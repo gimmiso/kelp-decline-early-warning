@@ -13,23 +13,39 @@ Website: [https://kelpwatch.org/](https://kelpwatch.org/)
 
 Kelpwatch provides satellite-derived kelp canopy data that can be visualized and downloaded for user-selected geographic and temporal extents. In this project, Kelpwatch data are used as the main ecological response variable for constructing kelp canopy decline labels.
 
-### Role in This Project
+### Study Region and Spatial Unit
 
-Initial broad regional Kelpwatch exports were found to be too coarse for site-level early-warning modeling. Therefore, this project uses a regular 10 km x 10 km fishnet grid across the Northern and Central California coastal corridor.
+The study region for the first version of this project is the Northern and Central California coastal corridor.
 
-Each grid cell is treated as a spatial observation unit. Because Kelpwatch accepts only single-feature geometry uploads, each fishnet cell is stored as an individual GeoJSON file and uploaded separately to Kelpwatch.
+This region was selected because broad regional Kelpwatch exports for Northern California and Central California were initially tested, but they were found to be too coarse for site-level early-warning modeling. Therefore, the project now uses a finer spatial sampling design within the same coastal region.
 
-The final Kelpwatch panel dataset will have the following general structure:
+The spatial unit is a regular 10 km x 10 km fishnet grid cell.
+
+Each grid cell is treated as an individual observation unit and is assigned a unique `cell_id`. The modeling dataset will therefore be constructed at the following spatial-temporal scale:
+
+```text
+cell_id x year
+```
+
+For raw Kelpwatch exports, the full structure is:
 
 ```text
 cell_id x year x quarter x kelp_area_m2
 ```
 
-For the first version of the modeling workflow, only the `quarter = max` rows will be used. In Kelpwatch, `max` represents the maximum quarterly kelp canopy value observed within the growing season. This produces an annual growing-season maximum canopy dataset with the following structure:
+For the first annual modeling version, only the `quarter = max` rows are used, resulting in:
 
 ```text
 cell_id x year x growing_season_max_kelp_area
 ```
+
+Adjacent grid cells share boundaries but do not overlap by area. The number of candidate cells is determined by the regular fishnet grid design, not by a manually predefined number of AOIs.
+
+### Role in This Project
+
+Because Kelpwatch accepts only single-feature geometry uploads, each fishnet cell is stored as an individual GeoJSON file and uploaded separately to Kelpwatch.
+
+For the first version of the modeling workflow, only the `quarter = max` rows will be used. In Kelpwatch, `max` represents the maximum quarterly kelp canopy value observed within the growing season.
 
 ### Target Variable
 
