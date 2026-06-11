@@ -180,6 +180,12 @@ documentation
 processing scripts
 ```
 
+Raw CSV export summaries and filtering metadata are tracked under:
+
+```text
+geometries/regular_10km_fishnet/
+```
+
 Raw CSV files should remain local and should not be staged or committed.
 
 ## 2. NOAA OISST Data

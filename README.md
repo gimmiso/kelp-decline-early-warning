@@ -33,6 +33,8 @@ Because Kelpwatch accepts only single-feature geometry uploads, each grid cell i
 
 Candidate cells will be retained for modeling only if Kelpwatch reports positive historical kelp footprint. A stricter robustness filter may use `count_cells_historic_footprint >= 500`, following the logic of previous Kelpwatch-based studies.
 
+After Kelpwatch export validation, candidate cells are filtered using historical kelp footprint. The exploratory dataset retains cells with `count_cells_historic_footprint > 0`, while the main modeling dataset retains cells with `count_cells_historic_footprint >= 500`. Based on the current Kelpwatch export summary, this leaves 74 exploratory cells and 50 main modeling cells from the original 285 candidate fishnet cells.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**
