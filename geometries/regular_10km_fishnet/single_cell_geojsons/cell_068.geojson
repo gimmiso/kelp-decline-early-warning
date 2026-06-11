@@ -1,0 +1,46 @@
+{
+  "type": "FeatureCollection",
+  "name": "cell_068",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "cell_id": "cell_068",
+        "region_group": "Northern California",
+        "center_lat": 38.28709,
+        "center_lon": -123.262955,
+        "cell_size_km": 10,
+        "grid_type": "regular_fishnet",
+        "time_variable": "Growing Season Max",
+        "notes": "Regular 10 km fishnet cell selected by intersection with Northern/Central California coastal corridor"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.2038208268069,
+              38.24367105756799
+            ],
+            [
+              -123.20769063765928,
+              38.33357683852123
+            ],
+            [
+              -123.32215887952711,
+              38.33047957295149
+            ],
+            [
+              -123.31815119415099,
+              38.240577562648454
+            ],
+            [
+              -123.2038208268069,
+              38.24367105756799
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

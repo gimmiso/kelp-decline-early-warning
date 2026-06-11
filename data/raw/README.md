@@ -91,6 +91,20 @@ data/processed/
 
 Raw OISST files should not be committed to GitHub.
 
+## Kelpwatch Cell-Level CSV Exports
+
+Raw Kelpwatch CSV exports are not committed to this repository. Each 10 km fishnet cell is uploaded individually to Kelpwatch as a single-feature GeoJSON file, and the downloaded CSV files are stored locally under `data/raw/`.
+
+Expected local raw file naming convention:
+
+```text
+data/raw/kelpwatch_aoi/kelpwatch_cell_001.csv
+data/raw/kelpwatch_aoi/kelpwatch_cell_002.csv
+...
+```
+
+These raw CSV files are excluded from Git to keep the repository lightweight and reproducible.
+
 ## 3. Data Management Policy
 
 This repository does not track raw data files directly. The following files are intentionally ignored by Git:

@@ -23,6 +23,16 @@ The project is designed as a reproducible research workflow and prototype decisi
 - **NOAA OISST:** daily gridded sea surface temperature for thermal anomaly and marine heatwave feature engineering.
 - **Optional external covariates:** coastline, ecoregion, bathymetry, exposure, or site metadata if needed for model interpretation.
 
+## Spatial Sampling Strategy
+
+Initial Kelpwatch aggregate CSV exports were found to be too coarse for site-level early-warning modeling. Therefore, this project uses a regular 10 km x 10 km fishnet grid across the Northern and Central California coastal corridor.
+
+The number of candidate cells is determined by the spatial grid design rather than predefined manually. The generated candidate grid contains 285 cells. Adjacent cells share boundaries but do not overlap by area.
+
+Because Kelpwatch accepts only single-feature geometry uploads, each grid cell is stored as an individual GeoJSON file and uploaded separately to Kelpwatch.
+
+Candidate cells will be retained for modeling only if Kelpwatch reports positive historical kelp footprint. A stricter robustness filter may use `count_cells_historic_footprint >= 500`, following the logic of previous Kelpwatch-based studies.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**
@@ -51,6 +61,11 @@ kelp-decline-early-warning/
 │   ├── raw/
 │   ├── processed/
 │   └── external/
+├── geometries/
+│   └── regular_10km_fishnet/
+├── scripts/
+├── docs/
+│   └── maps/
 ├── notebooks/
 │   ├── 01_kelpwatch_data_exploration.ipynb
 │   ├── 02_oisst_sst_feature_engineering.ipynb

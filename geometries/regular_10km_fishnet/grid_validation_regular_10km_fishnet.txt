@@ -1,0 +1,13 @@
+Regular 10 km fishnet validation
+Total selected cells: 285
+Cell size: 10 km x 10 km
+Coastal corridor buffer: 15.0 km
+Overlap pairs with positive area: 0
+No positive-area polygon overlaps detected.
+Boundary-touching cell pairs: 926
+Closest pair: cell_001 and cell_002
+Minimum polygon-to-polygon gap: 0.00 m
+
+Important note:
+Adjacent cells may share boundaries. This is not overlap and does not duplicate area.
+Cells should be retained for modeling only after Kelpwatch reports positive historical kelp footprint.
