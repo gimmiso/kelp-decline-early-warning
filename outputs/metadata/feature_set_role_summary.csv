@@ -1,0 +1,5 @@
+feature_set,analytical_role,interpretation
+canopy_only,biological state monitoring,Direct satellite-derived canopy condition and recent canopy history.
+oisst_only,thermal exposure screening,"SST anomalies, hot-day counts, and annual thermal stress context."
+canopy_noaa,biological state + environmental context,Combines current canopy state with thermal and upwelling context.
+CUTI/BEUTI,upwelling/nitrate-flux proxy context,Latitude-bin proxies for coastal upwelling and biologically effective upwelling.

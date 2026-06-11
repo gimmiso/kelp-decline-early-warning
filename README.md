@@ -63,6 +63,10 @@ Three feature sets are compared: canopy-only, OISST-only, and canopy plus NOAA e
 
 The first temporal model comparison showed that the canopy-only baseline achieved the highest test PR-AUC. This suggests that current canopy condition is a strong short-term early-warning signal for next-year decline. NOAA OISST and CUTI/BEUTI variables did not outperform the best canopy-only model in the first split, but they are retained as environmental exposure indicators for interpretation and SHAP-based comparison.
 
+### Canopy Persistence and Environmental Context
+
+The initial model comparison showed that canopy-only models achieved the strongest aggregate performance. To interpret this result, we analyzed canopy persistence and NOAA environmental signals separately. Current relative canopy was compared with next-year canopy condition, and NOAA OISST/CUTI/BEUTI variables were compared between decline and non-decline rows. Stratified analysis by current canopy condition was used to examine whether environmental stress indicators provide context beyond biological state monitoring.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**
