@@ -1,0 +1,13 @@
+metric,value
+input_rows,2100
+number_of_cells,50
+year_range,1984-2025
+baseline_period,1984-2013
+rows_with_valid_next_year_labels,2050
+main_decline_event_count,696
+main_decline_event_rate,0.33951219512195124
+full_history_p25_decline_event_count,513
+full_history_p25_decline_event_rate,0.2502439024390244
+decline_50pct_next_count,517
+decline_50pct_next_rate,0.2521951219512195
+full_labeled_rows,2100

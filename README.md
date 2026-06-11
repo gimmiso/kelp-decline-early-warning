@@ -35,6 +35,12 @@ Candidate cells will be retained for modeling only if Kelpwatch reports positive
 
 After Kelpwatch export validation, candidate cells are filtered using historical kelp footprint. The exploratory dataset retains cells with `count_cells_historic_footprint > 0`, while the main modeling dataset retains cells with `count_cells_historic_footprint >= 500`. Based on the current Kelpwatch export summary, this leaves 74 exploratory cells and 50 main modeling cells from the original 285 candidate fishnet cells.
 
+## Decline Label Construction
+
+The early-warning target is defined using next-year kelp canopy condition. For each 10 km fishnet cell, the main decline threshold is the cell-specific 25th percentile of `relative_canopy` during the 1984-2013 baseline period. A row is labeled as a decline event if the following year's growing-season maximum relative canopy falls below this baseline threshold.
+
+The final year is excluded from modeling because next-year canopy is unavailable. Robustness labels include a full-history 25th percentile label and a 50% next-year decline label.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**
