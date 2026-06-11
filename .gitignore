@@ -27,6 +27,8 @@ data/external/*
 *.gpkg
 
 # Generated outputs
+outputs/metadata/*
+!outputs/metadata/.gitkeep
 outputs/figures/*
 outputs/maps/*
 outputs/model_results/*

@@ -125,6 +125,25 @@ data/raw/kelpwatch_aoi/kelpwatch_cell_003.csv
 ...
 ```
 
+### Automated Download Test
+
+The Kelpwatch web app request pattern can be automated through the public upload and aggregate endpoints. The repository includes:
+
+```text
+scripts/download_kelpwatch_cell_exports.py
+scripts/validate_kelpwatch_exports.py
+docs/kelpwatch_api_investigation.md
+```
+
+The download script defaults to a limited 3-cell test:
+
+```bash
+python3 scripts/download_kelpwatch_cell_exports.py
+python3 scripts/validate_kelpwatch_exports.py
+```
+
+Do not run the full 285-cell download until the 3-cell test workflow is confirmed.
+
 ### Expected Raw CSV Fields
 
 The downloaded Kelpwatch CSV files are expected to include the following fields:
