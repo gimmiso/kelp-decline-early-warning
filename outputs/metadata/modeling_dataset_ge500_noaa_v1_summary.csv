@@ -1,0 +1,7 @@
+metric,value
+rows,2050
+columns,50
+cells,50
+year_range,1984-2024
+decline_event_next_rate,0.33951219512195124
+noaa_data_access_notes,OISST=SST_OI_DAILY_1981_PRESENT_HL; CUTI=erdCUTIdaily; BEUTI=erdBEUTIdaily; base=https://upwell.pfeg.noaa.gov/erddap

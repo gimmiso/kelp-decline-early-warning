@@ -43,13 +43,13 @@ The final year is excluded from modeling because next-year canopy is unavailable
 
 ## NOAA Environmental Features
 
-Version 1 uses NOAA-only environmental predictors. The core environmental feature set combines NOAA OISST thermal stress indicators with NOAA coastal upwelling index variables.
+Version 1 uses NOAA-only environmental predictors. The core environmental feature set combines NOAA OISST thermal stress indicators with NOAA CUTI/BEUTI upwelling variables.
 
 OISST features are assigned to each 10 km Kelpwatch fishnet cell using the nearest OISST grid point to the cell centroid. Annual SST summaries, SST anomalies, and hot-day indicators are computed using the 1984-2013 baseline period.
 
-Because OISST is coarser than the 10 km Kelpwatch fishnet, the nearest-grid assignment is treated as the Version 1 primary workflow. A later sensitivity analysis will compare nearest-grid assignment with a small coastal-buffer average around each cell, following the logic of prior kelp remote-sensing studies.
+Because OISST is coarser than the 10 km Kelpwatch fishnet, the nearest-grid assignment is treated as the Version 1 primary workflow. If the nearest coastal grid point has no valid SST values, the workflow falls back to the nearest valid neighboring OISST ocean grid point and records the source coordinates. A later sensitivity analysis will compare nearest-grid assignment with a small coastal-buffer average around each cell, following the logic of prior kelp remote-sensing studies.
 
-Upwelling features are used as a nutrient/upwelling proxy. Northern California cells are assigned to the 39N 125W upwelling index, while Central California cells are assigned to the 36N 122W upwelling index.
+CUTI and BEUTI features are used as physical and biologically effective upwelling proxies. Each cell is assigned to the nearest available CUTI/BEUTI latitude bin from the NOAA/PFEG ERDDAP service, and daily values are aggregated into annual, spring, and summer summaries.
 
 Chlorophyll-a and wave disturbance variables are reserved for future extensions.
 
