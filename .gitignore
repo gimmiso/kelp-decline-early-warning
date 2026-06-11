@@ -5,12 +5,15 @@ venv/
 .venv/
 
 # Local data
-data/raw/*
-data/processed/*
-data/external/*
+data/raw/**
+data/processed/**
+data/external/**
+!data/raw/
 !data/raw/.gitkeep
 !data/raw/README.md
+!data/processed/
 !data/processed/.gitkeep
+!data/external/
 !data/external/.gitkeep
 
 # Large geospatial and gridded files

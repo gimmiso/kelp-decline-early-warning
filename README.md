@@ -41,6 +41,18 @@ The early-warning target is defined using next-year kelp canopy condition. For e
 
 The final year is excluded from modeling because next-year canopy is unavailable. Robustness labels include a full-history 25th percentile label and a 50% next-year decline label.
 
+## NOAA Environmental Features
+
+Version 1 uses NOAA-only environmental predictors. The core environmental feature set combines NOAA OISST thermal stress indicators with NOAA coastal upwelling index variables.
+
+OISST features are assigned to each 10 km Kelpwatch fishnet cell using the nearest OISST grid point to the cell centroid. Annual SST summaries, SST anomalies, and hot-day indicators are computed using the 1984-2013 baseline period.
+
+Because OISST is coarser than the 10 km Kelpwatch fishnet, the nearest-grid assignment is treated as the Version 1 primary workflow. A later sensitivity analysis will compare nearest-grid assignment with a small coastal-buffer average around each cell, following the logic of prior kelp remote-sensing studies.
+
+Upwelling features are used as a nutrient/upwelling proxy. Northern California cells are assigned to the 39N 125W upwelling index, while Central California cells are assigned to the 36N 122W upwelling index.
+
+Chlorophyll-a and wave disturbance variables are reserved for future extensions.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**
@@ -92,6 +104,36 @@ kelp-decline-early-warning/
     ├── figures/
     ├── maps/
     └── model_results/
+```
+
+## Setup
+
+Create and activate a Python virtual environment, then install the project dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Use Python 3.10-3.13 for this environment. The SHAP dependency stack currently pulls `numba`, which does not support Python 3.14.
+
+On Windows, activate the environment with:
+
+```bat
+.venv\Scripts\activate
+```
+
+Run a quick environment check:
+
+```bash
+python -c "import pandas, sklearn, xgboost, lightgbm, shap; print('OK')"
+```
+
+On macOS, if the environment check fails with `libomp.dylib` missing while importing XGBoost or LightGBM, install the OpenMP runtime:
+
+```bash
+brew install libomp
 ```
 
 ## Expected Outputs
