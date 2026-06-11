@@ -1,0 +1,31 @@
+feature_set,model,split,tn,fp,fn,tp,n_rows,positive_rate
+canopy_only,Logistic Regression,validation,42,55,22,81,200,0.515
+canopy_only,Logistic Regression,test,20,46,27,107,200,0.67
+canopy_only,SVM,validation,97,0,103,0,200,0.515
+canopy_only,SVM,test,66,0,134,0,200,0.67
+canopy_only,Random Forest,validation,76,21,40,63,200,0.515
+canopy_only,Random Forest,test,58,8,55,79,200,0.67
+canopy_only,XGBoost,validation,67,30,34,69,200,0.515
+canopy_only,XGBoost,test,54,12,55,79,200,0.67
+canopy_only,LightGBM,validation,69,28,42,61,200,0.515
+canopy_only,LightGBM,test,53,13,55,79,200,0.67
+oisst_only,Logistic Regression,validation,67,30,44,59,200,0.515
+oisst_only,Logistic Regression,test,52,14,99,35,200,0.67
+oisst_only,SVM,validation,87,10,65,38,200,0.515
+oisst_only,SVM,test,65,1,121,13,200,0.67
+oisst_only,Random Forest,validation,66,31,52,51,200,0.515
+oisst_only,Random Forest,test,50,16,95,39,200,0.67
+oisst_only,XGBoost,validation,42,55,28,75,200,0.515
+oisst_only,XGBoost,test,43,23,74,60,200,0.67
+oisst_only,LightGBM,validation,45,52,50,53,200,0.515
+oisst_only,LightGBM,test,46,20,91,43,200,0.67
+canopy_noaa,Logistic Regression,validation,17,80,2,101,200,0.515
+canopy_noaa,Logistic Regression,test,40,26,50,84,200,0.67
+canopy_noaa,SVM,validation,60,37,54,49,200,0.515
+canopy_noaa,SVM,test,61,5,101,33,200,0.67
+canopy_noaa,Random Forest,validation,70,27,72,31,200,0.515
+canopy_noaa,Random Forest,test,63,3,97,37,200,0.67
+canopy_noaa,XGBoost,validation,58,39,61,42,200,0.515
+canopy_noaa,XGBoost,test,56,10,64,70,200,0.67
+canopy_noaa,LightGBM,validation,61,36,59,44,200,0.515
+canopy_noaa,LightGBM,test,60,6,83,51,200,0.67

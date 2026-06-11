@@ -53,6 +53,12 @@ CUTI and BEUTI features are used as physical and biologically effective upwellin
 
 Chlorophyll-a and wave disturbance variables are reserved for future extensions.
 
+## Initial Model Comparison
+
+The first modeling workflow compares Logistic Regression, SVM, Random Forest, XGBoost, and LightGBM using a temporal split rather than a random split. The main modeling subset uses complete-feature years 1989-2024, with training on 1989-2016, validation on 2017-2020, and final test evaluation on 2021-2024.
+
+Three feature sets are compared: canopy-only, OISST-only, and canopy plus NOAA environmental predictors. Final model comparison prioritizes PR-AUC, recall, and F1 because the task is framed as early-warning screening for future kelp canopy decline events.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**
