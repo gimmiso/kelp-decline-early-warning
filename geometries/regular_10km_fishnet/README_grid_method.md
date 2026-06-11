@@ -8,6 +8,17 @@ The number of cells is not pre-defined. Instead, a continuous 10 km × 10 km fis
 
 This avoids the earlier problem of selecting an arbitrary number of AOIs manually.
 
+## Source of Truth and Reproducibility
+
+The committed AOI files in this directory are package-derived files from `kelpwatch_regular_10km_fishnet_package.zip`. The package is treated as the source of truth for the accepted 285-cell design.
+
+The repository includes two scripts for reproducibility:
+
+- `scripts/extract_regular_10km_fishnet_package.py`: extracts the accepted package into the canonical repository structure and validates the expected outputs.
+- `scripts/verify_regular_10km_fishnet_design.py`: checks the committed files without modifying or regenerating the grid.
+
+Do not overwrite the committed GeoJSON files with regenerated output unless the regenerated files exactly reproduce the accepted package-derived design.
+
 ## Files
 
 - `single_cell_geojsons/`: single-feature GeoJSON files for Kelpwatch upload
