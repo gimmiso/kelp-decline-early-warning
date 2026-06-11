@@ -59,6 +59,10 @@ The first modeling workflow compares Logistic Regression, SVM, Random Forest, XG
 
 Three feature sets are compared: canopy-only, OISST-only, and canopy plus NOAA environmental predictors. Final model comparison prioritizes PR-AUC, recall, and F1 because the task is framed as early-warning screening for future kelp canopy decline events.
 
+### Initial Model Diagnostics
+
+The first temporal model comparison showed that the canopy-only baseline achieved the highest test PR-AUC. This suggests that current canopy condition is a strong short-term early-warning signal for next-year decline. NOAA OISST and CUTI/BEUTI variables did not outperform the best canopy-only model in the first split, but they are retained as environmental exposure indicators for interpretation and SHAP-based comparison.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**

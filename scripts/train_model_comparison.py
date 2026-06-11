@@ -39,6 +39,7 @@ INPUT_DATASET = Path("data/processed/modeling_dataset_ge500_noaa_v1.csv")
 RESULTS_OUTPUT = Path("outputs/metadata/model_comparison_results.csv")
 TEST_METRICS_OUTPUT = Path("outputs/metadata/model_comparison_test_metrics.csv")
 CONFUSION_OUTPUT = Path("outputs/metadata/model_comparison_confusion_matrices.csv")
+TEST_PREDICTIONS_OUTPUT = Path("outputs/metadata/model_comparison_test_predictions.csv")
 REPORT_OUTPUT = Path("outputs/metadata/model_comparison_report.md")
 PERFORMANCE_FIGURE = Path("outputs/figures/model_performance_comparison.png")
 PR_FIGURE = Path("outputs/figures/precision_recall_curves.png")
@@ -109,6 +110,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--results-output", type=Path, default=RESULTS_OUTPUT)
     parser.add_argument("--test-metrics-output", type=Path, default=TEST_METRICS_OUTPUT)
     parser.add_argument("--confusion-output", type=Path, default=CONFUSION_OUTPUT)
+    parser.add_argument("--test-predictions-output", type=Path, default=TEST_PREDICTIONS_OUTPUT)
     parser.add_argument("--report-output", type=Path, default=REPORT_OUTPUT)
     parser.add_argument("--performance-figure", type=Path, default=PERFORMANCE_FIGURE)
     parser.add_argument("--pr-figure", type=Path, default=PR_FIGURE)
@@ -289,13 +291,16 @@ def metrics_row(y_true: pd.Series, scores: np.ndarray, feature_set: str, model: 
     }
 
 
-def train_and_evaluate(data: pd.DataFrame) -> tuple[pd.DataFrame, dict[tuple[str, str], dict[str, object]]]:
+def train_and_evaluate(
+    data: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict[tuple[str, str], dict[str, object]]]:
     """Train models for every feature set and return metrics plus fitted test scores."""
     splits = split_data(data)
     sets = feature_sets(data)
     y_train = splits["train"][TARGET].astype(int)
     specs = model_specs(y_train)
     rows: list[dict[str, object]] = []
+    prediction_rows: list[pd.DataFrame] = []
     curves: dict[tuple[str, str], dict[str, object]] = {}
 
     for feature_set_name, features in sets.items():
@@ -313,9 +318,24 @@ def train_and_evaluate(data: pd.DataFrame) -> tuple[pd.DataFrame, dict[tuple[str
                 scores = predict_scores(pipe, splits[split_name][features])
                 rows.append(metrics_row(y_true, scores, feature_set_name, model_name, split_name))
                 if split_name == "test":
+                    prediction_rows.append(
+                        pd.DataFrame(
+                            {
+                                "feature_set": feature_set_name,
+                                "model": model_name,
+                                "cell_id": splits[split_name]["cell_id"].to_numpy(),
+                                "year": splits[split_name]["year"].to_numpy(),
+                                "region_group": splits[split_name]["region_group"].to_numpy(),
+                                "y_true": y_true.to_numpy(),
+                                "y_pred": (scores >= 0.5).astype(int),
+                                "y_proba": scores,
+                                "split": split_name,
+                            }
+                        )
+                    )
                     curves[(feature_set_name, model_name)] = {"y_true": y_true.to_numpy(), "scores": scores}
 
-    return pd.DataFrame(rows), curves
+    return pd.DataFrame(rows), pd.concat(prediction_rows, ignore_index=True), curves
 
 
 def plot_performance(test_metrics: pd.DataFrame, output: Path) -> None:
@@ -491,17 +511,18 @@ def main() -> None:
     """Run the model comparison workflow."""
     args = parse_args()
     data = main_subset(load_dataset(args.input))
-    metrics, curves = train_and_evaluate(data)
+    metrics, test_predictions, curves = train_and_evaluate(data)
     test_metrics = metrics.loc[metrics["split"] == "test"].copy()
     confusion = metrics[
         ["feature_set", "model", "split", "tn", "fp", "fn", "tp", "n_rows", "positive_rate"]
     ].copy()
 
-    for path in [args.results_output, args.test_metrics_output, args.confusion_output]:
+    for path in [args.results_output, args.test_metrics_output, args.confusion_output, args.test_predictions_output]:
         path.parent.mkdir(parents=True, exist_ok=True)
     metrics.to_csv(args.results_output, index=False)
     test_metrics.to_csv(args.test_metrics_output, index=False)
     confusion.to_csv(args.confusion_output, index=False)
+    test_predictions.to_csv(args.test_predictions_output, index=False)
     plot_performance(test_metrics, args.performance_figure)
     plot_curves(curves, args.pr_figure, args.roc_figure)
     write_report(metrics, data, args.report_output)

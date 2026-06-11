@@ -1,0 +1,157 @@
+feature_set,model,cell_id,year,region_group,y_true,y_pred,y_proba,split,is_false_negative
+canopy_only,Random Forest,cell_015,2023,Northern California,1,0,0.4582815517815516,test,True
+canopy_only,Random Forest,cell_019,2022,Northern California,1,0,0.4845771450771452,test,True
+canopy_only,Random Forest,cell_019,2023,Northern California,1,0,0.456803270803271,test,True
+canopy_only,Random Forest,cell_037,2021,Northern California,1,0,0.3954301346801346,test,True
+canopy_only,Random Forest,cell_038,2021,Northern California,1,0,0.1674044011544011,test,True
+canopy_only,Random Forest,cell_042,2021,Northern California,1,0,0.2811116805307981,test,True
+canopy_only,Random Forest,cell_042,2022,Northern California,1,0,0.448034151034151,test,True
+canopy_only,Random Forest,cell_042,2024,Northern California,1,0,0.479483285233285,test,True
+canopy_only,Random Forest,cell_060,2022,Northern California,1,0,0.4878674609704019,test,True
+canopy_only,Random Forest,cell_142,2022,Central California,1,0,0.1453030453951507,test,True
+canopy_only,Random Forest,cell_142,2023,Central California,1,0,0.4201941881647761,test,True
+canopy_only,Random Forest,cell_143,2022,Central California,1,0,0.3110699855699856,test,True
+canopy_only,Random Forest,cell_143,2023,Central California,1,0,0.3819554473304472,test,True
+canopy_only,Random Forest,cell_143,2024,Central California,1,0,0.4108941243941243,test,True
+canopy_only,Random Forest,cell_144,2022,Central California,1,0,0.4662763070263067,test,True
+canopy_only,Random Forest,cell_163,2022,Central California,1,0,0.3882368094868094,test,True
+canopy_only,Random Forest,cell_170,2021,Central California,1,0,0.4302896085396086,test,True
+canopy_only,Random Forest,cell_170,2022,Central California,1,0,0.2873992303992302,test,True
+canopy_only,Random Forest,cell_170,2023,Central California,1,0,0.4320762385762385,test,True
+canopy_only,Random Forest,cell_174,2021,Central California,1,0,0.3490576460576459,test,True
+canopy_only,Random Forest,cell_174,2022,Central California,1,0,0.1710513468013467,test,True
+canopy_only,Random Forest,cell_175,2021,Central California,1,0,0.4259809177750353,test,True
+canopy_only,Random Forest,cell_180,2022,Central California,1,0,0.2807168942168943,test,True
+canopy_only,Random Forest,cell_180,2023,Central California,1,0,0.4662924945424946,test,True
+canopy_only,Random Forest,cell_181,2022,Central California,1,0,0.4299780774780769,test,True
+canopy_only,Random Forest,cell_181,2023,Central California,1,0,0.2346766474266474,test,True
+canopy_only,Random Forest,cell_185,2021,Central California,1,0,0.3844080777610188,test,True
+canopy_only,Random Forest,cell_185,2022,Central California,1,0,0.3343077059106471,test,True
+canopy_only,Random Forest,cell_185,2023,Central California,1,0,0.3256844636844636,test,True
+canopy_only,Random Forest,cell_185,2024,Central California,1,0,0.4668926117455529,test,True
+canopy_only,Random Forest,cell_186,2024,Central California,1,0,0.355621582121582,test,True
+canopy_only,Random Forest,cell_191,2022,Central California,1,0,0.3377930587930589,test,True
+canopy_only,Random Forest,cell_191,2024,Central California,1,0,0.3464927942427943,test,True
+canopy_only,Random Forest,cell_196,2023,Central California,1,0,0.4869320031820029,test,True
+canopy_only,Random Forest,cell_197,2021,Central California,1,0,0.1285812827523353,test,True
+canopy_only,Random Forest,cell_197,2022,Central California,1,0,0.1472795382005908,test,True
+canopy_only,Random Forest,cell_197,2023,Central California,1,0,0.3948815027565027,test,True
+canopy_only,Random Forest,cell_197,2024,Central California,1,0,0.3624313031023557,test,True
+canopy_only,Random Forest,cell_202,2022,Central California,1,0,0.449953769914296,test,True
+canopy_only,Random Forest,cell_219,2022,Central California,1,0,0.2040231481481481,test,True
+canopy_only,Random Forest,cell_219,2023,Central California,1,0,0.212561161061161,test,True
+canopy_only,Random Forest,cell_219,2024,Central California,1,0,0.4695781163281162,test,True
+canopy_only,Random Forest,cell_225,2022,Central California,1,0,0.3429994218744219,test,True
+canopy_only,Random Forest,cell_225,2023,Central California,1,0,0.304976911976912,test,True
+canopy_only,Random Forest,cell_230,2022,Central California,1,0,0.3135008278758276,test,True
+canopy_only,Random Forest,cell_230,2023,Central California,1,0,0.4959734813117169,test,True
+canopy_only,Random Forest,cell_231,2022,Central California,1,0,0.4405230602730601,test,True
+canopy_only,Random Forest,cell_231,2023,Central California,1,0,0.4065608465608466,test,True
+canopy_only,Random Forest,cell_240,2022,Central California,1,0,0.3393757446257445,test,True
+canopy_only,Random Forest,cell_240,2024,Central California,1,0,0.3165436507936507,test,True
+canopy_only,Random Forest,cell_247,2022,Central California,1,0,0.4138128542567395,test,True
+canopy_only,Random Forest,cell_247,2024,Central California,1,0,0.3469815170209907,test,True
+canopy_only,Random Forest,cell_284,2022,Central California,1,0,0.4916348466348467,test,True
+canopy_only,Random Forest,cell_284,2023,Central California,1,0,0.4276858945148419,test,True
+canopy_only,Random Forest,cell_285,2022,Central California,1,0,0.2010843785843786,test,True
+canopy_noaa,SVM,cell_007,2021,Northern California,1,0,0.4787414436577364,test,True
+canopy_noaa,SVM,cell_007,2022,Northern California,1,0,0.3777922469234096,test,True
+canopy_noaa,SVM,cell_011,2021,Northern California,1,0,0.4776695534343913,test,True
+canopy_noaa,SVM,cell_011,2022,Northern California,1,0,0.3792938420501862,test,True
+canopy_noaa,SVM,cell_015,2021,Northern California,1,0,0.4795783066544377,test,True
+canopy_noaa,SVM,cell_015,2022,Northern California,1,0,0.3535228267164713,test,True
+canopy_noaa,SVM,cell_019,2021,Northern California,1,0,0.4671063481009529,test,True
+canopy_noaa,SVM,cell_019,2022,Northern California,1,0,0.3718226087977823,test,True
+canopy_noaa,SVM,cell_023,2021,Northern California,1,0,0.4684584971995049,test,True
+canopy_noaa,SVM,cell_023,2022,Northern California,1,0,0.3716377224142388,test,True
+canopy_noaa,SVM,cell_031,2021,Northern California,1,0,0.4646047067091273,test,True
+canopy_noaa,SVM,cell_031,2022,Northern California,1,0,0.3359207748690119,test,True
+canopy_noaa,SVM,cell_031,2023,Northern California,1,0,0.4738517521545913,test,True
+canopy_noaa,SVM,cell_032,2021,Northern California,1,0,0.4702485968904627,test,True
+canopy_noaa,SVM,cell_032,2022,Northern California,1,0,0.3646092244618841,test,True
+canopy_noaa,SVM,cell_032,2024,Northern California,1,0,0.4825964647202005,test,True
+canopy_noaa,SVM,cell_037,2021,Northern California,1,0,0.4643270529769879,test,True
+canopy_noaa,SVM,cell_037,2022,Northern California,1,0,0.3458199658466876,test,True
+canopy_noaa,SVM,cell_037,2024,Northern California,1,0,0.4745105359863988,test,True
+canopy_noaa,SVM,cell_038,2021,Northern California,1,0,0.4496070635535846,test,True
+canopy_noaa,SVM,cell_038,2022,Northern California,1,0,0.4015336823659231,test,True
+canopy_noaa,SVM,cell_038,2024,Northern California,1,0,0.4932863482227362,test,True
+canopy_noaa,SVM,cell_042,2021,Northern California,1,0,0.4632180480973768,test,True
+canopy_noaa,SVM,cell_042,2022,Northern California,1,0,0.3722978698513605,test,True
+canopy_noaa,SVM,cell_048,2021,Northern California,1,0,0.4617277190017714,test,True
+canopy_noaa,SVM,cell_048,2022,Northern California,1,0,0.3522302730598712,test,True
+canopy_noaa,SVM,cell_053,2021,Northern California,1,0,0.4600671810981662,test,True
+canopy_noaa,SVM,cell_053,2022,Northern California,1,0,0.3620332196081047,test,True
+canopy_noaa,SVM,cell_054,2021,Northern California,1,0,0.4607670626277084,test,True
+canopy_noaa,SVM,cell_054,2022,Northern California,1,0,0.3513376680842641,test,True
+canopy_noaa,SVM,cell_059,2024,Northern California,1,0,0.469583996968852,test,True
+canopy_noaa,SVM,cell_142,2022,Central California,1,0,0.2177227178397658,test,True
+canopy_noaa,SVM,cell_142,2023,Central California,1,0,0.4174602207962153,test,True
+canopy_noaa,SVM,cell_143,2022,Central California,1,0,0.1740686566338394,test,True
+canopy_noaa,SVM,cell_144,2022,Central California,1,0,0.1826335009162467,test,True
+canopy_noaa,SVM,cell_162,2021,Central California,1,0,0.2013546407679361,test,True
+canopy_noaa,SVM,cell_162,2022,Central California,1,0,0.1437599315849324,test,True
+canopy_noaa,SVM,cell_162,2023,Central California,1,0,0.4924632683939615,test,True
+canopy_noaa,SVM,cell_163,2022,Central California,1,0,0.2201201561073035,test,True
+canopy_noaa,SVM,cell_166,2021,Central California,1,0,0.1506525711935328,test,True
+canopy_noaa,SVM,cell_166,2022,Central California,1,0,0.1194876519957918,test,True
+canopy_noaa,SVM,cell_166,2023,Central California,1,0,0.4933527616625456,test,True
+canopy_noaa,SVM,cell_170,2021,Central California,1,0,0.131080365241597,test,True
+canopy_noaa,SVM,cell_170,2022,Central California,1,0,0.1485400998595269,test,True
+canopy_noaa,SVM,cell_170,2023,Central California,1,0,0.2243923372530298,test,True
+canopy_noaa,SVM,cell_170,2024,Central California,1,0,0.4508096523513836,test,True
+canopy_noaa,SVM,cell_174,2021,Central California,1,0,0.1052381233859022,test,True
+canopy_noaa,SVM,cell_174,2022,Central California,1,0,0.1463062931718245,test,True
+canopy_noaa,SVM,cell_174,2023,Central California,1,0,0.2082689517324339,test,True
+canopy_noaa,SVM,cell_174,2024,Central California,1,0,0.467443949958177,test,True
+canopy_noaa,SVM,cell_175,2021,Central California,1,0,0.1398018443233209,test,True
+canopy_noaa,SVM,cell_175,2022,Central California,1,0,0.1748472498839611,test,True
+canopy_noaa,SVM,cell_175,2024,Central California,1,0,0.452568730892393,test,True
+canopy_noaa,SVM,cell_180,2022,Central California,1,0,0.1060077887503062,test,True
+canopy_noaa,SVM,cell_180,2023,Central California,1,0,0.2509494120040013,test,True
+canopy_noaa,SVM,cell_180,2024,Central California,1,0,0.2947049927943591,test,True
+canopy_noaa,SVM,cell_181,2022,Central California,1,0,0.2370439049803783,test,True
+canopy_noaa,SVM,cell_181,2023,Central California,1,0,0.2354864175181137,test,True
+canopy_noaa,SVM,cell_185,2021,Central California,1,0,0.1558143092578477,test,True
+canopy_noaa,SVM,cell_185,2022,Central California,1,0,0.186920106453479,test,True
+canopy_noaa,SVM,cell_185,2023,Central California,1,0,0.142519989150356,test,True
+canopy_noaa,SVM,cell_185,2024,Central California,1,0,0.3501849821498682,test,True
+canopy_noaa,SVM,cell_186,2021,Central California,1,0,0.1572572653469076,test,True
+canopy_noaa,SVM,cell_186,2022,Central California,1,0,0.1713013047246266,test,True
+canopy_noaa,SVM,cell_186,2023,Central California,1,0,0.1577363822626727,test,True
+canopy_noaa,SVM,cell_186,2024,Central California,1,0,0.3741551095572032,test,True
+canopy_noaa,SVM,cell_191,2021,Central California,1,0,0.1263404279669542,test,True
+canopy_noaa,SVM,cell_191,2022,Central California,1,0,0.1587812929397737,test,True
+canopy_noaa,SVM,cell_191,2023,Central California,1,0,0.1470023347829836,test,True
+canopy_noaa,SVM,cell_191,2024,Central California,1,0,0.3886457229142099,test,True
+canopy_noaa,SVM,cell_196,2022,Central California,1,0,0.1607424472120361,test,True
+canopy_noaa,SVM,cell_196,2023,Central California,1,0,0.1759020719127255,test,True
+canopy_noaa,SVM,cell_196,2024,Central California,1,0,0.4132670104191048,test,True
+canopy_noaa,SVM,cell_197,2021,Central California,1,0,0.1104187113877516,test,True
+canopy_noaa,SVM,cell_197,2022,Central California,1,0,0.1778507906909869,test,True
+canopy_noaa,SVM,cell_197,2023,Central California,1,0,0.1668108612794497,test,True
+canopy_noaa,SVM,cell_197,2024,Central California,1,0,0.3657809882602356,test,True
+canopy_noaa,SVM,cell_202,2022,Central California,1,0,0.2446075975696831,test,True
+canopy_noaa,SVM,cell_202,2023,Central California,1,0,0.2918186999256703,test,True
+canopy_noaa,SVM,cell_202,2024,Central California,1,0,0.3820569734528368,test,True
+canopy_noaa,SVM,cell_203,2022,Central California,1,0,0.3161835468019979,test,True
+canopy_noaa,SVM,cell_203,2023,Central California,1,0,0.3399623986380628,test,True
+canopy_noaa,SVM,cell_207,2022,Central California,1,0,0.2892799484899445,test,True
+canopy_noaa,SVM,cell_207,2023,Central California,1,0,0.3218940472517575,test,True
+canopy_noaa,SVM,cell_219,2022,Central California,1,0,0.1823581202147115,test,True
+canopy_noaa,SVM,cell_219,2023,Central California,1,0,0.2167838463821233,test,True
+canopy_noaa,SVM,cell_219,2024,Central California,1,0,0.3848019159473336,test,True
+canopy_noaa,SVM,cell_225,2022,Central California,1,0,0.1524273874103838,test,True
+canopy_noaa,SVM,cell_225,2023,Central California,1,0,0.2602388901724697,test,True
+canopy_noaa,SVM,cell_230,2022,Central California,1,0,0.1265122547953288,test,True
+canopy_noaa,SVM,cell_230,2023,Central California,1,0,0.2011466819206501,test,True
+canopy_noaa,SVM,cell_231,2022,Central California,1,0,0.1306095636209784,test,True
+canopy_noaa,SVM,cell_231,2023,Central California,1,0,0.2310476864439558,test,True
+canopy_noaa,SVM,cell_240,2022,Central California,1,0,0.1702232608356918,test,True
+canopy_noaa,SVM,cell_240,2023,Central California,1,0,0.1322216052782159,test,True
+canopy_noaa,SVM,cell_240,2024,Central California,1,0,0.2116658875016916,test,True
+canopy_noaa,SVM,cell_247,2022,Central California,1,0,0.158523898034111,test,True
+canopy_noaa,SVM,cell_247,2024,Central California,1,0,0.2335376420275559,test,True
+canopy_noaa,SVM,cell_284,2022,Central California,1,0,0.1455530962626522,test,True
+canopy_noaa,SVM,cell_284,2023,Central California,1,0,0.3392428773564677,test,True
+canopy_noaa,SVM,cell_285,2022,Central California,1,0,0.1495297058761258,test,True

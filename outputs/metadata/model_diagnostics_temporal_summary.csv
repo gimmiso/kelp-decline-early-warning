@@ -1,0 +1,9 @@
+feature_set,model,year,actual_decline_count,predicted_decline_count,mean_predicted_risk,n_rows
+canopy_noaa,SVM,2021,24,2,0.26362788859409453,50
+canopy_noaa,SVM,2022,42,2,0.23854359407420667,50
+canopy_noaa,SVM,2023,37,16,0.3536667295085231,50
+canopy_noaa,SVM,2024,31,18,0.4296952581951557,50
+canopy_only,Random Forest,2021,24,21,0.46763888637592194,50
+canopy_only,Random Forest,2022,42,19,0.47960814240410277,50
+canopy_only,Random Forest,2023,37,24,0.5134647141771298,50
+canopy_only,Random Forest,2024,31,23,0.5098942114359768,50
