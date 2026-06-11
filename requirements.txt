@@ -1,0 +1,13 @@
+pandas
+numpy
+xarray
+netcdf4
+requests
+scikit-learn
+xgboost
+shap
+matplotlib
+seaborn
+plotly
+streamlit
+jupyter

@@ -1,0 +1,36 @@
+__pycache__/
+.ipynb_checkpoints/
+.env
+venv/
+.venv/
+
+# Local data
+data/raw/*
+data/processed/*
+data/external/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Large geospatial and gridded files
+*.zip
+*.csv.gz
+*.nc
+*.nc4
+*.tif
+*.tiff
+*.shp
+*.dbf
+*.shx
+*.prj
+*.gpkg
+
+# Generated outputs
+outputs/figures/*
+outputs/maps/*
+outputs/model_results/*
+!outputs/figures/.gitkeep
+!outputs/maps/.gitkeep
+!outputs/model_results/.gitkeep
+
+.DS_Store
