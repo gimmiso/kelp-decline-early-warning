@@ -49,7 +49,7 @@ OISST features are assigned to each 10 km Kelpwatch fishnet cell using the neare
 
 Because OISST is coarser than the 10 km Kelpwatch fishnet, the nearest-grid assignment is treated as the Version 1 primary workflow. If the nearest coastal grid point has no valid SST values, the workflow falls back to the nearest valid neighboring OISST ocean grid point and records the source coordinates. A later sensitivity analysis will compare nearest-grid assignment with a small coastal-buffer average around each cell, following the logic of prior kelp remote-sensing studies.
 
-CUTI and BEUTI features are used as physical and biologically effective upwelling proxies. Each cell is assigned to the nearest available CUTI/BEUTI latitude bin from the NOAA/PFEG ERDDAP service, and daily values are aggregated into annual, spring, and summer summaries.
+CUTI and BEUTI features are used as environmental exposure proxies. CUTI is treated as a coastal upwelling transport proxy, and BEUTI is treated as a nitrate-flux proxy. Each cell is assigned to the nearest available CUTI/BEUTI latitude bin from the NOAA/PFEG ERDDAP service, so these variables are not interpreted as cell-specific in situ measurements.
 
 Chlorophyll-a and wave disturbance variables are reserved for future extensions.
 
@@ -69,7 +69,9 @@ The initial model comparison showed that canopy-only models achieved the stronge
 
 ### SHAP Interpretation
 
-SHAP analysis was used to compare the best canopy-only model with an interpretable canopy+NOAA model. The canopy-only model highlights the importance of current canopy condition, confirming strong temporal persistence in kelp canopy state. The canopy+NOAA interpretation separates biological state signals from environmental exposure signals, including OISST thermal stress and CUTI/BEUTI upwelling/nitrate-flux proxies.
+SHAP results are interpreted as model-behavior explanations rather than causal mechanisms. The canopy-only model relied primarily on current and lagged canopy variables, while the canopy+NOAA model assigned substantial importance to OISST, CUTI, and BEUTI features. Some dependence patterns were nonlinear or directionally mixed, so NOAA variables are interpreted as environmental exposure context rather than simple causal drivers.
+
+Interpretation caution: SHAP values explain how the fitted model used features for prediction. They do not establish ecological causality. Directional patterns should be interpreted alongside known data limitations, including OISST grid resolution, CUTI/BEUTI latitude-bin assignment, missing biotic drivers such as grazing pressure, and the limited number of test years.
 
 ## Workflow
 

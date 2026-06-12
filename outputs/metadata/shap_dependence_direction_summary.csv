@@ -1,7 +1,7 @@
 feature,status,spearman_corr_feature_value_vs_shap,median_feature_value,mean_shap_low_feature_values,mean_shap_high_feature_values,high_minus_low_mean_shap,interpretation
-annual_mean_sst_anomaly,available,0.8960736136362978,0.0491803241965023,-0.02238891380147028,0.006311147508711028,0.028700061310181307,Higher feature values tend to increase model-predicted decline risk.
-annual_max_sst_anomaly,available,0.3418807919426904,0.08222256766425401,-0.012113504997656906,-0.0019328827271689242,0.010180622270487981,Higher feature values tend to increase model-predicted decline risk.
-hot_days_p90,available,-0.1391204087651167,33.5,-0.013727382005354016,-0.022171190339205383,-0.008443808333851367,Higher feature values tend to decrease model-predicted decline risk.
-hot_days_p95,available,-0.26516146148926045,16.0,-0.010092227528661681,-0.01237563395683128,-0.0022834064281695987,Higher feature values tend to decrease model-predicted decline risk.
-beuti_anomaly,available,0.32326820637115194,2.303726232963084,-0.05526571292430728,-0.052104638464680574,0.0031610744596267046,Higher feature values tend to increase model-predicted decline risk.
-cuti_anomaly,available,-0.7559954821711072,-0.0176697880138425,0.021100768898927206,-0.01156810113053406,-0.03266887002946127,Higher feature values tend to decrease model-predicted decline risk.
+annual_mean_sst_anomaly,available,0.8960736136362978,0.0491803241965023,-0.02238891380147028,0.006311147508711028,0.028700061310181307,In this fitted model, higher feature values have a positive SHAP association.
+annual_max_sst_anomaly,available,0.3418807919426904,0.08222256766425401,-0.012113504997656906,-0.0019328827271689242,0.010180622270487981,In this fitted model, higher feature values have a positive SHAP association.
+hot_days_p90,available,-0.1391204087651167,33.5,-0.013727382005354016,-0.022171190339205383,-0.008443808333851367,In this fitted model, higher feature values have a negative SHAP association.
+hot_days_p95,available,-0.26516146148926045,16.0,-0.010092227528661681,-0.01237563395683128,-0.0022834064281695987,In this fitted model, higher feature values have a negative SHAP association.
+beuti_anomaly,available,0.32326820637115194,2.303726232963084,-0.05526571292430728,-0.052104638464680574,0.0031610744596267046,In this fitted model, higher feature values have a positive SHAP association.
+cuti_anomaly,available,-0.7559954821711072,-0.0176697880138425,0.021100768898927206,-0.01156810113053406,-0.03266887002946127,In this fitted model, higher feature values have a negative SHAP association.

@@ -56,14 +56,20 @@ The best canopy+NOAA model by PR-AUC was SVM (test PR-AUC=0.8459). For SHAP, `Ra
 
 ## Dependence Plot Interpretation
 
-Dependence plots were generated to inspect whether SST anomalies and hot-day counts increase predicted decline risk, and whether lower CUTI/BEUTI anomalies correspond to increased risk in the interpreted canopy+NOAA tree model. These plots should be read as model-behavior summaries, not causal effect estimates.
+Dependence plots were used to inspect how the interpreted canopy+NOAA Random Forest used environmental variables when predicting decline risk. These plots summarize model behavior and should not be interpreted as causal ecological effect estimates.
 
-- `annual_mean_sst_anomaly`: Higher feature values tend to increase model-predicted decline risk. (Spearman r=0.896; high-minus-low mean SHAP=0.0287).
-- `annual_max_sst_anomaly`: Higher feature values tend to increase model-predicted decline risk. (Spearman r=0.342; high-minus-low mean SHAP=0.0102).
-- `hot_days_p90`: Higher feature values tend to decrease model-predicted decline risk. (Spearman r=-0.139; high-minus-low mean SHAP=-0.0084).
-- `hot_days_p95`: Higher feature values tend to decrease model-predicted decline risk. (Spearman r=-0.265; high-minus-low mean SHAP=-0.0023).
-- `beuti_anomaly`: Higher feature values tend to increase model-predicted decline risk. (Spearman r=0.323; high-minus-low mean SHAP=0.0032).
-- `cuti_anomaly`: Higher feature values tend to decrease model-predicted decline risk. (Spearman r=-0.756; high-minus-low mean SHAP=-0.0327).
+The SST anomaly variables showed relatively clear positive model associations with predicted decline risk. In contrast, hot-day exceedance counts and CUTI/BEUTI anomalies showed more mixed or context-dependent patterns. For example, some hot-day variables had negative SHAP associations in the interpreted Random Forest, and BEUTI/CUTI effects were not uniformly aligned with a simple monotonic ecological expectation.
+
+These results suggest that the canopy+NOAA model uses environmental variables in nonlinear and interaction-dependent ways. Therefore, NOAA variables are interpreted as environmental exposure context rather than direct causal drivers of kelp decline.
+
+Model-behavior diagnostics:
+
+- `annual_mean_sst_anomaly`: In this fitted model, higher feature values have a positive SHAP association. (Spearman r=0.896; high-minus-low mean SHAP=0.0287).
+- `annual_max_sst_anomaly`: In this fitted model, higher feature values have a positive SHAP association. (Spearman r=0.342; high-minus-low mean SHAP=0.0102).
+- `hot_days_p90`: In this fitted model, higher feature values have a negative SHAP association. (Spearman r=-0.139; high-minus-low mean SHAP=-0.0084).
+- `hot_days_p95`: In this fitted model, higher feature values have a negative SHAP association. (Spearman r=-0.265; high-minus-low mean SHAP=-0.0023).
+- `beuti_anomaly`: In this fitted model, higher feature values have a positive SHAP association. (Spearman r=0.323; high-minus-low mean SHAP=0.0032).
+- `cuti_anomaly`: In this fitted model, higher feature values have a negative SHAP association. (Spearman r=-0.756; high-minus-low mean SHAP=-0.0327).
 
 ## Local High-Risk Case Examples
 
@@ -72,13 +78,18 @@ Dependence plots were generated to inspect whether SST anomalies and hot-day cou
 
 ## Final Interpretation
 
-Current canopy condition dominates short-term prediction in the aggregate model comparison, while NOAA environmental variables provide interpretable thermal and upwelling/nitrate-flux exposure context. In the interpreted canopy+NOAA tree model, environmental proxies carry substantial internal SHAP importance, but this should be read as model explanation rather than evidence that NOAA variables replace direct canopy observations.
+Current canopy condition dominates short-term prediction in the aggregate model comparison. The canopy-only SHAP results confirm that current and lagged canopy-condition variables are the main biological-state signals. In the canopy+NOAA model, OISST, CUTI, and BEUTI variables carry substantial internal SHAP importance, indicating that NOAA environmental exposure indicators provide useful stress-context information.
+
+However, because some SHAP dependence patterns are nonlinear or directionally mixed, these variables should be interpreted as contextual environmental indicators rather than direct causal drivers. The results support a two-layer interpretation: biological state monitoring provides the strongest short-term predictive signal, while NOAA environmental variables help characterize thermal and upwelling/nitrate-flux exposure context.
+
+Interpretation caution: SHAP values explain how the fitted model used features for prediction. They do not establish ecological causality. Directional patterns should be interpreted alongside known data limitations, including OISST grid resolution, CUTI/BEUTI latitude-bin assignment, missing biotic drivers such as grazing pressure, and the limited number of test years.
 
 ## Limitations
 
 - SHAP explains model behavior, not causal mechanisms.
 - NOAA variables are exposure proxies.
 - OISST uses nearest valid ocean grid in Version 1.
-- CUTI/BEUTI use latitude-bin assignment.
+- CUTI is a coastal upwelling transport proxy, and BEUTI is a nitrate-flux proxy.
+- CUTI/BEUTI are latitude-bin environmental exposure proxies, not cell-specific in situ measurements.
 - No direct grazing or urchin variables are included.
 - The analysis has a small number of cells and limited test years.
