@@ -6,7 +6,7 @@
 
 ## Research Objective
 
-This project develops an explainable machine learning workflow for detecting early-warning signals of kelp canopy decline. It integrates Kelpwatch satellite-derived kelp canopy observations with NOAA Optimum Interpolation Sea Surface Temperature (OISST) data to build features, construct decline labels, train predictive models, and interpret environmental drivers of decline risk.
+This project develops an explainable machine learning workflow for detecting early-warning signals of kelp canopy decline. It integrates Kelpwatch satellite-derived kelp canopy observations with NOAA Optimum Interpolation Sea Surface Temperature (OISST), CUTI, and BEUTI data to build features, construct decline labels, train predictive models, and interpret environmental exposure context for decline risk.
 
 The project is designed as a reproducible research workflow and prototype decision-support system for kelp monitoring.
 
@@ -17,7 +17,7 @@ The project is designed as a reproducible research workflow and prototype decisi
 - Which temperature, temporal, and site-level features are most associated with elevated decline risk?
 - Can explainable AI methods such as SHAP make model outputs interpretable for ecological monitoring?
 
-## Planned Data Sources
+## Data Sources
 
 - **Kelpwatch:** satellite-derived kelp canopy area or extent time series.
 - **NOAA OISST:** daily gridded sea surface temperature for thermal anomaly and marine heatwave feature engineering.
@@ -59,6 +59,8 @@ The first modeling workflow compares Logistic Regression, SVM, Random Forest, XG
 
 Three feature sets are compared: canopy-only, OISST-only, and canopy plus NOAA environmental predictors. Final model comparison prioritizes PR-AUC, recall, and F1 because the task is framed as early-warning screening for future kelp canopy decline events.
 
+Key model-comparison result: the best aggregate test PR-AUC came from `canopy_only / Random Forest`, while the best canopy+NOAA PR-AUC came from `canopy_noaa / SVM`. SHAP interpretation uses `canopy_only / Random Forest` and `canopy_noaa / Random Forest`; SVM Kernel SHAP is left as a future refinement because it is slower and less stable for this workflow.
+
 ### Initial Model Diagnostics
 
 The first temporal model comparison showed that the canopy-only baseline achieved the highest test PR-AUC. This suggests that current canopy condition is a strong short-term early-warning signal for next-year decline. NOAA OISST and CUTI/BEUTI variables did not outperform the best canopy-only model in the first split, but they are retained as environmental exposure indicators for interpretation and SHAP-based comparison.
@@ -75,20 +77,35 @@ Interpretation caution: SHAP values explain how the fitted model used features f
 
 ## Workflow
 
-1. **Kelpwatch data exploration**
-   - Load kelp canopy time series, inspect spatial and temporal coverage, and identify candidate study sites.
+1. **Kelpwatch 10 km fishnet spatial design**
+   - Define regular 10 km x 10 km candidate cells across the Northern and Central California coastal corridor.
 
-2. **OISST SST feature engineering**
-   - Extract SST time series near kelp sites and compute anomalies, rolling means, cumulative heat stress, and marine heatwave indicators.
+2. **Kelpwatch cell filtering**
+   - Retain main modeling cells using historical kelp footprint thresholds.
 
-3. **Decline label construction**
-   - Define decline events using canopy loss thresholds, baseline periods, rolling windows, and persistence criteria.
+3. **Annual canopy panel construction**
+   - Build a cell-year panel from growing-season maximum Kelpwatch canopy exports.
 
-4. **Modeling with XGBoost and SHAP**
-   - Train early-warning models to predict decline risk and interpret feature contributions with SHAP.
+4. **Next-year decline label construction**
+   - Label rows using next-year canopy relative to a cell-specific historical baseline threshold.
 
-5. **Dashboard prototype**
-   - Build a Streamlit prototype for exploring kelp canopy trends, SST stress indicators, model predictions, and interpretability outputs.
+5. **NOAA environmental feature engineering**
+   - Add OISST thermal metrics and CUTI/BEUTI environmental exposure proxies.
+
+6. **Dataset validation**
+   - Check row counts, year coverage, missingness, suspicious values, OISST fallback, and CUTI/BEUTI latitude-bin assignment.
+
+7. **Five-model comparison**
+   - Compare Logistic Regression, SVM, Random Forest, XGBoost, and LightGBM across canopy-only, OISST-only, and canopy+NOAA feature sets.
+
+8. **Model diagnostics**
+   - Audit leakage, compare feature sets, inspect false negatives, and summarize temporal/environmental patterns.
+
+9. **Canopy persistence and environmental context analysis**
+   - Separate canopy-state persistence from NOAA environmental signal interpretation.
+
+10. **SHAP interpretation**
+    - Explain the best canopy-only model and an interpretable tree-based canopy+NOAA model.
 
 ## Repository Structure
 
@@ -107,11 +124,12 @@ kelp-decline-early-warning/
 ├── docs/
 │   └── maps/
 ├── notebooks/
-│   ├── 01_kelpwatch_data_exploration.ipynb
-│   ├── 02_oisst_sst_feature_engineering.ipynb
-│   ├── 03_decline_label_construction.ipynb
-│   ├── 04_modeling_xgboost_shap.ipynb
-│   └── 05_dashboard_prototype.ipynb
+│   ├── 01_kelpwatch_panel_construction.ipynb
+│   ├── 02_decline_label_construction.ipynb
+│   ├── 04_model_comparison.ipynb
+│   ├── 05_model_diagnostics.ipynb
+│   ├── 06_canopy_environment_context_analysis.ipynb
+│   └── 07_shap_interpretation.ipynb
 ├── src/
 │   ├── data_loader.py
 │   ├── feature_engineering.py
@@ -156,24 +174,43 @@ On macOS, if the environment check fails with `libomp.dylib` missing while impor
 brew install libomp
 ```
 
+## Reproducible Script Workflow
+
+The main analysis scripts are designed to be run in order after local Kelpwatch CSV exports and NOAA cache files are available:
+
+```bash
+python scripts/filter_kelpwatch_cells.py
+python scripts/build_kelpwatch_panel.py
+python scripts/construct_decline_labels.py
+python scripts/build_noaa_environmental_features.py
+python scripts/validate_kelpwatch_exports.py
+python scripts/train_model_comparison.py
+python scripts/diagnose_model_results.py
+python scripts/analyze_canopy_environment_context.py
+python scripts/interpret_models_shap.py
+```
+
+Raw Kelpwatch exports, processed modeling datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, reproducibility metadata, figures, GeoJSON AOIs, and written reports.
+
 ## Expected Outputs
 
-- Cleaned kelp canopy time series.
-- Site-level SST feature tables.
-- Decline event labels for model training and evaluation.
-- XGBoost model outputs and validation summaries.
-- SHAP feature-importance and explanation plots.
-- Prototype Streamlit dashboard for visual exploration.
+- Kelpwatch 10 km fishnet AOI design and validation files.
+- Annual kelp canopy panel metadata and decline-label summaries.
+- NOAA environmental feature summaries and modeling-dataset validation reports.
+- Five-model comparison tables and figures.
+- Model diagnostics for feature sets, false negatives, and environmental signal context.
+- Canopy persistence and environmental-context figures.
+- SHAP feature-importance, grouped-importance, dependence, and local explanation outputs.
 
 ## Scope and Interpretation
 
 This project is an early-warning and interpretability workflow. Model predictions should be interpreted as risk indicators for monitoring and prioritization, not as proof of ecological causation. Field observations and ecological expertise remain important for validating decline mechanisms and management decisions.
 
-## Current Development Priorities
+## Remaining Improvements
 
-- Identify initial Kelpwatch data access format and candidate regions.
-- Build the first kelp canopy time-series loader.
-- Prototype OISST extraction for selected kelp sites.
-- Define an initial decline-labeling rule.
-- Train a baseline XGBoost model.
-- Create first SHAP summary plots and dashboard mockup.
+- Add a polished README figure panel for portfolio presentation.
+- Add direct links from README sections to the most important reports and figures.
+- Add sensitivity analysis comparing nearest-grid OISST assignment with a coastal-buffer average.
+- Add additional ecological covariates where available, especially grazing pressure, urchin observations, wave disturbance, and disease-related context.
+- Consider spatial or grouped cross-validation in addition to the current temporal split.
+- Build a lightweight Streamlit dashboard from the validated outputs.
