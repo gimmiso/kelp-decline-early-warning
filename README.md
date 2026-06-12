@@ -148,6 +148,32 @@ False negatives: 101
 
 Within the tested algorithms, canopy+NOAA did not improve PR-AUC over canopy-only. However, for SVM at the default threshold, canopy+NOAA improved recall and F1 and reduced false negatives relative to canopy-only SVM. OISST-only models were generally weaker than canopy-only models, while canopy+NOAA models generally improved over OISST-only models.
 
+### Recall-Oriented Threshold Tuning
+
+Because kelp decline prediction is framed as an early-warning screening task, the default 0.5 decision threshold may be too conservative. We therefore selected recall-oriented thresholds on the validation period and applied them unchanged to the test period. This analysis evaluates whether false negatives can be reduced while preserving a reasonable precision-recall trade-off. Threshold tuning changes the classifier operating point; it does not change PR-AUC.
+
+The strongest balanced threshold-tuned result was `canopy_only / Random Forest` at threshold `0.30`:
+
+```text
+Recall: 0.910
+Precision: 0.753
+F1: 0.824
+False negatives: 12
+Default-threshold false negatives: 55
+```
+
+The most sensitive screening result was `canopy_noaa / SVM` at threshold `0.05`:
+
+```text
+Recall: 1.000
+Precision: 0.670
+F1: 0.802
+False negatives: 0
+Default-threshold false negatives: 101
+```
+
+These thresholds were selected using the 2017-2020 validation period only, then fixed for the 2021-2024 test period to avoid test-set leakage. For early-warning use, `canopy_only / Random Forest` gives the stronger balanced recall-F1 trade-off, while `canopy_noaa / SVM` is useful as a high-sensitivity screening option when reducing missed decline events is the priority.
+
 ### 3. NOAA Variables Provide Environmental Exposure Context
 
 ![Environmental signal comparison between decline and non-decline rows](outputs/figures/environmental_signal_decline_vs_nondecline.png)
@@ -201,6 +227,7 @@ python scripts/build_kelpwatch_panel.py
 python scripts/construct_decline_labels.py
 python scripts/build_noaa_environmental_features.py
 python scripts/train_model_comparison.py
+python scripts/tune_decision_thresholds.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
