@@ -2,7 +2,7 @@
 
 ## Project Title
 
-**Explainable Early-Warning Modeling for Kelp Canopy Decline Using Kelpwatch and NOAA OISST**
+**Explainable Early-Warning Modeling for Kelp Canopy Decline Using Kelpwatch and NOAA Environmental Data**
 
 ## Research Objective
 
@@ -13,14 +13,15 @@ The project is designed as a reproducible research workflow for kelp monitoring 
 ## Core Research Questions
 
 - Can satellite-derived kelp canopy time series be used to define robust decline events?
-- Do SST anomalies, marine heatwave indicators, and recent canopy trends provide early-warning information before decline?
+- Do SST anomalies, hot-day exceedance indicators, CUTI/BEUTI proxies, and recent canopy trends provide early-warning information before decline?
 - Which temperature, temporal, and site-level features are most associated with elevated decline risk?
 - Can explainable AI methods such as SHAP make model outputs interpretable for ecological monitoring?
 
 ## Data Sources
 
 - **Kelpwatch:** satellite-derived kelp canopy area or extent time series.
-- **NOAA OISST:** daily gridded sea surface temperature for thermal anomaly and marine heatwave feature engineering.
+- **NOAA OISST:** daily gridded sea surface temperature for thermal anomaly and hot-day exceedance feature engineering.
+- **NOAA CUTI/BEUTI:** coastal upwelling transport and nitrate-flux proxy data for environmental exposure context.
 - **Optional external covariates:** coastline, ecoregion, bathymetry, exposure, or site metadata if needed for model interpretation.
 
 ## Spatial Sampling Strategy
@@ -43,7 +44,7 @@ The final year is excluded from modeling because next-year canopy is unavailable
 
 ## NOAA Environmental Features
 
-Version 1 uses NOAA-only environmental predictors. The core environmental feature set combines NOAA OISST thermal stress indicators with NOAA CUTI/BEUTI upwelling variables.
+Version 1 uses NOAA environmental predictors. The core environmental feature set combines NOAA OISST thermal exposure indicators with NOAA CUTI/BEUTI upwelling and nitrate-flux proxy variables.
 
 OISST features are assigned to each 10 km Kelpwatch fishnet cell using the nearest OISST grid point to the cell centroid. Annual SST summaries, SST anomalies, and hot-day indicators are computed using the 1984-2013 baseline period.
 

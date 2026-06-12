@@ -1,27 +1,28 @@
 # Raw Data
 
-This directory is used to store raw data files for the kelp canopy decline early-warning project.
+This directory is used for local raw data files for the kelp canopy decline early-warning project.
 
-Raw data files are **not committed to this GitHub repository** because they may be large, externally maintained, or subject to different usage conditions. Instead, this repository documents the data sources, download procedures, and expected file structure so that the workflow can be reproduced.
+Raw data files are **not committed to this GitHub repository** because they may be large, externally maintained, or subject to different usage conditions. The repository instead tracks data-source documentation, spatial AOI definitions, scripts, validation metadata, reproducibility reports, and figures.
 
 ## 1. Kelpwatch Data
 
 ### Source
 
 Kelpwatch
+
 Website: [https://kelpwatch.org/](https://kelpwatch.org/)
 
-Kelpwatch provides satellite-derived kelp canopy data that can be visualized and downloaded for user-selected geographic and temporal extents. In this project, Kelpwatch data are used as the main ecological response variable for constructing kelp canopy decline labels.
+Kelpwatch provides satellite-derived kelp canopy data that can be visualized and downloaded for user-selected geographic and temporal extents. In this project, Kelpwatch data are used as the ecological response variable for constructing annual canopy panels and next-year kelp canopy decline labels.
 
 ### Study Region and Spatial Unit
 
-The study region for the first version of this project is the Northern and Central California coastal corridor.
+The study region for the current workflow is the Northern and Central California coastal corridor.
 
-This region was selected because broad regional Kelpwatch exports for Northern California and Central California were initially tested, but they were found to be too coarse for site-level early-warning modeling. Therefore, the project now uses a finer spatial sampling design within the same coastal region.
+Broad regional Kelpwatch exports for Northern California and Central California were initially tested, but they were too coarse for cell-level early-warning modeling. The project therefore uses a finer regular fishnet sampling design within the same coastal region.
 
-The spatial unit is a regular 10 km x 10 km fishnet grid cell.
+The spatial unit is a regular 10 km x 10 km fishnet grid cell. Each grid cell is treated as an individual observation unit and is assigned a unique `cell_id`.
 
-Each grid cell is treated as an individual observation unit and is assigned a unique `cell_id`. The modeling dataset will therefore be constructed at the following spatial-temporal scale:
+The modeling dataset is constructed at the following spatial-temporal scale:
 
 ```text
 cell_id x year
@@ -33,7 +34,7 @@ For raw Kelpwatch exports, the full structure is:
 cell_id x year x quarter x kelp_area_m2
 ```
 
-For the first annual modeling version, only the `quarter = max` rows are used, resulting in:
+The current annual modeling workflow uses only `quarter = max` rows. In Kelpwatch, `max` represents the maximum quarterly kelp canopy value observed within the growing season. This produces an annual growing-season maximum canopy dataset:
 
 ```text
 cell_id x year x growing_season_max_kelp_area
@@ -41,30 +42,9 @@ cell_id x year x growing_season_max_kelp_area
 
 Adjacent grid cells share boundaries but do not overlap by area. The number of candidate cells is determined by the regular fishnet grid design, not by a manually predefined number of AOIs.
 
-### Role in This Project
+### Spatial Sampling and Filtering Summary
 
-Because Kelpwatch accepts only single-feature geometry uploads, each fishnet cell is stored as an individual GeoJSON file and uploaded separately to Kelpwatch.
-
-For the first version of the modeling workflow, only the `quarter = max` rows will be used. In Kelpwatch, `max` represents the maximum quarterly kelp canopy value observed within the growing season.
-
-### Target Variable
-
-The main prediction target will be derived from future kelp canopy conditions.
-
-Example target variable:
-
-```text
-decline_event_next = 1 if next-year growing-season maximum canopy is below the cell-specific historical 25th percentile
-decline_event_next = 0 otherwise
-```
-
-In other words, a decline event is defined as a year in which the next-year kelp canopy falls below a historically low threshold for the same grid cell.
-
-### Spatial Sampling Design
-
-The candidate spatial units are generated from a regular 10 km x 10 km fishnet grid. The number of candidate cells is determined by the spatial grid design rather than predefined manually.
-
-The current candidate grid is stored under:
+The candidate spatial units are generated from a regular 10 km x 10 km fishnet grid. The current fishnet design and validation files are stored under:
 
 ```text
 geometries/regular_10km_fishnet/
@@ -73,27 +53,28 @@ geometries/regular_10km_fishnet/
 Relevant files include:
 
 ```text
+geometries/regular_10km_fishnet/README_grid_method.md
 geometries/regular_10km_fishnet/aoi_inventory_regular_10km_fishnet.csv
 geometries/regular_10km_fishnet/grid_validation_regular_10km_fishnet.txt
 geometries/regular_10km_fishnet/kelpwatch_regular_10km_fishnet_preview.geojson
 geometries/regular_10km_fishnet/single_cell_geojsons/
 ```
 
-Adjacent grid cells share boundaries but do not overlap by area. Candidate cells will be retained for modeling only if Kelpwatch reports a positive historical kelp footprint.
-
-Initial filtering rule:
+Current filtering summary:
 
 ```text
-count_cells_historic_footprint > 0
+Candidate fishnet cells: 285
+Exploratory retained cells with count_cells_historic_footprint > 0: 74
+Main modeling cells with count_cells_historic_footprint >= 500: 50
 ```
 
-A stricter robustness filter may also be tested:
-
-```text
-count_cells_historic_footprint >= 500
-```
+The main modeling workflow uses the `count_cells_historic_footprint >= 500` retained-cell list.
 
 ### Download Procedure
+
+Because Kelpwatch accepts only single-feature geometry uploads, each fishnet cell is stored as an individual GeoJSON file and uploaded separately to Kelpwatch.
+
+Manual download procedure:
 
 1. Open the Kelpwatch website.
 2. Upload one single-feature GeoJSON file from:
@@ -125,7 +106,7 @@ data/raw/kelpwatch_aoi/kelpwatch_cell_003.csv
 ...
 ```
 
-### Automated Download Test
+### Automated Download Workflow
 
 The Kelpwatch web app request pattern can be automated through the public upload and aggregate endpoints. The repository includes:
 
@@ -135,18 +116,18 @@ scripts/validate_kelpwatch_exports.py
 docs/kelpwatch_api_investigation.md
 ```
 
-The download script defaults to a limited 3-cell test:
+The automated Kelpwatch download workflow should be tested on a small number of cells before larger batch exports. This keeps the workflow reproducible and avoids unnecessary repeated requests.
+
+Example commands:
 
 ```bash
 python3 scripts/download_kelpwatch_cell_exports.py
 python3 scripts/validate_kelpwatch_exports.py
 ```
 
-Do not run the full 285-cell download until the 3-cell test workflow is confirmed.
-
 ### Expected Raw CSV Fields
 
-The downloaded Kelpwatch CSV files are expected to include the following fields:
+Downloaded Kelpwatch CSV files are expected to include:
 
 ```text
 year
@@ -159,105 +140,144 @@ count_cells_historic_footprint
 
 Field meanings:
 
-- `year`: year when imagery was collected
-- `quarter`: annual quarter or `max` growing-season maximum row
-- `kelp_area_m2`: total emergent kelp canopy area in square meters within the selected cell
-- `count_cells_kelp`: number of 30 m x 30 m cells containing kelp canopy
-- `count_cells_no_clouds`: number of cloud-free 30 m x 30 m cells within unoccupied kelp habitat
-- `count_cells_historic_footprint`: number of 30 m x 30 m cells where kelp canopy was observed at least once across the full observation period
+- `year`: year when imagery was collected.
+- `quarter`: annual quarter or `max` growing-season maximum row.
+- `kelp_area_m2`: total emergent kelp canopy area in square meters within the selected cell.
+- `count_cells_kelp`: number of 30 m x 30 m cells containing kelp canopy.
+- `count_cells_no_clouds`: number of cloud-free 30 m x 30 m cells within unoccupied kelp habitat.
+- `count_cells_historic_footprint`: number of 30 m x 30 m cells where kelp canopy was observed at least once across the full observation period.
 
-### Data Management Policy
+### Target Variable
 
-Raw Kelpwatch CSV exports are not committed to this repository. They are stored locally under `data/raw/kelpwatch_aoi/` and excluded from Git to keep the repository lightweight.
-
-The repository tracks only reproducibility files such as:
+The main prediction target is derived from next-year canopy condition:
 
 ```text
-GeoJSON AOI files
-AOI inventory files
-grid validation files
-documentation
-processing scripts
+decline_event_next = 1 if next-year growing-season maximum canopy is below the cell-specific historical 25th percentile
+decline_event_next = 0 otherwise
 ```
 
-Raw CSV export summaries and filtering metadata are tracked under:
+In other words, a decline event is defined as a year in which the next-year kelp canopy falls below a historically low threshold for the same grid cell.
+
+## 2. NOAA Environmental Data: OISST, CUTI, and BEUTI
+
+### Sources
+
+NOAA Optimum Interpolation Sea Surface Temperature (OISST)
+
+Website: [https://www.ncei.noaa.gov/products/optimum-interpolation-sst](https://www.ncei.noaa.gov/products/optimum-interpolation-sst)
+
+NOAA/PFEG ERDDAP for CUTI and BEUTI
+
+Base URL: [https://upwell.pfeg.noaa.gov/erddap](https://upwell.pfeg.noaa.gov/erddap)
+
+### Use in This Project
+
+The current workflow uses NOAA environmental data to create cell-year exposure features that are merged with Kelpwatch decline labels:
+
+- NOAA OISST daily sea surface temperature.
+- NOAA CUTI coastal upwelling transport proxy.
+- NOAA BEUTI nitrate-flux proxy.
+
+OISST features are assigned to each 10 km Kelpwatch fishnet cell using the nearest valid OISST ocean grid point to the cell centroid. CUTI and BEUTI features are assigned by the nearest available latitude bin.
+
+CUTI/BEUTI are interpreted as environmental exposure proxies, not cell-specific in situ measurements. CUTI is interpreted as a coastal upwelling transport proxy. BEUTI is interpreted as a nitrate-flux proxy.
+
+### Generated Environmental Feature Examples
+
+The current NOAA feature-engineering workflow creates variables including:
 
 ```text
-geometries/regular_10km_fishnet/
+annual_mean_sst
+annual_max_sst
+annual_min_sst
+annual_sst_std
+annual_mean_sst_anomaly
+annual_max_sst_anomaly
+hot_days_p90
+hot_days_p95
+lag1_annual_mean_sst_anomaly
+lag1_hot_days_p90
+annual_mean_cuti
+spring_mean_cuti
+summer_mean_cuti
+cuti_anomaly
+lag1_cuti_anomaly
+annual_mean_beuti
+spring_mean_beuti
+summer_mean_beuti
+beuti_anomaly
+lag1_beuti_anomaly
 ```
 
-Raw CSV files should remain local and should not be staged or committed.
+`hot_days_p90` and `hot_days_p95` are hot-day exceedance indicators based on historical OISST thresholds. The current Version 1 workflow does not claim to implement a full marine heatwave intensity analysis.
 
-## 2. NOAA OISST Data
+### Expected Local Storage
 
-### Source
-
-NOAA Optimum Interpolation Sea Surface Temperature
-Website: https://www.ncei.noaa.gov/products/optimum-interpolation-sst
-
-NOAA OISST provides daily gridded sea surface temperature data. In the next stage of this project, NOAA OISST will be used to derive marine heat stress indicators and merge them with the Kelpwatch canopy dataset.
-
-### Planned Use in This Project
-
-NOAA OISST will be used to generate SST-based predictor variables, including:
+Downloaded or cached NOAA source files are stored locally under:
 
 ```text
-mean_sst
-max_sst
-sst_anomaly
-marine_heatwave_days
-marine_heatwave_intensity
-lag1_sst_anomaly
-lag1_marine_heatwave_days
+data/external/noaa/
 ```
 
-These variables will be used as environmental predictors in the kelp canopy decline early-warning models.
-
-### Expected Storage
-
-Downloaded or processed NOAA OISST files should be stored separately under:
-
-```text
-data/external/
-```
-
-or, after preprocessing:
+Processed environmental feature tables are stored locally under:
 
 ```text
 data/processed/
 ```
 
-Raw OISST files should not be committed to GitHub.
+NOAA cache files, NetCDF files, and processed datasets are not committed to GitHub.
 
 ## 3. Data Management Policy
 
-This repository does not track raw data files directly. The following files are intentionally ignored by Git:
+This repository does not track raw, external, or processed data files directly. The following file groups are intentionally ignored by Git:
 
 ```text
 data/raw/*
 data/external/*
 data/processed/*
+NOAA cache files
+raw Kelpwatch CSV exports
 ```
 
-Only documentation files such as `README.md` and placeholder files such as `.gitkeep` are committed.
+Only documentation files such as `README.md` and placeholder files such as `.gitkeep` are committed inside data directories.
 
-This approach keeps the repository lightweight while preserving reproducibility through clear documentation of data sources and preprocessing steps.
-
-## 4. Planned Workflow
-
-The raw data workflow is:
+The repository tracks reproducibility files such as:
 
 ```text
-Kelpwatch CSV
-    -> canopy preprocessing
-    -> decline-event label construction
+scripts
+GeoJSON AOI definitions
+AOI inventory files
+grid validation files
+validation metadata
+reproducibility reports
+figures
+documentation
+```
 
-NOAA OISST
-    -> SST and marine heatwave feature engineering
+This approach keeps the repository lightweight while preserving reproducibility through clear documentation of data sources, expected local file structure, and preprocessing steps.
+
+## 4. Current Workflow
+
+The completed data workflow is:
+
+```text
+Kelpwatch cell exports
+    -> export validation
+    -> historical-footprint filtering
+    -> annual growing-season maximum canopy panel
+    -> next-year decline label construction
+
+NOAA OISST + CUTI/BEUTI
+    -> environmental feature engineering
+    -> feature validation
     -> merge with Kelpwatch decline labels
 
-Merged dataset
+Merged modeling dataset
+    -> temporal train/validation/test split
     -> five-model comparison
+    -> model diagnostics
+    -> canopy persistence and environmental-context analysis
     -> SHAP interpretation
-    -> early-warning dashboard
 ```
+
+An interactive app is not part of the current core workflow.
