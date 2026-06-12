@@ -8,7 +8,7 @@
 
 This project develops an explainable machine learning workflow for detecting early-warning signals of kelp canopy decline. It integrates Kelpwatch satellite-derived kelp canopy observations with NOAA Optimum Interpolation Sea Surface Temperature (OISST), CUTI, and BEUTI data to build features, construct decline labels, train predictive models, and interpret environmental exposure context for decline risk.
 
-The project is designed as a reproducible research workflow and prototype decision-support system for kelp monitoring.
+The project is designed as a reproducible research workflow for kelp monitoring and early-warning model interpretation.
 
 ## Core Research Questions
 
@@ -136,8 +136,6 @@ kelp-decline-early-warning/
 │   ├── labeling.py
 │   ├── modeling.py
 │   └── visualization.py
-├── app/
-│   └── streamlit_app.py
 └── outputs/
     ├── figures/
     ├── maps/
@@ -213,4 +211,4 @@ This project is an early-warning and interpretability workflow. Model prediction
 - Add sensitivity analysis comparing nearest-grid OISST assignment with a coastal-buffer average.
 - Add additional ecological covariates where available, especially grazing pressure, urchin observations, wave disturbance, and disease-related context.
 - Consider spatial or grouped cross-validation in addition to the current temporal split.
-- Build a lightweight Streamlit dashboard from the validated outputs.
+- Add a concise results-summary document for readers who want the main findings without opening every metadata report.

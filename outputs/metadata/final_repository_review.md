@@ -43,7 +43,7 @@ The repository now presents a coherent public-data GeoAI workflow for next-year 
 
 2. **README figures are not embedded yet.** The figures exist, but the README would be more portfolio-ready if 4-6 key figures were displayed directly with short captions.
 
-3. **Dashboard remains a future-facing artifact.** `app/streamlit_app.py` exists, but the strongest current deliverable is the reproducible analysis workflow and static outputs rather than an interactive dashboard.
+3. **No app layer is included.** The repository is now intentionally focused on reproducible scripts, reports, metadata, and figures rather than an interactive app.
 
 4. **Spatial validation could be made more visible.** The fishnet design and validation files are present, but a README figure or screenshot of the retained cells would help readers immediately understand the spatial design.
 
@@ -69,9 +69,8 @@ No critical scientific or leakage issue needs to be fixed before continuing.
 1. Add OISST coastal-buffer average sensitivity analysis and compare it with nearest-grid assignment.
 2. Add spatial/grouped cross-validation by cell or coastal subregion.
 3. Add additional ecological covariates where feasible, especially grazing pressure, urchin observations, sea star wasting disease context, wave exposure, and storm disturbance.
-4. Add a compact Streamlit dashboard using the already-created metadata and figures.
-5. Add a workflow diagram to show how Kelpwatch, OISST, CUTI, and BEUTI become a cell-year modeling dataset.
-6. Add a small `docs/results_summary.md` file for readers who want the results without opening every metadata report.
+4. Add a workflow diagram to show how Kelpwatch, OISST, CUTI, and BEUTI become a cell-year modeling dataset.
+5. Add a small `docs/results_summary.md` file for readers who want the results without opening every metadata report.
 
 ## Leakage Audit
 
