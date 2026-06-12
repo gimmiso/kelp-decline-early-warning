@@ -1,82 +1,116 @@
-# kelp-decline-early-warning
+# Explainable Early-Warning Modeling for Kelp Canopy Decline Using Kelpwatch and NOAA Environmental Data
 
-## Project Title
+## Overview
 
-**Explainable Early-Warning Modeling for Kelp Canopy Decline Using Kelpwatch and NOAA Environmental Data**
+This project builds a reproducible data science and GeoAI workflow for next-year kelp canopy decline early warning. It combines Kelpwatch satellite-derived kelp canopy observations with NOAA environmental exposure indicators from OISST, CUTI, and BEUTI.
 
-## Research Objective
+The workflow creates a 10 km fishnet cell-year dataset, constructs next-year decline labels, engineers NOAA thermal and upwelling-related proxy features, compares five supervised machine-learning models, and uses diagnostics plus SHAP interpretation to explain model behavior.
 
-This project develops an explainable machine learning workflow for detecting early-warning signals of kelp canopy decline. It integrates Kelpwatch satellite-derived kelp canopy observations with NOAA Optimum Interpolation Sea Surface Temperature (OISST), CUTI, and BEUTI data to build features, construct decline labels, train predictive models, and interpret environmental exposure context for decline risk.
+Final interpretation: current canopy condition was the strongest short-term signal for next-year kelp decline, reflecting temporal persistence in canopy state. NOAA OISST, CUTI, and BEUTI variables did not replace direct canopy monitoring or improve aggregate PR-AUC over canopy-only models, but they provided interpretable environmental exposure context related to thermal exposure and upwelling/nitrate-flux proxy conditions.
 
-The project is designed as a reproducible research workflow for kelp monitoring and early-warning model interpretation.
+## Research Questions
 
-## Core Research Questions
-
-- Can satellite-derived kelp canopy time series be used to define robust decline events?
-- Do SST anomalies, hot-day exceedance indicators, CUTI/BEUTI proxies, and recent canopy trends provide early-warning information before decline?
-- Which temperature, temporal, and site-level features are most associated with elevated decline risk?
-- Can explainable AI methods such as SHAP make model outputs interpretable for ecological monitoring?
+- Can satellite-derived kelp canopy time series define useful next-year decline events?
+- How strongly does current canopy condition persist into next-year canopy condition?
+- Do NOAA OISST, CUTI, and BEUTI exposure proxies add environmental context beyond direct canopy monitoring?
+- How do model results change across linear, margin-based, random-forest, and boosted-tree classifiers?
+- Can SHAP help separate biological-state signals from environmental-context signals without making causal claims?
 
 ## Data Sources
 
-- **Kelpwatch:** satellite-derived kelp canopy area or extent time series.
-- **NOAA OISST:** daily gridded sea surface temperature for thermal anomaly and hot-day exceedance feature engineering.
-- **NOAA CUTI/BEUTI:** coastal upwelling transport and nitrate-flux proxy data for environmental exposure context.
-- **Optional external covariates:** coastline, ecoregion, bathymetry, exposure, or site metadata if needed for model interpretation.
+- **Kelpwatch:** satellite-derived kelp canopy area time series for user-defined AOIs.
+- **NOAA OISST:** daily gridded sea surface temperature used for annual SST summaries, anomalies, and hot-day exceedance indicators.
+- **NOAA CUTI:** coastal upwelling transport proxy.
+- **NOAA BEUTI:** nitrate-flux proxy.
 
-## Spatial Sampling Strategy
+CUTI and BEUTI are interpreted as latitude-bin environmental exposure proxies. They are not cell-specific in situ nutrient measurements.
 
-Initial Kelpwatch aggregate CSV exports were found to be too coarse for site-level early-warning modeling. Therefore, this project uses a regular 10 km x 10 km fishnet grid across the Northern and Central California coastal corridor.
+## Spatial Design
 
-The number of candidate cells is determined by the spatial grid design rather than predefined manually. The generated candidate grid contains 285 cells. Adjacent cells share boundaries but do not overlap by area.
+The study region is the Northern and Central California coastal corridor. Initial broad Kelpwatch regional exports were too coarse for cell-level early-warning modeling, so the project uses a regular 10 km x 10 km fishnet grid.
 
-Because Kelpwatch accepts only single-feature geometry uploads, each grid cell is stored as an individual GeoJSON file and uploaded separately to Kelpwatch.
+Current spatial design summary:
 
-Candidate cells will be retained for modeling only if Kelpwatch reports positive historical kelp footprint. A stricter robustness filter may use `count_cells_historic_footprint >= 500`, following the logic of previous Kelpwatch-based studies.
+```text
+Candidate fishnet cells: 285
+Exploratory retained cells with count_cells_historic_footprint > 0: 74
+Main modeling cells with count_cells_historic_footprint >= 500: 50
+```
 
-After Kelpwatch export validation, candidate cells are filtered using historical kelp footprint. The exploratory dataset retains cells with `count_cells_historic_footprint > 0`, while the main modeling dataset retains cells with `count_cells_historic_footprint >= 500`. Based on the current Kelpwatch export summary, this leaves 74 exploratory cells and 50 main modeling cells from the original 285 candidate fishnet cells.
+Each grid cell is uploaded to Kelpwatch as a single-feature GeoJSON because Kelpwatch accepts one feature per uploaded geometry. The GeoJSON AOIs and validation files are stored under:
 
-## Decline Label Construction
+```text
+geometries/regular_10km_fishnet/
+```
 
-The early-warning target is defined using next-year kelp canopy condition. For each 10 km fishnet cell, the main decline threshold is the cell-specific 25th percentile of `relative_canopy` during the 1984-2013 baseline period. A row is labeled as a decline event if the following year's growing-season maximum relative canopy falls below this baseline threshold.
+## Target Definition
 
-The final year is excluded from modeling because next-year canopy is unavailable. Robustness labels include a full-history 25th percentile label and a 50% next-year decline label.
+The response variable is a next-year decline label:
 
-## NOAA Environmental Features
+```text
+decline_event_next = 1
+if next-year growing-season maximum relative canopy
+falls below the cell-specific historical 25th percentile
+```
 
-Version 1 uses NOAA environmental predictors. The core environmental feature set combines NOAA OISST thermal exposure indicators with NOAA CUTI/BEUTI upwelling and nitrate-flux proxy variables.
+The main baseline period is 1984-2013. The final year is excluded from label construction because next-year canopy is unavailable.
 
-OISST features are assigned to each 10 km Kelpwatch fishnet cell using the nearest OISST grid point to the cell centroid. Annual SST summaries, SST anomalies, and hot-day indicators are computed using the 1984-2013 baseline period.
+## NOAA Environmental Feature Engineering
 
-Because OISST is coarser than the 10 km Kelpwatch fishnet, the nearest-grid assignment is treated as the Version 1 primary workflow. If the nearest coastal grid point has no valid SST values, the workflow falls back to the nearest valid neighboring OISST ocean grid point and records the source coordinates. A later sensitivity analysis will compare nearest-grid assignment with a small coastal-buffer average around each cell, following the logic of prior kelp remote-sensing studies.
+Version 1 uses NOAA environmental predictors assigned to each 10 km Kelpwatch cell:
 
-CUTI and BEUTI features are used as environmental exposure proxies. CUTI is treated as a coastal upwelling transport proxy, and BEUTI is treated as a nitrate-flux proxy. Each cell is assigned to the nearest available CUTI/BEUTI latitude bin from the NOAA/PFEG ERDDAP service, so these variables are not interpreted as cell-specific in situ measurements.
+- OISST features are assigned using the nearest valid OISST ocean grid point to the cell centroid.
+- CUTI and BEUTI features are assigned using the nearest available latitude bin.
+- OISST anomalies and hot-day exceedance indicators use the 1984-2013 baseline period.
 
-Chlorophyll-a and wave disturbance variables are reserved for future extensions.
+Example generated features include:
 
-## Initial Model Comparison
+```text
+annual_mean_sst
+annual_max_sst
+annual_min_sst
+annual_sst_std
+annual_mean_sst_anomaly
+annual_max_sst_anomaly
+hot_days_p90
+hot_days_p95
+lag1_annual_mean_sst_anomaly
+lag1_hot_days_p90
+annual_mean_cuti
+cuti_anomaly
+annual_mean_beuti
+beuti_anomaly
+lag1_cuti_anomaly
+lag1_beuti_anomaly
+```
 
-The first modeling workflow compares Logistic Regression, SVM, Random Forest, XGBoost, and LightGBM using a temporal split rather than a random split. The main modeling subset uses complete-feature years 1989-2024, with training on 1989-2016, validation on 2017-2020, and final test evaluation on 2021-2024.
+`hot_days_p90` and `hot_days_p95` are hot-day exceedance indicators, not a full marine heatwave intensity analysis.
 
-Three feature sets are compared: canopy-only, OISST-only, and canopy plus NOAA environmental predictors. Final model comparison prioritizes PR-AUC, recall, and F1 because the task is framed as early-warning screening for future kelp canopy decline events.
+## Modeling Framework
 
-Multiple model classes were compared to distinguish linear baseline performance, nonlinear decision-boundary behavior, and tree-based interaction effects. Within each model class, canopy-only, OISST-only, and canopy+NOAA feature sets were compared to separate biological-state prediction from environmental-context augmentation.
+The main modeling subset uses complete-feature years 1989-2024:
 
-Key model-comparison result: the best aggregate test PR-AUC came from `canopy_only / Random Forest`, while the best canopy+NOAA PR-AUC came from `canopy_noaa / SVM`. SHAP interpretation uses `canopy_only / Random Forest` and `canopy_noaa / Random Forest`; SVM Kernel SHAP is left as a future refinement because it is slower and less stable for this workflow.
+```text
+Train: 1989-2016
+Validation: 2017-2020
+Test: 2021-2024
+```
 
-### Initial Model Diagnostics
+Five supervised classifiers were compared:
 
-The first temporal model comparison showed that the canopy-only baseline achieved the highest test PR-AUC. This suggests that current canopy condition is a strong short-term early-warning signal for next-year decline. NOAA OISST and CUTI/BEUTI variables did not outperform the best canopy-only model in the first split, but they are retained as environmental exposure indicators for interpretation and SHAP-based comparison.
+- Logistic Regression: transparent linear baseline.
+- SVM: nonlinear margin-based classifier for a relatively small tabular dataset.
+- Random Forest: robust nonlinear tree benchmark and SHAP-compatible model.
+- XGBoost: boosted-tree benchmark.
+- LightGBM: efficient boosted-tree benchmark.
 
-### Canopy Persistence and Environmental Context
+Three feature sets were compared within each model class:
 
-The initial model comparison showed that canopy-only models achieved the strongest aggregate performance. To interpret this result, we analyzed canopy persistence and NOAA environmental signals separately. Current relative canopy was compared with next-year canopy condition, and NOAA OISST/CUTI/BEUTI variables were compared between decline and non-decline rows. Stratified analysis by current canopy condition was used to examine whether environmental stress indicators provide context beyond biological state monitoring.
+- `canopy_only`: direct biological state monitoring.
+- `oisst_only`: thermal exposure variables alone.
+- `canopy_noaa`: canopy state plus NOAA environmental exposure context.
 
-### SHAP Interpretation
-
-SHAP results are interpreted as model-behavior explanations rather than causal mechanisms. The canopy-only model relied primarily on current and lagged canopy variables, while the canopy+NOAA model assigned substantial importance to OISST, CUTI, and BEUTI features. Some dependence patterns were nonlinear or directionally mixed, so NOAA variables are interpreted as environmental exposure context rather than simple causal drivers.
-
-Interpretation caution: SHAP values explain how the fitted model used features for prediction. They do not establish ecological causality. Directional patterns should be interpreted alongside known data limitations, including OISST grid resolution, CUTI/BEUTI latitude-bin assignment, missing biotic drivers such as grazing pressure, and the limited number of test years.
+Performance was evaluated using PR-AUC, recall, F1, and false negatives because the task is framed as early-warning screening rather than balanced classification.
 
 ## Results
 
@@ -84,65 +118,95 @@ Interpretation caution: SHAP values explain how the fitted model used features f
 
 ![Current relative canopy vs next-year relative canopy](outputs/figures/canopy_persistence_scatter.png)
 
-Current relative canopy was strongly associated with next-year canopy condition, supporting the interpretation that canopy state has strong temporal persistence.
+Current relative canopy was strongly associated with next-year canopy condition. The current-to-next-year relative canopy correlation was `0.610`, supporting the interpretation that canopy state has strong temporal persistence.
 
 ![Next-year decline rate by current canopy quintile](outputs/figures/canopy_quantile_decline_rate.png)
 
-The lowest current-canopy quintile had the highest next-year decline rate, helping explain why canopy-only models performed strongly.
+The lowest current-canopy quintile had the highest next-year decline rate (`0.633`), while the highest quintile had a lower decline rate (`0.303`). This helps explain why canopy-only models performed strongly.
 
 ### 2. Canopy-Only Models Performed Best in Aggregate Prediction
 
 ![Model performance comparison](outputs/figures/model_performance_comparison.png)
 
-Five machine-learning models were compared using a temporal train/validation/test split. The best aggregate test PR-AUC came from the canopy-only Random Forest, suggesting that direct canopy-state variables remain the strongest short-term predictors in this Version 1 workflow.
+The best aggregate test PR-AUC came from `canopy_only / Random Forest`:
+
+```text
+PR-AUC: 0.8974
+Recall: 0.5896
+F1: 0.7149
+False negatives: 55
+```
+
+The best canopy+NOAA PR-AUC came from `canopy_noaa / SVM`:
+
+```text
+PR-AUC: 0.8459
+Recall: 0.2463
+F1: 0.3837
+False negatives: 101
+```
+
+Within the tested algorithms, canopy+NOAA did not improve PR-AUC over canopy-only. However, for SVM at the default threshold, canopy+NOAA improved recall and F1 and reduced false negatives relative to canopy-only SVM. OISST-only models were generally weaker than canopy-only models, while canopy+NOAA models generally improved over OISST-only models.
 
 ### 3. NOAA Variables Provide Environmental Exposure Context
 
 ![Environmental signal comparison between decline and non-decline rows](outputs/figures/environmental_signal_decline_vs_nondecline.png)
 
-Decline rows tended to show higher SST anomaly and hot-day exposure and lower CUTI anomaly than non-decline rows. BEUTI-related signals were also different, but they should be interpreted cautiously as proxy-based and context-dependent. NOAA variables are environmental exposure proxies rather than replacements for direct canopy monitoring.
+Decline rows showed directional differences in several NOAA variables. For example, `annual_mean_sst_anomaly` was higher in decline rows, while `cuti_anomaly` was lower. BEUTI-related signals also differed, but they should be interpreted cautiously as proxy-based and context-dependent.
+
+NOAA variables are environmental exposure proxies. They provide context for interpreting decline risk but do not replace direct canopy monitoring and do not establish causal mechanisms.
 
 ### 4. SHAP Separates Biological-State Signals from Environmental-Context Signals
 
 ![Grouped SHAP importance](outputs/figures/shap_grouped_importance.png)
 
-Grouped SHAP importance showed that the canopy-only Random Forest relied on canopy-state variables, while the canopy+NOAA Random Forest assigned substantial internal importance to OISST, CUTI, and BEUTI variables. These SHAP values explain fitted model behavior, not ecological causality.
+SHAP interpretation was performed on:
 
-### Limitations and Future Work
+```text
+canopy_only / Random Forest
+canopy_noaa / Random Forest
+```
 
-Future work should test spatial generalization using grouped or leave-region-out validation, compare nearest-grid OISST assignment with coastal-buffer averages, add ecological covariates such as urchin grazing, wave disturbance, and disease context where available, and estimate uncertainty using bootstrap confidence intervals.
+Although SVM had the best canopy+NOAA PR-AUC, Kernel SHAP for SVM was not used because it can be slow and less stable. A Random Forest canopy+NOAA model was used for TreeExplainer-based interpretation.
 
-## Workflow
+Grouped SHAP importance showed:
 
-1. **Kelpwatch 10 km fishnet spatial design**
-   - Define regular 10 km x 10 km candidate cells across the Northern and Central California coastal corridor.
+- `canopy_only / Random Forest`: canopy-state variables accounted for `100%` of grouped SHAP importance.
+- `canopy_noaa / Random Forest`: OISST, BEUTI, and CUTI variables carried substantial internal SHAP importance, while canopy variables remained part of the model explanation.
 
-2. **Kelpwatch cell filtering**
-   - Retain main modeling cells using historical kelp footprint thresholds.
+These SHAP values explain fitted model behavior, not ecological causality.
 
-3. **Annual canopy panel construction**
-   - Build a cell-year panel from growing-season maximum Kelpwatch canopy exports.
+## Reproducible Workflow
 
-4. **Next-year decline label construction**
-   - Label rows using next-year canopy relative to a cell-specific historical baseline threshold.
+The completed workflow is:
 
-5. **NOAA environmental feature engineering**
-   - Add OISST thermal metrics and CUTI/BEUTI environmental exposure proxies.
+1. Northern/Central California 10 km fishnet spatial design.
+2. Kelpwatch cell export and validation.
+3. Historical-footprint cell filtering.
+4. Annual growing-season maximum canopy panel construction.
+5. Next-year decline label construction.
+6. NOAA OISST + CUTI/BEUTI feature engineering.
+7. Final modeling dataset validation.
+8. Five-model comparison.
+9. Model diagnostics.
+10. Canopy persistence and environmental-context analysis.
+11. SHAP interpretation.
+12. Within-model feature-set comparison.
 
-6. **Dataset validation**
-   - Check row counts, year coverage, missingness, suspicious values, OISST fallback, and CUTI/BEUTI latitude-bin assignment.
+Main scripts:
 
-7. **Five-model comparison**
-   - Compare Logistic Regression, SVM, Random Forest, XGBoost, and LightGBM across canopy-only, OISST-only, and canopy+NOAA feature sets.
+```bash
+python scripts/filter_kelpwatch_cells.py
+python scripts/build_kelpwatch_panel.py
+python scripts/construct_decline_labels.py
+python scripts/build_noaa_environmental_features.py
+python scripts/train_model_comparison.py
+python scripts/diagnose_model_results.py
+python scripts/analyze_canopy_environment_context.py
+python scripts/interpret_models_shap.py
+```
 
-8. **Model diagnostics**
-   - Audit leakage, compare feature sets, inspect false negatives, and summarize temporal/environmental patterns.
-
-9. **Canopy persistence and environmental context analysis**
-   - Separate canopy-state persistence from NOAA environmental signal interpretation.
-
-10. **SHAP interpretation**
-    - Explain the best canopy-only model and an interpretable tree-based canopy+NOAA model.
+Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, reproducibility reports, and figures.
 
 ## Repository Structure
 
@@ -150,7 +214,6 @@ Future work should test spatial generalization using grouped or leave-region-out
 kelp-decline-early-warning/
 ├── README.md
 ├── requirements.txt
-├── .gitignore
 ├── data/
 │   ├── raw/
 │   ├── processed/
@@ -161,27 +224,17 @@ kelp-decline-early-warning/
 ├── docs/
 │   └── maps/
 ├── notebooks/
-│   ├── 01_kelpwatch_panel_construction.ipynb
-│   ├── 02_decline_label_construction.ipynb
-│   ├── 04_model_comparison.ipynb
-│   ├── 05_model_diagnostics.ipynb
-│   ├── 06_canopy_environment_context_analysis.ipynb
-│   └── 07_shap_interpretation.ipynb
 ├── src/
-│   ├── data_loader.py
-│   ├── feature_engineering.py
-│   ├── labeling.py
-│   ├── modeling.py
-│   └── visualization.py
 └── outputs/
     ├── figures/
     ├── maps/
+    ├── metadata/
     └── model_results/
 ```
 
 ## Setup
 
-Create and activate a Python virtual environment, then install the project dependencies:
+Create and activate a Python virtual environment:
 
 ```bash
 python -m venv .venv
@@ -189,63 +242,36 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Use Python 3.10-3.13 for this environment. The SHAP dependency stack currently pulls `numba`, which does not support Python 3.14.
+Use Python 3.10-3.13. The SHAP dependency stack currently pulls `numba`, which does not support Python 3.14.
 
-On Windows, activate the environment with:
-
-```bat
-.venv\Scripts\activate
-```
-
-Run a quick environment check:
+Environment check:
 
 ```bash
 python -c "import pandas, sklearn, xgboost, lightgbm, shap; print('OK')"
 ```
 
-On macOS, if the environment check fails with `libomp.dylib` missing while importing XGBoost or LightGBM, install the OpenMP runtime:
+On macOS, if importing XGBoost or LightGBM fails with `libomp.dylib` missing, install OpenMP:
 
 ```bash
 brew install libomp
 ```
 
-## Reproducible Script Workflow
+## Limitations
 
-The main analysis scripts are designed to be run in order after local Kelpwatch CSV exports and NOAA cache files are available:
+- Small number of retained modeling cells (`50` main cells).
+- Limited final test years (`2021-2024`).
+- The temporal split does not fully test spatial generalization.
+- OISST uses nearest valid ocean-grid assignment in Version 1.
+- CUTI/BEUTI use nearest latitude-bin assignment.
+- No direct cell-level nutrient measurements are included.
+- No grazing, urchin, sea star wasting disease, or direct biotic pressure variables are included.
+- Environmental interpretation is proxy-based.
+- The workflow supports early-warning screening, not causal attribution.
 
-```bash
-python scripts/filter_kelpwatch_cells.py
-python scripts/build_kelpwatch_panel.py
-python scripts/construct_decline_labels.py
-python scripts/build_noaa_environmental_features.py
-python scripts/validate_kelpwatch_exports.py
-python scripts/train_model_comparison.py
-python scripts/diagnose_model_results.py
-python scripts/analyze_canopy_environment_context.py
-python scripts/interpret_models_shap.py
-```
+## Future Work
 
-Raw Kelpwatch exports, processed modeling datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, reproducibility metadata, figures, GeoJSON AOIs, and written reports.
-
-## Expected Outputs
-
-- Kelpwatch 10 km fishnet AOI design and validation files.
-- Annual kelp canopy panel metadata and decline-label summaries.
-- NOAA environmental feature summaries and modeling-dataset validation reports.
-- Five-model comparison tables and figures.
-- Model diagnostics for feature sets, false negatives, and environmental signal context.
-- Canopy persistence and environmental-context figures.
-- SHAP feature-importance, grouped-importance, dependence, and local explanation outputs.
-
-## Scope and Interpretation
-
-This project is an early-warning and interpretability workflow. Model predictions should be interpreted as risk indicators for monitoring and prioritization, not as proof of ecological causation. Field observations and ecological expertise remain important for validating decline mechanisms and management decisions.
-
-## Remaining Improvements
-
-- Add direct links from README sections to the most important reports and figures.
-- Add sensitivity analysis comparing nearest-grid OISST assignment with a coastal-buffer average.
-- Add additional ecological covariates where available, especially grazing pressure, urchin observations, wave disturbance, and disease-related context.
-- Consider spatial or grouped cross-validation in addition to the current temporal split.
-- Estimate uncertainty using bootstrap confidence intervals.
-- Add a concise results-summary document for readers who want the main findings without opening every metadata report.
+- Test spatial or grouped cross-validation, including leave-region-out validation.
+- Compare nearest-grid OISST assignment with coastal-buffer average sensitivity analyses.
+- Add ecological covariates such as grazing pressure, urchin observations, wave disturbance, and disease context where available.
+- Estimate uncertainty using bootstrap confidence intervals for model metrics.
+- Develop an optional Streamlit dashboard only if it can be polished and connected to tracked reproducibility outputs.
