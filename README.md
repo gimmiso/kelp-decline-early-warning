@@ -60,6 +60,8 @@ The first modeling workflow compares Logistic Regression, SVM, Random Forest, XG
 
 Three feature sets are compared: canopy-only, OISST-only, and canopy plus NOAA environmental predictors. Final model comparison prioritizes PR-AUC, recall, and F1 because the task is framed as early-warning screening for future kelp canopy decline events.
 
+Multiple model classes were compared to distinguish linear baseline performance, nonlinear decision-boundary behavior, and tree-based interaction effects. Within each model class, canopy-only, OISST-only, and canopy+NOAA feature sets were compared to separate biological-state prediction from environmental-context augmentation.
+
 Key model-comparison result: the best aggregate test PR-AUC came from `canopy_only / Random Forest`, while the best canopy+NOAA PR-AUC came from `canopy_noaa / SVM`. SHAP interpretation uses `canopy_only / Random Forest` and `canopy_noaa / Random Forest`; SVM Kernel SHAP is left as a future refinement because it is slower and less stable for this workflow.
 
 ### Initial Model Diagnostics
