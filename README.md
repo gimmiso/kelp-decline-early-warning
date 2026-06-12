@@ -76,6 +76,40 @@ SHAP results are interpreted as model-behavior explanations rather than causal m
 
 Interpretation caution: SHAP values explain how the fitted model used features for prediction. They do not establish ecological causality. Directional patterns should be interpreted alongside known data limitations, including OISST grid resolution, CUTI/BEUTI latitude-bin assignment, missing biotic drivers such as grazing pressure, and the limited number of test years.
 
+## Results
+
+### 1. Canopy State Is a Strong Short-Term Signal
+
+![Current relative canopy vs next-year relative canopy](outputs/figures/canopy_persistence_scatter.png)
+
+Current relative canopy was strongly associated with next-year canopy condition, supporting the interpretation that canopy state has strong temporal persistence.
+
+![Next-year decline rate by current canopy quintile](outputs/figures/canopy_quantile_decline_rate.png)
+
+The lowest current-canopy quintile had the highest next-year decline rate, helping explain why canopy-only models performed strongly.
+
+### 2. Canopy-Only Models Performed Best in Aggregate Prediction
+
+![Model performance comparison](outputs/figures/model_performance_comparison.png)
+
+Five machine-learning models were compared using a temporal train/validation/test split. The best aggregate test PR-AUC came from the canopy-only Random Forest, suggesting that direct canopy-state variables remain the strongest short-term predictors in this Version 1 workflow.
+
+### 3. NOAA Variables Provide Environmental Exposure Context
+
+![Environmental signal comparison between decline and non-decline rows](outputs/figures/environmental_signal_decline_vs_nondecline.png)
+
+Decline rows tended to show higher SST anomaly and hot-day exposure and lower CUTI anomaly than non-decline rows. BEUTI-related signals were also different, but they should be interpreted cautiously as proxy-based and context-dependent. NOAA variables are environmental exposure proxies rather than replacements for direct canopy monitoring.
+
+### 4. SHAP Separates Biological-State Signals from Environmental-Context Signals
+
+![Grouped SHAP importance](outputs/figures/shap_grouped_importance.png)
+
+Grouped SHAP importance showed that the canopy-only Random Forest relied on canopy-state variables, while the canopy+NOAA Random Forest assigned substantial internal importance to OISST, CUTI, and BEUTI variables. These SHAP values explain fitted model behavior, not ecological causality.
+
+### Limitations and Future Work
+
+Future work should test spatial generalization using grouped or leave-region-out validation, compare nearest-grid OISST assignment with coastal-buffer averages, add ecological covariates such as urchin grazing, wave disturbance, and disease context where available, and estimate uncertainty using bootstrap confidence intervals.
+
 ## Workflow
 
 1. **Kelpwatch 10 km fishnet spatial design**
@@ -207,9 +241,9 @@ This project is an early-warning and interpretability workflow. Model prediction
 
 ## Remaining Improvements
 
-- Add a polished README figure panel for portfolio presentation.
 - Add direct links from README sections to the most important reports and figures.
 - Add sensitivity analysis comparing nearest-grid OISST assignment with a coastal-buffer average.
 - Add additional ecological covariates where available, especially grazing pressure, urchin observations, wave disturbance, and disease-related context.
 - Consider spatial or grouped cross-validation in addition to the current temporal split.
+- Estimate uncertainty using bootstrap confidence intervals.
 - Add a concise results-summary document for readers who want the main findings without opening every metadata report.
