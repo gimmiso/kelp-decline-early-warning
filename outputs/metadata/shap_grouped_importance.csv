@@ -1,0 +1,8 @@
+feature_set,model,feature_group,mean_abs_shap,model_label,share_of_model_importance
+canopy_noaa,Random Forest,OISST,0.13781963794099558,canopy_noaa / Random Forest,0.38645090897172074
+canopy_noaa,Random Forest,BEUTI,0.09067008709299036,canopy_noaa / Random Forest,0.254241979569215
+canopy_noaa,Random Forest,CUTI,0.06401755343173464,canopy_noaa / Random Forest,0.17950737705776937
+canopy_noaa,Random Forest,canopy,0.05553573765314685,canopy_noaa / Random Forest,0.1557240797981346
+canopy_noaa,Random Forest,spatial,0.007677853148726168,canopy_noaa / Random Forest,0.02152895895392585
+canopy_noaa,Random Forest,region,0.0009082257647091694,canopy_noaa / Random Forest,0.002546695649234407
+canopy_only,Random Forest,canopy,0.21982700925660326,canopy_only / Random Forest,1.0

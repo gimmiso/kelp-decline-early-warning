@@ -67,6 +67,10 @@ The first temporal model comparison showed that the canopy-only baseline achieve
 
 The initial model comparison showed that canopy-only models achieved the strongest aggregate performance. To interpret this result, we analyzed canopy persistence and NOAA environmental signals separately. Current relative canopy was compared with next-year canopy condition, and NOAA OISST/CUTI/BEUTI variables were compared between decline and non-decline rows. Stratified analysis by current canopy condition was used to examine whether environmental stress indicators provide context beyond biological state monitoring.
 
+### SHAP Interpretation
+
+SHAP analysis was used to compare the best canopy-only model with an interpretable canopy+NOAA model. The canopy-only model highlights the importance of current canopy condition, confirming strong temporal persistence in kelp canopy state. The canopy+NOAA interpretation separates biological state signals from environmental exposure signals, including OISST thermal stress and CUTI/BEUTI upwelling/nitrate-flux proxies.
+
 ## Workflow
 
 1. **Kelpwatch data exploration**

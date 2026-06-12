@@ -1,0 +1,9 @@
+feature,mean_abs_shap,rank,feature_group
+kelp_area_m2,0.05151720782939064,1,canopy
+relative_canopy,0.051340013301367705,2,canopy
+lag1_relative_canopy,0.03305239538278719,3,canopy
+relative_canopy_change_lag1,0.02434479689295014,4,canopy
+count_cells_kelp,0.022572423891851615,5,canopy
+count_cells_no_clouds,0.014434746444721858,6,canopy
+count_cells_historic_footprint,0.011777314437582622,7,canopy
+historical_footprint_area_m2,0.010788111075951472,8,canopy

@@ -1,0 +1,33 @@
+feature,mean_abs_shap,rank,feature_group
+beuti_anomaly,0.05901551795264338,1,BEUTI
+annual_sst_std,0.02745216785272656,2,OISST
+hot_days_p90,0.020746348585864532,3,OISST
+cuti_anomaly,0.018199829258690004,4,CUTI
+annual_mean_sst_anomaly,0.016558693169874218,5,OISST
+lag1_cuti_anomaly,0.016308470760292605,6,CUTI
+relative_canopy,0.014762641200559883,7,canopy
+hot_days_p95,0.01419368613796938,8,OISST
+lag1_annual_mean_sst_anomaly,0.014026035273737646,9,OISST
+summer_mean_cuti,0.013763662234395069,10,CUTI
+annual_max_sst_anomaly,0.013619635999644218,11,OISST
+kelp_area_m2,0.013610375562831688,12,canopy
+summer_mean_beuti,0.01278439095515388,13,BEUTI
+annual_min_sst,0.010365782652557068,14,OISST
+annual_mean_beuti,0.008786437280547633,15,BEUTI
+annual_mean_cuti,0.00848713472963284,16,CUTI
+lag1_hot_days_p90,0.008011316437840262,17,OISST
+annual_max_sst,0.007834640206384186,18,OISST
+relative_canopy_change_lag1,0.0075702875650647435,19,canopy
+lag1_relative_canopy,0.007513268285849771,20,canopy
+spring_mean_cuti,0.007258456448724118,21,CUTI
+count_cells_kelp,0.007117072332190938,22,canopy
+spring_mean_beuti,0.005651225746401136,23,BEUTI
+annual_mean_sst,0.005011331624397513,24,OISST
+lag1_beuti_anomaly,0.00443251515824434,25,BEUTI
+center_lon,0.00420390871600368,26,spatial
+center_lat,0.0034739444327224877,27,spatial
+historical_footprint_area_m2,0.0017496713648958242,28,canopy
+count_cells_historic_footprint,0.001630007066478687,29,canopy
+count_cells_no_clouds,0.0015824142752753187,30,canopy
+region_group_Central California,0.0005775811994758328,31,region
+region_group_Northern California,0.00033064456523333654,32,region
