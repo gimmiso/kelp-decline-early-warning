@@ -15,15 +15,15 @@ Thresholds were selected using the validation period only and then fixed for the
 - Validation: 2017-2020
 - Test: 2021-2024
 - Candidate thresholds: 0.05 to 0.95 in 0.05 increments
-- Primary rule: highest validation F1 among thresholds with validation recall >= 0.70; if none reach 0.70, highest recall with F1 as tie-breaker
-- Secondary rule: highest validation F1 regardless of recall
+- Selection rules: default threshold 0.50; max F1; max F2; recall >= 0.70 then max F1; max recall subject to precision >= 0.65.
+- If no threshold satisfies precision >= 0.65, the precision-floor rule falls back to precision >= 0.50 and records that fallback.
 
 ## Main Findings
 
 - Largest test recall gain: canopy_noaa / SVM (0.246 to 1.000; false negatives 101 to 0).
 - Largest false-negative reduction: canopy_noaa / SVM (101 fewer false negatives).
-- Highest recall-oriented test recall: canopy_noaa / SVM (threshold=0.05, recall=1.000, precision=0.670, F1=0.802).
-- Best recall-oriented F1: canopy_only / Random Forest (threshold=0.30, recall=0.910, precision=0.753, F1=0.824).
+- Highest recall-oriented test recall: canopy_noaa / SVM (threshold=0.05, recall=1.000, precision=0.670, F1=0.802, F2=0.910).
+- Best recall-oriented F1: canopy_only / Random Forest (threshold=0.30, recall=0.910, precision=0.753, F1=0.824, F2=0.874).
 
 ## Specific Model Checks
 
@@ -32,30 +32,31 @@ Thresholds were selected using the validation period only and then fixed for the
 
 ## Threshold-Tuned Test Comparison
 
-| feature_set | model | threshold_recall | test_recall_default | test_recall_recall | recall_gain | test_false_negatives_default | test_false_negatives_recall | false_negative_reduction | test_precision_default | test_precision_recall | precision_change | test_f1_recall |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| canopy_noaa | SVM | 0.050 | 0.246 | 1.000 | 0.754 | 101 | 0 | 101 | 0.868 | 0.670 | -0.198 | 0.802 |
-| canopy_noaa | Random Forest | 0.050 | 0.276 | 1.000 | 0.724 | 97 | 0 | 97 | 0.925 | 0.670 | -0.255 | 0.802 |
-| canopy_only | SVM | 0.300 | 0.000 | 0.709 | 0.709 | 134 | 39 | 95 | 0.000 | 0.798 | 0.798 | 0.751 |
-| canopy_noaa | LightGBM | 0.050 | 0.381 | 0.948 | 0.567 | 83 | 7 | 76 | 0.895 | 0.665 | -0.230 | 0.782 |
-| oisst_only | SVM | 0.250 | 0.097 | 0.537 | 0.440 | 121 | 62 | 59 | 0.929 | 0.649 | -0.280 | 0.588 |
-| oisst_only | Random Forest | 0.300 | 0.291 | 0.642 | 0.351 | 95 | 48 | 47 | 0.709 | 0.667 | -0.042 | 0.654 |
-| oisst_only | LightGBM | 0.200 | 0.321 | 0.664 | 0.343 | 91 | 45 | 46 | 0.683 | 0.622 | -0.060 | 0.643 |
-| canopy_only | Random Forest | 0.300 | 0.590 | 0.910 | 0.321 | 55 | 12 | 43 | 0.908 | 0.753 | -0.155 | 0.824 |
-| canopy_noaa | XGBoost | 0.250 | 0.522 | 0.754 | 0.231 | 64 | 33 | 31 | 0.875 | 0.711 | -0.164 | 0.732 |
-| canopy_only | XGBoost | 0.400 | 0.590 | 0.799 | 0.209 | 55 | 27 | 28 | 0.868 | 0.748 | -0.120 | 0.773 |
-| canopy_only | Logistic Regression | 0.400 | 0.799 | 1.000 | 0.201 | 27 | 0 | 27 | 0.699 | 0.670 | -0.029 | 0.802 |
-| oisst_only | Logistic Regression | 0.450 | 0.261 | 0.366 | 0.104 | 99 | 85 | 14 | 0.714 | 0.681 | -0.034 | 0.476 |
-| oisst_only | XGBoost | 0.400 | 0.448 | 0.537 | 0.090 | 74 | 62 | 12 | 0.723 | 0.649 | -0.074 | 0.588 |
-| canopy_only | LightGBM | 0.400 | 0.590 | 0.672 | 0.082 | 55 | 44 | 11 | 0.859 | 0.833 | -0.025 | 0.744 |
-| canopy_noaa | Logistic Regression | 0.500 | 0.627 | 0.627 | 0.000 | 50 | 50 | 0 | 0.764 | 0.764 | 0.000 | 0.689 |
+| feature_set | model | threshold_recall | test_recall_default | test_recall_recall | recall_gain | test_false_negatives_default | test_false_negatives_recall | false_negative_reduction | test_precision_default | test_precision_recall | precision_change | test_f1_recall | test_f2_recall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| canopy_noaa | SVM | 0.050 | 0.246 | 1.000 | 0.754 | 101 | 0 | 101 | 0.868 | 0.670 | -0.198 | 0.802 | 0.910 |
+| canopy_noaa | Random Forest | 0.050 | 0.276 | 1.000 | 0.724 | 97 | 0 | 97 | 0.925 | 0.670 | -0.255 | 0.802 | 0.910 |
+| canopy_only | SVM | 0.300 | 0.000 | 0.709 | 0.709 | 134 | 39 | 95 | 0.000 | 0.798 | 0.798 | 0.751 | 0.725 |
+| canopy_noaa | LightGBM | 0.050 | 0.381 | 0.948 | 0.567 | 83 | 7 | 76 | 0.895 | 0.665 | -0.230 | 0.782 | 0.873 |
+| oisst_only | SVM | 0.250 | 0.097 | 0.537 | 0.440 | 121 | 62 | 59 | 0.929 | 0.649 | -0.280 | 0.588 | 0.556 |
+| oisst_only | Random Forest | 0.300 | 0.291 | 0.642 | 0.351 | 95 | 48 | 47 | 0.709 | 0.667 | -0.042 | 0.654 | 0.647 |
+| oisst_only | LightGBM | 0.200 | 0.321 | 0.664 | 0.343 | 91 | 45 | 46 | 0.683 | 0.622 | -0.060 | 0.643 | 0.655 |
+| canopy_only | Random Forest | 0.300 | 0.590 | 0.910 | 0.321 | 55 | 12 | 43 | 0.908 | 0.753 | -0.155 | 0.824 | 0.874 |
+| canopy_noaa | XGBoost | 0.250 | 0.522 | 0.754 | 0.231 | 64 | 33 | 31 | 0.875 | 0.711 | -0.164 | 0.732 | 0.745 |
+| canopy_only | XGBoost | 0.400 | 0.590 | 0.799 | 0.209 | 55 | 27 | 28 | 0.868 | 0.748 | -0.120 | 0.773 | 0.788 |
+| canopy_only | Logistic Regression | 0.400 | 0.799 | 1.000 | 0.201 | 27 | 0 | 27 | 0.699 | 0.670 | -0.029 | 0.802 | 0.910 |
+| oisst_only | Logistic Regression | 0.450 | 0.261 | 0.366 | 0.104 | 99 | 85 | 14 | 0.714 | 0.681 | -0.034 | 0.476 | 0.403 |
+| oisst_only | XGBoost | 0.400 | 0.448 | 0.537 | 0.090 | 74 | 62 | 12 | 0.723 | 0.649 | -0.074 | 0.588 | 0.556 |
+| canopy_only | LightGBM | 0.400 | 0.590 | 0.672 | 0.082 | 55 | 44 | 11 | 0.859 | 0.833 | -0.025 | 0.744 | 0.699 |
+| canopy_noaa | Logistic Regression | 0.500 | 0.627 | 0.627 | 0.000 | 50 | 50 | 0 | 0.764 | 0.764 | 0.000 | 0.689 | 0.650 |
 
 ## Interpretation
 
-For early-warning use, a recall-oriented operating point can be appropriate when false negatives are more costly than false positives. The preferred threshold-tuned model depends on whether the priority is maximum recall or a more balanced precision-recall trade-off.
+For early-warning screening, a recall-oriented operating point can be appropriate when false negatives are more costly than false positives. The preferred threshold-tuned model depends on whether the priority is maximum recall or a more balanced precision-recall trade-off.
 
-- If the goal is maximum screening sensitivity, the strongest recall-oriented option is `canopy_noaa / SVM`.
-- If the goal is a stronger balance between recall and precision, the strongest recall-oriented F1 option is `canopy_only / Random Forest`.
+- Main threshold-tuned model for a balanced recall-precision trade-off: `canopy_only / Random Forest`.
+- High-sensitivity screening scenario: `canopy_noaa / SVM`.
+- Precision-floor rule rows: 15; F2-optimal rows: 15.
 
 These results should be interpreted as operating-point diagnostics, not as evidence that threshold tuning improves the underlying model ranking quality.
 
@@ -64,12 +65,16 @@ These results should be interpreted as operating-point diagnostics, not as evide
 - `outputs/metadata/threshold_tuning_validation_grid.csv`
 - `outputs/metadata/threshold_tuning_selected_thresholds.csv`
 - `outputs/metadata/threshold_tuning_test_results.csv`
+- `outputs/model_results/threshold_tuning_results.csv`
+- `outputs/model_results/threshold_selection_summary.csv`
 - `outputs/figures/threshold_tuning_recall_precision_tradeoff.png`
 - `outputs/figures/threshold_tuning_false_negatives.png`
+- `outputs/figures/precision_recall_threshold_curve.png`
 
 ## Validation Grid Summary
 
 - Validation grid rows: 285
-- Selected threshold rows: 45
-- Test result rows: 45
+- Selected threshold rows: 75
+- Test result rows: 75
 - F1-optimal threshold rows: 15
+- F2-optimal threshold rows: 15

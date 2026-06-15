@@ -2,11 +2,11 @@
 
 ## Overview
 
-This project builds a reproducible data science and GeoAI workflow for next-year kelp canopy decline early warning. It combines Kelpwatch satellite-derived kelp canopy observations with NOAA environmental exposure indicators from OISST, CUTI, and BEUTI.
+This project builds a reproducible research-stage early-warning screening workflow for next-year kelp canopy decline. It combines Kelpwatch satellite-derived kelp canopy observations with NOAA environmental exposure indicators from OISST, CUTI, and BEUTI.
 
 The workflow creates a 10 km fishnet cell-year dataset, constructs next-year decline labels, engineers NOAA thermal and upwelling-related proxy features, compares five supervised machine-learning models, and uses diagnostics plus SHAP interpretation to explain model behavior.
 
-Final interpretation: current canopy condition was the strongest short-term signal for next-year kelp decline, reflecting temporal persistence in canopy state. NOAA OISST, CUTI, and BEUTI variables did not replace direct canopy monitoring or improve aggregate PR-AUC over canopy-only models, but they provided interpretable environmental exposure context related to thermal exposure and upwelling/nitrate-flux proxy conditions.
+Main claim: this repository evaluates whether Kelpwatch satellite-derived kelp canopy time series and NOAA environmental covariates can support a recall-oriented early-warning screening workflow for next-year kelp canopy decline. The results suggest useful risk-state prediction performance, but stricter diagnostics show that near-low-canopy persistence contributes substantially to apparent full-sample performance.
 
 ## Research Questions
 
@@ -110,7 +110,7 @@ Three feature sets were compared within each model class:
 - `oisst_only`: thermal exposure variables alone.
 - `canopy_noaa`: canopy state plus NOAA environmental exposure context.
 
-Performance was evaluated using PR-AUC, recall, F1, and false negatives because the task is framed as early-warning screening rather than balanced classification.
+Performance was evaluated using PR-AUC, recall, F1, F2, and false negatives because the task is framed as research-stage early-warning screening rather than balanced classification.
 
 ## Results
 
@@ -150,29 +150,33 @@ Within the tested algorithms, canopy+NOAA did not improve PR-AUC over canopy-onl
 
 ### Recall-Oriented Threshold Tuning
 
-Because kelp decline prediction is framed as an early-warning screening task, the default 0.5 decision threshold may be too conservative. We therefore selected recall-oriented thresholds on the validation period and applied them unchanged to the test period. This analysis evaluates whether false negatives can be reduced while preserving a reasonable precision-recall trade-off. Threshold tuning changes the classifier operating point; it does not change PR-AUC.
+Because kelp decline prediction is framed as a recall-oriented screening task, the default `0.50` decision threshold may be too conservative. Thresholds were selected on the validation period and applied unchanged to the test period. This analysis evaluates whether false negatives can be reduced while preserving a reasonable precision-recall trade-off. Threshold tuning changes the classifier operating point; it does not change PR-AUC.
 
-The strongest balanced threshold-tuned result was `canopy_only / Random Forest` at threshold `0.30`:
+The main threshold-tuned model is `canopy_only / Random Forest` at threshold `0.30`, which balances high recall with reasonable precision:
 
 ```text
+Selection role: main threshold-tuned model
 Recall: 0.910
 Precision: 0.753
 F1: 0.824
+F2: 0.874
 False negatives: 12
 Default-threshold false negatives: 55
 ```
 
-The most sensitive screening result was `canopy_noaa / SVM` at threshold `0.05`:
+The high-sensitivity screening scenario is `canopy_noaa / SVM` at threshold `0.05`. This setting achieves very high recall, but it uses a much lower threshold and may produce more warnings:
 
 ```text
+Selection role: high-sensitivity screening scenario
 Recall: 1.000
 Precision: 0.670
 F1: 0.802
+F2: 0.910
 False negatives: 0
 Default-threshold false negatives: 101
 ```
 
-These thresholds were selected using the 2017-2020 validation period only, then fixed for the 2021-2024 test period to avoid test-set leakage. For early-warning use, `canopy_only / Random Forest` gives the stronger balanced recall-F1 trade-off, while `canopy_noaa / SVM` is useful as a high-sensitivity screening option when reducing missed decline events is the priority.
+The threshold analysis now reports five selection rules: default `0.50`, max F1, max F2, recall >= 0.70 then max F1, and max recall subject to precision >= 0.65. If the precision floor is too strict for a model, the rule falls back to precision >= 0.50 and records that fallback. These thresholds were selected using the 2017-2020 validation period only, then fixed for the 2021-2024 test period to avoid test-set leakage.
 
 ### Early-Warning Validity Diagnostics
 
@@ -215,7 +219,13 @@ and next-year relative canopy falls below that p25 baseline
 
 This label captures transition into a low-canopy state rather than persistence of an already-low state. Under this stricter target, performance was more modest; the best full-sample PR-AUC was `0.401` for `canopy_only / Random Forest`, while at-risk PR-AUC values were generally in the `0.39-0.51` range depending on the threshold and model.
 
-These diagnostics suggest that the current Version 1 model is strongest at detecting canopy-state persistence and already-low or near-low canopy conditions. There is some preliminary signal in at-risk and new-decline-transition settings, but the present results should be described as a research-stage early-warning robustness check rather than a confirmed operational early-warning system.
+These diagnostics suggest that the current Version 1 model is strongest at detecting canopy-state persistence and already-low or near-low canopy conditions. There is some preliminary signal in at-risk and new-decline-transition settings, but the present results should be described as a research-stage early-warning validity evaluation rather than a deployed monitoring workflow.
+
+### How to Interpret the Results
+
+Full-sample PR-AUC can look strong because it includes persistent low-canopy states. At-risk subset performance is more relevant for early warning because it asks whether the model can identify future decline among locations that still have nonzero or moderate current canopy. The stricter `new_decline_event_next` label better captures new transition into low canopy, but it is harder to predict because it removes already-low persistence from the positive class.
+
+High recall is important because missing actual decline events is costly in a screening workflow. Precision still matters because too many false alarms reduce practical usefulness. The most defensible interpretation is therefore that the model provides a reproducible robustness check for distinguishing preliminary early-warning signal from canopy-state persistence.
 
 ### 3. NOAA Variables Provide Environmental Exposure Context
 
@@ -257,10 +267,12 @@ The completed workflow is:
 6. NOAA OISST + CUTI/BEUTI feature engineering.
 7. Final modeling dataset validation.
 8. Five-model comparison.
-9. Model diagnostics.
-10. Canopy persistence and environmental-context analysis.
-11. SHAP interpretation.
-12. Within-model feature-set comparison.
+9. Threshold tuning.
+10. Zero-persistence and at-risk validity diagnostics.
+11. Model diagnostics.
+12. Canopy persistence and environmental-context analysis.
+13. SHAP interpretation.
+14. Within-model feature-set comparison.
 
 Main scripts:
 
@@ -277,7 +289,11 @@ python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
 ```
 
-Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, reproducibility reports, and figures.
+Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeline and threshold tuning, but before final interpretation. This makes the final narrative distinguish risk-state prediction, near-low-canopy persistence, and stricter transition-into-decline performance.
+
+Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, reproducibility reports, and figures.
+
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids and threshold-selection summaries.
 
 ## Repository Structure
 

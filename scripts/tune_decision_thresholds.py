@@ -17,6 +17,7 @@ import pandas as pd
 from sklearn.metrics import (
     average_precision_score,
     confusion_matrix,
+    fbeta_score,
     f1_score,
     precision_score,
     recall_score,
@@ -43,6 +44,9 @@ TEST_RESULTS_OUTPUT = Path("outputs/metadata/threshold_tuning_test_results.csv")
 REPORT_OUTPUT = Path("outputs/metadata/threshold_tuning_report.md")
 PR_TRADEOFF_FIGURE = Path("outputs/figures/threshold_tuning_recall_precision_tradeoff.png")
 FALSE_NEGATIVE_FIGURE = Path("outputs/figures/threshold_tuning_false_negatives.png")
+MODEL_RESULTS_GRID_OUTPUT = Path("outputs/model_results/threshold_tuning_results.csv")
+MODEL_RESULTS_SELECTION_OUTPUT = Path("outputs/model_results/threshold_selection_summary.csv")
+THRESHOLD_CURVE_FIGURE = Path("outputs/figures/precision_recall_threshold_curve.png")
 
 THRESHOLDS = np.round(np.arange(0.05, 1.0, 0.05), 2)
 
@@ -57,6 +61,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report-output", type=Path, default=REPORT_OUTPUT)
     parser.add_argument("--pr-tradeoff-figure", type=Path, default=PR_TRADEOFF_FIGURE)
     parser.add_argument("--false-negative-figure", type=Path, default=FALSE_NEGATIVE_FIGURE)
+    parser.add_argument("--model-results-grid-output", type=Path, default=MODEL_RESULTS_GRID_OUTPUT)
+    parser.add_argument("--model-results-selection-output", type=Path, default=MODEL_RESULTS_SELECTION_OUTPUT)
+    parser.add_argument("--threshold-curve-figure", type=Path, default=THRESHOLD_CURVE_FIGURE)
     return parser.parse_args()
 
 
@@ -69,6 +76,7 @@ def threshold_metrics(y_true: pd.Series | np.ndarray, scores: np.ndarray, thresh
         "precision": precision_score(y_true, predictions, zero_division=0),
         "recall": recall_score(y_true, predictions, zero_division=0),
         "f1": f1_score(y_true, predictions, zero_division=0),
+        "f2": fbeta_score(y_true, predictions, beta=2, zero_division=0),
         "false_positives": int(fp),
         "false_negatives": int(fn),
         "true_positives": int(tp),
@@ -102,6 +110,7 @@ def validation_grid_for_scores(
         "precision",
         "recall",
         "f1",
+        "f2",
         "false_positives",
         "false_negatives",
         "true_positives",
@@ -112,8 +121,19 @@ def validation_grid_for_scores(
     return pd.DataFrame(rows)[columns]
 
 
+def precision_floor_choice(group: pd.DataFrame) -> tuple[pd.Series, float, bool]:
+    """Select max recall subject to a precision floor, with documented fallback."""
+    eligible = group.loc[group["precision"] >= 0.65].copy()
+    if eligible.empty:
+        eligible = group.loc[group["precision"] >= 0.50].copy()
+        if eligible.empty:
+            return group.sort_values(["precision", "recall", "f2", "f1"], ascending=False).iloc[0], np.nan, True
+        return eligible.sort_values(["recall", "f2", "f1", "precision"], ascending=False).iloc[0], 0.50, True
+    return eligible.sort_values(["recall", "f2", "f1", "precision"], ascending=False).iloc[0], 0.65, False
+
+
 def select_thresholds(validation_grid: pd.DataFrame) -> pd.DataFrame:
-    """Select recall-oriented, max-F1, and default thresholds from validation metrics."""
+    """Select default, F1, F2, recall-oriented, and precision-floor thresholds."""
     selected_rows = []
     for (model_name, feature_set_name), group in validation_grid.groupby(["model", "feature_set"], sort=False):
         eligible = group.loc[group["recall"] >= 0.70].copy()
@@ -122,12 +142,16 @@ def select_thresholds(validation_grid: pd.DataFrame) -> pd.DataFrame:
         else:
             recall_choice = eligible.sort_values(["f1", "recall", "precision"], ascending=False).iloc[0]
         max_f1_choice = group.sort_values(["f1", "recall", "precision"], ascending=False).iloc[0]
+        max_f2_choice = group.sort_values(["f2", "recall", "precision", "f1"], ascending=False).iloc[0]
         default_choice = group.loc[np.isclose(group["threshold"], 0.50)].iloc[0]
+        floor_choice, precision_floor_used, floor_fallback = precision_floor_choice(group)
 
-        for selection_rule, choice in [
-            ("recall_ge_0.70_then_max_f1", recall_choice),
-            ("max_f1", max_f1_choice),
-            ("default_0.5", default_choice),
+        for selection_rule, choice, precision_floor_target, precision_floor_actual, fallback_used in [
+            ("default_0.5", default_choice, np.nan, np.nan, False),
+            ("max_f1", max_f1_choice, np.nan, np.nan, False),
+            ("max_f2", max_f2_choice, np.nan, np.nan, False),
+            ("recall_ge_0.70_then_max_f1", recall_choice, np.nan, np.nan, False),
+            ("max_recall_precision_ge_0.65", floor_choice, 0.65, precision_floor_used, floor_fallback),
         ]:
             selected_rows.append(
                 {
@@ -135,9 +159,13 @@ def select_thresholds(validation_grid: pd.DataFrame) -> pd.DataFrame:
                     "feature_set": feature_set_name,
                     "selection_rule": selection_rule,
                     "selected_threshold": float(choice["threshold"]),
+                    "precision_floor_target": precision_floor_target,
+                    "precision_floor_used": precision_floor_actual,
+                    "precision_floor_fallback_used": bool(fallback_used),
                     "validation_precision": float(choice["precision"]),
                     "validation_recall": float(choice["recall"]),
                     "validation_f1": float(choice["f1"]),
+                    "validation_f2": float(choice["f2"]),
                     "validation_false_positives": int(choice["false_positives"]),
                     "validation_false_negatives": int(choice["false_negatives"]),
                 }
@@ -167,6 +195,7 @@ def test_results_for_scores(
                 "test_precision": row["precision"],
                 "test_recall": row["recall"],
                 "test_f1": row["f1"],
+                "test_f2": row["f2"],
                 "test_pr_auc": average_precision_score(y_test, test_scores),
                 "test_roc_auc": roc_auc_score(y_test, test_scores),
                 "test_false_positives": row["false_positives"],
@@ -177,6 +206,17 @@ def test_results_for_scores(
             }
         )
     return pd.DataFrame(rows)
+
+
+def threshold_selection_summary(selected_thresholds: pd.DataFrame, test_results: pd.DataFrame) -> pd.DataFrame:
+    """Combine validation-selected thresholds with held-out test performance."""
+    merged = selected_thresholds.merge(
+        test_results,
+        left_on=["model", "feature_set", "selection_rule", "selected_threshold"],
+        right_on=["model", "feature_set", "selection_rule", "threshold"],
+        how="left",
+    )
+    return merged.drop(columns=["threshold"])
 
 
 def train_and_score(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -283,6 +323,37 @@ def plot_false_negatives(test_results: pd.DataFrame, output: Path) -> None:
     plt.close(fig)
 
 
+def plot_precision_recall_threshold_curve(validation_grid: pd.DataFrame, output: Path) -> None:
+    """Plot validation precision, recall, and F2 as functions of threshold."""
+    output.parent.mkdir(parents=True, exist_ok=True)
+    selected_pairs = [
+        ("canopy_only", "Random Forest"),
+        ("canopy_noaa", "SVM"),
+        ("canopy_only", "Logistic Regression"),
+        ("canopy_noaa", "Random Forest"),
+    ]
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True, sharey=True)
+    for ax, (feature_set_name, model_name) in zip(axes.flat, selected_pairs, strict=True):
+        subset = validation_grid.loc[
+            (validation_grid["feature_set"] == feature_set_name)
+            & (validation_grid["model"] == model_name)
+        ].sort_values("threshold")
+        ax.plot(subset["threshold"], subset["precision"], marker="o", label="Precision")
+        ax.plot(subset["threshold"], subset["recall"], marker="o", label="Recall")
+        ax.plot(subset["threshold"], subset["f2"], marker="o", label="F2")
+        ax.axhline(0.65, color="gray", linestyle="--", linewidth=1, label="Precision floor 0.65")
+        ax.set_title(f"{feature_set_name} / {model_name}")
+        ax.set_xlabel("Decision threshold")
+        ax.set_ylabel("Validation score")
+        ax.grid(alpha=0.25)
+    handles, labels = axes.flat[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=4, bbox_to_anchor=(0.5, -0.02))
+    fig.suptitle("Validation precision, recall, and F2 across decision thresholds")
+    fig.tight_layout(rect=(0, 0.05, 1, 0.97))
+    fig.savefig(output, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
 def format_model_feature(row: pd.Series) -> str:
     """Return a compact model-feature label."""
     return f"{row['feature_set']} / {row['model']}"
@@ -311,7 +382,9 @@ def write_report(
     """Write a concise threshold tuning report."""
     default = test_results.loc[test_results["selection_rule"] == "default_0.5"].copy()
     recall = test_results.loc[test_results["selection_rule"] == "recall_ge_0.70_then_max_f1"].copy()
+    precision_floor = test_results.loc[test_results["selection_rule"] == "max_recall_precision_ge_0.65"].copy()
     f1_optimal = test_results.loc[test_results["selection_rule"] == "max_f1"].copy()
+    f2_optimal = test_results.loc[test_results["selection_rule"] == "max_f2"].copy()
     comparison = recall.merge(
         default,
         on=["feature_set", "model"],
@@ -331,7 +404,7 @@ def write_report(
         ["false_negative_reduction", "recall_gain", "test_f1_recall"], ascending=False
     ).iloc[0]
     best_early_warning = recall.sort_values(
-        ["test_recall", "test_precision", "test_f1", "test_pr_auc"], ascending=False
+        ["test_recall", "test_precision", "test_f2", "test_f1", "test_pr_auc"], ascending=False
     ).iloc[0]
     best_f1_recall = recall.sort_values(["test_f1", "test_recall", "test_precision"], ascending=False).iloc[0]
 
@@ -363,6 +436,7 @@ def write_report(
             "test_precision_recall",
             "precision_change",
             "test_f1_recall",
+            "test_f2_recall",
         ]
     ].sort_values(["false_negative_reduction", "recall_gain"], ascending=False)
 
@@ -384,8 +458,8 @@ def write_report(
         "- Validation: 2017-2020",
         "- Test: 2021-2024",
         "- Candidate thresholds: 0.05 to 0.95 in 0.05 increments",
-        "- Primary rule: highest validation F1 among thresholds with validation recall >= 0.70; if none reach 0.70, highest recall with F1 as tie-breaker",
-        "- Secondary rule: highest validation F1 regardless of recall",
+        "- Selection rules: default threshold 0.50; max F1; max F2; recall >= 0.70 then max F1; max recall subject to precision >= 0.65.",
+        "- If no threshold satisfies precision >= 0.65, the precision-floor rule falls back to precision >= 0.50 and records that fallback.",
         "",
         "## Main Findings",
         "",
@@ -396,10 +470,12 @@ def write_report(
         f"({int(most_fn_reduction['false_negative_reduction'])} fewer false negatives).",
         f"- Highest recall-oriented test recall: {format_model_feature(best_early_warning)} "
         f"(threshold={best_early_warning['threshold']:.2f}, recall={best_early_warning['test_recall']:.3f}, "
-        f"precision={best_early_warning['test_precision']:.3f}, F1={best_early_warning['test_f1']:.3f}).",
+        f"precision={best_early_warning['test_precision']:.3f}, F1={best_early_warning['test_f1']:.3f}, "
+        f"F2={best_early_warning['test_f2']:.3f}).",
         f"- Best recall-oriented F1: {format_model_feature(best_f1_recall)} "
         f"(threshold={best_f1_recall['threshold']:.2f}, recall={best_f1_recall['test_recall']:.3f}, "
-        f"precision={best_f1_recall['test_precision']:.3f}, F1={best_f1_recall['test_f1']:.3f}).",
+        f"precision={best_f1_recall['test_precision']:.3f}, F1={best_f1_recall['test_f1']:.3f}, "
+        f"F2={best_f1_recall['test_f2']:.3f}).",
         "",
         "## Specific Model Checks",
         "",
@@ -412,10 +488,11 @@ def write_report(
         "",
         "## Interpretation",
         "",
-        "For early-warning use, a recall-oriented operating point can be appropriate when false negatives are more costly than false positives. The preferred threshold-tuned model depends on whether the priority is maximum recall or a more balanced precision-recall trade-off.",
+        "For early-warning screening, a recall-oriented operating point can be appropriate when false negatives are more costly than false positives. The preferred threshold-tuned model depends on whether the priority is maximum recall or a more balanced precision-recall trade-off.",
         "",
-        f"- If the goal is maximum screening sensitivity, the strongest recall-oriented option is `{format_model_feature(best_early_warning)}`.",
-        f"- If the goal is a stronger balance between recall and precision, the strongest recall-oriented F1 option is `{format_model_feature(best_f1_recall)}`.",
+        f"- Main threshold-tuned model for a balanced recall-precision trade-off: `{format_model_feature(best_f1_recall)}`.",
+        f"- High-sensitivity screening scenario: `{format_model_feature(best_early_warning)}`.",
+        f"- Precision-floor rule rows: {len(precision_floor)}; F2-optimal rows: {len(f2_optimal)}.",
         "",
         "These results should be interpreted as operating-point diagnostics, not as evidence that threshold tuning improves the underlying model ranking quality.",
         "",
@@ -424,8 +501,11 @@ def write_report(
         "- `outputs/metadata/threshold_tuning_validation_grid.csv`",
         "- `outputs/metadata/threshold_tuning_selected_thresholds.csv`",
         "- `outputs/metadata/threshold_tuning_test_results.csv`",
+        "- `outputs/model_results/threshold_tuning_results.csv`",
+        "- `outputs/model_results/threshold_selection_summary.csv`",
         "- `outputs/figures/threshold_tuning_recall_precision_tradeoff.png`",
         "- `outputs/figures/threshold_tuning_false_negatives.png`",
+        "- `outputs/figures/precision_recall_threshold_curve.png`",
         "",
         "## Validation Grid Summary",
         "",
@@ -433,6 +513,7 @@ def write_report(
         f"- Selected threshold rows: {len(selected_thresholds)}",
         f"- Test result rows: {len(test_results)}",
         f"- F1-optimal threshold rows: {len(f1_optimal)}",
+        f"- F2-optimal threshold rows: {len(f2_optimal)}",
     ]
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -443,6 +524,7 @@ def main() -> None:
     args = parse_args()
     data = main_subset(load_dataset(args.input))
     validation_grid, selected_thresholds, test_results = train_and_score(data)
+    selection_summary = threshold_selection_summary(selected_thresholds, test_results)
 
     for output in [
         args.validation_grid_output,
@@ -451,18 +533,24 @@ def main() -> None:
         args.report_output,
         args.pr_tradeoff_figure,
         args.false_negative_figure,
+        args.model_results_grid_output,
+        args.model_results_selection_output,
+        args.threshold_curve_figure,
     ]:
         output.parent.mkdir(parents=True, exist_ok=True)
 
     validation_grid.to_csv(args.validation_grid_output, index=False)
     selected_thresholds.to_csv(args.selected_thresholds_output, index=False)
     test_results.to_csv(args.test_results_output, index=False)
+    validation_grid.to_csv(args.model_results_grid_output, index=False)
+    selection_summary.to_csv(args.model_results_selection_output, index=False)
     plot_precision_recall_tradeoff(validation_grid, selected_thresholds, args.pr_tradeoff_figure)
     plot_false_negatives(test_results, args.false_negative_figure)
+    plot_precision_recall_threshold_curve(validation_grid, args.threshold_curve_figure)
     write_report(validation_grid, selected_thresholds, test_results, args.report_output)
 
     recall_results = test_results.loc[test_results["selection_rule"] == "recall_ge_0.70_then_max_f1"]
-    best = recall_results.sort_values(["test_recall", "test_precision", "test_f1"], ascending=False).iloc[0]
+    best = recall_results.sort_values(["test_recall", "test_precision", "test_f2", "test_f1"], ascending=False).iloc[0]
     print("Threshold tuning complete.")
     print("Thresholds selected on validation period only: 2017-2020")
     print("Thresholds applied to held-out test period: 2021-2024")
