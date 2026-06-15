@@ -294,6 +294,29 @@ Decline rows showed directional differences in several NOAA variables. For examp
 
 NOAA variables are environmental exposure proxies. They provide context for interpreting decline risk but do not replace direct canopy monitoring and do not establish causal mechanisms.
 
+### Environmental Covariate Quality Check
+
+An additional environmental covariate diagnostic was added to test whether the current NOAA features are spatially and temporally precise enough to add incremental predictive value beyond canopy state. This matters because OISST, CUTI, and BEUTI are useful regional exposure proxies, but they are coarser than the nearshore 10 km Kelpwatch fishnet cells and may not capture local kelp stress processes.
+
+![OISST spatial matching distance](outputs/figures/oisst_matching_distance_distribution.png)
+
+The nearest valid OISST grid assignment produced a mean cell-to-source distance of `10.16 km`, a median distance of `10.63 km`, and a maximum distance of `22.18 km`. One retained cell was farther than `20 km` from its assigned OISST source grid, and no cells were farther than `40 km`.
+
+A cached 3x3 OISST-neighborhood sensitivity check showed that nearest-grid and neighborhood-mean annual SST summaries were highly correlated, but not identical:
+
+```text
+Annual mean SST mean absolute difference: 0.071 deg C
+Annual SST anomaly mean absolute difference: 0.026 deg C
+Annual hot days p90 mean absolute difference: 2.65 days
+Median annual SST correlation: 0.999
+```
+
+The incremental-value evaluation did not show a consistent improvement from adding current NOAA features to canopy-state variables in the full original-label task. The best full-sample recall-oriented result remained `canopy_current_only / Logistic Regression`, with recall `0.896`, F2 `0.856`, and PR-AUC `0.854`. Environment-only models retained some signal, but adding environment to canopy variables reduced recall in this Version 1 setup.
+
+For at-risk observations with `current_canopy > 0.05`, the best result in this diagnostic was `environment_only / Logistic Regression`, with recall `0.556`, F2 `0.551`, and PR-AUC `0.554`. For stricter transition labels, performance remained modest. This suggests that NOAA variables provide useful environmental context and some screening signal, but the present Version 1 covariates should not be interpreted as a robust standalone early-warning system.
+
+The most defensible conclusion is that current canopy state remains the strongest short-term predictor, while NOAA features are contextual exposure variables whose incremental value should be tested with finer sensitivity analyses. Future refinements should compare nearest-grid OISST against coastal-buffer averages, use event-window or seasonal stress metrics, and add local ecological covariates such as grazing, wave disturbance, disease context, and regional validation.
+
 ### 4. SHAP Separates Biological-State Signals from Environmental-Context Signals
 
 ![Grouped SHAP importance](outputs/figures/shap_grouped_importance.png)
@@ -329,10 +352,11 @@ The completed workflow is:
 9. Threshold tuning.
 10. Zero-persistence and at-risk validity diagnostics.
 11. Recall-oriented modeling extensions.
-12. Model diagnostics.
-13. Canopy persistence and environmental-context analysis.
-14. SHAP interpretation.
-15. Within-model feature-set comparison.
+12. Environmental covariate quality-control and sensitivity diagnostics.
+13. Model diagnostics.
+14. Canopy persistence and environmental-context analysis.
+15. SHAP interpretation.
+16. Within-model feature-set comparison.
 
 Main scripts:
 
@@ -345,6 +369,7 @@ python scripts/train_model_comparison.py
 python scripts/tune_decision_thresholds.py
 python scripts/diagnose_zero_persistence.py
 python scripts/run_recall_oriented_modeling_extensions.py
+python scripts/diagnose_environmental_covariates.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
@@ -354,9 +379,11 @@ Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeli
 
 Run `python scripts/run_recall_oriented_modeling_extensions.py` after the validity diagnostics when testing cost-sensitive models, actionable labels, trajectory features, environmental stress interactions, and extended threshold tuning.
 
+Run `python scripts/diagnose_environmental_covariates.py` after NOAA feature construction and recall-oriented diagnostics to evaluate OISST matching distance, nearest-grid versus cached 3x3 OISST sensitivity, seasonal/window environmental features, and incremental environmental value across full-sample, at-risk, transition, and actionable labels.
+
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, actionable-label summaries, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
@@ -413,7 +440,9 @@ brew install libomp
 - Limited final test years (`2021-2024`).
 - The temporal split does not fully test spatial generalization.
 - OISST uses nearest valid ocean-grid assignment in Version 1.
+- The cached 3x3 OISST sensitivity check is an intermediate diagnostic, not a full coastal-buffer average.
 - CUTI/BEUTI use nearest latitude-bin assignment.
+- Seasonal and annual NOAA features may miss short event windows and local nearshore stress processes.
 - No direct cell-level nutrient measurements are included.
 - No grazing, urchin, sea star wasting disease, or direct biotic pressure variables are included.
 - Environmental interpretation is proxy-based.

@@ -1,0 +1,15 @@
+feature,status,notes
+cached_3x3_oisst,created,Uses cached OISST grid files within one 0.25-degree step of each source grid point.
+buffer_average_oisst,skipped,Not implemented because local cache does not contain a complete coastal-radius grid inventory.
+winter_cuti_anomaly,created,Seasonal CUTI anomaly from cached daily table.
+winter_cuti_anomaly_lag1,created,Lagged seasonal CUTI anomaly.
+spring_cuti_anomaly,created,Seasonal CUTI anomaly from cached daily table.
+spring_cuti_anomaly_lag1,created,Lagged seasonal CUTI anomaly.
+summer_cuti_anomaly,created,Seasonal CUTI anomaly from cached daily table.
+summer_cuti_anomaly_lag1,created,Lagged seasonal CUTI anomaly.
+winter_beuti_anomaly,created,Seasonal BEUTI anomaly from cached daily table.
+winter_beuti_anomaly_lag1,created,Lagged seasonal BEUTI anomaly.
+spring_beuti_anomaly,created,Seasonal BEUTI anomaly from cached daily table.
+spring_beuti_anomaly_lag1,created,Lagged seasonal BEUTI anomaly.
+summer_beuti_anomaly,created,Seasonal BEUTI anomaly from cached daily table.
+summer_beuti_anomaly_lag1,created,Lagged seasonal BEUTI anomaly.

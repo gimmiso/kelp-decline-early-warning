@@ -1,0 +1,10 @@
+metric,value
+mean_distance_km,10.16302687287404
+median_distance_km,10.63442578816344
+max_distance_km,22.176656961671902
+std_distance_km,4.014409235758265
+cells_distance_gt_10km,28.0
+cells_distance_gt_20km,1.0
+cells_distance_gt_30km,0.0
+cells_distance_gt_40km,0.0
+n_cells,50.0
