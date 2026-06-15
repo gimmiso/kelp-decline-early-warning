@@ -1,0 +1,11 @@
+feature,status,source_columns,notes
+sst_anomaly_lag1,created,lag1_annual_mean_sst_anomaly,Alias for existing lagged OISST anomaly.
+sst_anomaly_2yr_mean,created,annual_mean_sst_anomaly,Rolling current plus lag-1 SST anomaly mean.
+marine_heatwave_days_lag1,created,lag1_hot_days_p90,Uses lagged hot-day proxy already present.
+marine_heatwave_intensity_lag1,skipped,not available,Dataset has hot-day counts but no marine heatwave intensity variable.
+cuti_anomaly_lag1,created,lag1_cuti_anomaly,Alias for existing lagged upwelling proxy anomaly.
+beuti_anomaly_lag1,created,lag1_beuti_anomaly,Alias for existing lagged upwelling proxy anomaly.
+high_sst_low_upwelling,created,annual_mean_sst_anomaly; cuti_anomaly,Continuous interaction; positive when warm anomaly coincides with low CUTI.
+high_sst_low_beuti,created,annual_mean_sst_anomaly; beuti_anomaly,Continuous interaction; positive when warm anomaly coincides with low BEUTI.
+declining_canopy_slope_x_sst_anomaly,created,canopy_3yr_slope; annual_mean_sst_anomaly,Interaction between recent canopy decline and SST anomaly.
+declining_canopy_slope_x_mhw_days,created,canopy_3yr_slope; hot_days_p90,Interaction between recent canopy decline and hot-day exposure.

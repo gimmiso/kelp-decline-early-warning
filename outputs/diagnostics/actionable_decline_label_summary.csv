@@ -1,0 +1,13 @@
+target,split,n_observations,n_positive_events,event_prevalence
+decline_event_next,train,1400,421,0.3007142857142857
+decline_event_next,validation,200,103,0.515
+decline_event_next,test,200,134,0.67
+decline_event_next,all_modeling_years,1800,658,0.3655555555555556
+actionable_decline_low_next,train,1400,258,0.18428571428571427
+actionable_decline_low_next,validation,200,38,0.19
+actionable_decline_low_next,test,200,45,0.225
+actionable_decline_low_next,all_modeling_years,1800,341,0.18944444444444444
+actionable_decline_drop_next,train,1400,395,0.28214285714285714
+actionable_decline_drop_next,validation,200,41,0.205
+actionable_decline_drop_next,test,200,34,0.17
+actionable_decline_drop_next,all_modeling_years,1800,470,0.2611111111111111

@@ -227,6 +227,65 @@ Full-sample PR-AUC can look strong because it includes persistent low-canopy sta
 
 High recall is important because missing actual decline events is costly in a screening workflow. Precision still matters because too many false alarms reduce practical usefulness. The most defensible interpretation is therefore that the model provides a reproducible robustness check for distinguishing preliminary early-warning signal from canopy-state persistence.
 
+### Recall-Oriented Modeling Extensions
+
+The next modeling extension adds cost-sensitive learning, actionable decline labels, canopy trajectory features, environmental stress interactions, feature-set ablations, and extended validation-based threshold tuning. The purpose is to improve recall-oriented risk screening while avoiding a trivial "predict everything as decline" result.
+
+False negatives are costly in early-warning screening because missed decline events reduce the value of an alerting workflow. Class-weighted and positive-class-weighted models were added to increase sensitivity to decline events while keeping unweighted models as baselines. Threshold tuning is still selected on the 2017-2020 validation period and fixed on the 2021-2024 test period to avoid test-set leakage.
+
+Two actionable labels were added:
+
+```text
+actionable_decline_low_next:
+current_canopy > 0.05
+and next_canopy < historical_25th_percentile
+
+actionable_decline_drop_next:
+current_canopy > 0.05
+and proportional next-year canopy drop >= 0.30
+```
+
+These labels are more practical for actionable decline screening than the original label alone because they require currently observable canopy before a low-canopy or sharp-drop outcome. They are also less strict than `new_decline_event_next`, which only captures transition from at-or-above the historical p25 threshold into below-p25 canopy.
+
+The extension also adds leakage-safe canopy trajectory features such as `canopy_lag1`, `canopy_lag2`, `canopy_2yr_change`, `canopy_3yr_slope`, `canopy_3yr_cv`, `canopy_drop_from_3yr_max`, and `years_since_last_high_canopy`. Environmental stress features include lagged SST anomaly, two-year SST anomaly mean, lagged hot-day exposure, lagged CUTI/BEUTI anomalies, and simple thermal-stress interactions.
+
+Key results:
+
+```text
+Original decline label, default threshold:
+Best F2 = 0.857
+Model = canopy_current_only / Logistic Regression / cost_sensitive
+Recall = 0.896
+Precision = 0.732
+
+Original decline label, balanced threshold tuning:
+Model = canopy_current_only / XGBoost / unweighted
+Threshold = 0.25
+Recall = 0.813
+Precision = 0.779
+F2 = 0.806
+
+Original decline label, high-sensitivity threshold tuning:
+Model = canopy_current_only / LightGBM / unweighted
+Threshold = 0.05
+Recall = 1.000
+Precision = 0.677
+F2 = 0.913
+
+Actionable drop label:
+Best default-threshold F2 = 0.699
+Model = canopy_trajectory_only / XGBoost / cost_sensitive
+
+Actionable drop label, threshold tuned:
+Model = canopy_current_plus_trajectory / SVM / cost_sensitive
+Threshold = 0.20
+Recall = 0.941
+Precision = 0.516
+F2 = 0.808
+```
+
+Trajectory features did not outperform current-canopy-only models for the original `decline_event_next` label, so the original full-sample task still appears strongly influenced by canopy-state persistence. However, trajectory features were useful for `actionable_decline_drop_next`, providing preliminary evidence that recent canopy trajectory can support actionable decline screening when the target is defined as a sharp future drop rather than persistence of already-low canopy.
+
 ### 3. NOAA Variables Provide Environmental Exposure Context
 
 ![Environmental signal comparison between decline and non-decline rows](outputs/figures/environmental_signal_decline_vs_nondecline.png)
@@ -269,10 +328,11 @@ The completed workflow is:
 8. Five-model comparison.
 9. Threshold tuning.
 10. Zero-persistence and at-risk validity diagnostics.
-11. Model diagnostics.
-12. Canopy persistence and environmental-context analysis.
-13. SHAP interpretation.
-14. Within-model feature-set comparison.
+11. Recall-oriented modeling extensions.
+12. Model diagnostics.
+13. Canopy persistence and environmental-context analysis.
+14. SHAP interpretation.
+15. Within-model feature-set comparison.
 
 Main scripts:
 
@@ -284,6 +344,7 @@ python scripts/build_noaa_environmental_features.py
 python scripts/train_model_comparison.py
 python scripts/tune_decision_thresholds.py
 python scripts/diagnose_zero_persistence.py
+python scripts/run_recall_oriented_modeling_extensions.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
@@ -291,9 +352,11 @@ python scripts/interpret_models_shap.py
 
 Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeline and threshold tuning, but before final interpretation. This makes the final narrative distinguish risk-state prediction, near-low-canopy persistence, and stricter transition-into-decline performance.
 
+Run `python scripts/run_recall_oriented_modeling_extensions.py` after the validity diagnostics when testing cost-sensitive models, actionable labels, trajectory features, environmental stress interactions, and extended threshold tuning.
+
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids and threshold-selection summaries.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, actionable-label summaries, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, and feature-ablation results.
 
 ## Repository Structure
 

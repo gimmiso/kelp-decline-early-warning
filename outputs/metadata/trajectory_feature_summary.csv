@@ -1,0 +1,10 @@
+feature_group,feature,status,missing_count,non_missing_count
+canopy_trajectory,canopy_lag1,created,50,1750
+canopy_trajectory,canopy_lag2,created,100,1700
+canopy_trajectory,canopy_2yr_change,created,100,1700
+canopy_trajectory,canopy_3yr_change,created,150,1650
+canopy_trajectory,canopy_3yr_mean,created,0,1800
+canopy_trajectory,canopy_3yr_slope,created,100,1700
+canopy_trajectory,canopy_3yr_cv,created,50,1750
+canopy_trajectory,canopy_drop_from_3yr_max,created,0,1800
+canopy_trajectory,years_since_last_high_canopy,created,220,1580
