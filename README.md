@@ -174,6 +174,49 @@ Default-threshold false negatives: 101
 
 These thresholds were selected using the 2017-2020 validation period only, then fixed for the 2021-2024 test period to avoid test-set leakage. For early-warning use, `canopy_only / Random Forest` gives the stronger balanced recall-F1 trade-off, while `canopy_noaa / SVM` is useful as a high-sensitivity screening option when reducing missed decline events is the priority.
 
+### Early-Warning Validity Diagnostics
+
+An additional methodological robustness check evaluates whether model performance is partly driven by zero-state or near-zero-state persistence. This matters because a model can appear useful for early warning if it mostly identifies locations that are already degraded and likely to remain degraded, rather than detecting transition into future low-canopy conditions.
+
+The diagnostic measures current-to-next-year canopy transitions using `relative_canopy` and `next_year_relative_canopy` under zero and near-zero thresholds:
+
+```text
+current_zero -> next_zero
+current_zero -> next_nonzero
+current_nonzero -> next_zero
+current_nonzero -> next_nonzero
+```
+
+Exact zero-to-zero persistence was limited in this dataset, but near-zero persistence was substantial:
+
+```text
+Threshold 0.00: zero -> zero persistence = 0.143
+Threshold 0.01: zero -> zero persistence = 0.630
+Threshold 0.05: zero -> zero persistence = 0.669
+Threshold 0.10: zero -> zero persistence = 0.746
+```
+
+At-risk subset evaluation shows that original-label performance declines when already-low canopy states are removed. For `current_canopy > 0.05`, the best original-label test result was `canopy_only / Random Forest`:
+
+```text
+PR-AUC: 0.633
+Recall: 0.400
+F1: 0.480
+Positive events: 45 / 93
+```
+
+A stricter transition label was also tested:
+
+```text
+new_decline_event_next = 1
+if current relative canopy is at or above the cell-specific 1984-2013 p25 baseline
+and next-year relative canopy falls below that p25 baseline
+```
+
+This label captures transition into a low-canopy state rather than persistence of an already-low state. Under this stricter target, performance was more modest; the best full-sample PR-AUC was `0.401` for `canopy_only / Random Forest`, while at-risk PR-AUC values were generally in the `0.39-0.51` range depending on the threshold and model.
+
+These diagnostics suggest that the current Version 1 model is strongest at detecting canopy-state persistence and already-low or near-low canopy conditions. There is some preliminary signal in at-risk and new-decline-transition settings, but the present results should be described as a research-stage early-warning robustness check rather than a confirmed operational early-warning system.
+
 ### 3. NOAA Variables Provide Environmental Exposure Context
 
 ![Environmental signal comparison between decline and non-decline rows](outputs/figures/environmental_signal_decline_vs_nondecline.png)
@@ -228,6 +271,7 @@ python scripts/construct_decline_labels.py
 python scripts/build_noaa_environmental_features.py
 python scripts/train_model_comparison.py
 python scripts/tune_decision_thresholds.py
+python scripts/diagnose_zero_persistence.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
@@ -254,6 +298,7 @@ kelp-decline-early-warning/
 ├── src/
 └── outputs/
     ├── figures/
+    ├── diagnostics/
     ├── maps/
     ├── metadata/
     └── model_results/
@@ -294,6 +339,7 @@ brew install libomp
 - No grazing, urchin, sea star wasting disease, or direct biotic pressure variables are included.
 - Environmental interpretation is proxy-based.
 - The workflow supports early-warning screening, not causal attribution.
+- Early-warning validity depends on separating transition-into-decline skill from persistence of already-low or near-zero canopy states.
 
 ## Future Work
 

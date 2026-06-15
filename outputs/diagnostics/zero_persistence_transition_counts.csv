@@ -1,0 +1,17 @@
+canopy_threshold,current_state,next_state,transition,count,total_observations,current_state_total
+0.0,current_zero,next_zero,current_zero -> next_zero,1,1800,7
+0.0,current_zero,next_nonzero,current_zero -> next_nonzero,6,1800,7
+0.0,current_nonzero,next_zero,current_nonzero -> next_zero,6,1800,1793
+0.0,current_nonzero,next_nonzero,current_nonzero -> next_nonzero,1787,1800,1793
+0.01,current_zero,next_zero,current_zero -> next_zero,177,1800,281
+0.01,current_zero,next_nonzero,current_zero -> next_nonzero,104,1800,281
+0.01,current_nonzero,next_zero,current_nonzero -> next_zero,120,1800,1519
+0.01,current_nonzero,next_nonzero,current_nonzero -> next_nonzero,1399,1800,1519
+0.05,current_zero,next_zero,current_zero -> next_zero,429,1800,641
+0.05,current_zero,next_nonzero,current_zero -> next_nonzero,212,1800,641
+0.05,current_nonzero,next_zero,current_nonzero -> next_zero,220,1800,1159
+0.05,current_nonzero,next_nonzero,current_nonzero -> next_nonzero,939,1800,1159
+0.1,current_zero,next_zero,current_zero -> next_zero,701,1800,940
+0.1,current_zero,next_nonzero,current_zero -> next_nonzero,239,1800,940
+0.1,current_nonzero,next_zero,current_nonzero -> next_zero,257,1800,860
+0.1,current_nonzero,next_nonzero,current_nonzero -> next_nonzero,603,1800,860
