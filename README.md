@@ -700,6 +700,23 @@ Trajectory-only features improved the at-risk original target relative to the ex
 
 The interpretation is therefore cautious: canopy trajectory features mainly refine persistence-based risk-state screening. They provide some useful at-risk signal and can reduce false negatives under some operating points, but they do not yet establish robust true transition or actionable early-warning skill.
 
+## Integrated Model-Result Synthesis
+
+The repository now includes an integrated result synthesis layer that consolidates existing V1/V2, threshold-tuned, recall-oriented, OISST, CRW, bathymetry/habitat, multiscale exposure, naive persistence, and canopy-trajectory result tables without rerunning heavy feature construction or model training.
+
+The synthesis writes:
+
+```text
+results/tables/integrated_model_comparison_master.csv
+results/tables/integrated_best_by_target.csv
+results/tables/integrated_baseline_gap_summary.csv
+outputs/diagnostics/integrated_model_results_report.md
+```
+
+Current integrated results summarize `21` source result files and `2,520` standardized model-result rows across five target groups. The strongest original broad decline result was the multiscale environmental Random Forest (`PR-AUC = 0.971`), but this should be interpreted as broad risk-state screening. For stricter targets, performance is more modest: the best new-transition PR-AUC was `0.610`, and the best actionable-drop PR-AUC was `0.803`. Threshold-tuned and cost-sensitive models can reduce false negatives, but those gains must be read as recall-oriented sensitivity trade-offs rather than confirmed operational early-warning.
+
+The main synthesis conclusion is that the project now has strong evidence for regional screening and persistence-aware risk detection, while true transition/actionable early-warning remains the harder methodological target. The next most important additions are explicit claim gates, rare-event learning focused on transition/actionable labels, wave exposure, and biological disturbance covariates such as grazing pressure.
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -777,11 +794,12 @@ The completed workflow is:
 17. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
 18. Static GEBCO bathymetry and habitat-context covariates.
 19. Leakage-safe canopy trajectory and time-series instability proxy features.
-20. Model diagnostics.
-21. Canopy persistence and environmental-context analysis.
-22. SHAP interpretation.
-23. Within-model feature-set comparison.
-24. V3 ecological data feasibility scan.
+20. Integrated model-result synthesis.
+21. Model diagnostics.
+22. Canopy persistence and environmental-context analysis.
+23. SHAP interpretation.
+24. Within-model feature-set comparison.
+25. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -804,6 +822,7 @@ python scripts/16a_download_crw5km_point_cache.py
 python scripts/16b_build_crw5km_composite_features.py
 python scripts/17_build_bathymetry_habitat_features.py
 python scripts/19_build_canopy_trajectory_features.py
+python scripts/21_integrate_model_results.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -829,6 +848,8 @@ Run `python scripts/16b_build_crw5km_composite_features.py` to reproduce the imp
 Run `python scripts/17_build_bathymetry_habitat_features.py` to reproduce the static GEBCO bathymetry and habitat-context workflow. This script downloads a small GEBCO subset through the GEBCO queue API unless a local NetCDF is supplied, computes ocean-only depth and slope summaries for retained 10 km cells, deletes raw GEBCO files by default, and compares habitat, SST, canopy, and combined feature families.
 
 Run `python scripts/19_build_canopy_trajectory_features.py` to reproduce the leakage-safe canopy trajectory workflow. This script builds lagged canopy, rolling mean, slope, recovery/decline, time-series instability, and presence-frequency proxy features using only years up to and including year `t`, writes an explicit leakage audit, and compares trajectory features against naive persistence, existing canopy-only, CRW composite, habitat, and combined feature families.
+
+Run `python scripts/21_integrate_model_results.py` after major model-result tables have been generated. This script standardizes existing result CSVs into a master comparison table, best-by-target table, baseline-gap summary, and diagnostic report without rerunning feature construction or model training.
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
