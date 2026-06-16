@@ -565,6 +565,68 @@ CRW composite features improved over OISST-only for the original broad decline t
 
 CRW 5 km SST should be treated as a higher-resolution satellite SST exposure layer, not true local in-situ nearshore temperature. Composite features summarize monthly mean SST and SSTA, so they cannot fully reproduce daily hot-day counts, cumulative heat stress, or short marine-heatwave duration metrics.
 
+## Static Bathymetry and Habitat Covariates
+
+The repository now includes a static bathymetry and habitat-context layer inspired by kelp persistence and decline studies. The purpose is to test whether physical habitat setting helps explain where canopy decline risk, thermal exposure, or persistence patterns are more likely to occur.
+
+The implemented workflow uses a small GEBCO 2026 California coastal subset downloaded through the GEBCO grid subsetting API. Raw GEBCO zip and NetCDF files are temporary by default and are not committed. GEBCO elevation is converted to positive ocean depth using:
+
+```text
+depth_m = -elevation_m
+for ocean pixels where elevation_m < 0
+```
+
+Coastal cells can include land, so summaries are computed over valid ocean pixels only. The workflow records `ocean_pixel_share` and `bathymetry_missing_rate` to diagnose support and coverage.
+
+Generated habitat features include:
+
+```text
+mean_depth_m
+min_depth_m
+max_depth_m
+depth_range_m
+shallow_area_share_0_30m
+shallow_area_share_0_50m
+slope_mean
+slope_std
+n_bathymetry_pixels_used
+ocean_pixel_share
+bathymetry_missing_rate
+```
+
+The completed run produced:
+
+```text
+Retained cells with habitat features: 50 / 50
+Mean ocean pixel share: 0.526
+Mean bathymetry missing rate: 0.000
+Mean depth: 76.80 m
+Mean shallow 0-30 m share: 0.311
+Mean shallow 0-50 m share: 0.511
+Computed model-comparison rows: 68
+```
+
+Tracked habitat outputs:
+
+```text
+results/tables/bathymetry_habitat_feature_diagnostics.csv
+results/tables/bathymetry_habitat_model_comparison.csv
+outputs/diagnostics/bathymetry_habitat_feature_report.md
+```
+
+Best PR-AUC results from the habitat comparison were:
+
+```text
+original_decline: naive persistence baseline, PR-AUC 0.893
+at_risk_original_gt005: habitat_only / Logistic Regression L2, PR-AUC 0.764
+new_decline_transition: canopy + OISST + habitat / Logistic Regression L2, PR-AUC 0.408
+actionable_decline_drop: canopy + OISST + habitat / Logistic Regression L2, PR-AUC 0.619
+```
+
+Habitat-only performance was strong for the original broad decline target and the at-risk original target. This suggests that static physical setting contains useful spatial risk-screening information. However, habitat-only performance remained weak for the stricter new-transition target, and improvements on broad decline labels should not be interpreted as operational early-warning skill.
+
+Bathymetry and habitat features are static covariates, not direct biological drivers. They represent habitat suitability and exposure context rather than grazing pressure, disease, recruitment, or direct ecological mechanisms. No future target information is used in these features.
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -640,11 +702,12 @@ The completed workflow is:
 15. V2 multi-scale environmental exposure construction.
 16. V2 transition-based multi-scale exposure selection.
 17. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
-18. Model diagnostics.
-19. Canopy persistence and environmental-context analysis.
-20. SHAP interpretation.
-21. Within-model feature-set comparison.
-22. V3 ecological data feasibility scan.
+18. Static GEBCO bathymetry and habitat-context covariates.
+19. Model diagnostics.
+20. Canopy persistence and environmental-context analysis.
+21. SHAP interpretation.
+22. Within-model feature-set comparison.
+23. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -665,6 +728,7 @@ python scripts/10_multiscale_exposure_selection.py
 python scripts/16_build_crw_5km_sst_features.py
 python scripts/16a_download_crw5km_point_cache.py
 python scripts/16b_build_crw5km_composite_features.py
+python scripts/17_build_bathymetry_habitat_features.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -687,11 +751,13 @@ Run `python scripts/16_build_crw_5km_sst_features.py` to build or plan the optio
 
 Run `python scripts/16b_build_crw5km_composite_features.py` to reproduce the implemented CRW monthly-composite workflow. This script streams NOAA STAR monthly NetCDF files, extracts retained Kelpwatch cell points, writes a compact local extracted cache, deletes raw NetCDF files by default, builds annual/seasonal CRW features, and compares CRW composite, OISST, combined, and canopy feature families.
 
+Run `python scripts/17_build_bathymetry_habitat_features.py` to reproduce the static GEBCO bathymetry and habitat-context workflow. This script downloads a small GEBCO subset through the GEBCO queue API unless a local NetCDF is supplied, computes ocean-only depth and slope summaries for retained 10 km cells, deletes raw GEBCO files by default, and compares habitat, SST, canopy, and combined feature families.
+
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/`, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
@@ -752,6 +818,7 @@ brew install libomp
 - OISST uses nearest valid ocean-grid assignment in Version 1.
 - The cached 3x3 OISST sensitivity check is an intermediate diagnostic, not a full coastal-buffer average.
 - CRW 5 km monthly composites provide an implemented higher-resolution SST exposure sensitivity layer, but they do not reproduce daily hot-day counts or cumulative heat-stress metrics.
+- GEBCO bathymetry/habitat variables are static spatial covariates and should be interpreted as habitat/exposure context, not direct ecological drivers or operational early-warning signals.
 - CUTI/BEUTI use nearest latitude-bin assignment.
 - Seasonal and annual NOAA features may miss short event windows and local nearshore stress processes.
 - No direct cell-level nutrient measurements are included.
@@ -767,6 +834,7 @@ brew install libomp
 - Expand the V2 buffer workflow to a complete OISST point cache for every candidate buffer.
 - Compare nearest-grid OISST assignment with complete coastal-buffer average sensitivity analyses.
 - Use the optional CRW daily point-cache path or an HPC workflow to test daily hot-day and cumulative heat-stress metrics against the monthly-composite CRW layer.
+- Test whether bathymetry/habitat gains persist under spatial or leave-region-out validation before interpreting them as robust spatial risk-screening covariates.
 - Add ecological covariates such as grazing pressure, urchin observations, wave disturbance, and disease context where available.
 - Estimate uncertainty using bootstrap confidence intervals for model metrics.
 - Develop an optional Streamlit dashboard only if it can be polished and connected to tracked reproducibility outputs.

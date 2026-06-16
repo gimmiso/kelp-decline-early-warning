@@ -1,0 +1,21 @@
+diagnostic,feature,value_min,value_max,value_mean,missing_rate,notes
+feature_summary,mean_depth_m,10.666666666666666,404.5187165775401,76.79893403485109,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,min_depth_m,1.0,12.0,3.06,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,max_depth_m,20.0,812.0,199.36,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,depth_range_m,19.0,809.0,196.3,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,shallow_area_share_0_30m,0.020833333333333332,1.0,0.3113357303635401,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,shallow_area_share_0_50m,0.03333333333333333,1.0,0.5110656653514182,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,slope_mean,0.00782652131233747,0.12343105798401743,0.03481939648814263,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,slope_std,0.006857639350683273,0.09913338239130114,0.02670260850585246,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,n_bathymetry_pixels_used,6.0,585.0,305.46,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,ocean_pixel_share,0.010186757215619695,0.9842105263157894,0.525783235467926,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_summary,bathymetry_missing_rate,0.0,0.0,0.0,0.0,Static GEBCO-derived bathymetry/habitat covariate.
+feature_status,computed,,,50.0,,Number of retained cells with this bathymetry extraction status.
+data_access,bbox,,,,,"west=-123.8902, east=-120.1676, south=34.3648, north=39.5393"
+data_access,basket_id,,,,,GEBCO_16_Jun_2026_0afb3ae1b829
+data_access,download_size_bytes,,,2653600.0,,2653600
+data_access,netcdf_file,,,,,gebco_2026_n39.5393_s34.3648_w-123.8902_e-120.1676.nc
+data_access,bbox_west,,,-123.89021362131078,,-123.89021362131078
+data_access,bbox_east,,,-120.16763259755704,,-120.16763259755704
+data_access,bbox_south,,,34.364824070112334,,34.364824070112334
+data_access,bbox_north,,,39.53927664468454,,39.53927664468454
