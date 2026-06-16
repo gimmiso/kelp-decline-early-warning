@@ -363,12 +363,17 @@ This repository now includes a V2 analysis layer that treats spatial resolution 
 
 ### Why Multi-Scale Exposure Is Needed
 
-Version 1 used nearest-grid OISST assignment as the baseline. That is reproducible and efficient, but it creates a support mismatch: 10 km Kelpwatch cells are compared with coarse offshore/coastal OISST grid points. Buffer-based exposure summaries reduce sensitivity to a single nearest point by aggregating OISST grid centroids around each kelp cell.
+Version 1 used nearest-grid OISST assignment as the baseline. That is reproducible and efficient, but it creates a support mismatch: 10 km Kelpwatch cells are compared with coarse offshore/coastal OISST grid points. V2 therefore adds source-aware interpolated SST exposure and broader coastal-neighborhood buffer summaries.
+
+For OISST, IDW is not treated as ordinary missing-value imputation. It is source-aware interpolation from a coarse 0.25-degree gridded SST field to kelp cell centroids. The resulting variables should be described as **IDW-interpolated OISST exposure at kelp-cell centroids**, not as true 10 km SST.
 
 The V2 construction script builds OISST exposure summaries for:
 
 ```text
 nearest grid
+IDW k = 4 interpolation
+IDW k = 8 interpolation sensitivity
+bilinear interpolation, only if the cached OISST grid is complete and regular enough
 10 km buffer
 25 km buffer
 30 km buffer
@@ -396,22 +401,25 @@ The current local V2 run generated:
 | Scale | Feature columns | Rows | Mean OISST points | Min OISST points | Max OISST points |
 |---|---:|---:|---:|---:|---:|
 | nearest | 10 | 1,900 | 1.00 | 1 | 1 |
+| IDW k=4 | 10 | 1,900 | 4.00 | 4 | 4 |
+| IDW k=8 | 10 | 1,900 | 8.00 | 8 | 8 |
 | 10 km | 9 | 1,900 | 1.00 | 1 | 1 |
-| 25 km | 9 | 1,900 | 1.54 | 1 | 2 |
-| 30 km | 9 | 1,900 | 1.88 | 1 | 3 |
-| 50 km | 9 | 1,900 | 2.86 | 2 | 4 |
-| 75 km | 9 | 1,900 | 4.08 | 2 | 5 |
+| 25 km | 9 | 1,900 | 2.18 | 1 | 3 |
+| 30 km | 9 | 1,900 | 2.58 | 1 | 4 |
+| 50 km | 9 | 1,900 | 4.36 | 2 | 6 |
+| 75 km | 9 | 1,900 | 6.46 | 2 | 9 |
 
-The 10 km buffer has substantial overlap with nearest-grid behavior because the available local OISST cache contains only grid points previously needed by the Version 1 workflow. A publication-grade full multi-scale run should cache all OISST grid points intersecting each candidate buffer.
+The 10 km buffer is under-supported relative to the 0.25-degree OISST grid spacing and has substantial overlap with nearest-grid behavior. For this reason, IDW k=4 is used as the main practical interpolation method, IDW k=8 is retained as a sensitivity check, and 25/30/50/75 km buffers are interpreted as broader coastal-neighborhood exposure metrics. Bilinear interpolation was not included in the current run because the cached OISST grid was not complete enough around all kelp cells (`0` complete cells, `50` incomplete cells).
 
 ### Multi-Scale Model Comparison
 
 The V2 comparison evaluates:
 
 - `M0`: nearest-grid baseline.
-- `M1`: fixed 30 km buffer model.
-- `M2`: single-scale models for each candidate buffer.
-- `M3`: multi-scale selected models using L1-regularized Logistic Regression and Random Forest.
+- `M1`: IDW k=4 main practical interpolation.
+- `M2`: IDW k=8 sensitivity, plus bilinear only if the cached grid is complete and regular enough.
+- `M3`: 25/30/50/75 km buffer models as broader coastal-neighborhood exposure metrics.
+- `M4`: multi-scale selected models using L1-regularized Logistic Regression and Random Forest.
 
 The feature set is deliberately compact to reduce multicollinearity:
 
@@ -427,10 +435,10 @@ The best temporal results from the current V2 environment-only run were:
 
 | Target | Best comparison | Scale | Model | PR-AUC | Recall | Precision | F1 | Balanced accuracy |
 |---|---|---|---|---:|---:|---:|---:|---:|
-| Original decline state | `M3_multiscale_l1_regularized` | multi | Logistic Regression L1 | 0.815 | 0.813 | 0.673 | 0.736 | 0.505 |
+| Original decline state | `M3_buffer_25km` | 25 km | Logistic Regression L2 | 0.807 | 0.813 | 0.665 | 0.732 | 0.490 |
 | At-risk original target | `M0_nearest_grid_baseline` | nearest | Random Forest | 0.741 | 0.267 | 0.923 | 0.414 | 0.623 |
-| New decline transition | `M2_single_scale_75km` | 75 km | Random Forest | 0.282 | 0.192 | 0.313 | 0.238 | 0.565 |
-| Actionable decline drop | `M2_single_scale_50km` | 50 km | Logistic Regression L2 | 0.387 | 1.000 | 0.183 | 0.309 | 0.542 |
+| New decline transition | `M3_buffer_75km` | 75 km | Random Forest | 0.282 | 0.192 | 0.313 | 0.238 | 0.565 |
+| Actionable decline drop | `M3_buffer_50km` | 50 km | Logistic Regression L2 | 0.387 | 1.000 | 0.183 | 0.309 | 0.542 |
 
 The transition and actionable-drop targets are harder than the original decline-state label. Lower performance under these labels is scientifically meaningful because these labels reduce the influence of already-low or persistent low-canopy states.
 
@@ -444,15 +452,17 @@ The current combined rule selected:
 |---|---|
 | Original decline state | 30 km |
 | At-risk original target | nearest |
-| New decline transition | 10 km |
-| Actionable decline drop | 10 km |
+| New decline transition | 75 km |
+| Actionable decline drop | nearest |
 
 This should be interpreted as a prototype scale-selection result. Thermal stress, upwelling, dispersal, grazing, wave exposure, and disease processes may operate at different spatial supports.
 
 ### V2 Limitations
 
 - OISST is still a coarse offshore/coastal thermal proxy.
+- IDW-interpolated OISST exposure reduces nearest-grid dependence but does not create true 10 km SST or true nearshore in-situ temperature.
 - Buffer aggregation reduces nearest-grid sensitivity but does not create true nearshore in-situ temperature.
+- The 10 km buffer is under-supported relative to 0.25-degree OISST grid spacing; it is tracked as a diagnostic support rather than emphasized as a main model scale.
 - The current local OISST cache was designed for the Version 1 nearest-grid workflow, so a full publication-grade buffer run should cache all grid points intersecting each buffer.
 - Multi-scale selection can be unstable when the number of retained kelp cells or transition events is small.
 - At-risk transition prediction is harder than canopy-state prediction, so lower performance is expected and scientifically meaningful.

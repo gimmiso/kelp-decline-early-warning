@@ -2,8 +2,9 @@
 
 This script adds a new analysis layer without replacing the Version 1 nearest
 grid workflow. It treats cached OISST grid cells as environmental point
-supports, buffers Kelpwatch cell centroids in a projected CRS, and aggregates
-annual exposure summaries at multiple spatial supports.
+supports, interpolates OISST exposure to Kelpwatch cell centroids, buffers
+Kelpwatch cell centroids in a projected CRS, and aggregates annual exposure
+summaries at multiple spatial supports.
 """
 
 from __future__ import annotations
@@ -31,6 +32,18 @@ MODEL_END_YEAR = 2024
 PROJECTED_CRS = "EPSG:3310"
 GEOGRAPHIC_CRS = "EPSG:4326"
 SCALES_KM = [10, 25, 30, 50, 75]
+IDW_K_VALUES = [4, 8]
+IDW_POWER = 2.0
+POINT_FEATURES = [
+    "annual_mean_sst",
+    "annual_max_sst",
+    "annual_min_sst",
+    "annual_sst_std",
+    "annual_mean_sst_anomaly",
+    "annual_max_sst_anomaly",
+    "hot_days_p90",
+    "hot_days_p95",
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -42,6 +55,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--summary-output", type=Path, default=DEFAULT_SUMMARY)
     parser.add_argument("--report-output", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--scales-km", type=int, nargs="+", default=SCALES_KM)
+    parser.add_argument("--idw-k", type=int, nargs="+", default=IDW_K_VALUES)
+    parser.add_argument("--idw-power", type=float, default=IDW_POWER)
     return parser.parse_args()
 
 
@@ -153,6 +168,103 @@ def nearest_assignments(cell_gdf: gpd.GeoDataFrame, point_gdf: gpd.GeoDataFrame)
     ).assign(oisst_nearest_distance_km=lambda x: x["oisst_nearest_distance_km"] / 1000.0)
 
 
+def distance_assignments(cell_gdf: gpd.GeoDataFrame, point_gdf: gpd.GeoDataFrame) -> pd.DataFrame:
+    """Return distance from every cell centroid to every cached OISST point."""
+    rows = []
+    point_records = point_gdf[["oisst_lat", "oisst_lon", "geometry"]].to_dict("records")
+    for cell in cell_gdf[["cell_id", "geometry"]].itertuples():
+        for point in point_records:
+            rows.append(
+                {
+                    "cell_id": cell.cell_id,
+                    "oisst_lat": point["oisst_lat"],
+                    "oisst_lon": point["oisst_lon"],
+                    "distance_km": float(cell.geometry.distance(point["geometry"]) / 1000.0),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def idw_memberships(distances: pd.DataFrame, k_values: list[int], power: float) -> pd.DataFrame:
+    """Return source-aware IDW memberships for each requested k."""
+    rows = []
+    for k in k_values:
+        for cell_id, group in distances.groupby("cell_id"):
+            nearest = group.sort_values("distance_km").head(k).copy()
+            zero_distance = nearest["distance_km"] <= 1e-9
+            if zero_distance.any():
+                weights = np.where(zero_distance, 1.0, 0.0)
+            else:
+                raw_weights = 1.0 / np.power(nearest["distance_km"].to_numpy(), power)
+                weights = raw_weights / raw_weights.sum()
+            for (_, row), weight in zip(nearest.iterrows(), weights):
+                rows.append(
+                    {
+                        "method": f"idw_k{k}",
+                        "k": k,
+                        "cell_id": cell_id,
+                        "oisst_lat": row["oisst_lat"],
+                        "oisst_lon": row["oisst_lon"],
+                        "distance_km": row["distance_km"],
+                        "weight": float(weight),
+                    }
+                )
+    return pd.DataFrame(rows)
+
+
+def bilinear_memberships(cells: pd.DataFrame, point_gdf: gpd.GeoDataFrame) -> tuple[pd.DataFrame, dict[str, object]]:
+    """Return bilinear memberships only if every cell has four cached vertices."""
+    cached_points = {
+        (round(float(row.oisst_lat), 3), round(float(row.oisst_lon), 3))
+        for row in point_gdf[["oisst_lat", "oisst_lon"]].drop_duplicates().itertuples()
+    }
+    rows = []
+    incomplete_cells = []
+    for cell in cells.itertuples():
+        lat = float(cell.center_lat)
+        lon = float(cell.center_lon)
+        lat0 = np.floor((lat + 89.875) / 0.25) * 0.25 - 89.875
+        lon0 = np.floor((lon + 179.875) / 0.25) * 0.25 - 179.875
+        lat1 = lat0 + 0.25
+        lon1 = lon0 + 0.25
+        vertices = [
+            (round(lat0, 3), round(lon0, 3)),
+            (round(lat0, 3), round(lon1, 3)),
+            (round(lat1, 3), round(lon0, 3)),
+            (round(lat1, 3), round(lon1, 3)),
+        ]
+        if not all(vertex in cached_points for vertex in vertices):
+            incomplete_cells.append(cell.cell_id)
+            continue
+        lat_fraction = 0.0 if lat1 == lat0 else (lat - lat0) / (lat1 - lat0)
+        lon_fraction = 0.0 if lon1 == lon0 else (lon - lon0) / (lon1 - lon0)
+        weights = {
+            (round(lat0, 3), round(lon0, 3)): (1 - lat_fraction) * (1 - lon_fraction),
+            (round(lat0, 3), round(lon1, 3)): (1 - lat_fraction) * lon_fraction,
+            (round(lat1, 3), round(lon0, 3)): lat_fraction * (1 - lon_fraction),
+            (round(lat1, 3), round(lon1, 3)): lat_fraction * lon_fraction,
+        }
+        for (point_lat, point_lon), weight in weights.items():
+            rows.append(
+                {
+                    "method": "bilinear",
+                    "cell_id": cell.cell_id,
+                    "oisst_lat": point_lat,
+                    "oisst_lon": point_lon,
+                    "weight": float(weight),
+                }
+            )
+    diagnostics = {
+        "bilinear_complete": len(incomplete_cells) == 0,
+        "bilinear_complete_cells": int(cells["cell_id"].nunique() - len(incomplete_cells)),
+        "bilinear_incomplete_cells": len(incomplete_cells),
+    }
+    if incomplete_cells:
+        diagnostics["bilinear_incomplete_examples"] = ",".join(incomplete_cells[:10])
+        return pd.DataFrame(), diagnostics
+    return pd.DataFrame(rows), diagnostics
+
+
 def buffer_memberships(
     cell_gdf: gpd.GeoDataFrame,
     point_gdf: gpd.GeoDataFrame,
@@ -184,6 +296,8 @@ def buffer_memberships(
 def aggregate_exposures(
     annual: pd.DataFrame,
     nearest: pd.DataFrame,
+    idw: pd.DataFrame,
+    bilinear: pd.DataFrame,
     memberships: pd.DataFrame,
     scales_km: list[int],
 ) -> pd.DataFrame:
@@ -198,10 +312,41 @@ def aggregate_exposures(
         oisst_nearest_hot_days_p90_max=("hot_days_p90", "max"),
         oisst_nearest_hot_days_p95_mean=("hot_days_p95", "mean"),
         oisst_nearest_hot_days_p95_max=("hot_days_p95", "max"),
-        oisst_nearest_n_grid_points=("oisst_lat", "nunique"),
+        oisst_nearest_n_grid_points=("oisst_lat", "count"),
         oisst_nearest_distance_km=("oisst_nearest_distance_km", "first"),
     )
     output = nearest_grouped.copy()
+
+    for method in sorted(idw["method"].unique()) if not idw.empty else []:
+        members = idw.loc[idw["method"] == method]
+        joined = members.merge(annual, on=["oisst_lat", "oisst_lon"], how="inner")
+        for feature in POINT_FEATURES:
+            joined[f"{feature}_weighted"] = joined[feature] * joined["weight"]
+        grouped = joined.groupby(["cell_id", "year"], as_index=False).agg(
+            **{
+                f"oisst_{method}_{feature}_idw": (f"{feature}_weighted", "sum")
+                for feature in POINT_FEATURES
+            },
+            **{
+                f"oisst_{method}_n_grid_points": ("oisst_lat", "count"),
+                f"oisst_{method}_max_distance_km": ("distance_km", "max"),
+            },
+        )
+        output = output.merge(grouped, on=["cell_id", "year"], how="left")
+
+    if not bilinear.empty:
+        joined = bilinear.merge(annual, on=["oisst_lat", "oisst_lon"], how="inner")
+        for feature in POINT_FEATURES:
+            joined[f"{feature}_weighted"] = joined[feature] * joined["weight"]
+        grouped = joined.groupby(["cell_id", "year"], as_index=False).agg(
+            **{
+                f"oisst_bilinear_{feature}_interpolated": (f"{feature}_weighted", "sum")
+                for feature in POINT_FEATURES
+            },
+            oisst_bilinear_n_grid_points=("oisst_lat", "count"),
+        )
+        output = output.merge(grouped, on=["cell_id", "year"], how="left")
+
     for scale in scales_km:
         members = memberships.loc[memberships["scale_km"] == scale]
         joined = members.merge(annual, on=["oisst_lat", "oisst_lon"], how="inner")
@@ -216,17 +361,25 @@ def aggregate_exposures(
                 f"{prefix}_hot_days_p90_max": ("hot_days_p90", "max"),
                 f"{prefix}_hot_days_p95_mean": ("hot_days_p95", "mean"),
                 f"{prefix}_hot_days_p95_max": ("hot_days_p95", "max"),
-                f"{prefix}_n_grid_points": ("oisst_lat", "nunique"),
+                f"{prefix}_n_grid_points": ("oisst_lat", "count"),
             }
         )
         output = output.merge(grouped, on=["cell_id", "year"], how="left")
     return output.sort_values(["cell_id", "year"]).reset_index(drop=True)
 
 
-def feature_summary(features: pd.DataFrame, scales_km: list[int]) -> pd.DataFrame:
+def feature_summary(
+    features: pd.DataFrame,
+    scales_km: list[int],
+    idw_k_values: list[int],
+    bilinear_diagnostics: dict[str, object],
+) -> pd.DataFrame:
     """Summarize feature coverage by spatial scale."""
     rows = []
-    scale_names = ["nearest", *[f"{scale}km" for scale in scales_km]]
+    scale_names = ["nearest", *[f"idw_k{k}" for k in idw_k_values]]
+    if bilinear_diagnostics.get("bilinear_complete"):
+        scale_names.append("bilinear")
+    scale_names.extend([f"{scale}km" for scale in scales_km])
     for scale in scale_names:
         point_col = f"oisst_{scale}_n_grid_points"
         feature_cols = [column for column in features.columns if column.startswith(f"oisst_{scale}_")]
@@ -244,18 +397,30 @@ def feature_summary(features: pd.DataFrame, scales_km: list[int]) -> pd.DataFram
     return pd.DataFrame(rows)
 
 
-def write_report(output: Path, summary: pd.DataFrame, cache_dir: Path, scales_km: list[int]) -> None:
+def write_report(
+    output: Path,
+    summary: pd.DataFrame,
+    cache_dir: Path,
+    scales_km: list[int],
+    idw_k_values: list[int],
+    bilinear_diagnostics: dict[str, object],
+) -> None:
     """Write a concise construction report."""
     lines = [
         "# Multi-Scale Environmental Feature Construction Report",
         "",
         "## Purpose",
         "",
-        "This V2 layer constructs OISST exposure variables at multiple spatial supports around each retained Kelpwatch cell. It keeps the Version 1 nearest-grid assignment as the baseline and adds buffer-based summaries to evaluate support mismatch.",
+        "This V2 layer constructs source-aware OISST exposure variables around each retained Kelpwatch cell. It keeps the Version 1 nearest-grid assignment as the baseline, adds IDW-interpolated OISST exposure at kelp-cell centroids, and adds broader coastal-neighborhood buffer summaries to evaluate support mismatch.",
         "",
         "## Implementation",
         "",
         f"- OISST cache directory: `{cache_dir}`.",
+        "- Nearest-grid assignment is retained as the baseline.",
+        f"- IDW interpolation uses k = `{', '.join(map(str, idw_k_values))}` and power = `{IDW_POWER}`.",
+        "- IDW is source-aware interpolation from a coarse 0.25-degree gridded SST field to kelp cell centroids; it is not ordinary missing-value imputation and does not create true 10 km SST.",
+        f"- Bilinear interpolation included: `{bool(bilinear_diagnostics.get('bilinear_complete'))}`.",
+        f"- Bilinear complete cells: `{bilinear_diagnostics.get('bilinear_complete_cells')}`; incomplete cells: `{bilinear_diagnostics.get('bilinear_incomplete_cells')}`.",
         f"- Buffer scales: `{', '.join(str(scale) + ' km' for scale in scales_km)}`.",
         f"- Distance operations use projected CRS `{PROJECTED_CRS}` rather than degree buffers.",
         "- OISST cached grid cells are treated as point supports at their grid centroids.",
@@ -276,7 +441,7 @@ def write_report(output: Path, summary: pd.DataFrame, cache_dir: Path, scales_km
             "",
             "## Interpretation Notes",
             "",
-            "Buffer aggregation reduces sensitivity to a single nearest OISST grid cell, but it does not create true nearshore in-situ temperature. The current local cache contains OISST points previously needed by the Version 1 workflow, so this V2 output should be interpreted as a reproducible multi-scale prototype. A publication-grade run should cache all OISST grid points intersecting each candidate buffer.",
+            "IDW-interpolated OISST exposure at kelp-cell centroids is the main practical interpolation method in this V2 layer because 10 km buffers are under-supported relative to the 0.25-degree OISST grid spacing. Buffer aggregation reduces sensitivity to a single nearest OISST grid cell, but it does not create true nearshore in-situ temperature. The current local cache contains OISST points previously needed by the Version 1 workflow, so this V2 output should be interpreted as a reproducible multi-scale prototype. A publication-grade run should cache all OISST grid points intersecting each candidate buffer.",
             "",
         ]
     )
@@ -294,16 +459,19 @@ def main() -> None:
     annual = annual.loc[annual["year"].between(BASELINE_START_YEAR, MODEL_END_YEAR)].copy()
     cell_gdf, point_gdf = point_geodata(cells, annual)
     nearest = nearest_assignments(cell_gdf, point_gdf)
+    distances = distance_assignments(cell_gdf, point_gdf)
+    idw = idw_memberships(distances, args.idw_k, args.idw_power)
+    bilinear, bilinear_diagnostics = bilinear_memberships(cells, point_gdf)
     memberships = buffer_memberships(cell_gdf, point_gdf, args.scales_km)
-    features = aggregate_exposures(annual, nearest, memberships, args.scales_km)
+    features = aggregate_exposures(annual, nearest, idw, bilinear, memberships, args.scales_km)
     features = features.loc[features["year"].between(BASELINE_START_YEAR, MODEL_END_YEAR)].copy()
-    summary = feature_summary(features, args.scales_km)
+    summary = feature_summary(features, args.scales_km, args.idw_k, bilinear_diagnostics)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.summary_output.parent.mkdir(parents=True, exist_ok=True)
     features.to_csv(args.output, index=False)
     summary.to_csv(args.summary_output, index=False)
-    write_report(args.report_output, summary, args.cache_dir, args.scales_km)
+    write_report(args.report_output, summary, args.cache_dir, args.scales_km, args.idw_k, bilinear_diagnostics)
 
     print(f"Wrote multi-scale features: {args.output}")
     print(f"Wrote feature summary: {args.summary_output}")

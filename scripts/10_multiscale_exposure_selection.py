@@ -1,9 +1,9 @@
 """Compare V2 multi-scale environmental exposure models.
 
-This script evaluates whether OISST exposure summaries at different spatial
-supports provide useful transition-oriented screening signal. It does not
-overwrite Version 1 models; it writes compact V2 result tables under
-``results/tables``.
+This script evaluates whether nearest-grid, source-aware IDW-interpolated
+OISST exposure, and broader coastal-neighborhood buffer summaries provide
+useful transition-oriented screening signal. It does not overwrite Version 1
+models; it writes compact V2 result tables under ``results/tables``.
 """
 
 from __future__ import annotations
@@ -50,7 +50,7 @@ REPORT_OUTPUT = Path("outputs/diagnostics/multiscale_exposure_selection_report.m
 TARGET_ORIGINAL = "decline_event_next"
 TARGET_NEW_DECLINE = "new_decline_event_next"
 TARGET_AT_RISK = "decline_event_next_at_risk_gt005"
-SCALES = ["nearest", "10km", "25km", "30km", "50km", "75km"]
+SCALES = ["nearest", "idw_k4", "idw_k8", "bilinear", "25km", "30km", "50km", "75km"]
 UPWELLING_FEATURES = ["cuti_anomaly", "beuti_anomaly"]
 HIGH_CORRELATION_THRESHOLD = 0.80
 
@@ -117,6 +117,18 @@ def add_multiscale_lags(data: pd.DataFrame) -> pd.DataFrame:
 def scale_feature_names(scale: str) -> list[str]:
     """Return domain-guided reduced OISST features for one spatial scale."""
     prefix = f"oisst_{scale}"
+    if scale.startswith("idw_k"):
+        return [
+            f"{prefix}_annual_mean_sst_anomaly_idw",
+            f"{prefix}_hot_days_p90_idw",
+            f"lag1_{prefix}_hot_days_p90_idw",
+        ]
+    if scale == "bilinear":
+        return [
+            f"{prefix}_annual_mean_sst_anomaly_interpolated",
+            f"{prefix}_hot_days_p90_interpolated",
+            f"lag1_{prefix}_hot_days_p90_interpolated",
+        ]
     return [
         f"{prefix}_annual_mean_sst_anomaly_mean",
         f"{prefix}_hot_days_p90_mean",
@@ -135,11 +147,12 @@ def build_feature_sets(data: pd.DataFrame, include_current_canopy: bool) -> list
     current = ["current_canopy_allowed"] if include_current_canopy else []
     upwelling = available(UPWELLING_FEATURES, data)
     for scale in SCALES:
-        comparison = "M0_nearest_grid_baseline" if scale == "nearest" else f"M2_single_scale_{scale}"
+        comparison = comparison_label(scale)
         if scale == "30km":
-            comparison = "M1_fixed_30km_buffer"
-        features = available(scale_feature_names(scale), data) + upwelling + current
-        if features:
+            comparison = "M3_fixed_30km_buffer"
+        scale_features = available(scale_feature_names(scale), data)
+        if scale_features:
+            features = scale_features + upwelling + current
             sets.extend(model_variants(comparison, scale, features))
 
     multi_features = []
@@ -149,7 +162,7 @@ def build_feature_sets(data: pd.DataFrame, include_current_canopy: bool) -> list
     if multi_features:
         sets.append(
             FeatureSet(
-                comparison="M3_multiscale_l1_regularized",
+                comparison="M4_multiscale_l1_regularized",
                 scale="multi",
                 features=multi_features,
                 model_family="Logistic Regression L1",
@@ -164,7 +177,7 @@ def build_feature_sets(data: pd.DataFrame, include_current_canopy: bool) -> list
         )
         sets.append(
             FeatureSet(
-                comparison="M3_multiscale_random_forest",
+                comparison="M4_multiscale_random_forest",
                 scale="multi",
                 features=multi_features,
                 model_family="Random Forest",
@@ -178,6 +191,19 @@ def build_feature_sets(data: pd.DataFrame, include_current_canopy: bool) -> list
             )
         )
     return sets
+
+
+def comparison_label(scale: str) -> str:
+    """Return a stable model-comparison label for one exposure support."""
+    if scale == "nearest":
+        return "M0_nearest_grid_baseline"
+    if scale == "idw_k4":
+        return "M1_idw_k4_main_interpolation"
+    if scale == "idw_k8":
+        return "M2_idw_k8_sensitivity"
+    if scale == "bilinear":
+        return "M2_bilinear_if_regular_grid"
+    return f"M3_buffer_{scale}"
 
 
 def model_variants(comparison: str, scale: str, features: list[str]) -> list[FeatureSet]:
@@ -351,7 +377,7 @@ def selected_scale_table(results: pd.DataFrame) -> pd.DataFrame:
     """Select candidate scales using PR-AUC, recall, variance, and interpretability."""
     single = results.loc[
         results["validation_design"].eq("temporal_holdout")
-        & results["comparison"].str.startswith(("M0_", "M1_", "M2_"))
+        & results["comparison"].str.startswith(("M0_", "M1_", "M2_", "M3_buffer", "M3_fixed"))
     ].copy()
     if single.empty:
         return pd.DataFrame()
@@ -414,7 +440,7 @@ def write_report(output: Path, results: pd.DataFrame, selected: pd.DataFrame, co
         "",
         "## Purpose",
         "",
-        "This report evaluates OISST exposure variables at multiple spatial supports using transition-oriented kelp decline targets. It treats spatial resolution as a modeling choice rather than a fixed preprocessing assumption.",
+        "This report evaluates nearest-grid, IDW-interpolated OISST exposure at kelp-cell centroids, and broader coastal-neighborhood buffer summaries using transition-oriented kelp decline targets. It treats spatial resolution as a modeling choice rather than a fixed preprocessing assumption.",
         "",
         "## Outputs",
         "",
@@ -442,9 +468,9 @@ def write_report(output: Path, results: pd.DataFrame, selected: pd.DataFrame, co
             "",
             "## Interpretation",
             "",
-            "The transition and actionable-drop labels are harder than the original decline-state label because they reduce the influence of already-low canopy persistence. Lower performance under these labels is scientifically meaningful and should not be framed as failure.",
-            "",
-            "Scale selection is reported as multi-scale exposure selection, not as discovery of one universal optimal resolution. Thermal stress, upwelling proxies, and local biological processes may operate at different spatial supports.",
+        "The transition and actionable-drop labels are harder than the original decline-state label because they reduce the influence of already-low canopy persistence. Lower performance under these labels is scientifically meaningful and should not be framed as failure.",
+        "",
+        "IDW is interpreted as source-aware interpolation from the coarse 0.25-degree OISST field to kelp-cell centroids, not as ordinary missing-value imputation and not as true 10 km SST. Scale selection is reported as multi-scale exposure selection, not as discovery of one universal optimal resolution. Thermal stress, upwelling proxies, and local biological processes may operate at different spatial supports.",
             "",
         ]
     )
