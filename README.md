@@ -717,6 +717,28 @@ Current integrated results summarize `21` source result files and `2,520` standa
 
 The main synthesis conclusion is that the project now has strong evidence for regional screening and persistence-aware risk detection, while true transition/actionable early-warning remains the harder methodological target. The next most important additions are explicit claim gates, rare-event learning focused on transition/actionable labels, wave exposure, and biological disturbance covariates such as grazing pressure.
 
+## Claim-Gate Interpretation
+
+The repository now applies conservative claim gates to the integrated model results. These gates are not formal statistical significance tests. They are pre-specified interpretation rules that separate broad risk-state screening from stronger early-warning claims.
+
+Current default claim-gate results are:
+
+```text
+Gate 1, original_decline: risk_state_screening_supported
+Gate 2, at_risk_original: at_risk_screening_partially_supported
+Gate 3, new_transition/actionable_drop: transition_recall_oriented_sensitivity_only
+```
+
+The safe claim is therefore: the current workflow supports broad decline-risk state screening and partial at-risk screening, while transition/actionable results should be described as recall-oriented warning sensitivity rather than robust operational early warning.
+
+Tracked claim-gate outputs:
+
+```text
+results/tables/claim_gate_summary.csv
+results/tables/claim_gate_sensitivity.csv
+outputs/diagnostics/claim_gate_interpretation_report.md
+```
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -795,11 +817,12 @@ The completed workflow is:
 18. Static GEBCO bathymetry and habitat-context covariates.
 19. Leakage-safe canopy trajectory and time-series instability proxy features.
 20. Integrated model-result synthesis.
-21. Model diagnostics.
-22. Canopy persistence and environmental-context analysis.
-23. SHAP interpretation.
-24. Within-model feature-set comparison.
-25. V3 ecological data feasibility scan.
+21. Claim-gate interpretation.
+22. Model diagnostics.
+23. Canopy persistence and environmental-context analysis.
+24. SHAP interpretation.
+25. Within-model feature-set comparison.
+26. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -823,6 +846,7 @@ python scripts/16b_build_crw5km_composite_features.py
 python scripts/17_build_bathymetry_habitat_features.py
 python scripts/19_build_canopy_trajectory_features.py
 python scripts/21_integrate_model_results.py
+python scripts/22_apply_claim_gates.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -850,6 +874,8 @@ Run `python scripts/17_build_bathymetry_habitat_features.py` to reproduce the st
 Run `python scripts/19_build_canopy_trajectory_features.py` to reproduce the leakage-safe canopy trajectory workflow. This script builds lagged canopy, rolling mean, slope, recovery/decline, time-series instability, and presence-frequency proxy features using only years up to and including year `t`, writes an explicit leakage audit, and compares trajectory features against naive persistence, existing canopy-only, CRW composite, habitat, and combined feature families.
 
 Run `python scripts/21_integrate_model_results.py` after major model-result tables have been generated. This script standardizes existing result CSVs into a master comparison table, best-by-target table, baseline-gap summary, and diagnostic report without rerunning feature construction or model training.
+
+Run `python scripts/22_apply_claim_gates.py` after integrated result synthesis. This script applies conservative claim-support rules to the integrated tables and writes a claim-gate summary, precision-floor sensitivity table, and interpretation report.
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
