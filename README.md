@@ -777,6 +777,23 @@ results/tables/wave_exposure_model_comparison.csv
 outputs/diagnostics/wave_exposure_feature_report.md
 ```
 
+## Spatial Validation Diagnostics
+
+The repository now includes a spatial holdout diagnostic to test whether model performance is inflated by neighboring 10 km cells sharing similar coastal conditions. Retained cells are split into latitude-based coastal bands, with models trained on non-held-out bands and tested on the held-out band. The primary validation uses three bands; a five-band version is also reported.
+
+Both three-band and five-band validation were usable by event-count criteria. In the three-band diagnostic, at-risk original decline performance dropped substantially compared with temporal validation, suggesting that at-risk screening remains spatially sensitive. For actionable-drop prediction, spatial PR-AUC was more stable for some combined feature families, but recall was lower than temporal validation. The best three-band actionable-drop mean PR-AUC came from `trajectory_crw_habitat_wave` (`0.676`), but mean recall was `0.339`, so this should not be interpreted as robust spatially transferable early warning.
+
+Spatial validation therefore limits the current claim level: the workflow supports internal regional risk-screening diagnostics within the retained California cells, while stronger spatially transferable early-warning claims require external region validation.
+
+Tracked spatial-validation outputs:
+
+```text
+results/tables/spatial_validation_fold_results.csv
+results/tables/spatial_validation_summary.csv
+results/tables/spatial_vs_temporal_validation_gap.csv
+outputs/diagnostics/spatial_validation_diagnostics_report.md
+```
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -858,11 +875,12 @@ The completed workflow is:
 21. Claim-gate interpretation.
 22. Rare-event alert learning.
 23. CDIP-first wave exposure feature construction and model comparison.
-24. Model diagnostics.
-25. Canopy persistence and environmental-context analysis.
-26. SHAP interpretation.
-27. Within-model feature-set comparison.
-28. V3 ecological data feasibility scan.
+24. Spatial validation diagnostics.
+25. Model diagnostics.
+26. Canopy persistence and environmental-context analysis.
+27. SHAP interpretation.
+28. Within-model feature-set comparison.
+29. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -889,6 +907,7 @@ python scripts/21_integrate_model_results.py
 python scripts/22_apply_claim_gates.py
 python scripts/24_rare_event_alert_learning.py
 python scripts/25_build_wave_exposure_features.py
+python scripts/26_spatial_validation_diagnostics.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -923,11 +942,13 @@ Run `python scripts/24_rare_event_alert_learning.py` to test training-only rare-
 
 Run `python scripts/25_build_wave_exposure_features.py` to build the CDIP-first wave-exposure layer. This script tests CDIP MOP modeled products first, keeps CDIP buoy and NDBC as fallback concepts, builds retained-cell wave features from CDIP MOP `waveHs`, and compares wave-only and wave-combination feature families. Raw CDIP/NOAA cache files remain ignored.
 
+Run `python scripts/26_spatial_validation_diagnostics.py` to test latitude-band spatial holdouts within the retained California cells. This diagnostic checks whether temporal-split performance is stable when entire coastal bands are held out, and writes fold-level, summary, and temporal-gap tables.
+
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, and wave-exposure tables, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, wave-exposure, and spatial-validation tables, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
