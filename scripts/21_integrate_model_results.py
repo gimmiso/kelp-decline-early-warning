@@ -24,6 +24,13 @@ BEST_OUT = RESULTS_DIR / "integrated_best_by_target.csv"
 GAP_OUT = RESULTS_DIR / "integrated_baseline_gap_summary.csv"
 REPORT_OUT = DIAGNOSTICS_DIR / "integrated_model_results_report.md"
 
+CSV_WRITE_KWARGS = {
+    "index": False,
+    "lineterminator": "\n",
+    "na_rep": "",
+    "float_format": "%.6f",
+}
+
 
 EXPECTED_RESULT_FILES = [
     "results/tables/model_comparison_results.csv",
@@ -130,6 +137,27 @@ def safe_float(value) -> float:
         return float(value)
     except (TypeError, ValueError):
         return np.nan
+
+
+def clean_csv_cells(df: pd.DataFrame) -> pd.DataFrame:
+    """Return a copy with object-cell line breaks flattened for GitHub previews."""
+    out = df.copy()
+    object_cols = out.select_dtypes(include=["object", "string"]).columns
+    for col in object_cols:
+        out[col] = (
+            out[col]
+            .astype("string")
+            .str.replace("\r\n", " ", regex=False)
+            .str.replace("\n", " ", regex=False)
+            .str.replace("\r", " ", regex=False)
+        )
+        out[col] = out[col].where(out[col].notna(), "")
+    return out
+
+
+def write_portable_csv(df: pd.DataFrame, path: Path) -> None:
+    """Write CSVs with stable LF newlines and pandas/GitHub-friendly formatting."""
+    clean_csv_cells(df).to_csv(path, **CSV_WRITE_KWARGS)
 
 
 def first_present(row: pd.Series, names: Iterable[str], default=None):
@@ -833,9 +861,9 @@ def main() -> None:
     best = build_best_by_target(master)
     gaps = build_gap_summary(master)
 
-    master.to_csv(MASTER_OUT, index=False)
-    best.to_csv(BEST_OUT, index=False)
-    gaps.to_csv(GAP_OUT, index=False)
+    write_portable_csv(master, MASTER_OUT)
+    write_portable_csv(best, BEST_OUT)
+    write_portable_csv(gaps, GAP_OUT)
     write_report(master, best, gaps, found_files, missing_files)
 
     print(f"Source result files found: {len(found_files)}")
