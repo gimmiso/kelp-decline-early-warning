@@ -1,0 +1,5 @@
+target_definition,feature_family,model,n_train,n_test,positive_events_test,event_prevalence_test,pr_auc,recall,precision,f1,balanced_accuracy,status
+original_decline,crw5km,not_run,0,0,0,,,,,,,dry_run_no_local_crw_cache
+at_risk_original_gt005,crw5km,not_run,0,0,0,,,,,,,dry_run_no_local_crw_cache
+new_decline_transition,crw5km,not_run,0,0,0,,,,,,,dry_run_no_local_crw_cache
+actionable_decline_drop,crw5km,not_run,0,0,0,,,,,,,dry_run_no_local_crw_cache
