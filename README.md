@@ -357,6 +357,124 @@ Grouped SHAP importance showed:
 
 These SHAP values explain fitted model behavior, not ecological causality.
 
+## V2: Multi-Scale Exposure Selection and Transition-Based Early Warning
+
+This repository now includes a V2 analysis layer that treats spatial resolution as a modeling choice rather than a fixed preprocessing assumption. Environmental exposure variables are constructed at multiple spatial supports and evaluated using transition-oriented targets under temporal and region-holdout validation. This design is intended to distinguish actionable new kelp decline risk from persistence of already-low canopy states.
+
+### Why Multi-Scale Exposure Is Needed
+
+Version 1 used nearest-grid OISST assignment as the baseline. That is reproducible and efficient, but it creates a support mismatch: 10 km Kelpwatch cells are compared with coarse offshore/coastal OISST grid points. Buffer-based exposure summaries reduce sensitivity to a single nearest point by aggregating OISST grid centroids around each kelp cell.
+
+The V2 construction script builds OISST exposure summaries for:
+
+```text
+nearest grid
+10 km buffer
+25 km buffer
+30 km buffer
+50 km buffer
+75 km buffer
+```
+
+Distance and buffer operations are performed in projected CRS `EPSG:3310`, not by buffering raw latitude/longitude degrees. OISST grid cells are treated as point supports at their grid centroids. CUTI and BEUTI remain latitude-bin proxies in this V2 layer because they are not local radial-buffer measurements.
+
+### Transition-Oriented Evaluation
+
+The multi-scale comparison prioritizes targets that reduce false early-warning caused by canopy-state persistence:
+
+- `decline_event_next`: original decline-state target.
+- at-risk original target: original target evaluated only where `current_canopy > 0.05`.
+- `new_decline_event_next`: transition from at-or-above the historical p25 threshold into below-p25 canopy.
+- `actionable_decline_drop_next`: current canopy above 0.05 followed by at least a 30 percent next-year drop.
+
+The default V2 multi-scale comparison excludes current canopy from the predictor set. This makes the environmental scale-selection experiment stricter because the model cannot rely directly on current canopy-state persistence. Current canopy can be added only when explicitly requested as a separate experiment.
+
+### Multi-Scale Feature Construction
+
+The current local V2 run generated:
+
+| Scale | Feature columns | Rows | Mean OISST points | Min OISST points | Max OISST points |
+|---|---:|---:|---:|---:|---:|
+| nearest | 10 | 1,900 | 1.00 | 1 | 1 |
+| 10 km | 9 | 1,900 | 1.00 | 1 | 1 |
+| 25 km | 9 | 1,900 | 1.54 | 1 | 2 |
+| 30 km | 9 | 1,900 | 1.88 | 1 | 3 |
+| 50 km | 9 | 1,900 | 2.86 | 2 | 4 |
+| 75 km | 9 | 1,900 | 4.08 | 2 | 5 |
+
+The 10 km buffer has substantial overlap with nearest-grid behavior because the available local OISST cache contains only grid points previously needed by the Version 1 workflow. A publication-grade full multi-scale run should cache all OISST grid points intersecting each candidate buffer.
+
+### Multi-Scale Model Comparison
+
+The V2 comparison evaluates:
+
+- `M0`: nearest-grid baseline.
+- `M1`: fixed 30 km buffer model.
+- `M2`: single-scale models for each candidate buffer.
+- `M3`: multi-scale selected models using L1-regularized Logistic Regression and Random Forest.
+
+The feature set is deliberately compact to reduce multicollinearity:
+
+```text
+annual_mean_sst_anomaly
+hot_days_p90
+lag1_hot_days_p90
+cuti_anomaly
+beuti_anomaly
+```
+
+The best temporal results from the current V2 environment-only run were:
+
+| Target | Best comparison | Scale | Model | PR-AUC | Recall | Precision | F1 | Balanced accuracy |
+|---|---|---|---|---:|---:|---:|---:|---:|
+| Original decline state | `M3_multiscale_l1_regularized` | multi | Logistic Regression L1 | 0.815 | 0.813 | 0.673 | 0.736 | 0.505 |
+| At-risk original target | `M0_nearest_grid_baseline` | nearest | Random Forest | 0.741 | 0.267 | 0.923 | 0.414 | 0.623 |
+| New decline transition | `M2_single_scale_75km` | 75 km | Random Forest | 0.282 | 0.192 | 0.313 | 0.238 | 0.565 |
+| Actionable decline drop | `M2_single_scale_50km` | 50 km | Logistic Regression L2 | 0.387 | 1.000 | 0.183 | 0.309 | 0.542 |
+
+The transition and actionable-drop targets are harder than the original decline-state label. Lower performance under these labels is scientifically meaningful because these labels reduce the influence of already-low or persistent low-canopy states.
+
+### Scale-Selection Interpretation
+
+Scale selection is reported as **multi-scale exposure selection**, not discovery of one universal optimal resolution. Candidate scales are summarized using a combined decision rule that considers PR-AUC, recall, fold/design stability, balanced accuracy, Brier score, and ecological interpretability.
+
+The current combined rule selected:
+
+| Target | Candidate scale |
+|---|---|
+| Original decline state | 30 km |
+| At-risk original target | nearest |
+| New decline transition | 10 km |
+| Actionable decline drop | 10 km |
+
+This should be interpreted as a prototype scale-selection result. Thermal stress, upwelling, dispersal, grazing, wave exposure, and disease processes may operate at different spatial supports.
+
+### V2 Limitations
+
+- OISST is still a coarse offshore/coastal thermal proxy.
+- Buffer aggregation reduces nearest-grid sensitivity but does not create true nearshore in-situ temperature.
+- The current local OISST cache was designed for the Version 1 nearest-grid workflow, so a full publication-grade buffer run should cache all grid points intersecting each buffer.
+- Multi-scale selection can be unstable when the number of retained kelp cells or transition events is small.
+- At-risk transition prediction is harder than canopy-state prediction, so lower performance is expected and scientifically meaningful.
+- Biological drivers such as urchin grazing, predator loss, disease, wave disturbance, and local restoration activity remain outside the coarse climate-only model unless added in a second-stage ecological case study.
+
+### Second-Stage Framework
+
+The recommended interpretation is a two-stage GeoAI workflow:
+
+```text
+Stage 1: 10 km regional screening
+Kelpwatch canopy + NOAA climate/upwelling proxies
+identify broad transition-risk hotspots
+
+Stage 2: local ecological diagnosis
+30 m Landsat/Kelpwatch patches
+local survey data on urchins, sea stars, predators, substrate, disease, waves, and restoration
+spatial join only within Stage 1 hotspots
+```
+
+Stage 2 is a proposed extension, not an implemented result in the current repository.
+
 ## Reproducible Workflow
 
 The completed workflow is:
@@ -374,10 +492,12 @@ The completed workflow is:
 11. Recall-oriented modeling extensions.
 12. Environmental covariate quality-control and sensitivity diagnostics.
 13. Multicollinearity diagnostics.
-14. Model diagnostics.
-15. Canopy persistence and environmental-context analysis.
-16. SHAP interpretation.
-17. Within-model feature-set comparison.
+14. V2 multi-scale environmental exposure construction.
+15. V2 transition-based multi-scale exposure selection.
+16. Model diagnostics.
+17. Canopy persistence and environmental-context analysis.
+18. SHAP interpretation.
+19. Within-model feature-set comparison.
 
 Main scripts:
 
@@ -392,6 +512,8 @@ python scripts/diagnose_zero_persistence.py
 python scripts/run_recall_oriented_modeling_extensions.py
 python scripts/diagnose_environmental_covariates.py
 python scripts/diagnose_multicollinearity.py
+python scripts/09_build_multiscale_environmental_features.py
+python scripts/10_multiscale_exposure_selection.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
@@ -405,7 +527,9 @@ Run `python scripts/diagnose_environmental_covariates.py` after NOAA feature con
 
 Run `python scripts/diagnose_multicollinearity.py` before coefficient-level or feature-importance interpretation. This records correlation, VIF, and condition-number diagnostics so individual-feature explanations can be framed cautiously when predictors are redundant.
 
-Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, reproducibility reports, and figures.
+Run `python scripts/09_build_multiscale_environmental_features.py` and `python scripts/10_multiscale_exposure_selection.py` to reproduce the V2 multi-scale exposure construction and transition-oriented scale-selection tables. The processed multi-scale feature file is ignored by Git and should be regenerated locally from the NOAA cache.
+
+Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/`, reproducibility reports, and figures.
 
 `outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
@@ -425,6 +549,8 @@ kelp-decline-early-warning/
 ├── docs/
 │   └── maps/
 ├── notebooks/
+├── results/
+│   └── tables/
 ├── src/
 └── outputs/
     ├── figures/
@@ -472,11 +598,17 @@ brew install libomp
 - Environmental interpretation is proxy-based.
 - The workflow supports early-warning screening, not causal attribution.
 - Early-warning validity depends on separating transition-into-decline skill from persistence of already-low or near-zero canopy states.
+- Multi-scale exposure selection is a prototype sensitivity layer until all OISST grid points intersecting each candidate buffer are cached and evaluated.
 
 ## Future Work
 
 - Test spatial or grouped cross-validation, including leave-region-out validation.
-- Compare nearest-grid OISST assignment with coastal-buffer average sensitivity analyses.
+- Expand the V2 buffer workflow to a complete OISST point cache for every candidate buffer.
+- Compare nearest-grid OISST assignment with complete coastal-buffer average sensitivity analyses.
 - Add ecological covariates such as grazing pressure, urchin observations, wave disturbance, and disease context where available.
 - Estimate uncertainty using bootstrap confidence intervals for model metrics.
 - Develop an optional Streamlit dashboard only if it can be polished and connected to tracked reproducibility outputs.
+
+## References
+
+References for spatial scale, support mismatch, validation design, Kelpwatch, and NOAA OISST are listed in [`refs.bib`](refs.bib).
