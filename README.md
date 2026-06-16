@@ -221,6 +221,43 @@ This label captures transition into a low-canopy state rather than persistence o
 
 These diagnostics suggest that the current Version 1 model is strongest at detecting canopy-state persistence and already-low or near-low canopy conditions. There is some preliminary signal in at-risk and new-decline-transition settings, but the present results should be described as a research-stage early-warning validity evaluation rather than a deployed monitoring workflow.
 
+### Naive Persistence Baseline and Early-Warning Validity Check
+
+A stricter benchmark layer treats simple canopy-persistence rules as official baseline models. This check asks whether machine-learning models add useful early-warning information beyond rules that only encode current or recent canopy state.
+
+The benchmark includes:
+
+- cell-specific historical p25 persistence rule;
+- fixed current-canopy low-state rule using `current_canopy < 0.05`;
+- lag-1 low-state rule;
+- recent declining trajectory rule;
+- canopy-only Logistic Regression baselines.
+
+These baselines were evaluated against the original `decline_event_next` label, at-risk original-label subsets, the stricter `new_decline_event_next` transition label, and the actionable `actionable_decline_drop_next` label. They were also tested for high-canopy subgroups, including `current_canopy > 0.05`, current canopy above the cell-specific historical p50, and current canopy above the historical p75.
+
+For the full-sample original decline task, the best naive persistence baseline was nearly identical to the best ML model:
+
+```text
+Best naive baseline: B_fixed_low_canopy_005_rule
+Naive PR-AUC: 0.893
+
+Best ML model: canopy_only / Random Forest
+ML PR-AUC: 0.897
+
+ML minus naive PR-AUC: 0.004
+```
+
+For transition-oriented and actionable targets, machine-learning models did not clearly outperform naive persistence baselines under the high-canopy claim gate. The benchmark found:
+
+```text
+High-canopy transition/actionable comparisons evaluated: 8
+High-canopy comparisons passing the claim gate: 0
+```
+
+This means the strongest current evidence is for canopy-state persistence and risk-state screening, not confirmed operational early warning before visible decline. High full-sample performance should not be interpreted as operational early-warning skill unless the model also outperforms simple canopy-persistence baselines under at-risk, high-canopy, and transition-oriented evaluation settings.
+
+This repository therefore provides a persistence-aware diagnostic framework for separating apparent decline predictability from true early-warning signal.
+
 ### How to Interpret the Results
 
 Full-sample PR-AUC can look strong because it includes persistent low-canopy states. At-risk subset performance is more relevant for early warning because it asks whether the model can identify future decline among locations that still have nonzero or moderate current canopy. The stricter `new_decline_event_next` label better captures new transition into low canopy, but it is harder to predict because it removes already-low persistence from the positive class.
@@ -499,15 +536,16 @@ The completed workflow is:
 8. Five-model comparison.
 9. Threshold tuning.
 10. Zero-persistence and at-risk validity diagnostics.
-11. Recall-oriented modeling extensions.
-12. Environmental covariate quality-control and sensitivity diagnostics.
-13. Multicollinearity diagnostics.
-14. V2 multi-scale environmental exposure construction.
-15. V2 transition-based multi-scale exposure selection.
-16. Model diagnostics.
-17. Canopy persistence and environmental-context analysis.
-18. SHAP interpretation.
-19. Within-model feature-set comparison.
+11. Naive persistence baseline benchmark.
+12. Recall-oriented modeling extensions.
+13. Environmental covariate quality-control and sensitivity diagnostics.
+14. Multicollinearity diagnostics.
+15. V2 multi-scale environmental exposure construction.
+16. V2 transition-based multi-scale exposure selection.
+17. Model diagnostics.
+18. Canopy persistence and environmental-context analysis.
+19. SHAP interpretation.
+20. Within-model feature-set comparison.
 
 Main scripts:
 
@@ -519,6 +557,7 @@ python scripts/build_noaa_environmental_features.py
 python scripts/train_model_comparison.py
 python scripts/tune_decision_thresholds.py
 python scripts/diagnose_zero_persistence.py
+python scripts/11_naive_persistence_baseline_benchmark.py
 python scripts/run_recall_oriented_modeling_extensions.py
 python scripts/diagnose_environmental_covariates.py
 python scripts/diagnose_multicollinearity.py
@@ -531,6 +570,8 @@ python scripts/interpret_models_shap.py
 
 Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeline and threshold tuning, but before final interpretation. This makes the final narrative distinguish risk-state prediction, near-low-canopy persistence, and stricter transition-into-decline performance.
 
+Run `python scripts/11_naive_persistence_baseline_benchmark.py` after zero-persistence diagnostics to compare ML results against official naive canopy-persistence baselines. This benchmark gates early-warning claims by testing whether ML models outperform simple current-canopy, lagged-canopy, and recent-trajectory rules under at-risk, high-canopy, transition, and actionable target settings.
+
 Run `python scripts/run_recall_oriented_modeling_extensions.py` after the validity diagnostics when testing cost-sensitive models, actionable labels, trajectory features, environmental stress interactions, and extended threshold tuning.
 
 Run `python scripts/diagnose_environmental_covariates.py` after NOAA feature construction and recall-oriented diagnostics to evaluate OISST matching distance, nearest-grid versus cached 3x3 OISST sensitivity, seasonal/window environmental features, and incremental environmental value across full-sample, at-risk, transition, and actionable labels.
@@ -541,7 +582,7 @@ Run `python scripts/09_build_multiscale_environmental_features.py` and `python s
 
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/`, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
