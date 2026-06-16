@@ -522,6 +522,43 @@ spatial join only within Stage 1 hotspots
 
 Stage 2 is a proposed extension, not an implemented result in the current repository.
 
+## V3 Candidate: Ecological Transition Case Study
+
+The V1/V2 results suggest that climate-only and canopy-state models have limited true early-warning performance for high-canopy abrupt transitions. Full-sample decline prediction is strongly affected by canopy-state persistence, while transition-oriented and actionable-drop targets are harder. This motivates a biologically richer Stage-2 case study focused on local ecological drivers of abrupt kelp collapse.
+
+Candidate local drivers include purple sea urchin grazing pressure, predator loss, sea star wasting disease, wave exposure, substrate, restoration history, and interactions between marine heatwave exposure and grazer pressure. The purpose of this V3 direction is not to claim improved performance yet. It is to test whether adding site-level ecological monitoring data makes the transition problem more biologically meaningful.
+
+### Candidate Ecological Data Sources
+
+| Dataset | Spatial coverage | Temporal coverage | Likely variables | Access method | Coordinates available | Join to Kelpwatch 10 km cells | Pre-collapse / collapse / post-collapse support | Limitations |
+|---|---|---|---|---|---|---|---|---|
+| [BCO-DMO purple sea urchin density](https://www.bco-dmo.org/dataset/541003) | California coast, roughly 37.8-39.3 N from Andrew Molera State Park to Manchester State Park | 2005-2014 | Purple urchin density or counts, site, year, survey metadata | BCO-DMO dataset page | Likely site coordinates or site locations; verify after download | Join survey sites to nearest or intersecting Kelpwatch 10 km cells | Useful pre-collapse and early collapse context | Ends in 2014, so post-collapse analysis is limited |
+| [BCO-DMO / CDFW kelp forest monitoring](https://www.bco-dmo.org/dataset/927682) | Sonoma-Mendocino Coast, northern California | 1999-2023 in BCO-DMO subset; broader ongoing program also appears in OPC/DataONE | Organism counts, algal habitat cover, substrate cover, lengths, site, depth | BCO-DMO and OPC/DataONE repository products | Yes or likely available for monitoring locations; verify precision | Strong candidate for spatial join to Kelpwatch cells or local canopy buffers | Best first candidate for pre-collapse, collapse, and post-collapse analysis | Requires harmonizing multiple ecological tables and uneven survey years |
+| [California open data kelp forest transect surveys](https://data.ca.gov/dataset/kelp-forest-transect-surveys-sonoma-and-mendocino-county-northern-california-coast) | Sonoma and Mendocino counties; rocky reefs from 0-60 ft depth | Verify package year coverage after download | 30 x 2 m transect observations, depth, site, species or habitat measurements | California open data / CNRA package | Expected, but must be checked from files | Strong candidate, likely aligned with northern California monitoring products | Likely useful if years span the 2014-2016 collapse window | Package may contain multiple CSV/PDF/RTF files needing schema harmonization |
+| [Reef Check California Kelp Forest Monitoring Program](https://www.reefcheck.org/kelp-forest-program/kelp-forest-monitoring-and-mpas/) | California coast, with recent expansion to Oregon and Washington | Program began in 2006; 2024 data available by request according to Reef Check | Fish, invertebrate, kelp, substrate, and site survey indicators | Data request workflow | Likely site coordinates after access approval | Potentially strong for broader California extension | Could support broader validation beyond Sonoma-Mendocino | Access request and protocol harmonization are blockers |
+| [PISCO kelp forest monitoring](https://piscoweb.org/kelp-forest-study) | California and Oregon rocky-bottom kelp forest sites | Continuous monitoring since 1999 | Macroalgae, invertebrate, fish density/biomass, site, depth, survey protocol fields | PISCO data access and related DataONE/OBIS products where available | Likely site coordinates, subject to access product | Potentially strong for central/southern California and MPA comparisons | Useful for broader ecological covariate design | Access and schema may vary by institution or product |
+
+### Proposed V3 Modeling Design
+
+Candidate targets:
+
+- `abrupt_canopy_drop_next`: currently observable canopy followed by a sharp next-year relative canopy drop.
+- `healthy_to_low_transition`: current canopy above a cell or site historical healthy threshold followed by low canopy.
+- `post_heatwave_collapse_indicator`: transition into low canopy during or after a marine heatwave/event period.
+
+Candidate features:
+
+- marine heatwave intensity from OISST;
+- IDW-interpolated or buffer OISST heat stress;
+- urchin density or urchin count;
+- sea star, predator, or community proxy if available;
+- interaction term: heatwave intensity x urchin density;
+- year fixed effects or event-period indicators.
+
+Recommended scope: start with a Northern California / Sonoma-Mendocino ecological transition case study rather than a full California model. This scope aligns with long-term kelp forest monitoring, the documented bull kelp collapse period, and the current Kelpwatch V1 region. A full California ecological model should wait until Reef Check, PISCO, and regional survey schemas are harmonized.
+
+The recommended interpretation is that the climate-only model is a regional screening layer. A biologically meaningful early-warning study should focus on abrupt transitions in monitored kelp forest sites where urchin density and predator/community data can be joined to Kelpwatch canopy trajectories.
+
 ## Reproducible Workflow
 
 The completed workflow is:
@@ -546,6 +583,7 @@ The completed workflow is:
 18. Canopy persistence and environmental-context analysis.
 19. SHAP interpretation.
 20. Within-model feature-set comparison.
+21. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -563,6 +601,7 @@ python scripts/diagnose_environmental_covariates.py
 python scripts/diagnose_multicollinearity.py
 python scripts/09_build_multiscale_environmental_features.py
 python scripts/10_multiscale_exposure_selection.py
+python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
@@ -580,9 +619,11 @@ Run `python scripts/diagnose_multicollinearity.py` before coefficient-level or f
 
 Run `python scripts/09_build_multiscale_environmental_features.py` and `python scripts/10_multiscale_exposure_selection.py` to reproduce the V2 multi-scale exposure construction and transition-oriented scale-selection tables. The processed multi-scale feature file is ignored by Git and should be regenerated locally from the NOAA cache.
 
+Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
+
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/`, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
