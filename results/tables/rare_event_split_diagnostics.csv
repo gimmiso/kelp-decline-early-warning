@@ -1,0 +1,13 @@
+target_definition,target_column,split,rows,positive_events,positive_rate,cells_with_positive_events,years_with_positive_events,filter_column
+actionable_drop,actionable_decline_drop_next,train,1400,395,0.282143,49,27,
+actionable_drop,actionable_decline_drop_next,validation,200,41,0.205000,32,4,
+actionable_drop,actionable_decline_drop_next,test,200,34,0.170000,31,3,
+actionable_drop,actionable_decline_drop_next,all,1800,470,0.261111,50,34,
+new_transition,new_decline_event_next,train,1400,270,0.192857,50,22,
+new_transition,new_decline_event_next,validation,200,21,0.105000,18,3,
+new_transition,new_decline_event_next,test,200,26,0.130000,25,3,
+new_transition,new_decline_event_next,all,1800,317,0.176111,50,28,
+at_risk_original,decline_event_next,train,955,258,0.270157,47,22,at_risk_original_eligible
+at_risk_original,decline_event_next,validation,111,38,0.342342,20,4,at_risk_original_eligible
+at_risk_original,decline_event_next,test,93,45,0.483871,23,4,at_risk_original_eligible
+at_risk_original,decline_event_next,all,1159,341,0.294219,47,30,at_risk_original_eligible

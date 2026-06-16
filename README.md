@@ -739,6 +739,25 @@ results/tables/claim_gate_sensitivity.csv
 outputs/diagnostics/claim_gate_interpretation_report.md
 ```
 
+## Rare-Event Alert Learning
+
+The repository now includes a rare-event alert-learning experiment for `actionable_decline_drop_next`, `new_decline_event_next`, and the at-risk original decline subset. This workflow tests class weighting, training-only positive oversampling, training-only negative undersampling, hard-negative undersampling, validation-selected thresholds, and top-k alert prioritization while leaving validation and test distributions untouched.
+
+The rare-event run improved sensitivity for some stricter targets. For `actionable_decline_drop_next`, the best F2 result came from `canopy_only / Logistic Regression / class_weighted_threshold_tuned` with F2 `0.764`, recall `0.912`, precision `0.463`, and `3` false negatives. The lowest-false-negative actionable-drop model reached `0` false negatives, but with precision below the default `0.40` claim-gate floor. Top-k alert evaluation showed useful alert-prioritization behavior, but this is not the same as full early-warning support.
+
+The claim-gate interpretation remains conservative: rare-event learning supports recall-oriented warning sensitivity, not robust operational transition/actionable early warning. Wave exposure remains the next priority feature layer.
+
+Tracked rare-event outputs:
+
+```text
+results/tables/rare_event_split_diagnostics.csv
+results/tables/rare_event_hard_negative_diagnostics.csv
+results/tables/rare_event_threshold_tuning.csv
+results/tables/rare_event_topk_alert_evaluation.csv
+results/tables/rare_event_alert_model_comparison.csv
+outputs/diagnostics/rare_event_alert_learning_report.md
+```
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -818,11 +837,12 @@ The completed workflow is:
 19. Leakage-safe canopy trajectory and time-series instability proxy features.
 20. Integrated model-result synthesis.
 21. Claim-gate interpretation.
-22. Model diagnostics.
-23. Canopy persistence and environmental-context analysis.
-24. SHAP interpretation.
-25. Within-model feature-set comparison.
-26. V3 ecological data feasibility scan.
+22. Rare-event alert learning.
+23. Model diagnostics.
+24. Canopy persistence and environmental-context analysis.
+25. SHAP interpretation.
+26. Within-model feature-set comparison.
+27. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -847,6 +867,7 @@ python scripts/17_build_bathymetry_habitat_features.py
 python scripts/19_build_canopy_trajectory_features.py
 python scripts/21_integrate_model_results.py
 python scripts/22_apply_claim_gates.py
+python scripts/24_rare_event_alert_learning.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -876,6 +897,8 @@ Run `python scripts/19_build_canopy_trajectory_features.py` to reproduce the lea
 Run `python scripts/21_integrate_model_results.py` after major model-result tables have been generated. This script standardizes existing result CSVs into a master comparison table, best-by-target table, baseline-gap summary, and diagnostic report without rerunning feature construction or model training.
 
 Run `python scripts/22_apply_claim_gates.py` after integrated result synthesis. This script applies conservative claim-support rules to the integrated tables and writes a claim-gate summary, precision-floor sensitivity table, and interpretation report.
+
+Run `python scripts/24_rare_event_alert_learning.py` to test training-only rare-event resampling, hard-negative sampling, validation-selected thresholds, and annual top-k alert prioritization for transition/actionable targets. This script does not resample validation or test rows and does not create new ecological events.
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
