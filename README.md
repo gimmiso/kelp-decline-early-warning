@@ -317,6 +317,26 @@ For at-risk observations with `current_canopy > 0.05`, the best result in this d
 
 The most defensible conclusion is that current canopy state remains the strongest short-term predictor, while NOAA features are contextual exposure variables whose incremental value should be tested with finer sensitivity analyses. Future refinements should compare nearest-grid OISST against coastal-buffer averages, use event-window or seasonal stress metrics, and add local ecological covariates such as grazing, wave disturbance, disease context, and regional validation.
 
+### Multicollinearity Diagnostic
+
+Because the modeling dataset includes structurally related canopy variables and multiple NOAA-derived exposure summaries, a multicollinearity diagnostic was added before final feature interpretation. This diagnostic evaluates pairwise Pearson correlations, variance inflation factors (VIF), and condition numbers for the same feature sets used in the main model comparison.
+
+![Multicollinearity correlation heatmap](outputs/figures/multicollinearity_correlation_heatmap.png)
+
+The diagnostic found `19` feature pairs with `abs(r) >= 0.80`. The strongest redundancies were expected and structurally interpretable:
+
+```text
+count_cells_historic_footprint vs historical_footprint_area_m2: r = 1.000
+count_cells_historic_footprint vs count_cells_no_clouds: r = 1.000
+center_lat vs center_lon: r = -0.996
+hot_days_p90 vs hot_days_p95: r = 0.963
+count_cells_kelp vs kelp_area_m2: r = 0.910
+```
+
+VIF diagnostics also indicated strong multivariate redundancy. The `canopy_noaa` feature set had `25` high-VIF rows using the `VIF >= 10` threshold. Some infinite VIF values arise from exact linear relationships, such as current canopy, lagged canopy, and canopy change being included together.
+
+This finding does not invalidate the tree-based screening models, but it changes how feature interpretation should be framed. Logistic Regression coefficients should be treated as transparent baseline behavior rather than definitive individual-variable effects. SHAP and feature-importance narratives should emphasize grouped evidence, such as canopy state, OISST thermal exposure, CUTI upwelling proxy, and BEUTI nitrate-flux proxy, instead of making strong claims about isolated correlated predictors.
+
 ### 4. SHAP Separates Biological-State Signals from Environmental-Context Signals
 
 ![Grouped SHAP importance](outputs/figures/shap_grouped_importance.png)
@@ -353,10 +373,11 @@ The completed workflow is:
 10. Zero-persistence and at-risk validity diagnostics.
 11. Recall-oriented modeling extensions.
 12. Environmental covariate quality-control and sensitivity diagnostics.
-13. Model diagnostics.
-14. Canopy persistence and environmental-context analysis.
-15. SHAP interpretation.
-16. Within-model feature-set comparison.
+13. Multicollinearity diagnostics.
+14. Model diagnostics.
+15. Canopy persistence and environmental-context analysis.
+16. SHAP interpretation.
+17. Within-model feature-set comparison.
 
 Main scripts:
 
@@ -370,6 +391,7 @@ python scripts/tune_decision_thresholds.py
 python scripts/diagnose_zero_persistence.py
 python scripts/run_recall_oriented_modeling_extensions.py
 python scripts/diagnose_environmental_covariates.py
+python scripts/diagnose_multicollinearity.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
@@ -380,6 +402,8 @@ Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeli
 Run `python scripts/run_recall_oriented_modeling_extensions.py` after the validity diagnostics when testing cost-sensitive models, actionable labels, trajectory features, environmental stress interactions, and extended threshold tuning.
 
 Run `python scripts/diagnose_environmental_covariates.py` after NOAA feature construction and recall-oriented diagnostics to evaluate OISST matching distance, nearest-grid versus cached 3x3 OISST sensitivity, seasonal/window environmental features, and incremental environmental value across full-sample, at-risk, transition, and actionable labels.
+
+Run `python scripts/diagnose_multicollinearity.py` before coefficient-level or feature-importance interpretation. This records correlation, VIF, and condition-number diagnostics so individual-feature explanations can be framed cautiously when predictors are redundant.
 
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, reproducibility reports, and figures.
 
