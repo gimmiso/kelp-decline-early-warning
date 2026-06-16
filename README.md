@@ -507,56 +507,63 @@ This should be interpreted as a prototype scale-selection result. Thermal stress
 
 ## CRW 5 km SST Candidate Exposure Layer
 
-This repository now includes a planning and feature-construction layer for NOAA Coral Reef Watch CoralTemp 5 km SST as a higher-resolution satellite SST exposure alternative to NOAA OISST. This addition does not remove the existing OISST V1/V2 workflow. Instead, it prepares a direct sensitivity test of whether a less coarse SST product improves at-risk and transition-oriented kelp decline prediction.
+This repository now includes an implemented NOAA Coral Reef Watch 5 km monthly-composite SST exposure layer as a higher-resolution satellite SST alternative to NOAA OISST. This addition does not remove the existing OISST V1/V2 workflow. Instead, it provides a direct sensitivity test of whether a less coarse SST product improves at-risk and transition-oriented kelp decline prediction.
 
-NOAA Coral Reef Watch describes CoralTemp as a daily global 5 km satellite SST product used in the CRW 5 km heat-stress product suite. The PacIOOS ERDDAP endpoint exposes the `dhw_5km` griddap dataset with variables including `CRW_SST` and `CRW_SSTANOMALY`. The operational ERDDAP metadata reports a 0.05 degree grid and daily time coverage beginning on 1985-04-01.
+The daily CRW point-cache path was tested first, but full 1985-2024 daily point extraction was too slow in the current environment. The monthly ERDDAP bbox path was also inconsistent for full-period extraction. The implemented workflow therefore streams predictable NOAA STAR monthly NetCDF files, extracts only retained Kelpwatch cell points, writes a compact point-level monthly cache, and deletes raw NetCDF files unless `--keep-raw-cache` is explicitly used.
 
-The candidate CRW feature family includes:
+The implemented monthly-composite CRW feature family includes:
 
 ```text
 annual_mean_sst_crw5km
-annual_max_sst_crw5km
 spring_mean_sst_crw5km
-summer_max_sst_crw5km
+summer_mean_sst_crw5km
 warmest_month_mean_sst_crw5km
-sst_anomaly_crw5km
-hot_days_p90_crw5km
-cumulative_heat_stress_crw5km
-lag1_sst_anomaly_crw5km
-lag1_hot_days_p90_crw5km
+annual_mean_ssta_crw5km
+spring_ssta_crw5km
+summer_ssta_crw5km
+annual_max_monthly_ssta_crw5km
+lag1 versions of the above features
 ```
 
 Spatial matching is defined as:
 
-- baseline: nearest CRW 5 km ocean grid cell to each Kelpwatch 10 km cell centroid;
-- sensitivity: 10 km and 25 km CRW grid-point buffer means where enough cached grid points are available;
-- diagnostics: `distance_to_crw_grid_km` and number of grid points used.
+- baseline: nearest valid CRW 5 km ocean grid cell to each Kelpwatch 10 km cell centroid;
+- diagnostics: `distance_to_crw_grid_km`, source monthly filenames, and extraction status;
+- compact extracted cache: `data/external/noaa/cache/crw5km_composites/extracted/crw5km_monthly_points_extracted.csv`.
 
-The current repository run is a dry-run feasibility check because local CRW daily point caches are not yet present under:
-
-```text
-data/external/noaa/cache/crw5km/
-```
-
-The dry-run created:
+The completed composite run produced:
 
 ```text
-results/tables/crw5km_vs_oisst_feature_diagnostics.csv
-results/tables/crw5km_model_comparison.csv
-outputs/diagnostics/crw5km_sst_feature_report.md
+Monthly file pairs successfully processed: 444
+Extracted monthly point rows: 22,200
+Annual CRW feature rows built: 1,800
+Unique Kelpwatch cells: 50
+Mean CRW feature missingness: 0.0000
+Mean nearest-grid distance: 2.815 km
+Max nearest-grid distance: 7.720 km
+Computed model-comparison rows: 40
 ```
 
-Current dry-run diagnostics:
+Tracked CRW composite outputs:
 
 ```text
-Kelpwatch cells inspected: 50
-Mean distance to theoretical nearest CRW grid center: 1.94 km
-Max distance to theoretical nearest CRW grid center: 3.55 km
-Computed CRW model-comparison rows: 0
-Run status: dry_run_no_local_crw_cache
+results/tables/crw5km_composite_feature_diagnostics.csv
+results/tables/crw5km_composite_model_comparison.csv
+outputs/diagnostics/crw5km_composite_feature_report.md
 ```
 
-CRW 5 km SST should be treated as a higher-resolution satellite SST exposure layer, not true local in-situ nearshore temperature. The next step is to cache daily CRW point series for the retained Kelpwatch cells, build the CRW cell-year features, and compare CRW-only, OISST-only, and combined exposure models for the original decline, at-risk original, new transition, and actionable-drop targets.
+Best PR-AUC results by target in the CRW composite comparison were:
+
+```text
+original_decline: canopy_only / Random Forest, PR-AUC 0.879
+at_risk_original_gt005: canopy_only / Random Forest, PR-AUC 0.602
+new_decline_transition: canopy_only / Logistic Regression L2, PR-AUC 0.407
+actionable_decline_drop: canopy_only / Logistic Regression L2, PR-AUC 0.579
+```
+
+CRW composite features improved over OISST-only for the original broad decline target (`0.828` versus `0.714` PR-AUC for the best CRW-only and OISST-only rows). However, CRW composite features did not improve over OISST-only or canopy-only for the at-risk original, new-transition, or actionable-drop targets in this run. This supports a cautious interpretation: CRW 5 km monthly composites add useful SST exposure sensitivity, but they do not by themselves solve the harder transition-oriented early-warning problem.
+
+CRW 5 km SST should be treated as a higher-resolution satellite SST exposure layer, not true local in-situ nearshore temperature. Composite features summarize monthly mean SST and SSTA, so they cannot fully reproduce daily hot-day counts, cumulative heat stress, or short marine-heatwave duration metrics.
 
 ## Second-Stage Framework
 
@@ -632,7 +639,7 @@ The completed workflow is:
 14. Multicollinearity diagnostics.
 15. V2 multi-scale environmental exposure construction.
 16. V2 transition-based multi-scale exposure selection.
-17. CRW 5 km SST candidate exposure feasibility and comparison layer.
+17. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
 18. Model diagnostics.
 19. Canopy persistence and environmental-context analysis.
 20. SHAP interpretation.
@@ -656,6 +663,8 @@ python scripts/diagnose_multicollinearity.py
 python scripts/09_build_multiscale_environmental_features.py
 python scripts/10_multiscale_exposure_selection.py
 python scripts/16_build_crw_5km_sst_features.py
+python scripts/16a_download_crw5km_point_cache.py
+python scripts/16b_build_crw5km_composite_features.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -674,13 +683,15 @@ Run `python scripts/diagnose_multicollinearity.py` before coefficient-level or f
 
 Run `python scripts/09_build_multiscale_environmental_features.py` and `python scripts/10_multiscale_exposure_selection.py` to reproduce the V2 multi-scale exposure construction and transition-oriented scale-selection tables. The processed multi-scale feature file is ignored by Git and should be regenerated locally from the NOAA cache.
 
-Run `python scripts/16_build_crw_5km_sst_features.py` to build or plan the CRW CoralTemp 5 km SST exposure layer. If local CRW cache files are unavailable, the script runs in dry-run mode and writes access requirements plus not-run diagnostics instead of fabricating feature or model results.
+Run `python scripts/16_build_crw_5km_sst_features.py` to build or plan the optional daily CRW CoralTemp 5 km SST exposure layer. If local CRW daily point-cache files are unavailable, the script runs in dry-run mode and writes access requirements plus not-run diagnostics instead of fabricating feature or model results. Run `python scripts/16a_download_crw5km_point_cache.py` only as an optional long-run/HPC daily-cache path.
+
+Run `python scripts/16b_build_crw5km_composite_features.py` to reproduce the implemented CRW monthly-composite workflow. This script streams NOAA STAR monthly NetCDF files, extracts retained Kelpwatch cell points, writes a compact local extracted cache, deletes raw NetCDF files by default, builds annual/seasonal CRW features, and compares CRW composite, OISST, combined, and canopy feature families.
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/`, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
@@ -740,7 +751,7 @@ brew install libomp
 - The temporal split does not fully test spatial generalization.
 - OISST uses nearest valid ocean-grid assignment in Version 1.
 - The cached 3x3 OISST sensitivity check is an intermediate diagnostic, not a full coastal-buffer average.
-- CRW 5 km SST is currently implemented as a candidate exposure layer with dry-run access planning; local CRW daily point caches are still needed before model performance can be compared.
+- CRW 5 km monthly composites provide an implemented higher-resolution SST exposure sensitivity layer, but they do not reproduce daily hot-day counts or cumulative heat-stress metrics.
 - CUTI/BEUTI use nearest latitude-bin assignment.
 - Seasonal and annual NOAA features may miss short event windows and local nearshore stress processes.
 - No direct cell-level nutrient measurements are included.
@@ -755,7 +766,7 @@ brew install libomp
 - Test spatial or grouped cross-validation, including leave-region-out validation.
 - Expand the V2 buffer workflow to a complete OISST point cache for every candidate buffer.
 - Compare nearest-grid OISST assignment with complete coastal-buffer average sensitivity analyses.
-- Cache NOAA Coral Reef Watch CoralTemp 5 km SST point series for retained Kelpwatch cells and compare CRW against OISST for transition-oriented targets.
+- Use the optional CRW daily point-cache path or an HPC workflow to test daily hot-day and cumulative heat-stress metrics against the monthly-composite CRW layer.
 - Add ecological covariates such as grazing pressure, urchin observations, wave disturbance, and disease context where available.
 - Estimate uncertainty using bootstrap confidence intervals for model metrics.
 - Develop an optional Streamlit dashboard only if it can be polished and connected to tracked reproducibility outputs.

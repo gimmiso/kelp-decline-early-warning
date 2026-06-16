@@ -1,0 +1,30 @@
+diagnostic,feature,comparison_feature,value,status,notes
+missingness,annual_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,spring_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,summer_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,warmest_month_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,annual_mean_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,spring_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,summer_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,annual_max_monthly_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_annual_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_spring_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_summer_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_warmest_month_mean_sst_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_annual_mean_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_spring_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_summer_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+missingness,lag1_annual_max_monthly_ssta_crw5km,,0.0,computed,Fraction of retained Kelpwatch cell-year rows missing the CRW composite feature.
+feature_correlation,annual_mean_sst_crw5km,annual_mean_sst,0.9485360849702258,computed,Pearson correlation across matched cell-year rows.
+feature_correlation,annual_mean_ssta_crw5km,annual_mean_sst_anomaly,0.8684283312632164,computed,Pearson correlation across matched cell-year rows.
+feature_correlation,lag1_annual_mean_ssta_crw5km,lag1_annual_mean_sst_anomaly,0.8683316381714131,computed,Pearson correlation across matched cell-year rows.
+support,monthly_files_successfully_processed,,444.0,computed,CRW monthly composite extraction support diagnostic.
+support,monthly_point_rows_extracted,,22200.0,computed,CRW monthly composite extraction support diagnostic.
+support,annual_feature_rows,,1800.0,computed,CRW monthly composite extraction support diagnostic.
+support,unique_cells,,50.0,computed,CRW monthly composite extraction support diagnostic.
+support,mean_distance_to_crw_grid_km,,2.8147927491413465,computed,CRW monthly composite extraction support diagnostic.
+support,max_distance_to_crw_grid_km,,7.719923158325306,computed,CRW monthly composite extraction support diagnostic.
+support,processed_months_this_run,,444.0,computed,CRW monthly composite extraction support diagnostic.
+support,skipped_cached_months,,0.0,computed,CRW monthly composite extraction support diagnostic.
+support,failed_months_this_run,,0.0,computed,CRW monthly composite extraction support diagnostic.
+data_access,NOAA_STAR_monthly_netcdf,,,computed,Monthly SST mean and SSTA mean files were streamed from https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1_op/nc/v1.0/monthly/{year}/.
