@@ -272,7 +272,29 @@ def annual_crw_point_features(daily: pd.DataFrame) -> pd.DataFrame:
 
 def nearest_crw_features(cells: pd.DataFrame, annual_points: pd.DataFrame, years: pd.Series) -> pd.DataFrame:
     """Attach nearest CRW annual point features to each Kelpwatch cell-year."""
-    skeleton = cells[["cell_id", "nearest_crw_lat", "nearest_crw_lon", "distance_to_crw_grid_km"]].merge(
+    point_meta = annual_points[["crw_lat", "crw_lon"]].drop_duplicates().reset_index(drop=True)
+    if point_meta.empty:
+        return pd.DataFrame()
+    assignments = []
+    for cell in cells.itertuples():
+        distances = haversine_km(
+            np.repeat(float(cell.center_lat), len(point_meta)),
+            np.repeat(float(cell.center_lon), len(point_meta)),
+            point_meta["crw_lat"].to_numpy(),
+            point_meta["crw_lon"].to_numpy(),
+        )
+        nearest_idx = int(np.nanargmin(distances))
+        nearest_point = point_meta.iloc[nearest_idx]
+        assignments.append(
+            {
+                "cell_id": cell.cell_id,
+                "nearest_crw_lat": float(nearest_point["crw_lat"]),
+                "nearest_crw_lon": float(nearest_point["crw_lon"]),
+                "distance_to_crw_grid_km": float(distances[nearest_idx]),
+            }
+        )
+    assigned = pd.DataFrame(assignments)
+    skeleton = assigned.merge(
         pd.DataFrame({"year": sorted(years.unique())}), how="cross"
     )
     features = skeleton.merge(
@@ -754,6 +776,12 @@ def main() -> None:
         if crw_features.empty:
             mode = "dry_run_no_local_crw_cache"
         else:
+            actual_assignments = crw_features[
+                ["cell_id", "nearest_crw_lat", "nearest_crw_lon", "distance_to_crw_grid_km"]
+            ].drop_duplicates("cell_id")
+            cells = cells.drop(columns=["nearest_crw_lat", "nearest_crw_lon", "distance_to_crw_grid_km"]).merge(
+                actual_assignments, on="cell_id", how="left"
+            )
             crw_features.to_csv(args.feature_output, index=False)
 
     diagnostics = feature_diagnostics(data, crw_features, cells, mode)
