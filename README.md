@@ -794,6 +794,26 @@ results/tables/spatial_vs_temporal_validation_gap.csv
 outputs/diagnostics/spatial_validation_diagnostics_report.md
 ```
 
+## Spatial Failure Repair Diagnostics
+
+Spatial validation is now used as a debugging signal rather than only a limitation. The repair workflow tests whether replacing or supplementing absolute predictors with cell-relative canopy history, local CRW anomaly/percentile features, CDIP wave anomaly features, and static habitat context improves transfer across latitude-defined coastal bands.
+
+The largest three-band feature shifts were in absolute CRW SST, CDIP winter wave height, static slope, relative canopy, and canopy-presence frequency. The spatial repair results were mixed. For `at_risk_original`, relative dynamic features slightly improved mean three-band PR-AUC over the previous best spatial-validation summary (`0.501` vs `0.493`) and improved worst-band PR-AUC (`0.414` vs `0.323`). For `actionable_drop`, relative dynamic plus habitat context improved recall relative to the highest-PR-AUC combined spatial model, but did not exceed the previous best spatial PR-AUC. The best repair PR-AUC for `actionable_drop` was `0.607`, compared with `0.676` from the earlier `trajectory_crw_habitat_wave` spatial-validation summary.
+
+The interpretation is therefore conservative: cell-relative and anomaly features help diagnose spatial transfer weakness and modestly improve the at-risk spatial holdout, but they do not justify strengthening the claim gate. Gate 3 remains target-specific and provisional, and stronger spatially transferable early-warning claims should wait for external or multiregion validation.
+
+Tracked spatial-repair outputs:
+
+```text
+results/tables/spatial_failure_anatomy.csv
+results/tables/spatial_feature_shift_diagnostics.csv
+results/tables/spatial_repair_feature_diagnostics.csv
+results/tables/spatial_repair_model_comparison.csv
+results/tables/spatial_repair_stability_ranking.csv
+results/tables/spatial_repair_threshold_sensitivity.csv
+outputs/diagnostics/spatial_failure_repair_report.md
+```
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -876,11 +896,12 @@ The completed workflow is:
 22. Rare-event alert learning.
 23. CDIP-first wave exposure feature construction and model comparison.
 24. Spatial validation diagnostics.
-25. Model diagnostics.
-26. Canopy persistence and environmental-context analysis.
-27. SHAP interpretation.
-28. Within-model feature-set comparison.
-29. V3 ecological data feasibility scan.
+25. Spatial failure repair diagnostics and spatially robust feature selection.
+26. Model diagnostics.
+27. Canopy persistence and environmental-context analysis.
+28. SHAP interpretation.
+29. Within-model feature-set comparison.
+30. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -908,6 +929,7 @@ python scripts/22_apply_claim_gates.py
 python scripts/24_rare_event_alert_learning.py
 python scripts/25_build_wave_exposure_features.py
 python scripts/26_spatial_validation_diagnostics.py
+python scripts/27_spatial_failure_repair.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -944,11 +966,13 @@ Run `python scripts/25_build_wave_exposure_features.py` to build the CDIP-first 
 
 Run `python scripts/26_spatial_validation_diagnostics.py` to test latitude-band spatial holdouts within the retained California cells. This diagnostic checks whether temporal-split performance is stable when entire coastal bands are held out, and writes fold-level, summary, and temporal-gap tables.
 
+Run `python scripts/27_spatial_failure_repair.py` after spatial validation to build cell-relative, anomaly-based, and percentile-style repair features from existing layers only. This script reruns compact spatial holdout comparisons, ranks models by mean and worst-band performance, and tests precision-floor threshold recalibration without adding new external data.
+
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, wave-exposure, and spatial-validation tables, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, wave-exposure, spatial-validation, and spatial-repair tables, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
