@@ -1,0 +1,35 @@
+diagnostic,feature,value,status,notes
+feature_missingness,canopy_current_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_current_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_lag1,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_lag1,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_lag2,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_lag2,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_3yr_mean_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_3yr_mean_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_5yr_mean_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_5yr_mean_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_3yr_slope_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_3yr_slope_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_5yr_slope_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_5yr_slope_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,canopy_cv_5yr_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,canopy_cv_5yr_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,years_since_last_high_canopy_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,years_since_last_high_canopy_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,years_since_last_low_canopy_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,years_since_last_low_canopy_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,recent_decline_rate_3yr_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,recent_decline_rate_3yr_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,recent_recovery_rate_3yr_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,recent_recovery_rate_3yr_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,instability_score_5yr_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,instability_score_5yr_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+feature_missingness,presence_frequency_5yr_t,0.0,computed,Missingness across 1989-2024 model-period cell-year rows.
+first_valid_year,presence_frequency_5yr_t,1989.0,computed,First model-period year with a non-missing value for this feature.
+leakage_audit,trajectory_max_source_year_used,0.0,passed,Rows where max source year used exceeded the row year.
+feature_rows,rows,1800.0,computed,Canopy trajectory feature rows for 1989-2024.
+threshold_note,decline_event_next,,documented,Default labels use the existing 1984-2013 p25 baseline column; full-history p25 is present in the source data but not used here.
+window_definition,rolling_windows,,documented,"3-year windows use t,t-1,t-2; 5-year windows use t,t-1,t-2,t-3,t-4."
+proxy_note,instability_score_5yr_t,,documented,"This is a time-series instability proxy based on mean absolute annual canopy change, not true spatial fragmentation."
+first_year_all_trajectory_features_valid,all_trajectory_features,1988.0,computed,Computed across the full 1984-2024 panel before model-period filtering.

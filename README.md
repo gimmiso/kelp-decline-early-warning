@@ -627,6 +627,79 @@ Habitat-only performance was strong for the original broad decline target and th
 
 Bathymetry and habitat features are static covariates, not direct biological drivers. They represent habitat suitability and exposure context rather than grazing pressure, disease, recruitment, or direct ecological mechanisms. No future target information is used in these features.
 
+## Canopy Trajectory and Instability Proxy Features
+
+The repository now includes a leakage-safe canopy trajectory feature layer. This layer is a diagnostic extension of the persistence baseline, not an environmental driver layer. It asks whether recent canopy history, trend, and time-series instability improve prediction of at-risk or transition-oriented decline.
+
+For each cell-year `t`, all trajectory features use only observations from year `t` and earlier. The leakage audit stores `trajectory_max_source_year_used` for every generated feature row and verifies:
+
+```text
+trajectory_max_source_year_used <= year
+```
+
+The completed audit passed with `0` violating rows. The first year where all trajectory features are available in the full panel is `1988`, so the main 1989-2024 modeling period has complete trajectory coverage.
+
+Generated canopy trajectory features include:
+
+```text
+canopy_current_t
+canopy_lag1
+canopy_lag2
+canopy_3yr_mean_t
+canopy_5yr_mean_t
+canopy_3yr_slope_t
+canopy_5yr_slope_t
+canopy_cv_5yr_t
+years_since_last_high_canopy_t
+years_since_last_low_canopy_t
+recent_decline_rate_3yr_t
+recent_recovery_rate_3yr_t
+instability_score_5yr_t
+presence_frequency_5yr_t
+```
+
+The rolling windows are defined strictly:
+
+```text
+3-year window: t, t-1, t-2
+5-year window: t, t-1, t-2, t-3, t-4
+```
+
+`instability_score_5yr_t` is a time-series instability proxy based on mean absolute annual canopy change. It is not true spatial fragmentation because patch geometry is not used.
+
+The completed run produced:
+
+```text
+Feature rows built: 1,800
+Cells represented: 50
+Model-period years: 1989-2024
+Maximum feature missingness: 0.0000
+Leakage audit: passed
+Computed model-comparison rows: 75
+```
+
+Tracked canopy trajectory outputs:
+
+```text
+results/tables/canopy_trajectory_feature_diagnostics.csv
+results/tables/canopy_trajectory_model_comparison.csv
+outputs/diagnostics/canopy_trajectory_feature_report.md
+```
+
+Best PR-AUC results from the trajectory comparison were:
+
+```text
+original_decline: naive persistence baseline, PR-AUC 0.893
+at_risk_original_gt005: habitat_only / Logistic Regression L2, PR-AUC 0.764
+new_decline_transition: canopy trajectory + CRW + habitat / Logistic Regression L2, PR-AUC 0.419
+actionable_decline_drop: existing canopy-only / Logistic Regression L2, PR-AUC 0.579
+high_canopy_original_decline: canopy trajectory + habitat / Logistic Regression L2, PR-AUC 0.657
+```
+
+Trajectory-only features improved the at-risk original target relative to the existing canopy-only feature set (`0.650` versus `0.602` PR-AUC). They did not improve the original broad decline target, the stricter new-transition target, or the actionable-drop target by PR-AUC. For actionable decline, trajectory-only Random Forest reduced false negatives compared with existing canopy-only Random Forest (`6` versus `16`), but it did not beat the best existing canopy-only PR-AUC.
+
+The interpretation is therefore cautious: canopy trajectory features mainly refine persistence-based risk-state screening. They provide some useful at-risk signal and can reduce false negatives under some operating points, but they do not yet establish robust true transition or actionable early-warning skill.
+
 ## Second-Stage Framework
 
 The recommended interpretation is a two-stage GeoAI workflow:
@@ -703,11 +776,12 @@ The completed workflow is:
 16. V2 transition-based multi-scale exposure selection.
 17. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
 18. Static GEBCO bathymetry and habitat-context covariates.
-19. Model diagnostics.
-20. Canopy persistence and environmental-context analysis.
-21. SHAP interpretation.
-22. Within-model feature-set comparison.
-23. V3 ecological data feasibility scan.
+19. Leakage-safe canopy trajectory and time-series instability proxy features.
+20. Model diagnostics.
+21. Canopy persistence and environmental-context analysis.
+22. SHAP interpretation.
+23. Within-model feature-set comparison.
+24. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -729,6 +803,7 @@ python scripts/16_build_crw_5km_sst_features.py
 python scripts/16a_download_crw5km_point_cache.py
 python scripts/16b_build_crw5km_composite_features.py
 python scripts/17_build_bathymetry_habitat_features.py
+python scripts/19_build_canopy_trajectory_features.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -753,11 +828,13 @@ Run `python scripts/16b_build_crw5km_composite_features.py` to reproduce the imp
 
 Run `python scripts/17_build_bathymetry_habitat_features.py` to reproduce the static GEBCO bathymetry and habitat-context workflow. This script downloads a small GEBCO subset through the GEBCO queue API unless a local NetCDF is supplied, computes ocean-only depth and slope summaries for retained 10 km cells, deletes raw GEBCO files by default, and compares habitat, SST, canopy, and combined feature families.
 
+Run `python scripts/19_build_canopy_trajectory_features.py` to reproduce the leakage-safe canopy trajectory workflow. This script builds lagged canopy, rolling mean, slope, recovery/decline, time-series instability, and presence-frequency proxy features using only years up to and including year `t`, writes an explicit leakage audit, and compares trajectory features against naive persistence, existing canopy-only, CRW composite, habitat, and combined feature families.
+
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
 Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/`, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
@@ -819,6 +896,7 @@ brew install libomp
 - The cached 3x3 OISST sensitivity check is an intermediate diagnostic, not a full coastal-buffer average.
 - CRW 5 km monthly composites provide an implemented higher-resolution SST exposure sensitivity layer, but they do not reproduce daily hot-day counts or cumulative heat-stress metrics.
 - GEBCO bathymetry/habitat variables are static spatial covariates and should be interpreted as habitat/exposure context, not direct ecological drivers or operational early-warning signals.
+- Canopy trajectory and instability features are time-series persistence diagnostics, not true spatial fragmentation metrics.
 - CUTI/BEUTI use nearest latitude-bin assignment.
 - Seasonal and annual NOAA features may miss short event windows and local nearshore stress processes.
 - No direct cell-level nutrient measurements are included.
