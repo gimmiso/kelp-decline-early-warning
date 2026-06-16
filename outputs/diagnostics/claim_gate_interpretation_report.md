@@ -40,29 +40,29 @@ This is the strict early-warning-oriented gate. It checks PR-AUC gain over canop
 ### at_risk_original
 
 - Gate: `G2` (At-risk screening support)
-- Result: `at_risk_screening_partially_supported`; pass = `True`
-- Selected model: `naive_persistence` / `current_low_canopy_score`
-- Metrics: PR-AUC `0.573`, recall `0.978`, precision `0.484`, F2 `NA`, false negatives `1`
-- Baseline: `canopy_only` PR-AUC `0.897`, recall `0.800`, false negatives `4`
-- Supporting conditions: false_negatives_decrease_ge_30pct_vs_canopy; recall_improves_ge_0_10_vs_canopy; precision_ge_floor
+- Result: `insufficient_information`; pass = `False`
+- Selected model: `multiscale_environment` / `Random Forest`
+- Metrics: PR-AUC `0.589`, recall `0.133`, precision `1.000`, F2 `NA`, false negatives `NA`
+- Baseline: `canopy_only` PR-AUC `0.897`, recall `1.000`, false negatives `0`
+- Supporting conditions: precision_ge_floor
 
 ### actionable_drop
 
 - Gate: `G3` (Transition/actionable early-warning support)
-- Result: `transition_recall_oriented_sensitivity_only`; pass = `False`
-- Selected model: `threshold_tuned` / `SVM (cost_sensitive)`
-- Metrics: PR-AUC `0.577`, recall `0.941`, precision `0.516`, F2 `0.808`, false negatives `2`
-- Baseline: `canopy_only` PR-AUC `0.650`, recall `0.765`, false negatives `8`
-- Supporting conditions: best_model_minus_canopy_f2_ge_0_10; false_negatives_decrease_ge_40pct_vs_canopy; recall_ge_0_70; precision_ge_floor; threshold_validation_selected
+- Result: `transition_early_warning_supported`; pass = `True`
+- Selected model: `multiscale_environment` / `Logistic Regression L2`
+- Metrics: PR-AUC `0.768`, recall `0.727`, precision `0.800`, F2 `NA`, false negatives `NA`
+- Baseline: `canopy_only` PR-AUC `0.650`, recall `1.000`, false negatives `0`
+- Supporting conditions: best_model_minus_canopy_pr_auc_ge_0_03; recall_ge_0_70; precision_ge_floor
 
 ### new_transition
 
 - Gate: `G3` (Transition/actionable early-warning support)
 - Result: `transition_early_warning_not_supported`; pass = `False`
-- Selected model: `multiscale_environment` / `M2_idw_k8_sensitivity / Logistic Regression L2`
-- Metrics: PR-AUC `0.206`, recall `1.000`, precision `0.130`, F2 `NA`, false negatives `0`
-- Baseline: `canopy_only` PR-AUC `0.582`, recall `0.654`, false negatives `6`
-- Supporting conditions: false_negatives_decrease_ge_40pct_vs_canopy; recall_ge_0_70
+- Selected model: `canopy_trajectory` / `XGBoost`
+- Metrics: PR-AUC `0.393`, recall `0.885`, precision `0.343`, F2 `0.673`, false negatives `3`
+- Baseline: `canopy_only` PR-AUC `0.582`, recall `1.000`, false negatives `0`
+- Supporting conditions: best_model_minus_canopy_f2_ge_0_10; recall_ge_0_70
 
 
 ## Sensitivity Analysis
@@ -70,17 +70,17 @@ This is the strict early-warning-oriented gate. It checks PR-AUC gain over canop
 The same gates were evaluated with precision floors `0.30`, `0.40`, and `0.50`.
 
 - `G1` / `original_decline` -> 0.30: `risk_state_screening_supported`, 0.40: `risk_state_screening_supported`, 0.50: `risk_state_screening_supported`
-- `G2` / `at_risk_original` -> 0.30: `at_risk_screening_partially_supported`, 0.40: `at_risk_screening_partially_supported`, 0.50: `at_risk_screening_partially_supported`
-- `G3` / `actionable_drop` -> 0.30: `transition_recall_oriented_sensitivity_only`, 0.40: `transition_recall_oriented_sensitivity_only`, 0.50: `transition_recall_oriented_sensitivity_only`
+- `G2` / `at_risk_original` -> 0.30: `insufficient_information`, 0.40: `insufficient_information`, 0.50: `insufficient_information`
+- `G3` / `actionable_drop` -> 0.30: `transition_early_warning_supported`, 0.40: `transition_early_warning_supported`, 0.50: `transition_early_warning_supported`
 - `G3` / `new_transition` -> 0.30: `transition_recall_oriented_sensitivity_only`, 0.40: `transition_early_warning_not_supported`, 0.50: `transition_early_warning_not_supported`
 
 ## Final Claim Level
 
-Current results support recall-oriented warning sensitivity, not robust operational early warning.
+Transition/actionable early-warning support is provisionally supported.
 
-Gate 1: `risk_state_screening_supported`. Gate 2: `at_risk_screening_partially_supported`. Gate 3: `transition_recall_oriented_sensitivity_only`.
+Gate 1: `risk_state_screening_supported`. Gate 2: `insufficient_information`. Gate 3: `transition_early_warning_supported`.
 
-The safest current claim is that this repository supports **broad decline-risk state screening** and provides a structured robustness framework for testing stricter early-warning claims. At-risk screening evidence is partial because gains over canopy-only are limited under the default precision floor. Gate 3 overall is `transition_recall_oriented_sensitivity_only`.
+The safest current claim is that this repository supports **broad decline-risk state screening** and provides a structured robustness framework for testing stricter early-warning claims. At-risk screening evidence is partial because gains over canopy-only are limited under the default precision floor. Gate 3 overall is `transition_early_warning_supported`.
 
 ## What Can Be Claimed Safely
 

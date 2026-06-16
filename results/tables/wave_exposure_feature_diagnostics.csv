@@ -1,0 +1,30 @@
+diagnostic,feature,value,status,notes
+selected_source,wave_source_type,CDIP MOP alongshore modeled wave exposure,computed,Literature-matched modeled nearshore wave product.
+cdip_mop_catalog_reachable,cdip_access,True,computed,https://thredds.cdip.ucsd.edu/thredds/catalog/cdip/model/MOP_alongshore/catalog.xml
+cdip_mop_wavehs_accessible,waveHs,True,computed,https://thredds.cdip.ucsd.edu/thredds/dodsC/cdip/model/MOP_alongshore/SN220_hindcast.nc
+cdip_buoy_accessible,waveHs,True,computed,https://thredds.cdip.ucsd.edu/thredds/dodsC/cdip/archive/067p1/067p1_historic.nc
+cells_with_wave_features,cell_id,50,computed,Retained Kelpwatch cells assigned to nearest CDIP MOP point.
+cell_year_wave_rows,rows,1800,computed,Cell-year wave feature rows.
+unique_cdip_mop_points,cdip_mop_id,16,computed,Unique nearest MOP points used.
+downloaded_mop_points,cdip_mop_id,0,computed,MOP OPeNDAP point series downloaded this run.
+cached_mop_points_reused,cdip_mop_id,16,computed,MOP point monthly cache reused this run.
+distance_to_cdip_model_point_km_mean,distance_to_cdip_model_point_km,9.548498558064262,computed,Mean nearest MOP point distance.
+distance_to_cdip_model_point_km_max,distance_to_cdip_model_point_km,26.367658114480594,computed,Maximum nearest MOP point distance.
+feature_missingness,winter_max_wave_height_cdip_model,0.3055555555555556,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,winter_max_wave_height_cdip_model,1.360525 to 11.486458,computed,Observed range.
+feature_missingness,winter_mean_wave_height_cdip_model,0.3055555555555556,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,winter_mean_wave_height_cdip_model,0.552742 to 3.323614,computed,Observed range.
+feature_missingness,annual_max_wave_height_cdip_model,0.3055555555555556,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,annual_max_wave_height_cdip_model,1.360525 to 11.836371,computed,Observed range.
+feature_missingness,annual_mean_wave_height_cdip_model,0.3055555555555556,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,annual_mean_wave_height_cdip_model,0.538418 to 2.251622,computed,Observed range.
+feature_missingness,lag1_winter_max_wave_height_cdip_model,0.3333333333333333,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,lag1_winter_max_wave_height_cdip_model,1.360525 to 11.486458,computed,Observed range.
+feature_missingness,lag1_winter_mean_wave_height_cdip_model,0.3333333333333333,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,lag1_winter_mean_wave_height_cdip_model,0.552742 to 3.323614,computed,Observed range.
+feature_missingness,wave_height_anomaly_cdip_model,0.3055555555555556,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,wave_height_anomaly_cdip_model,-2.752695 to 3.890878,computed,Observed range.
+feature_missingness,storm_month_count_cdip_model,0.3055555555555556,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,storm_month_count_cdip_model,0.000000 to 4.000000,computed,Observed range.
+feature_missingness,distance_to_cdip_model_point_km,0.0,computed,Missingness across 1989-2024 cell-year rows.
+feature_range,distance_to_cdip_model_point_km,0.296403 to 26.367658,computed,Observed range.

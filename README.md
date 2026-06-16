@@ -725,11 +725,13 @@ Current default claim-gate results are:
 
 ```text
 Gate 1, original_decline: risk_state_screening_supported
-Gate 2, at_risk_original: at_risk_screening_partially_supported
-Gate 3, new_transition/actionable_drop: transition_recall_oriented_sensitivity_only
+Gate 2, at_risk_original: insufficient_information
+Gate 3, actionable_drop: transition_early_warning_supported
+Gate 3, new_transition: transition_early_warning_not_supported
+Gate 3 overall, new_transition/actionable_drop: transition_early_warning_supported
 ```
 
-The safe claim is therefore: the current workflow supports broad decline-risk state screening and partial at-risk screening, while transition/actionable results should be described as recall-oriented warning sensitivity rather than robust operational early warning.
+The safe claim is therefore: the current workflow supports broad decline-risk state screening, while transition/actionable support is provisional and target-specific. The current Gate 3 pass is driven by the actionable-drop target in the integrated model synthesis, not by the CDIP wave layer alone. The stricter new-transition target remains unsupported.
 
 Tracked claim-gate outputs:
 
@@ -745,7 +747,7 @@ The repository now includes a rare-event alert-learning experiment for `actionab
 
 Gate 3 remains unchanged after this rare-event extension: the transition/actionable interpretation is still `transition_recall_oriented_sensitivity_only`, not robust operational early warning. However, actionable-drop recall and F2 improved. For `actionable_decline_drop_next`, the best F2 result came from `canopy_only / Logistic Regression / class_weighted_threshold_tuned` with F2 `0.764`, recall `0.912`, precision `0.463`, and `3` false negatives. The lowest-false-negative actionable-drop model reached `0` false negatives, but with precision below the default `0.40` claim-gate floor. Top-k alert evaluation showed useful alert-prioritization behavior, but this is not the same as full early-warning support.
 
-The claim-gate interpretation therefore remains conservative: rare-event learning improves recall-oriented warning sensitivity for actionable-drop alerts without changing the overall claim gate. Wave exposure remains the next priority feature layer.
+At the time of the rare-event extension, the claim-gate interpretation remained conservative: rare-event learning improved recall-oriented warning sensitivity for actionable-drop alerts without changing the overall claim gate. That result motivated the CDIP wave-exposure layer summarized below.
 
 Tracked rare-event outputs:
 
@@ -756,6 +758,23 @@ results/tables/rare_event_threshold_tuning.csv
 results/tables/rare_event_topk_alert_evaluation.csv
 results/tables/rare_event_alert_model_comparison.csv
 outputs/diagnostics/rare_event_alert_learning_report.md
+```
+
+## CDIP Wave Exposure Layer
+
+The repository now includes a CDIP-first wave-exposure layer inspired by kelp persistence studies. The script first tests official CDIP data-access routes, including THREDDS / OPeNDAP access to MOP alongshore modeled wave products and archived CDIP buoy observations. Because CDIP MOP alongshore hindcast files were accessible and included `waveHs`, the implemented working layer uses nearest sampled CDIP MOP modeled points rather than falling back to NDBC.
+
+The generated features summarize CDIP modeled significant wave height for the retained 10 km Kelpwatch cell-year unit, including winter and annual mean/max wave height, lagged winter exposure, wave-height anomaly, storm-month count, nearest MOP-point distance, and exploratory wave interactions with CRW, habitat, and canopy-trajectory variables. CDIP MOP is closer to the kelp-persistence literature than a generic buoy proxy, but it is still an approximation: the features are aggregated to 10 km cell-year units, the tested hindcast starts in 2000, and sampled nearest MOP points do not exactly reproduce Cavanaugh et al.'s original extraction.
+
+The wave comparison produced `1,800` cell-year feature rows for `50` retained cells. Wave-only models were useful for broad and at-risk screening, but wave combinations did not improve actionable-drop PR-AUC over the trajectory-only benchmark in this run. The best actionable-drop wave-related PR-AUC came from `trajectory_plus_oisst_plus_habitat_plus_wave / Logistic Regression` (`PR-AUC = 0.508`, recall `0.382`, precision `0.619`, F2 `0.414`, false negatives `21`). The lowest-false-negative wave-related actionable-drop row reduced false negatives to `2`, but with low precision (`0.239`), so this should be interpreted as recall-oriented alert sensitivity rather than stronger operational early-warning evidence.
+
+Tracked wave outputs:
+
+```text
+results/tables/wave_exposure_candidate_sources.csv
+results/tables/wave_exposure_feature_diagnostics.csv
+results/tables/wave_exposure_model_comparison.csv
+outputs/diagnostics/wave_exposure_feature_report.md
 ```
 
 ## Second-Stage Framework
@@ -838,11 +857,12 @@ The completed workflow is:
 20. Integrated model-result synthesis.
 21. Claim-gate interpretation.
 22. Rare-event alert learning.
-23. Model diagnostics.
-24. Canopy persistence and environmental-context analysis.
-25. SHAP interpretation.
-26. Within-model feature-set comparison.
-27. V3 ecological data feasibility scan.
+23. CDIP-first wave exposure feature construction and model comparison.
+24. Model diagnostics.
+25. Canopy persistence and environmental-context analysis.
+26. SHAP interpretation.
+27. Within-model feature-set comparison.
+28. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -868,6 +888,7 @@ python scripts/19_build_canopy_trajectory_features.py
 python scripts/21_integrate_model_results.py
 python scripts/22_apply_claim_gates.py
 python scripts/24_rare_event_alert_learning.py
+python scripts/25_build_wave_exposure_features.py
 python scripts/14_ecological_data_feasibility_scan.py
 python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
@@ -900,11 +921,13 @@ Run `python scripts/22_apply_claim_gates.py` after integrated result synthesis. 
 
 Run `python scripts/24_rare_event_alert_learning.py` to test training-only rare-event resampling, hard-negative sampling, validation-selected thresholds, and annual top-k alert prioritization for transition/actionable targets. This script does not resample validation or test rows and does not create new ecological events.
 
+Run `python scripts/25_build_wave_exposure_features.py` to build the CDIP-first wave-exposure layer. This script tests CDIP MOP modeled products first, keeps CDIP buoy and NDBC as fallback concepts, builds retained-cell wave features from CDIP MOP `waveHs`, and compares wave-only and wave-combination feature families. Raw CDIP/NOAA cache files remain ignored.
+
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, and rare-event alert-learning tables, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, and wave-exposure tables, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 

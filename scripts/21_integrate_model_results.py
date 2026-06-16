@@ -40,6 +40,7 @@ EXPECTED_RESULT_FILES = [
     "results/tables/crw5km_composite_model_comparison.csv",
     "results/tables/bathymetry_habitat_model_comparison.csv",
     "results/tables/canopy_trajectory_model_comparison.csv",
+    "results/tables/wave_exposure_model_comparison.csv",
     "results/tables/crw5km_model_comparison.csv",
     "results/tables/high_canopy_subgroup_performance.csv",
     "outputs/metadata/model_comparison_results.csv",
@@ -102,6 +103,7 @@ ENVIRONMENT_ONLY_FAMILIES = {
     "CRW_composite_only",
     "bathymetry_habitat_only",
     "multiscale_environment",
+    "wave_only",
 }
 
 CANOPY_FAMILIES = {
@@ -195,6 +197,22 @@ def normalize_feature_family(raw: object, source_table: str = "", context: str =
         return "threshold_tuned"
     if "cost_sensitive" in text or "rare_event" in text or "class_weight" in text:
         return "rare_event_learning"
+    if "trajectory" in text and "crw" in text and "habitat" in text and "wave" in text:
+        return "canopy_plus_CRW_plus_habitat_plus_wave"
+    if "trajectory" in text and "crw" in text and "wave" in text:
+        return "canopy_plus_CRW_plus_wave"
+    if "trajectory" in text and "oisst" in text and "habitat" in text and "wave" in text:
+        return "canopy_plus_OISST_plus_habitat_plus_wave"
+    if "crw" in text and "habitat" in text and "wave" in text:
+        return "CRW_plus_habitat_plus_wave"
+    if "trajectory" in text and "wave" in text:
+        return "canopy_plus_wave"
+    if "crw" in text and "wave" in text:
+        return "CRW_plus_wave"
+    if "habitat" in text and "wave" in text:
+        return "habitat_plus_wave"
+    if "wave" in text or "cdip" in text or "ndbc" in text:
+        return "wave_only"
     if "current_lag_slope" in text or "lag_slope" in text:
         return "canopy_trajectory"
     if "naive" in text or "persistence_rule" in text or "persistence_baseline" in text:
@@ -241,6 +259,8 @@ def infer_experiment_layer(path: Path) -> str:
 
     if "canopy_trajectory" in name:
         return "trajectory"
+    if "wave_exposure" in name:
+        return "wave_exposure"
     if "bathymetry" in name or "habitat" in name:
         return "bathymetry_habitat"
     if "crw5km_composite" in name:

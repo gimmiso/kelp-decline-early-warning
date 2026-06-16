@@ -9,17 +9,17 @@ No heavy feature construction or model training was rerun. Missing expected file
 Integrated rows:
 
 ```text
-Source result files found: 21
+Source result files found: 23
 Missing expected files: 1
-Rows integrated: 2520
-Rankable computed rows: 2516
+Rows integrated: 3872
+Rankable computed rows: 3868
 Targets detected: 5
 Detected target groups: original_decline, at_risk_original, new_transition, actionable_drop, high_canopy_subgroup
 ```
 
 Status counts:
 
-- `computed`: 2516
+- `computed`: 3868
 - `dry_run_no_local_crw_cache`: 4
 
 Found result files:
@@ -45,6 +45,8 @@ Found result files:
 - `results/tables/ml_vs_naive_baseline_gap.csv`
 - `results/tables/multiscale_model_comparison.csv`
 - `results/tables/naive_persistence_baseline_comparison.csv`
+- `results/tables/rare_event_alert_model_comparison.csv`
+- `results/tables/wave_exposure_model_comparison.csv`
 
 Missing expected result files:
 
@@ -71,17 +73,17 @@ Missing expected result files:
 ### at_risk_original
 
 - Best PR-AUC: `validity_diagnostics` / `canopy_only` / `Random Forest` = `0.897`.
-- Best recall: `bathymetry_habitat` / `naive_persistence` / `current_low_canopy_score` = `0.978`.
-- Best F2: `` / `` / `` = `NA`.
-- Best false-negative count: `current_low_canopy_score` = `1`.
+- Best recall: `V2_extension` / `bathymetry_habitat_only` / `Logistic Regression` = `1.000`.
+- Best F2: `V2_extension` / `bathymetry_habitat_only` / `Random Forest` = `0.837`.
+- Best false-negative count: `Logistic Regression` = `0`.
 - Interpretation: At-risk evaluation removes already-low canopy states and is a stronger early-warning stress test, but still may reflect persistence and spatial risk.
 
 ### new_transition
 
 - Best PR-AUC: `V2_extension` / `canopy_trajectory` / `E2_logistic_current_lag_slope` = `0.610`.
-- Best recall: `V2_extension` / `multiscale_environment` / `M2_idw_k8_sensitivity / Logistic Regression L2` = `1.000`.
-- Best F2: `` / `` / `` = `NA`.
-- Best false-negative count: `M2_idw_k8_sensitivity / Logistic Regression L2` = `0`.
+- Best recall: `V2_extension` / `canopy_plus_trajectory` / `LightGBM` = `1.000`.
+- Best F2: `V2_extension` / `canopy_plus_trajectory` / `XGBoost` = `0.676`.
+- Best false-negative count: `LightGBM` = `0`.
 - Interpretation: Strict transition-oriented target; useful performance here would be stronger evidence for early-warning skill than original-label performance.
 
 ### actionable_drop
@@ -104,9 +106,9 @@ Missing expected result files:
 ## Baseline Gap Diagnosis
 
 - `original_decline`: best-minus-naive `0.077`, best-minus-canopy `0.073`, CRW-minus-OISST `0.006`, trajectory-minus-canopy `-0.056`, false-negative reduction vs canopy `18`.
-- `at_risk_original`: best-minus-naive `0.090`, best-minus-canopy `0.000`, CRW-minus-OISST `-0.294`, trajectory-minus-canopy `-0.226`, false-negative reduction vs canopy `3`.
-- `new_transition`: best-minus-naive `0.319`, best-minus-canopy `0.028`, CRW-minus-OISST `-0.305`, trajectory-minus-canopy `0.028`, false-negative reduction vs canopy `6`.
-- `actionable_drop`: best-minus-naive `0.406`, best-minus-canopy `0.153`, CRW-minus-OISST `-0.507`, trajectory-minus-canopy `-0.078`, false-negative reduction vs canopy `8`.
+- `at_risk_original`: best-minus-naive `0.090`, best-minus-canopy `0.000`, CRW-minus-OISST `-0.294`, trajectory-minus-canopy `-0.226`, false-negative reduction vs canopy `0`.
+- `new_transition`: best-minus-naive `0.319`, best-minus-canopy `0.028`, CRW-minus-OISST `-0.284`, trajectory-minus-canopy `0.028`, false-negative reduction vs canopy `0`.
+- `actionable_drop`: best-minus-naive `0.406`, best-minus-canopy `0.153`, CRW-minus-OISST `-0.505`, trajectory-minus-canopy `-0.075`, false-negative reduction vs canopy `0`.
 - `high_canopy_subgroup`: best-minus-naive `0.213`, best-minus-canopy `0.018`, CRW-minus-OISST `-0.422`, trajectory-minus-canopy `0.018`, false-negative reduction vs canopy `0`.
 
 Interpretation rule: improvements on the original broad decline target support **risk-state screening** unless the same feature family also improves at-risk, new-transition, or actionable-drop targets. False-negative reductions are useful for screening, but a recall gain with low precision is a sensitivity trade-off rather than operational early-warning success.
@@ -114,7 +116,7 @@ Interpretation rule: improvements on the original broad decline target support *
 ## Feature-Layer Interpretation
 
 - **CRW 5 km composite:** best PR-AUC 0.852 on `original_decline` using `bathymetry_habitat` / `Logistic Regression L2`.
-- **bathymetry/habitat:** best PR-AUC 0.889 on `original_decline` using `bathymetry_habitat` / `Random Forest`.
+- **bathymetry/habitat:** best PR-AUC 0.903 on `original_decline` using `wave_exposure` / `XGBoost`.
 - **canopy trajectory:** best PR-AUC 0.809 on `original_decline` using `trajectory` / `Logistic Regression L2`.
 - **threshold-tuned:** best PR-AUC 0.897 on `original_decline` using `threshold_tuned` / `Random Forest`.
 - **rare-event/cost-sensitive:** best PR-AUC 0.888 on `original_decline` using `rare_event_learning` / `SVM (cost_sensitive)`.
