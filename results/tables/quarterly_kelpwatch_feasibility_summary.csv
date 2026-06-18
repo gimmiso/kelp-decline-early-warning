@@ -1,0 +1,18 @@
+section,metric,value,notes
+overall,retained_ge500_cells,50.000000,
+overall,usable_quarterly_cells,50.000000,
+overall,raw_files_missing,0.000000,
+overall,cells_missing_required_columns,0.000000,
+overall,quarterly_panel_rows,8400.000000,
+overall,cells_in_panel,50.000000,
+overall,first_year,1984.000000,
+overall,last_year,2025.000000,
+overall,expected_complete_cell_year_quarter_rows,8400.000000,Based on cells x years x 4 quarters after excluding current year.
+overall,panel_completeness_rate,1.000000,
+quarter_counts,quarter_1_rows,2100.000000,"unique_cells=50, years=42"
+quarter_counts,quarter_2_rows,2100.000000,"unique_cells=50, years=42"
+quarter_counts,quarter_3_rows,2100.000000,"unique_cells=50, years=42"
+quarter_counts,quarter_4_rows,2100.000000,"unique_cells=50, years=42"
+cell_status,usable_quarterly,50.000000,
+missingness,max_missing_quarter_rows_per_cell,0.000000,Counts expected q1-q4 rows missing between each cell's first and last raw year.
+missingness,cells_with_any_missing_quarter_rows,0.000000,

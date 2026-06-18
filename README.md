@@ -785,7 +785,7 @@ Compact horizon-valid test results:
 | 1 year | 2021-2023 | 30 / 150 | 0.200 | canopy_current_only | Logistic Regression | 0.602 | 0.867 | 0.520 | 0.765 |
 | 2 year | 2021-2022 | 54 / 100 | 0.540 | canopy_current_plus_trajectory | Random Forest | 0.975 | 1.000 | 0.900 | 0.978 |
 
-The two-year target performed much better in this internal test, but it also has a wider event window, fewer valid test years, and a much higher event rate. This should be interpreted as broader-horizon actionable risk screening, not proof of an operational early-warning system. Trajectory features helped the two-year horizon modestly by PR-AUC, but did not help the one-year horizon relative to current canopy alone.
+The two-year target performed much better in this internal test, but it also has a wider event window, fewer valid test years, and a much higher event rate. This should be interpreted as broader-horizon actionable risk screening, not proof of an operational early-warning system. It is useful as context, but it is not the main short-horizon early-warning direction for the course/report framing. Trajectory features helped the two-year horizon modestly by PR-AUC, but did not help the one-year horizon relative to current canopy alone.
 
 Tracked multi-horizon outputs:
 
@@ -794,6 +794,48 @@ results/tables/multihorizon_actionable_model_comparison.csv
 results/tables/multihorizon_actionable_summary.csv
 results/tables/multihorizon_actionable_common_year_comparison.csv
 outputs/diagnostics/multihorizon_actionable_warning_report.md
+```
+
+## Quarterly Actionable Warning Feasibility
+
+The repository now includes a feasibility-first quarterly actionable warning experiment. This is the short-horizon direction that is more relevant to course/report framing than the annual within-two-year label. The goal is to test whether existing Kelpwatch exports can support sub-annual labels before claiming any operational warning skill.
+
+The raw Kelpwatch exports contain quarterly values `1`, `2`, `3`, `4`, plus `max`. For the 50 retained GE500 cells, the quarterly panel contains `8,400` rows from `1984-2025`, with complete q1-q4 coverage after excluding the current year.
+
+Quarterly labels are:
+
+```text
+next 1 quarter:
+current relative canopy > 0.05
+and drop from q to q+1 >= 30%
+
+within next 2 quarters:
+current relative canopy > 0.05
+and drop from q to min(q+1, q+2) >= 30%
+
+within next 4 quarters:
+current relative canopy > 0.05
+and drop from q to min(q+1, q+2, q+3, q+4) >= 30%
+```
+
+Compact test results:
+
+| Horizon | Valid test rows | Test events | Event rate | Best feature family | Best model | PR-AUC | Recall | Precision | F2 |
+|---|---:|---:|---:|---|---|---:|---:|---:|---:|
+| Next 1 quarter | 950 | 138 | 0.145 | quarterly_current_plus_trajectory | LightGBM | 0.975 | 1.000 | 0.868 | 0.970 |
+| Within 2 quarters | 900 | 149 | 0.166 | quarterly_current_plus_trajectory | Random Forest | 0.999 | 0.993 | 0.961 | 0.987 |
+| Within 4 quarters | 800 | 147 | 0.184 | quarterly_current_only | Logistic Regression | 1.000 | 1.000 | 1.000 | 1.000 |
+
+These results show that quarterly warning labels are technically feasible and highly predictable in the retained-cell dataset. However, event rates vary strongly by current quarter: in the test period, q3 event rates reached about `0.43-0.44`, while q1 event rates were near zero. This suggests that the current quarterly drop labels partly capture seasonal canopy drawdown, not only ecological deterioration. The next methodological step should be seasonal-baseline or same-quarter year-over-year labels before making stronger short-horizon early-warning claims.
+
+Tracked quarterly outputs:
+
+```text
+results/tables/quarterly_kelpwatch_feasibility_summary.csv
+results/tables/quarterly_actionable_label_summary.csv
+results/tables/quarterly_actionable_feature_diagnostics.csv
+results/tables/quarterly_actionable_model_comparison.csv
+outputs/diagnostics/quarterly_actionable_warning_feasibility_report.md
 ```
 
 ## CDIP Wave Exposure Layer
@@ -931,14 +973,15 @@ The completed workflow is:
 21. Claim-gate interpretation.
 22. Rare-event alert learning.
 23. Multi-horizon actionable warning experiment.
-24. CDIP-first wave exposure feature construction and model comparison.
-25. Spatial validation diagnostics.
-26. Spatial failure repair diagnostics and spatially robust feature selection.
-27. Model diagnostics.
-28. Canopy persistence and environmental-context analysis.
-29. SHAP interpretation.
-30. Within-model feature-set comparison.
-31. V3 ecological data feasibility scan.
+24. Quarterly actionable warning feasibility.
+25. CDIP-first wave exposure feature construction and model comparison.
+26. Spatial validation diagnostics.
+27. Spatial failure repair diagnostics and spatially robust feature selection.
+28. Model diagnostics.
+29. Canopy persistence and environmental-context analysis.
+30. SHAP interpretation.
+31. Within-model feature-set comparison.
+32. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -965,6 +1008,7 @@ python scripts/21_integrate_model_results.py
 python scripts/22_apply_claim_gates.py
 python scripts/24_rare_event_alert_learning.py
 python scripts/28_multihorizon_actionable_warning.py
+python scripts/29_quarterly_actionable_warning_feasibility.py
 python scripts/25_build_wave_exposure_features.py
 python scripts/26_spatial_validation_diagnostics.py
 python scripts/27_spatial_failure_repair.py
@@ -1002,6 +1046,8 @@ Run `python scripts/24_rare_event_alert_learning.py` to test training-only rare-
 
 Run `python scripts/28_multihorizon_actionable_warning.py` to compare one-year and within-two-year actionable canopy-drop risk screening. This script reuses existing processed canopy, trajectory, environmental, habitat, and wave feature layers, creates horizon-specific labels, and writes separate multi-horizon result tables without modifying the integrated model-result master table.
 
+Run `python scripts/29_quarterly_actionable_warning_feasibility.py` to check whether existing Kelpwatch raw exports support sub-annual actionable warning labels. This script builds an ignored quarterly retained-cell panel, creates next-1Q, within-2Q, and within-4Q labels, runs a compact quarterly trajectory comparison if event counts are sufficient, and reports seasonal-label caveats.
+
 Run `python scripts/25_build_wave_exposure_features.py` to build the CDIP-first wave-exposure layer. This script tests CDIP MOP modeled products first, keeps CDIP buoy and NDBC as fallback concepts, builds retained-cell wave features from CDIP MOP `waveHs`, and compares wave-only and wave-combination feature families. Raw CDIP/NOAA cache files remain ignored.
 
 Run `python scripts/26_spatial_validation_diagnostics.py` to test latitude-band spatial holdouts within the retained California cells. This diagnostic checks whether temporal-split performance is stable when entire coastal bands are held out, and writes fold-level, summary, and temporal-gap tables.
@@ -1010,9 +1056,9 @@ Run `python scripts/27_spatial_failure_repair.py` after spatial validation to bu
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon and quarterly actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, multi-horizon actionable-warning reports, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, multi-horizon and quarterly actionable-warning reports, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 

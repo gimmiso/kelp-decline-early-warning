@@ -1,0 +1,11 @@
+feature,feature_family,missingness,mean,std,min,max
+relative_canopy,quarterly_current_only,0.000000,0.055343,0.093116,0.000000,0.743557
+lag1_quarter_relative_canopy,quarterly_trajectory,0.005952,0.055498,0.093321,0.000000,0.743557
+lag2_quarter_relative_canopy,quarterly_trajectory,0.011905,0.055408,0.093402,0.000000,0.743557
+lag4_quarter_relative_canopy,quarterly_trajectory,0.023810,0.055894,0.093799,0.000000,0.743557
+change_2quarters,quarterly_trajectory,0.011905,0.000450,0.139529,-0.743557,0.743557
+change_4quarters,quarterly_trajectory,0.023810,0.000198,0.080741,-0.743557,0.578823
+rolling_4quarter_mean,quarterly_trajectory,0.017857,0.055804,0.057099,0.000000,0.399161
+rolling_4quarter_slope,quarterly_trajectory,0.017857,0.000119,0.042916,-0.208498,0.268382
+rolling_4quarter_cv,quarterly_trajectory,0.017857,1.204654,0.338341,0.000000,2.000000
+drop_from_rolling_4quarter_max,quarterly_trajectory,0.000000,0.576757,0.414543,0.000000,1.000000
