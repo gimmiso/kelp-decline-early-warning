@@ -762,7 +762,7 @@ outputs/diagnostics/rare_event_alert_learning_report.md
 
 ## Multi-Horizon Actionable Warning Experiment
 
-The repository now includes a multi-horizon actionable warning experiment that compares sharp canopy-drop risk at two horizons. This experiment supports the main machine-learning framing of the project rather than the spatial-transferability diagnostics.
+The main project result remains annual 10 km cell-year next-year actionable decline risk screening. The repository also includes a multi-horizon annual sensitivity experiment that compares sharp canopy-drop risk at two horizons. This experiment supports the main machine-learning framing of the project rather than the spatial-transferability diagnostics.
 
 The labels are:
 
@@ -785,7 +785,7 @@ Compact horizon-valid test results:
 | 1 year | 2021-2023 | 30 / 150 | 0.200 | canopy_current_only | Logistic Regression | 0.602 | 0.867 | 0.520 | 0.765 |
 | 2 year | 2021-2022 | 54 / 100 | 0.540 | canopy_current_plus_trajectory | Random Forest | 0.975 | 1.000 | 0.900 | 0.978 |
 
-The two-year target performed much better in this internal test, but it also has a wider event window, fewer valid test years, and a much higher event rate. This should be interpreted as broader-horizon actionable risk screening, not proof of an operational early-warning system. It is useful as context, but it is not the main short-horizon early-warning direction for the course/report framing. Trajectory features helped the two-year horizon modestly by PR-AUC, but did not help the one-year horizon relative to current canopy alone.
+The two-year target performed much better in this internal test, but it also has a wider event window, fewer valid test years, and a much higher event rate. This should be interpreted as broader-horizon risk screening or horizon sensitivity, not proof of an operational early-warning system. It is useful as context, but it is not the main short-horizon early-warning direction for the course/report framing. Trajectory features helped the two-year horizon modestly by PR-AUC, but did not help the one-year horizon relative to current canopy alone.
 
 Tracked multi-horizon outputs:
 
@@ -798,7 +798,7 @@ outputs/diagnostics/multihorizon_actionable_warning_report.md
 
 ## Quarterly Actionable Warning Feasibility
 
-The repository now includes a feasibility-first quarterly actionable warning experiment. This is the short-horizon direction that is more relevant to course/report framing than the annual within-two-year label. The goal is to test whether existing Kelpwatch exports can support sub-annual labels before claiming any operational warning skill.
+The repository now includes a feasibility-first quarterly actionable warning experiment. This is not yet the main early-warning model. The main report framing remains annual 10 km cell-year next-year actionable decline risk screening. The quarterly experiment is a sub-annual warning feasibility check that tests whether existing Kelpwatch exports can support a cell-quarter panel and shorter warning labels before claiming any operational quarterly warning skill.
 
 The raw Kelpwatch exports contain quarterly values `1`, `2`, `3`, `4`, plus `max`. For the 50 retained GE500 cells, the quarterly panel contains `8,400` rows from `1984-2025`, with complete q1-q4 coverage after excluding the current year.
 
@@ -826,7 +826,17 @@ Compact test results:
 | Within 2 quarters | 900 | 149 | 0.166 | quarterly_current_plus_trajectory | Random Forest | 0.999 | 0.993 | 0.961 | 0.987 |
 | Within 4 quarters | 800 | 147 | 0.184 | quarterly_current_only | Logistic Regression | 1.000 | 1.000 | 1.000 | 1.000 |
 
-These results show that quarterly warning labels are technically feasible and highly predictable in the retained-cell dataset. However, event rates vary strongly by current quarter: in the test period, q3 event rates reached about `0.43-0.44`, while q1 event rates were near zero. This suggests that the current quarterly drop labels partly capture seasonal canopy drawdown, not only ecological deterioration. The next methodological step should be seasonal-baseline or same-quarter year-over-year labels before making stronger short-horizon early-warning claims.
+Quarterly Kelpwatch observations confirm that sub-annual warning horizons are technically feasible. However, the initial quarterly actionable-drop labels are strongly season-sensitive and may capture normal seasonal canopy drawdown rather than abnormal ecological deterioration. Event rates vary strongly by current quarter: in the test period, q3 event rates reached about `0.43-0.44`, while q1 event rates were near zero. Therefore, high quarterly model performance should not be interpreted as pure ecological deterioration prediction or operational quarterly early warning.
+
+### Seasonality-Adjusted Quarterly Early Warning
+
+Future quarterly work should:
+
+- Add a quarter-only baseline to test how much of the signal is explained by seasonality alone.
+- Build seasonal-adjusted quarterly labels using each cell's same-quarter historical baseline, such as same-quarter median or 25th percentile.
+- Define warning events as abnormal declines relative to seasonal expectations, not simple raw drops from the current quarter.
+- Add non-leaky quarterly environmental predictors, such as current/lagged quarterly SST, thermal stress, upwelling, and wave exposure, using only information available up to the warning quarter.
+- Re-evaluate 1Q, 2Q, and 4Q warning horizons after seasonal adjustment.
 
 Tracked quarterly outputs:
 

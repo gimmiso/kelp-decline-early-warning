@@ -2,8 +2,10 @@
 
 ## Purpose
 
+The main project result remains annual 10 km cell-year next-year actionable decline risk screening.
 The annual within-two-year experiment is a broader-horizon risk-screening check, not the desired short warning direction for the course/report framing.
-This workflow therefore tests whether existing Kelpwatch quarterly exports can support shorter actionable warning horizons: next quarter, within two quarters, and within four quarters.
+This workflow is a sub-annual warning feasibility check. It tests whether existing Kelpwatch quarterly exports can support a cell-quarter panel and shorter actionable warning horizons: next quarter, within two quarters, and within four quarters.
+It is not yet the main early-warning model and should not be interpreted as proof of operational quarterly early warning.
 
 ## Quarterly Data Usability
 
@@ -73,8 +75,18 @@ Test event rates by current quarter:
 
 ## Interpretation
 
-Quarterly modeling is feasible if all retained cells have complete quarterly coverage and each horizon has enough positive events in train, validation, and test splits.
-Shorter quarterly horizons are closer to actionable early-warning framing than the annual two-year horizon, but they remain risk-screening diagnostics rather than operational warning claims.
-The test event rates vary strongly by current quarter, especially for high-canopy summer/fall quarters, so these labels likely capture seasonal canopy drawdown as well as true deterioration.
-A stronger quarterly early-warning design should add seasonal baselines or same-quarter year-over-year decline labels before making strong warning claims.
-The quarterly labels use sharper temporal resolution, so they are useful for course/report framing if performance remains meaningful without relying only on annual persistence.
+Quarterly Kelpwatch observations confirm that sub-annual warning horizons are technically feasible.
+All retained cells have complete quarterly coverage and each horizon has enough positive events in train, validation, and test splits.
+However, the initial quarterly actionable-drop labels are strongly season-sensitive and may capture normal seasonal canopy drawdown rather than abnormal ecological deterioration.
+The test event rates vary strongly by current quarter, especially for high-canopy summer/fall quarters, so high quarterly model performance should not be interpreted as pure ecological deterioration prediction.
+This experiment is therefore treated as a feasibility result, not an operational quarterly early-warning model.
+
+## Seasonality-Adjusted Quarterly Early Warning
+
+Future quarterly work should:
+
+- Add a quarter-only baseline to test how much of the signal is explained by seasonality alone.
+- Build seasonal-adjusted quarterly labels using each cell's same-quarter historical baseline, such as same-quarter median or 25th percentile.
+- Define warning events as abnormal declines relative to seasonal expectations, not simple raw drops from the current quarter.
+- Add non-leaky quarterly environmental predictors, such as current/lagged quarterly SST, thermal stress, upwelling, and wave exposure, using only information available up to the warning quarter.
+- Re-evaluate 1Q, 2Q, and 4Q warning horizons after seasonal adjustment.
