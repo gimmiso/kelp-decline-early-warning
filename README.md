@@ -760,6 +760,42 @@ results/tables/rare_event_alert_model_comparison.csv
 outputs/diagnostics/rare_event_alert_learning_report.md
 ```
 
+## Multi-Horizon Actionable Warning Experiment
+
+The repository now includes a multi-horizon actionable warning experiment that compares sharp canopy-drop risk at two horizons. This experiment supports the main machine-learning framing of the project rather than the spatial-transferability diagnostics.
+
+The labels are:
+
+```text
+actionable_decline_drop_next_1year:
+current relative canopy > 0.05
+and proportional drop from year t to t+1 >= 0.30
+
+actionable_decline_drop_next_2year:
+current relative canopy > 0.05
+and proportional drop from year t to min(t+1, t+2) >= 0.30
+```
+
+The two-year label means decline occurs within the next two years, not exactly at year `t+2`. Rows without the required future canopy observations are excluded from that horizon, and future canopy values are used only to define labels, not predictors.
+
+Compact horizon-valid test results:
+
+| Horizon | Test years | Test events | Event rate | Best feature family | Best model | PR-AUC | Recall | Precision | F2 |
+|---|---:|---:|---:|---|---|---:|---:|---:|---:|
+| 1 year | 2021-2023 | 30 / 150 | 0.200 | canopy_current_only | Logistic Regression | 0.602 | 0.867 | 0.520 | 0.765 |
+| 2 year | 2021-2022 | 54 / 100 | 0.540 | canopy_current_plus_trajectory | Random Forest | 0.975 | 1.000 | 0.900 | 0.978 |
+
+The two-year target performed much better in this internal test, but it also has a wider event window, fewer valid test years, and a much higher event rate. This should be interpreted as broader-horizon actionable risk screening, not proof of an operational early-warning system. Trajectory features helped the two-year horizon modestly by PR-AUC, but did not help the one-year horizon relative to current canopy alone.
+
+Tracked multi-horizon outputs:
+
+```text
+results/tables/multihorizon_actionable_model_comparison.csv
+results/tables/multihorizon_actionable_summary.csv
+results/tables/multihorizon_actionable_common_year_comparison.csv
+outputs/diagnostics/multihorizon_actionable_warning_report.md
+```
+
 ## CDIP Wave Exposure Layer
 
 The repository now includes a CDIP-first wave-exposure layer inspired by kelp persistence studies. The script first tests official CDIP data-access routes, including THREDDS / OPeNDAP access to MOP alongshore modeled wave products and archived CDIP buoy observations. Because CDIP MOP alongshore hindcast files were accessible and included `waveHs`, the implemented working layer uses nearest sampled CDIP MOP modeled points rather than falling back to NDBC.
@@ -894,14 +930,15 @@ The completed workflow is:
 20. Integrated model-result synthesis.
 21. Claim-gate interpretation.
 22. Rare-event alert learning.
-23. CDIP-first wave exposure feature construction and model comparison.
-24. Spatial validation diagnostics.
-25. Spatial failure repair diagnostics and spatially robust feature selection.
-26. Model diagnostics.
-27. Canopy persistence and environmental-context analysis.
-28. SHAP interpretation.
-29. Within-model feature-set comparison.
-30. V3 ecological data feasibility scan.
+23. Multi-horizon actionable warning experiment.
+24. CDIP-first wave exposure feature construction and model comparison.
+25. Spatial validation diagnostics.
+26. Spatial failure repair diagnostics and spatially robust feature selection.
+27. Model diagnostics.
+28. Canopy persistence and environmental-context analysis.
+29. SHAP interpretation.
+30. Within-model feature-set comparison.
+31. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -927,6 +964,7 @@ python scripts/19_build_canopy_trajectory_features.py
 python scripts/21_integrate_model_results.py
 python scripts/22_apply_claim_gates.py
 python scripts/24_rare_event_alert_learning.py
+python scripts/28_multihorizon_actionable_warning.py
 python scripts/25_build_wave_exposure_features.py
 python scripts/26_spatial_validation_diagnostics.py
 python scripts/27_spatial_failure_repair.py
@@ -962,6 +1000,8 @@ Run `python scripts/22_apply_claim_gates.py` after integrated result synthesis. 
 
 Run `python scripts/24_rare_event_alert_learning.py` to test training-only rare-event resampling, hard-negative sampling, validation-selected thresholds, and annual top-k alert prioritization for transition/actionable targets. This script does not resample validation or test rows and does not create new ecological events.
 
+Run `python scripts/28_multihorizon_actionable_warning.py` to compare one-year and within-two-year actionable canopy-drop risk screening. This script reuses existing processed canopy, trajectory, environmental, habitat, and wave feature layers, creates horizon-specific labels, and writes separate multi-horizon result tables without modifying the integrated model-result master table.
+
 Run `python scripts/25_build_wave_exposure_features.py` to build the CDIP-first wave-exposure layer. This script tests CDIP MOP modeled products first, keeps CDIP buoy and NDBC as fallback concepts, builds retained-cell wave features from CDIP MOP `waveHs`, and compares wave-only and wave-combination feature families. Raw CDIP/NOAA cache files remain ignored.
 
 Run `python scripts/26_spatial_validation_diagnostics.py` to test latitude-band spatial holdouts within the retained California cells. This diagnostic checks whether temporal-split performance is stable when entire coastal bands are held out, and writes fold-level, summary, and temporal-gap tables.
@@ -970,9 +1010,9 @@ Run `python scripts/27_spatial_failure_repair.py` after spatial validation to bu
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, wave-exposure, spatial-validation, and spatial-repair tables, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, reproducibility reports, and figures.
 
-`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
+`outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, multi-horizon actionable-warning reports, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
 ## Repository Structure
 
