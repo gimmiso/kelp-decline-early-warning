@@ -50,8 +50,8 @@ FOOTPRINT_GE500_CSV = (
     / "filtered_cells_historic_footprint_ge500.csv"
 )
 OUTPUT_DIR = ROOT / "outputs" / "maps"
-PNG_OUT = OUTPUT_DIR / "study_area_retained_10km_grid_cells.png"
-PDF_OUT = OUTPUT_DIR / "study_area_retained_10km_grid_cells.pdf"
+PNG_OUT = OUTPUT_DIR / "figure1_study_area_retained_10km_grid_cells.png"
+PDF_OUT = OUTPUT_DIR / "figure1_study_area_retained_10km_grid_cells.pdf"
 
 PROJECT_CRS = "EPSG:3310"  # California Albers, useful for local map scale.
 
@@ -194,7 +194,7 @@ def plot_map() -> tuple[int, int, int]:
         if coast is not None:
             coast = coast.to_crs(PROJECT_CRS)
 
-        fig, ax = plt.subplots(figsize=(8.0, 9.4))
+        fig, ax = plt.subplots(figsize=(8.0, 8.7))
         fig.patch.set_facecolor("white")
         ax.set_facecolor("#F7FAFC")
 
@@ -247,24 +247,6 @@ def plot_map() -> tuple[int, int, int]:
         ax.set_ylim(extent[2], extent[3])
         ax.set_aspect("equal")
         ax.axis("off")
-
-        ax.set_title(
-            "Figure 1. Study area and retained 10 km grid cells",
-            loc="left",
-            fontsize=12.5,
-            fontweight="bold",
-            pad=14,
-        )
-        ax.text(
-            0.0,
-            1.012,
-            "Northern and Central California Kelpwatch fishnet; retained cells are based on historical kelp footprint.",
-            transform=ax.transAxes,
-            ha="left",
-            va="bottom",
-            fontsize=8.7,
-            color="#444444",
-        )
 
         legend_items = [
             Patch(
