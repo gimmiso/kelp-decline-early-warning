@@ -26,8 +26,10 @@ from pathlib import Path
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 import pandas as pd
 from matplotlib.patches import Patch, Rectangle
+from shapely.geometry import Point
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,7 +55,9 @@ OUTPUT_DIR = ROOT / "outputs" / "maps"
 PNG_OUT = OUTPUT_DIR / "figure1_study_area_retained_10km_grid_cells.png"
 PDF_OUT = OUTPUT_DIR / "figure1_study_area_retained_10km_grid_cells.pdf"
 
-PROJECT_CRS = "EPSG:3310"  # California Albers, useful for local map scale.
+# Plot in California Albers so the 10 km grid cells, scale bar, and coastal
+# distances are shown in a projected CRS rather than raw longitude/latitude.
+PROJECT_CRS = "EPSG:3310"
 
 NE_LAND_URL = "https://naturalearth.s3.amazonaws.com/50m_physical/ne_50m_land.zip"
 NE_COAST_URL = "https://naturalearth.s3.amazonaws.com/50m_physical/ne_50m_coastline.zip"
@@ -172,11 +176,41 @@ def add_north_arrow(ax) -> None:
     )
 
 
-def plot_map() -> tuple[int, int, int]:
+def add_reference_labels(ax) -> None:
+    """Add small cartographic reference labels transformed into the plot CRS.
+
+    These are context labels only. The anchor points are approximate bay-center
+    locations in EPSG:4326 and are projected to EPSG:3310 for plotting.
+    """
+    labels = [("San Francisco Bay", -122.35, 37.78, 10000, 10000)]
+    x0, x1 = ax.get_xlim()
+    y0, y1 = ax.get_ylim()
+    text_effect = [pe.withStroke(linewidth=2.5, foreground="white", alpha=0.9)]
+
+    for label, lon, lat, dx, dy in labels:
+        point = gpd.GeoSeries([Point(lon, lat)], crs="EPSG:4326").to_crs(PROJECT_CRS)
+        x = point.geometry.iloc[0].x + dx
+        y = point.geometry.iloc[0].y + dy
+        if x0 <= x <= x1 and y0 <= y <= y1:
+            ax.text(
+                x,
+                y,
+                label,
+                fontsize=7.2,
+                color="#555B62",
+                ha="left",
+                va="center",
+                path_effects=text_effect,
+                zorder=6,
+            )
+
+
+def plot_map() -> tuple[int, int, int, str, str]:
     grid, gt0_ids, ge500_ids = load_grid_and_filters()
     candidate_count = len(grid)
     gt0_count = len(gt0_ids)
     ge500_count = len(ge500_ids)
+    source_crs = str(grid.crs)
 
     grid_projected = grid.to_crs(PROJECT_CRS)
     all_cells = grid_projected
@@ -194,12 +228,12 @@ def plot_map() -> tuple[int, int, int]:
         if coast is not None:
             coast = coast.to_crs(PROJECT_CRS)
 
-        fig, ax = plt.subplots(figsize=(8.0, 8.7))
+        fig, ax = plt.subplots(figsize=(6.7, 8.4))
         fig.patch.set_facecolor("white")
         ax.set_facecolor("#F7FAFC")
 
         minx, miny, maxx, maxy = grid_projected.total_bounds
-        x_margin = 55000
+        x_margin = 35000
         y_margin = 35000
         extent = (minx - x_margin, maxx + x_margin, miny - y_margin, maxy + y_margin)
 
@@ -268,48 +302,28 @@ def plot_map() -> tuple[int, int, int]:
         ax.legend(
             handles=legend_items,
             loc="center left",
-            bbox_to_anchor=(1.02, 0.42),
+            bbox_to_anchor=(0.68, 0.405),
             frameon=True,
             framealpha=0.95,
             facecolor="white",
             edgecolor="#C8C8C8",
-            fontsize=8.5,
+            fontsize=6.9,
             title="Cell selection",
-            title_fontsize=9,
-        )
-
-        annotation = (
-            "Verified counts\n"
-            f"Candidate cells: {candidate_count}\n"
-            f"Footprint cells: {gt0_count}\n"
-            f"Retained cells: {ge500_count}"
-        )
-        ax.text(
-            0.025,
-            0.065,
-            annotation,
-            transform=ax.transAxes,
-            ha="left",
-            va="bottom",
-            fontsize=8.5,
-            linespacing=1.35,
-            bbox=dict(
-                boxstyle="round,pad=0.35",
-                facecolor="white",
-                edgecolor="#BFC4CB",
-                linewidth=0.7,
-                alpha=0.96,
-            ),
-            zorder=5,
+            title_fontsize=7.3,
+            borderpad=0.38,
+            handlelength=1.25,
+            handleheight=0.62,
+            labelspacing=0.38,
         )
 
         add_scale_bar(ax)
         add_north_arrow(ax)
+        add_reference_labels(ax)
 
         # Optional locator inset. It uses Natural Earth land only as a reference
         # background and marks the actual grid extent with a rectangle.
         if land is not None:
-            inset = ax.inset_axes([0.70, 0.735, 0.24, 0.205])
+            inset = ax.inset_axes([0.66, 0.755, 0.27, 0.19])
             inset.set_facecolor("#F7FAFC")
             land_ll = land.to_crs("EPSG:4326")
             grid_ll = grid.to_crs("EPSG:4326")
@@ -343,15 +357,18 @@ def plot_map() -> tuple[int, int, int]:
         fig.savefig(PDF_OUT, bbox_inches="tight", facecolor="white")
         plt.close(fig)
 
-    return candidate_count, gt0_count, ge500_count
+    return candidate_count, gt0_count, ge500_count, source_crs, PROJECT_CRS
 
 
 def main() -> None:
-    candidate_count, gt0_count, ge500_count = plot_map()
+    candidate_count, gt0_count, ge500_count, source_crs, plot_crs = plot_map()
     print("Verified counts:")
     print(f"  Candidate fishnet cells: {candidate_count}")
     print(f"  Historical footprint > 0 cells: {gt0_count}")
     print(f"  Main retained cells >=500 pixels: {ge500_count}")
+    print("Coordinate reference systems:")
+    print(f"  Source grid CRS: {source_crs}")
+    print(f"  Plot CRS: {plot_crs}")
     print("Output files:")
     print(f"  {PNG_OUT}")
     print(f"  {PDF_OUT}")
