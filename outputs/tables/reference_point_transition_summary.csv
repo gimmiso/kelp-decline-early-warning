@@ -1,0 +1,17 @@
+split,transition_type,n_observations,share_of_observations,mean_current_relative_canopy,mean_next_relative_canopy,mean_absolute_change,mean_proportional_drop,n_actionable_low_entry,n_sharp_drop_30,n_sharp_drop_50,n_high_to_low_transition,n_reference_to_low_transition
+pre_modeling,new_low_transition,25,0.100000,0.178455,0.064292,-0.114163,0.664594,20,19,16,11,19
+pre_modeling,persistent_low,13,0.052000,0.021107,0.017374,-0.003733,-3.060405,2,1,0,0,0
+pre_modeling,recovery_from_low,66,0.264000,0.051493,0.174487,0.122994,-13.776026,0,0,0,0,0
+pre_modeling,stable_non_low,146,0.584000,0.196285,0.202056,0.005771,-0.345879,0,33,18,0,0
+test,new_low_transition,26,0.130000,0.179396,0.031903,-0.147493,0.794205,18,16,16,7,15
+test,persistent_low,108,0.540000,0.030840,0.035142,0.004302,-1.650803,27,8,6,0,0
+test,recovery_from_low,18,0.090000,0.045519,0.115443,0.069923,-2.312773,0,0,0,0,0
+test,stable_non_low,48,0.240000,0.149786,0.157541,0.007755,-0.184386,0,10,6,0,0
+train,new_low_transition,270,0.192857,0.189429,0.058391,-0.131037,0.705784,217,201,174,76,172
+train,persistent_low,151,0.107857,0.041311,0.042748,0.001437,-1.340438,41,13,10,0,0
+train,recovery_from_low,243,0.173571,0.061075,0.162130,0.101055,-9.434215,0,0,0,0,0
+train,stable_non_low,736,0.525714,0.178498,0.186285,0.007787,-0.381753,0,181,106,0,0
+validation,new_low_transition,21,0.105000,0.252141,0.076622,-0.175519,0.687615,19,18,15,7,15
+validation,persistent_low,82,0.410000,0.030252,0.028841,-0.001411,-2.402521,19,8,4,0,0
+validation,recovery_from_low,27,0.135000,0.063995,0.189408,0.125413,-30.275988,0,0,0,0,0
+validation,stable_non_low,70,0.350000,0.160340,0.185080,0.024740,-0.518555,0,15,8,0,0

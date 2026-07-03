@@ -238,6 +238,44 @@ outputs/figures/topk_hits_false_alerts_by_budget.png
 
 Top-k evaluation asks how many true decline cases are captured when only the highest-risk cells can be inspected. Small budgets may have high precision but low recall, while larger budgets capture more true declines and produce more false alerts. Lift@k compares prioritisation against random selection at the same monitoring budget.
 
+### Reference-point state taxonomy
+
+This analysis classifies grid-year observations into site-specific canopy reference states and transition types. It separates persistent low-canopy conditions from new low-state transitions and sharp actionable drops, supporting persistence-aware interpretation of model outputs.
+
+Run:
+
+```bash
+python scripts/32_reference_point_state_taxonomy.py
+```
+
+Input:
+
+```text
+data/processed/modeling_dataset_ge500_noaa_v1.csv
+outputs/metadata/model_comparison_test_predictions.csv
+```
+
+Outputs:
+
+```text
+outputs/tables/reference_point_state_taxonomy.csv
+outputs/tables/reference_point_transition_matrix.csv
+outputs/tables/reference_point_transition_matrix_by_year.csv
+outputs/tables/reference_point_transition_summary.csv
+outputs/tables/reference_point_transition_summary_by_year.csv
+outputs/tables/model_risk_by_transition_type.csv
+outputs/tables/topk_transition_composition.csv
+outputs/reports/reference_point_state_taxonomy_summary.md
+outputs/figures/reference_point_transition_matrix_counts.png
+outputs/figures/reference_point_transition_matrix_probabilities.png
+outputs/figures/reference_point_transition_types_by_year.png
+outputs/figures/reference_point_current_vs_next_canopy.png
+outputs/figures/model_risk_by_transition_type.png
+outputs/figures/topk_transition_composition.png
+```
+
+The reference taxonomy uses cell-specific 1984-2013 q25, q50, and q75 relative-canopy reference points. It should be interpreted as an ecological state-assessment and decision-support diagnostic, not as proof of fully operational early-warning skill.
+
 ### Early-Warning Validity Diagnostics
 
 An additional methodological robustness check evaluates whether model performance is partly driven by zero-state or near-zero-state persistence. This matters because a model can appear useful for early warning if it mostly identifies locations that are already degraded and likely to remain degraded, rather than detecting transition into future low-canopy conditions.
@@ -1031,29 +1069,30 @@ The completed workflow is:
 9. Threshold tuning.
 10. Threshold trade-off curves and alert-burden diagnostics.
 11. Alert-budget and top-k prioritisation diagnostics.
-12. Zero-persistence and at-risk validity diagnostics.
-13. Naive persistence baseline benchmark.
-14. Recall-oriented modeling extensions.
-15. Environmental covariate quality-control and sensitivity diagnostics.
-16. Multicollinearity diagnostics.
-17. V2 multi-scale environmental exposure construction.
-18. V2 transition-based multi-scale exposure selection.
-19. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
-20. Static GEBCO bathymetry and habitat-context covariates.
-21. Leakage-safe canopy trajectory and time-series instability proxy features.
-22. Integrated model-result synthesis.
-23. Claim-gate interpretation.
-24. Rare-event alert learning.
-25. Multi-horizon actionable warning experiment.
-26. Quarterly actionable warning feasibility.
-27. CDIP-first wave exposure feature construction and model comparison.
-28. Spatial validation diagnostics.
-29. Spatial failure repair diagnostics and spatially robust feature selection.
-30. Model diagnostics.
-31. Canopy persistence and environmental-context analysis.
-32. SHAP interpretation.
-33. Within-model feature-set comparison.
-34. V3 ecological data feasibility scan.
+12. Reference-point state taxonomy and transition matrix analysis.
+13. Zero-persistence and at-risk validity diagnostics.
+14. Naive persistence baseline benchmark.
+15. Recall-oriented modeling extensions.
+16. Environmental covariate quality-control and sensitivity diagnostics.
+17. Multicollinearity diagnostics.
+18. V2 multi-scale environmental exposure construction.
+19. V2 transition-based multi-scale exposure selection.
+20. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
+21. Static GEBCO bathymetry and habitat-context covariates.
+22. Leakage-safe canopy trajectory and time-series instability proxy features.
+23. Integrated model-result synthesis.
+24. Claim-gate interpretation.
+25. Rare-event alert learning.
+26. Multi-horizon actionable warning experiment.
+27. Quarterly actionable warning feasibility.
+28. CDIP-first wave exposure feature construction and model comparison.
+29. Spatial validation diagnostics.
+30. Spatial failure repair diagnostics and spatially robust feature selection.
+31. Model diagnostics.
+32. Canopy persistence and environmental-context analysis.
+33. SHAP interpretation.
+34. Within-model feature-set comparison.
+35. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -1066,6 +1105,7 @@ python scripts/train_model_comparison.py
 python scripts/tune_decision_thresholds.py
 python scripts/30_threshold_tradeoff_curves.py
 python scripts/31_alert_budget_topk_evaluation.py
+python scripts/32_reference_point_state_taxonomy.py
 python scripts/diagnose_zero_persistence.py
 python scripts/11_naive_persistence_baseline_benchmark.py
 python scripts/run_recall_oriented_modeling_extensions.py
@@ -1095,6 +1135,8 @@ python scripts/interpret_models_shap.py
 Run `python scripts/30_threshold_tradeoff_curves.py` after `python scripts/train_model_comparison.py` if you want decision-support curves from the saved test-set prediction probabilities. The script does not retrain models; it sweeps thresholds over `outputs/metadata/model_comparison_test_predictions.csv` and writes alert-burden, false-alert, missed-decline, recall, precision, F1, and F2 diagnostics.
 
 Run `python scripts/31_alert_budget_topk_evaluation.py` after threshold trade-off analysis to evaluate fixed monitoring budgets from the same saved test-set prediction probabilities. The script ranks grid-year observations by predicted risk, computes annual and pooled top-k precision, recall, lift, false alerts, and missed declines, and writes a compact monitoring-prioritisation report.
+
+Run `python scripts/32_reference_point_state_taxonomy.py` after top-k evaluation to classify cell-years into site-specific q25/q50/q75 canopy reference states, build current-to-next-year state-transition matrices, link transition types to model risk scores, and summarize whether annual top-k alerts are concentrated in persistent low states or include new actionable transitions.
 
 Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeline and threshold tuning, but before final interpretation. This makes the final narrative distinguish risk-state prediction, near-low-canopy persistence, and stricter transition-into-decline performance.
 
@@ -1134,7 +1176,7 @@ Run `python scripts/27_spatial_failure_repair.py` after spatial validation to bu
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon and quarterly actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, `outputs/tables/` threshold trade-off and alert-budget top-k diagnostics, `outputs/reports/` threshold trade-off and alert-budget top-k summaries, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon and quarterly actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, `outputs/tables/` threshold trade-off, alert-budget top-k, and reference-point state-taxonomy diagnostics, `outputs/reports/` threshold trade-off, alert-budget top-k, and reference-point state-taxonomy summaries, reproducibility reports, and figures.
 
 `outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, multi-horizon and quarterly actionable-warning reports, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 

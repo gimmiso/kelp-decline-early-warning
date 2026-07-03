@@ -1,0 +1,61 @@
+label_target,feature_set,model,split,transition_type,n_observations,mean_predicted_probability,median_predicted_probability,q25_predicted_probability,q75_predicted_probability,mean_true_label,share_actionable_low_entry,share_sharp_drop_30,share_new_low_transition,share_persistent_low
+decline_event_next,canopy_noaa,LightGBM,test,new_low_transition,26,0.204760,0.108949,0.072269,0.280474,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_noaa,LightGBM,test,persistent_low,108,0.444604,0.436635,0.229815,0.650460,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_noaa,LightGBM,test,recovery_from_low,18,0.315976,0.243673,0.154417,0.463618,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_noaa,LightGBM,test,stable_non_low,48,0.221783,0.160152,0.102112,0.279422,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_noaa,Logistic Regression,test,new_low_transition,26,0.479343,0.431597,0.389114,0.549906,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_noaa,Logistic Regression,test,persistent_low,108,0.610092,0.604849,0.475955,0.735278,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_noaa,Logistic Regression,test,recovery_from_low,18,0.581216,0.626917,0.447548,0.735743,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_noaa,Logistic Regression,test,stable_non_low,48,0.486388,0.461803,0.394576,0.556764,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_noaa,Random Forest,test,new_low_transition,26,0.282622,0.249541,0.206727,0.362025,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_noaa,Random Forest,test,persistent_low,108,0.425318,0.468261,0.299833,0.534656,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_noaa,Random Forest,test,recovery_from_low,18,0.354290,0.350925,0.250043,0.400700,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_noaa,Random Forest,test,stable_non_low,48,0.295053,0.277190,0.242131,0.330094,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_noaa,SVM,test,new_low_transition,26,0.276488,0.218921,0.159079,0.416251,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_noaa,SVM,test,persistent_low,108,0.385728,0.383429,0.215504,0.528759,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_noaa,SVM,test,recovery_from_low,18,0.285175,0.234854,0.190140,0.361233,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_noaa,SVM,test,stable_non_low,48,0.214505,0.172024,0.143824,0.245013,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_noaa,XGBoost,test,new_low_transition,26,0.258083,0.225952,0.180413,0.284522,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_noaa,XGBoost,test,persistent_low,108,0.536577,0.602644,0.323943,0.731822,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_noaa,XGBoost,test,recovery_from_low,18,0.430446,0.346554,0.280226,0.705859,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_noaa,XGBoost,test,stable_non_low,48,0.301414,0.268737,0.201114,0.357139,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_only,LightGBM,test,new_low_transition,26,0.372401,0.331140,0.246469,0.477394,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_only,LightGBM,test,persistent_low,108,0.624037,0.646716,0.412993,0.841806,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_only,LightGBM,test,recovery_from_low,18,0.396874,0.399818,0.261179,0.512518,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_only,LightGBM,test,stable_non_low,48,0.315769,0.280388,0.213079,0.384396,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_only,Logistic Regression,test,new_low_transition,26,0.490859,0.494552,0.481687,0.509145,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_only,Logistic Regression,test,persistent_low,108,0.536777,0.535040,0.527333,0.546782,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_only,Logistic Regression,test,recovery_from_low,18,0.528348,0.527405,0.516375,0.540445,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_only,Logistic Regression,test,stable_non_low,48,0.498862,0.503132,0.478006,0.516083,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_only,Random Forest,test,new_low_transition,26,0.409694,0.404621,0.311678,0.519170,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_only,Random Forest,test,persistent_low,108,0.597239,0.582356,0.457912,0.777873,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_only,Random Forest,test,recovery_from_low,18,0.426351,0.389997,0.358755,0.521799,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_only,Random Forest,test,stable_non_low,48,0.327127,0.306778,0.220742,0.431938,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_only,SVM,test,new_low_transition,26,0.291593,0.286950,0.254316,0.321632,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_only,SVM,test,persistent_low,108,0.343524,0.367641,0.318258,0.381077,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_only,SVM,test,recovery_from_low,18,0.325386,0.331754,0.322017,0.338659,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_only,SVM,test,stable_non_low,48,0.271570,0.265445,0.245827,0.285217,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,canopy_only,XGBoost,test,new_low_transition,26,0.417503,0.416850,0.313605,0.487795,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,canopy_only,XGBoost,test,persistent_low,108,0.625604,0.581570,0.458692,0.838503,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,canopy_only,XGBoost,test,recovery_from_low,18,0.467410,0.439288,0.371949,0.513529,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,canopy_only,XGBoost,test,stable_non_low,48,0.400978,0.393846,0.337064,0.456616,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,oisst_only,LightGBM,test,new_low_transition,26,0.212145,0.160764,0.107329,0.275000,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,oisst_only,LightGBM,test,persistent_low,108,0.409606,0.381784,0.164660,0.637177,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,oisst_only,LightGBM,test,recovery_from_low,18,0.453073,0.433722,0.271822,0.676861,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,oisst_only,LightGBM,test,stable_non_low,48,0.380197,0.331414,0.237306,0.528883,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,oisst_only,Logistic Regression,test,new_low_transition,26,0.379079,0.372632,0.348924,0.390006,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,oisst_only,Logistic Regression,test,persistent_low,108,0.439946,0.406110,0.365157,0.547285,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,oisst_only,Logistic Regression,test,recovery_from_low,18,0.458585,0.472007,0.355039,0.541413,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,oisst_only,Logistic Regression,test,stable_non_low,48,0.404732,0.386251,0.349253,0.458760,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,oisst_only,Random Forest,test,new_low_transition,26,0.275119,0.287764,0.149896,0.363141,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,oisst_only,Random Forest,test,persistent_low,108,0.409357,0.449330,0.248837,0.594971,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,oisst_only,Random Forest,test,recovery_from_low,18,0.420621,0.425933,0.288822,0.523449,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,oisst_only,Random Forest,test,stable_non_low,48,0.372793,0.350660,0.290524,0.468485,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,oisst_only,SVM,test,new_low_transition,26,0.158222,0.139052,0.105071,0.174580,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,oisst_only,SVM,test,persistent_low,108,0.317662,0.301141,0.152016,0.427512,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,oisst_only,SVM,test,recovery_from_low,18,0.305990,0.284131,0.246122,0.361394,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,oisst_only,SVM,test,stable_non_low,48,0.253096,0.267400,0.190770,0.303545,0.000000,0.000000,0.208333,0.000000,0.000000
+decline_event_next,oisst_only,XGBoost,test,new_low_transition,26,0.266084,0.244975,0.152832,0.319335,1.000000,0.692308,0.615385,1.000000,0.000000
+decline_event_next,oisst_only,XGBoost,test,persistent_low,108,0.480485,0.545908,0.306413,0.683922,1.000000,0.250000,0.074074,0.000000,1.000000
+decline_event_next,oisst_only,XGBoost,test,recovery_from_low,18,0.485895,0.475532,0.332140,0.655095,0.000000,0.000000,0.000000,0.000000,0.000000
+decline_event_next,oisst_only,XGBoost,test,stable_non_low,48,0.412881,0.410880,0.296205,0.536862,0.000000,0.000000,0.208333,0.000000,0.000000
