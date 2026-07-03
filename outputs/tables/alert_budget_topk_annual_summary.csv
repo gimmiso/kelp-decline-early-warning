@@ -1,0 +1,166 @@
+label_target,feature_set,model,split,budget_type,budget_value,mean_precision_at_k,mean_recall_at_k,mean_lift_at_k,mean_hits,mean_false_alerts,mean_missed_declines,total_hits,total_false_alerts,total_missed_declines,n_years
+decline_event_next,canopy_noaa,LightGBM,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_noaa,LightGBM,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_noaa,LightGBM,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,LightGBM,test,fixed_k,10.0,0.925,0.2903251754058206,1.4516258770291028,9.25,0.75,24.25,37,3,97,4
+decline_event_next,canopy_noaa,LightGBM,test,fixed_k,15.0,0.8833333333333333,0.4069622618009715,1.356540872669905,13.25,1.75,20.25,53,7,81,4
+decline_event_next,canopy_noaa,LightGBM,test,fixed_k,20.0,0.8375,0.5087780753103334,1.2719451882758335,16.75,3.25,16.75,67,13,67,4
+decline_event_next,canopy_noaa,LightGBM,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,LightGBM,test,percent,0.2,0.925,0.2903251754058206,1.4516258770291028,9.25,0.75,24.25,37,3,97,4
+decline_event_next,canopy_noaa,LightGBM,test,percent,0.3,0.8833333333333333,0.4069622618009715,1.356540872669905,13.25,1.75,20.25,53,7,81,4
+decline_event_next,canopy_noaa,LightGBM,test,percent,0.4,0.8375,0.5087780753103334,1.2719451882758335,16.75,3.25,16.75,67,13,67,4
+decline_event_next,canopy_noaa,LightGBM,test,percent,0.5,0.8200000000000001,0.6252348258396645,1.250469651679329,20.5,4.5,13.0,82,18,52,4
+decline_event_next,canopy_noaa,Logistic Regression,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_noaa,Logistic Regression,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_noaa,Logistic Regression,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,Logistic Regression,test,fixed_k,10.0,0.95,0.2947297816249429,1.4736489081247146,9.5,0.5,24.0,38,2,96,4
+decline_event_next,canopy_noaa,Logistic Regression,test,fixed_k,15.0,0.95,0.44026471748245943,1.4675490582748647,14.25,0.75,19.25,57,3,77,4
+decline_event_next,canopy_noaa,Logistic Regression,test,fixed_k,20.0,0.925,0.567318470544277,1.4182961763606925,18.5,1.5,15.0,74,6,60,4
+decline_event_next,canopy_noaa,Logistic Regression,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,Logistic Regression,test,percent,0.2,0.95,0.2947297816249429,1.4736489081247146,9.5,0.5,24.0,38,2,96,4
+decline_event_next,canopy_noaa,Logistic Regression,test,percent,0.3,0.95,0.44026471748245943,1.4675490582748647,14.25,0.75,19.25,57,3,77,4
+decline_event_next,canopy_noaa,Logistic Regression,test,percent,0.4,0.925,0.567318470544277,1.4182961763606925,18.5,1.5,15.0,74,6,60,4
+decline_event_next,canopy_noaa,Logistic Regression,test,percent,0.5,0.88,0.6735985697679245,1.3471971395358493,22.0,3.0,11.5,88,12,46,4
+decline_event_next,canopy_noaa,Random Forest,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_noaa,Random Forest,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_noaa,Random Forest,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,Random Forest,test,fixed_k,10.0,0.95,0.29838969153485284,1.491948457674264,9.5,0.5,24.0,38,2,96,4
+decline_event_next,canopy_noaa,Random Forest,test,fixed_k,15.0,0.9333333333333333,0.4371678706356126,1.457226235452042,14.0,1.0,19.5,56,4,78,4
+decline_event_next,canopy_noaa,Random Forest,test,fixed_k,20.0,0.8625,0.5317235438203181,1.3293088595507951,17.25,2.75,16.25,69,11,65,4
+decline_event_next,canopy_noaa,Random Forest,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,Random Forest,test,percent,0.2,0.95,0.29838969153485284,1.491948457674264,9.5,0.5,24.0,38,2,96,4
+decline_event_next,canopy_noaa,Random Forest,test,percent,0.3,0.9333333333333333,0.4371678706356126,1.457226235452042,14.0,1.0,19.5,56,4,78,4
+decline_event_next,canopy_noaa,Random Forest,test,percent,0.4,0.8625,0.5317235438203181,1.3293088595507951,17.25,2.75,16.25,69,11,65,4
+decline_event_next,canopy_noaa,Random Forest,test,percent,0.5,0.79,0.6052655478058704,1.2105310956117408,19.75,5.25,13.75,79,21,55,4
+decline_event_next,canopy_noaa,SVM,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_noaa,SVM,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_noaa,SVM,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,SVM,test,fixed_k,10.0,0.975,0.3038386889193341,1.5191934445966704,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_noaa,SVM,test,fixed_k,15.0,0.9333333333333333,0.436904502428696,1.4563483414289866,14.0,1.0,19.5,56,4,78,4
+decline_event_next,canopy_noaa,SVM,test,fixed_k,20.0,0.875,0.5327082554905136,1.331770638726284,17.5,2.5,16.0,70,10,64,4
+decline_event_next,canopy_noaa,SVM,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,SVM,test,percent,0.2,0.975,0.3038386889193341,1.5191934445966704,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_noaa,SVM,test,percent,0.3,0.9333333333333333,0.436904502428696,1.4563483414289866,14.0,1.0,19.5,56,4,78,4
+decline_event_next,canopy_noaa,SVM,test,percent,0.4,0.875,0.5327082554905136,1.331770638726284,17.5,2.5,16.0,70,10,64,4
+decline_event_next,canopy_noaa,SVM,test,percent,0.5,0.84,0.6342840536388923,1.2685681072777846,21.0,4.0,12.5,84,16,50,4
+decline_event_next,canopy_noaa,XGBoost,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_noaa,XGBoost,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_noaa,XGBoost,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,XGBoost,test,fixed_k,10.0,0.975,0.3038386889193341,1.5191934445966704,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_noaa,XGBoost,test,fixed_k,15.0,0.9,0.41005910864781836,1.3668636954927278,13.5,1.5,20.0,54,6,80,4
+decline_event_next,canopy_noaa,XGBoost,test,fixed_k,20.0,0.8375,0.5051181654004234,1.2627954135010588,16.75,3.25,16.75,67,13,67,4
+decline_event_next,canopy_noaa,XGBoost,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_noaa,XGBoost,test,percent,0.2,0.975,0.3038386889193341,1.5191934445966704,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_noaa,XGBoost,test,percent,0.3,0.9,0.41005910864781836,1.3668636954927278,13.5,1.5,20.0,54,6,80,4
+decline_event_next,canopy_noaa,XGBoost,test,percent,0.4,0.8375,0.5051181654004234,1.2627954135010588,16.75,3.25,16.75,67,13,67,4
+decline_event_next,canopy_noaa,XGBoost,test,percent,0.5,0.8,0.6033337484950388,1.2066674969900777,20.0,5.0,13.5,80,20,54,4
+decline_event_next,canopy_only,LightGBM,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_only,LightGBM,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_only,LightGBM,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_only,LightGBM,test,fixed_k,10.0,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,LightGBM,test,fixed_k,15.0,0.9166666666666666,0.4157714742392162,1.3859049141307205,13.75,1.25,19.75,55,5,79,4
+decline_event_next,canopy_only,LightGBM,test,fixed_k,20.0,0.875,0.533775999501806,1.3344399987545148,17.5,2.5,16.0,70,10,64,4
+decline_event_next,canopy_only,LightGBM,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_only,LightGBM,test,percent,0.2,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,LightGBM,test,percent,0.3,0.9166666666666666,0.4157714742392162,1.3859049141307205,13.75,1.25,19.75,55,5,79,4
+decline_event_next,canopy_only,LightGBM,test,percent,0.4,0.875,0.533775999501806,1.3344399987545148,17.5,2.5,16.0,70,10,64,4
+decline_event_next,canopy_only,LightGBM,test,percent,0.5,0.8300000000000001,0.6296394320587869,1.2592788641175738,20.75,4.25,12.75,83,17,51,4
+decline_event_next,canopy_only,Logistic Regression,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_only,Logistic Regression,test,fixed_k,3.0,0.9166666666666666,0.08550644538547764,1.4251074230912941,2.75,0.25,30.75,11,1,123,4
+decline_event_next,canopy_only,Logistic Regression,test,fixed_k,5.0,0.8,0.12110137210943663,1.2110137210943663,4.0,1.0,29.5,16,4,118,4
+decline_event_next,canopy_only,Logistic Regression,test,fixed_k,10.0,0.85,0.2585717918379209,1.2928589591896045,8.5,1.5,25.0,34,6,100,4
+decline_event_next,canopy_only,Logistic Regression,test,fixed_k,15.0,0.8833333333333333,0.40776663760534726,1.3592221253511576,13.25,1.75,20.25,53,7,81,4
+decline_event_next,canopy_only,Logistic Regression,test,fixed_k,20.0,0.85,0.5213068771536513,1.3032671928841284,17.0,3.0,16.5,68,12,66,4
+decline_event_next,canopy_only,Logistic Regression,test,percent,0.1,0.8,0.12110137210943663,1.2110137210943663,4.0,1.0,29.5,16,4,118,4
+decline_event_next,canopy_only,Logistic Regression,test,percent,0.2,0.85,0.2585717918379209,1.2928589591896045,8.5,1.5,25.0,34,6,100,4
+decline_event_next,canopy_only,Logistic Regression,test,percent,0.3,0.8833333333333333,0.40776663760534726,1.3592221253511576,13.25,1.75,20.25,53,7,81,4
+decline_event_next,canopy_only,Logistic Regression,test,percent,0.4,0.85,0.5213068771536513,1.3032671928841284,17.0,3.0,16.5,68,12,66,4
+decline_event_next,canopy_only,Logistic Regression,test,percent,0.5,0.8200000000000001,0.6333590214638601,1.2667180429277205,20.5,4.5,13.0,82,18,52,4
+decline_event_next,canopy_only,Random Forest,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_only,Random Forest,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_only,Random Forest,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_only,Random Forest,test,fixed_k,10.0,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,Random Forest,test,fixed_k,15.0,0.95,0.4366048075725495,1.4553493585751651,14.25,0.75,19.25,57,3,77,4
+decline_event_next,canopy_only,Random Forest,test,fixed_k,20.0,0.8999999999999999,0.5509494229252294,1.3773735573130734,18.0,2.0,15.5,72,8,62,4
+decline_event_next,canopy_only,Random Forest,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_only,Random Forest,test,percent,0.2,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,Random Forest,test,percent,0.3,0.95,0.4366048075725495,1.4553493585751651,14.25,0.75,19.25,57,3,77,4
+decline_event_next,canopy_only,Random Forest,test,percent,0.4,0.8999999999999999,0.5509494229252294,1.3773735573130734,18.0,2.0,15.5,72,8,62,4
+decline_event_next,canopy_only,Random Forest,test,percent,0.5,0.87,0.6629418877402748,1.3258837754805497,21.75,3.25,11.75,87,13,47,4
+decline_event_next,canopy_only,SVM,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_only,SVM,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_only,SVM,test,fixed_k,5.0,0.95,0.1455349358575165,1.4553493585751651,4.75,0.25,28.75,19,1,115,4
+decline_event_next,canopy_only,SVM,test,fixed_k,10.0,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,SVM,test,fixed_k,15.0,0.9333333333333333,0.42984805081579275,1.4328268360526426,14.0,1.0,19.5,56,4,78,4
+decline_event_next,canopy_only,SVM,test,fixed_k,20.0,0.9375,0.5753829866733092,1.4384574666832732,18.75,1.25,14.75,75,5,59,4
+decline_event_next,canopy_only,SVM,test,percent,0.1,0.95,0.1455349358575165,1.4553493585751651,4.75,0.25,28.75,19,1,115,4
+decline_event_next,canopy_only,SVM,test,percent,0.2,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,SVM,test,percent,0.3,0.9333333333333333,0.42984805081579275,1.4328268360526426,14.0,1.0,19.5,56,4,78,4
+decline_event_next,canopy_only,SVM,test,percent,0.4,0.9375,0.5753829866733092,1.4384574666832732,18.75,1.25,14.75,75,5,59,4
+decline_event_next,canopy_only,SVM,test,percent,0.5,0.88,0.6741019533358243,1.3482039066716487,22.0,3.0,11.5,88,12,46,4
+decline_event_next,canopy_only,XGBoost,test,fixed_k,1.0,1.0,0.03119032050483663,1.5595160252418316,1.0,0.0,32.5,4,0,130,4
+decline_event_next,canopy_only,XGBoost,test,fixed_k,3.0,1.0,0.0935709615145099,1.5595160252418316,3.0,0.0,30.5,12,0,122,4
+decline_event_next,canopy_only,XGBoost,test,fixed_k,5.0,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_only,XGBoost,test,fixed_k,10.0,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,XGBoost,test,fixed_k,15.0,0.9,0.4126746273923693,1.3755820913078978,13.5,1.5,20.0,54,6,80,4
+decline_event_next,canopy_only,XGBoost,test,fixed_k,20.0,0.875,0.5329716236974302,1.3324290592435752,17.5,2.5,16.0,70,10,64,4
+decline_event_next,canopy_only,XGBoost,test,percent,0.1,1.0,0.15595160252418316,1.5595160252418316,5.0,0.0,28.5,20,0,114,4
+decline_event_next,canopy_only,XGBoost,test,percent,0.2,0.975,0.3014865383816997,1.5074326919084984,9.75,0.25,23.75,39,1,95,4
+decline_event_next,canopy_only,XGBoost,test,percent,0.3,0.9,0.4126746273923693,1.3755820913078978,13.5,1.5,20.0,54,6,80,4
+decline_event_next,canopy_only,XGBoost,test,percent,0.4,0.875,0.5329716236974302,1.3324290592435752,17.5,2.5,16.0,70,10,64,4
+decline_event_next,canopy_only,XGBoost,test,percent,0.5,0.8300000000000001,0.6317515672354382,1.2635031344708765,20.75,4.25,12.75,83,17,51,4
+decline_event_next,oisst_only,LightGBM,test,fixed_k,1.0,0.75,0.020773653838169967,1.0386826919084984,0.75,0.25,32.75,3,1,131,4
+decline_event_next,oisst_only,LightGBM,test,fixed_k,3.0,0.75,0.0659808714244198,1.0996811904069967,2.25,0.75,31.25,9,3,125,4
+decline_event_next,oisst_only,LightGBM,test,fixed_k,5.0,0.75,0.11354023954830406,1.1354023954830406,3.75,1.25,29.75,15,5,119,4
+decline_event_next,oisst_only,LightGBM,test,fixed_k,10.0,0.65,0.2003544443060572,1.001772221530286,6.5,3.5,27.0,26,14,108,4
+decline_event_next,oisst_only,LightGBM,test,fixed_k,15.0,0.6833333333333333,0.31234690912110263,1.041156363737009,10.25,4.75,23.25,41,19,93,4
+decline_event_next,oisst_only,LightGBM,test,fixed_k,20.0,0.675,0.4082103416780836,1.0205258541952091,13.5,6.5,20.0,54,26,80,4
+decline_event_next,oisst_only,LightGBM,test,percent,0.1,0.75,0.11354023954830406,1.1354023954830406,3.75,1.25,29.75,15,5,119,4
+decline_event_next,oisst_only,LightGBM,test,percent,0.2,0.65,0.2003544443060572,1.001772221530286,6.5,3.5,27.0,26,14,108,4
+decline_event_next,oisst_only,LightGBM,test,percent,0.3,0.6833333333333333,0.31234690912110263,1.041156363737009,10.25,4.75,23.25,41,19,93,4
+decline_event_next,oisst_only,LightGBM,test,percent,0.4,0.675,0.4082103416780836,1.0205258541952091,13.5,6.5,20.0,54,26,80,4
+decline_event_next,oisst_only,LightGBM,test,percent,0.5,0.6699999999999999,0.5004138643251547,1.0008277286503093,16.75,8.25,16.75,67,33,67,4
+decline_event_next,oisst_only,Logistic Regression,test,fixed_k,1.0,0.75,0.020773653838169967,1.0386826919084984,0.75,0.25,32.75,3,1,131,4
+decline_event_next,oisst_only,Logistic Regression,test,fixed_k,3.0,0.6666666666666666,0.055564204757753144,0.9260700792958858,2.0,1.0,31.5,8,4,126,4
+decline_event_next,oisst_only,Logistic Regression,test,fixed_k,5.0,0.75,0.11118808901066965,1.1118808901066966,3.75,1.25,29.75,15,5,119,4
+decline_event_next,oisst_only,Logistic Regression,test,fixed_k,10.0,0.725,0.21065175198239716,1.0532587599119858,7.25,2.75,26.25,29,11,105,4
+decline_event_next,oisst_only,Logistic Regression,test,fixed_k,15.0,0.6833333333333333,0.2963385332336945,0.9877951107789817,10.25,4.75,23.25,41,19,93,4
+decline_event_next,oisst_only,Logistic Regression,test,fixed_k,20.0,0.7250000000000001,0.4210401357578777,1.052600339394694,14.5,5.5,19.0,58,22,76,4
+decline_event_next,oisst_only,Logistic Regression,test,percent,0.1,0.75,0.11118808901066965,1.1118808901066966,3.75,1.25,29.75,15,5,119,4
+decline_event_next,oisst_only,Logistic Regression,test,percent,0.2,0.725,0.21065175198239716,1.0532587599119858,7.25,2.75,26.25,29,11,105,4
+decline_event_next,oisst_only,Logistic Regression,test,percent,0.3,0.6833333333333333,0.2963385332336945,0.9877951107789817,10.25,4.75,23.25,41,19,93,4
+decline_event_next,oisst_only,Logistic Regression,test,percent,0.4,0.7250000000000001,0.4210401357578777,1.052600339394694,14.5,5.5,19.0,58,22,76,4
+decline_event_next,oisst_only,Logistic Regression,test,percent,0.5,0.74,0.5353250716153941,1.0706501432307884,18.5,6.5,15.0,74,26,60,4
+decline_event_next,oisst_only,Random Forest,test,fixed_k,1.0,0.5,0.01270913770913771,0.6354568854568854,0.5,0.5,33.0,2,2,132,4
+decline_event_next,oisst_only,Random Forest,test,fixed_k,3.0,0.6666666666666666,0.05791635529538755,0.9652725882564592,2.0,1.0,31.5,8,4,126,4
+decline_event_next,oisst_only,Random Forest,test,fixed_k,5.0,0.7,0.1031235728816374,1.031235728816374,3.5,1.5,30.0,14,6,120,4
+decline_event_next,oisst_only,Random Forest,test,fixed_k,10.0,0.7,0.2049393863909993,1.0246969319549963,7.0,3.0,26.5,28,12,106,4
+decline_event_next,oisst_only,Random Forest,test,fixed_k,15.0,0.7333333333333334,0.3281528936770872,1.0938429789236241,11.0,4.0,22.5,44,16,90,4
+decline_event_next,oisst_only,Random Forest,test,fixed_k,20.0,0.75,0.4529141756964338,1.1322854392410844,15.0,5.0,18.5,60,20,74,4
+decline_event_next,oisst_only,Random Forest,test,percent,0.1,0.7,0.1031235728816374,1.031235728816374,3.5,1.5,30.0,14,6,120,4
+decline_event_next,oisst_only,Random Forest,test,percent,0.2,0.7,0.2049393863909993,1.0246969319549963,7.0,3.0,26.5,28,12,106,4
+decline_event_next,oisst_only,Random Forest,test,percent,0.3,0.7333333333333334,0.3281528936770872,1.0938429789236241,11.0,4.0,22.5,44,16,90,4
+decline_event_next,oisst_only,Random Forest,test,percent,0.4,0.75,0.4529141756964338,1.1322854392410844,15.0,5.0,18.5,60,20,74,4
+decline_event_next,oisst_only,Random Forest,test,percent,0.5,0.71,0.5376162452775356,1.0752324905550712,17.75,7.25,15.75,71,29,63,4
+decline_event_next,oisst_only,SVM,test,fixed_k,1.0,0.75,0.020773653838169967,1.0386826919084984,0.75,0.25,32.75,3,1,131,4
+decline_event_next,oisst_only,SVM,test,fixed_k,3.0,0.75,0.0659808714244198,1.0996811904069967,2.25,0.75,31.25,9,3,125,4
+decline_event_next,oisst_only,SVM,test,fixed_k,5.0,0.8500000000000001,0.12836151243409308,1.2836151243409308,4.25,0.75,29.25,17,3,117,4
+decline_event_next,oisst_only,SVM,test,fixed_k,10.0,0.825,0.24264644829160958,1.2132322414580479,8.25,1.75,25.25,33,7,101,4
+decline_event_next,oisst_only,SVM,test,fixed_k,15.0,0.7333333333333334,0.3176765475152572,1.0589218250508574,11.0,4.0,22.5,44,16,90,4
+decline_event_next,oisst_only,SVM,test,fixed_k,20.0,0.7125,0.40907569435795244,1.0226892358948811,14.25,5.75,19.25,57,23,77,4
+decline_event_next,oisst_only,SVM,test,percent,0.1,0.8500000000000001,0.12836151243409308,1.2836151243409308,4.25,0.75,29.25,17,3,117,4
+decline_event_next,oisst_only,SVM,test,percent,0.2,0.825,0.24264644829160958,1.2132322414580479,8.25,1.75,25.25,33,7,101,4
+decline_event_next,oisst_only,SVM,test,percent,0.3,0.7333333333333334,0.3176765475152572,1.0589218250508574,11.0,4.0,22.5,44,16,90,4
+decline_event_next,oisst_only,SVM,test,percent,0.4,0.7125,0.40907569435795244,1.0226892358948811,14.25,5.75,19.25,57,23,77,4
+decline_event_next,oisst_only,SVM,test,percent,0.5,0.66,0.4750565657823722,0.9501131315647444,16.5,8.5,17.0,66,34,68,4
+decline_event_next,oisst_only,XGBoost,test,fixed_k,1.0,0.75,0.020773653838169967,1.0386826919084984,0.75,0.25,32.75,3,1,131,4
+decline_event_next,oisst_only,XGBoost,test,fixed_k,3.0,0.6666666666666666,0.055564204757753144,0.9260700792958858,2.0,1.0,31.5,8,4,126,4
+decline_event_next,oisst_only,XGBoost,test,fixed_k,5.0,0.75,0.10752817910075974,1.0752817910075976,3.75,1.25,29.75,15,5,119,4
+decline_event_next,oisst_only,XGBoost,test,fixed_k,10.0,0.775,0.2322894611201063,1.1614473056005314,7.75,2.25,25.75,31,9,103,4
+decline_event_next,oisst_only,XGBoost,test,fixed_k,15.0,0.7666666666666667,0.34663407647278616,1.155446921575954,11.5,3.5,22.0,46,14,88,4
+decline_event_next,oisst_only,XGBoost,test,fixed_k,20.0,0.7124999999999999,0.42663184497861917,1.0665796124465479,14.25,5.75,19.25,57,23,77,4
+decline_event_next,oisst_only,XGBoost,test,percent,0.1,0.75,0.10752817910075974,1.0752817910075976,3.75,1.25,29.75,15,5,119,4
+decline_event_next,oisst_only,XGBoost,test,percent,0.2,0.775,0.2322894611201063,1.1614473056005314,7.75,2.25,25.75,31,9,103,4
+decline_event_next,oisst_only,XGBoost,test,percent,0.3,0.7666666666666667,0.34663407647278616,1.155446921575954,11.5,3.5,22.0,46,14,88,4
+decline_event_next,oisst_only,XGBoost,test,percent,0.4,0.7124999999999999,0.42663184497861917,1.0665796124465479,14.25,5.75,19.25,57,23,77,4
+decline_event_next,oisst_only,XGBoost,test,percent,0.5,0.6900000000000001,0.5112742350645576,1.0225484701291154,17.25,7.75,16.25,69,31,65,4
