@@ -178,14 +178,20 @@ Default-threshold false negatives: 101
 
 The threshold analysis now reports five selection rules: default `0.50`, max F1, max F2, recall >= 0.70 then max F1, and max recall subject to precision >= 0.65. If the precision floor is too strict for a model, the rule falls back to precision >= 0.50 and records that fallback. These thresholds were selected using the 2017-2020 validation period only, then fixed for the 2021-2024 test period to avoid test-set leakage.
 
-### Threshold Trade-Off Analysis
+### Threshold trade-off analysis
 
-The repository also includes threshold trade-off curves that sweep alert thresholds from `0.00` to `1.00` and quantify the practical balance between recall, precision, false alerts, missed declines, F1, F2, alerts per 100 cell-years, and missed declines per 100 true decline cases. This analysis evaluates how alert thresholds change the balance between missed declines and false alerts. It is intended as a decision-support diagnostic rather than evidence of fully operational early-warning skill.
+This analysis evaluates how alert thresholds shift the balance between missed declines and false alerts. It is a decision-support diagnostic, not evidence of fully operational early-warning skill.
 
 Run:
 
 ```bash
 python scripts/30_threshold_tradeoff_curves.py
+```
+
+Input:
+
+```text
+outputs/metadata/model_comparison_test_predictions.csv
 ```
 
 Outputs:
