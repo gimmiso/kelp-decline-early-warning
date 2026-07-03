@@ -178,6 +178,29 @@ Default-threshold false negatives: 101
 
 The threshold analysis now reports five selection rules: default `0.50`, max F1, max F2, recall >= 0.70 then max F1, and max recall subject to precision >= 0.65. If the precision floor is too strict for a model, the rule falls back to precision >= 0.50 and records that fallback. These thresholds were selected using the 2017-2020 validation period only, then fixed for the 2021-2024 test period to avoid test-set leakage.
 
+### Threshold Trade-Off Analysis
+
+The repository also includes threshold trade-off curves that sweep alert thresholds from `0.00` to `1.00` and quantify the practical balance between recall, precision, false alerts, missed declines, F1, F2, alerts per 100 cell-years, and missed declines per 100 true decline cases. This analysis evaluates how alert thresholds change the balance between missed declines and false alerts. It is intended as a decision-support diagnostic rather than evidence of fully operational early-warning skill.
+
+Run:
+
+```bash
+python scripts/30_threshold_tradeoff_curves.py
+```
+
+Outputs:
+
+```text
+outputs/tables/threshold_tradeoff_metrics.csv
+outputs/reports/threshold_tradeoff_summary.md
+outputs/figures/threshold_tradeoff_recall_vs_alerts.png
+outputs/figures/threshold_tradeoff_precision_recall.png
+outputs/figures/threshold_tradeoff_false_alerts_vs_missed.png
+outputs/figures/threshold_tradeoff_f2_vs_threshold.png
+```
+
+Lower thresholds increase recall but increase alert burden, while higher thresholds reduce false alerts but increase missed declines. These curves should be interpreted alongside persistence baselines, at-risk subsets, stricter transition labels, and actionable-drop labels.
+
 ### Early-Warning Validity Diagnostics
 
 An additional methodological robustness check evaluates whether model performance is partly driven by zero-state or near-zero-state persistence. This matters because a model can appear useful for early warning if it mostly identifies locations that are already degraded and likely to remain degraded, rather than detecting transition into future low-canopy conditions.
@@ -969,29 +992,30 @@ The completed workflow is:
 7. Final modeling dataset validation.
 8. Five-model comparison.
 9. Threshold tuning.
-10. Zero-persistence and at-risk validity diagnostics.
-11. Naive persistence baseline benchmark.
-12. Recall-oriented modeling extensions.
-13. Environmental covariate quality-control and sensitivity diagnostics.
-14. Multicollinearity diagnostics.
-15. V2 multi-scale environmental exposure construction.
-16. V2 transition-based multi-scale exposure selection.
-17. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
-18. Static GEBCO bathymetry and habitat-context covariates.
-19. Leakage-safe canopy trajectory and time-series instability proxy features.
-20. Integrated model-result synthesis.
-21. Claim-gate interpretation.
-22. Rare-event alert learning.
-23. Multi-horizon actionable warning experiment.
-24. Quarterly actionable warning feasibility.
-25. CDIP-first wave exposure feature construction and model comparison.
-26. Spatial validation diagnostics.
-27. Spatial failure repair diagnostics and spatially robust feature selection.
-28. Model diagnostics.
-29. Canopy persistence and environmental-context analysis.
-30. SHAP interpretation.
-31. Within-model feature-set comparison.
-32. V3 ecological data feasibility scan.
+10. Threshold trade-off curves and alert-burden diagnostics.
+11. Zero-persistence and at-risk validity diagnostics.
+12. Naive persistence baseline benchmark.
+13. Recall-oriented modeling extensions.
+14. Environmental covariate quality-control and sensitivity diagnostics.
+15. Multicollinearity diagnostics.
+16. V2 multi-scale environmental exposure construction.
+17. V2 transition-based multi-scale exposure selection.
+18. CRW 5 km SST candidate exposure feasibility, monthly-composite extraction, and comparison layer.
+19. Static GEBCO bathymetry and habitat-context covariates.
+20. Leakage-safe canopy trajectory and time-series instability proxy features.
+21. Integrated model-result synthesis.
+22. Claim-gate interpretation.
+23. Rare-event alert learning.
+24. Multi-horizon actionable warning experiment.
+25. Quarterly actionable warning feasibility.
+26. CDIP-first wave exposure feature construction and model comparison.
+27. Spatial validation diagnostics.
+28. Spatial failure repair diagnostics and spatially robust feature selection.
+29. Model diagnostics.
+30. Canopy persistence and environmental-context analysis.
+31. SHAP interpretation.
+32. Within-model feature-set comparison.
+33. V3 ecological data feasibility scan.
 
 Main scripts:
 
@@ -1002,6 +1026,7 @@ python scripts/construct_decline_labels.py
 python scripts/build_noaa_environmental_features.py
 python scripts/train_model_comparison.py
 python scripts/tune_decision_thresholds.py
+python scripts/30_threshold_tradeoff_curves.py
 python scripts/diagnose_zero_persistence.py
 python scripts/11_naive_persistence_baseline_benchmark.py
 python scripts/run_recall_oriented_modeling_extensions.py
@@ -1027,6 +1052,8 @@ python scripts/diagnose_model_results.py
 python scripts/analyze_canopy_environment_context.py
 python scripts/interpret_models_shap.py
 ```
+
+Run `python scripts/30_threshold_tradeoff_curves.py` after `python scripts/train_model_comparison.py` if you want decision-support curves from the saved test-set prediction probabilities. The script does not retrain models; it sweeps thresholds over `outputs/metadata/model_comparison_test_predictions.csv` and writes alert-burden, false-alert, missed-decline, recall, precision, F1, and F2 diagnostics.
 
 Run `python scripts/diagnose_zero_persistence.py` after the main modeling pipeline and threshold tuning, but before final interpretation. This makes the final narrative distinguish risk-state prediction, near-low-canopy persistence, and stricter transition-into-decline performance.
 
@@ -1066,7 +1093,7 @@ Run `python scripts/27_spatial_failure_repair.py` after spatial validation to bu
 
 Run `python scripts/14_ecological_data_feasibility_scan.py` to regenerate the V3 ecological data feasibility report. This script does not download ecological data or change V1/V2 models; it documents candidate urchin, kelp forest monitoring, and community survey datasets for a future Stage-2 ecological transition case study.
 
-Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon and quarterly actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, reproducibility reports, and figures.
+Raw Kelpwatch exports, processed datasets, and NOAA/CDIP cache files are intentionally ignored by Git. The repository tracks scripts, GeoJSON AOIs, validation metadata, diagnostic reports, selected model-result summaries, `results/tables/` including integrated, claim-gate, rare-event alert-learning, multi-horizon and quarterly actionable-warning, wave-exposure, spatial-validation, and spatial-repair tables, `outputs/tables/` threshold trade-off diagnostics, `outputs/reports/` threshold trade-off summaries, reproducibility reports, and figures.
 
 `outputs/diagnostics/` contains zero-persistence transition tables, at-risk subset evaluation, stricter new-decline label performance, naive persistence baseline reports, CRW 5 km SST feasibility and composite-extraction reports, bathymetry/habitat feature reports, canopy trajectory leakage-audit reports, CDIP wave-exposure reports, spatial-validation and spatial-repair reports, ecological data feasibility planning, actionable-label summaries, multi-horizon and quarterly actionable-warning reports, environmental covariate QC reports, OISST matching-distance diagnostics, claim-gate and rare-event alert-learning reports, and diagnostic plots/reports. `outputs/model_results/` contains compact model-result outputs such as threshold tuning grids, threshold-selection summaries, cost-sensitive model comparisons, actionable-label performance, environmental incremental-value diagnostics, and feature-ablation results.
 
