@@ -1,0 +1,19 @@
+experiment_id,status,classification,hypothesis_or_gate,analysis_population,config_path,input_manifest,started_at_utc,finished_at_utc,git_sha,run_id,qc_status,decision,notes
+E2E-v2-E00,complete,design_audit,Gate 0 plan and repository audit,not_applicable,configs/paper_e2e_v2.yaml,,,,,,passed,plan_drafted,"No confirmatory NOAA run executed"
+E2E-v2-E01,pilot_complete_not_confirmatory,pilot,H1a-H1b Kelpwatch-only expanding-window feasibility,provisional_165_full_thermal_domain,external_pilot_config,,,,,,passed,pilot_only,"Results inspected before v2 lock; cannot serve as independent confirmation"
+E2E-v2-E02,planned,data_quality,Gate 1 source provenance and hashes,all_sources,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E03,planned,data_quality,Gate 2 Kelpwatch cohort and API validation,full_west_coast,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E04,planned,data_quality,Gate 3 CRW and OISST coverage and matching,provisional_165_full_thermal_domain,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E05,planned,data_quality,Gate 3 CUTI-BEUTI supported-domain audit,provisional_107_us_upwelling_domain,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E06,planned,data_quality,Gate 3 ERA5 wave coverage and CDIP support audit,provisional_165_full_thermal_domain,configs/paper_e2e_v2.yaml,,,,,,pending,,"Adoption decision must precede outcome modeling"
+E2E-v2-E10,planned,locked_primary,H2a CRW thermal incremental value,full_thermal_domain_after_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E11,planned,locked_sensitivity,H2b CRW versus OISST product sensitivity,full_thermal_domain_after_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E12,planned,locked_secondary,H3a CUTI-BEUTI incremental value,us_upwelling_domain_after_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E13,planned,locked_diagnostic,H4 year versus within-year score comparison,full_thermal_domain_after_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E14,planned,locked_decision,H5a monitoring-budget utility,full_thermal_and_us_upwelling_domains,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E15,planned,locked_robustness,H5b spatial transfer,eligible_regions_after_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E16,planned,locked_robustness,H6 thresholds cohorts grids aggregation climatology,all_valid_domains,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E17,planned,locked_diagnostic,Calibration and observation-effort audit,all_valid_domains,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E18,planned,exploratory,Recent Landsat-Planet outcome agreement,california_2017_2024,configs/paper_e2e_v2.yaml,,,,,,pending,,
+E2E-v2-E19,planned,locked_secondary_if_qc_passes,H3b wave incremental value,full_domain_after_wave_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,"Run only if E06 passes prespecified coverage gate"
+E2E-v2-E20,planned,locked_sensitivity,H2c March preseason forecast clock,full_thermal_domain_after_qc,configs/paper_e2e_v2.yaml,,,,,,pending,,"Distinct Q2-Q3 outcome; cannot replace primary next-year result"
