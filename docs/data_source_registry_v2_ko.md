@@ -39,6 +39,19 @@
 - Bounds: 27.0088–48.3953°N, 124.7666–114.0420°W
 - License: CC BY 4.0
 
+## 2026-08-14 최소 확장실험의 NOAA snapshot
+
+- OISST dataset ID: `noaa_psl_62b6_f192_98f7` (NOAA NMFS ERDDAP weekly OISST v2.1)
+- OISST endpoint: `https://comet.nefsc.noaa.gov/erddap/griddap/noaa_psl_62b6_f192_98f7.nc`
+- OISST temporal coverage used: 1984–2024, weekly; 2024 minimum 52 observations
+- OISST matching: 86 unique requested points, nearest valid ocean fallback, maximum displacement 27.8 km
+- OISST climatology: 1984–2004 fixed pre-forecast baseline
+- Daily-mirror rejection: 기존 AOML mirror는 1994–1996 누락과 2024-11-27 종료가 확인되어 이번 실행에 사용하지 않음
+- CUTI/BEUTI endpoints: `erdCUTIdaily`, `erdBEUTIdaily`
+- CUTI/BEUTI support used: U.S. West Coast 31–47°N의 107셀; Baja와 47°N 북쪽 제외
+- CUTI/BEUTI climatology: 1988–2004 fixed baseline
+- 세부 source-point mapping, coverage QC, 파일 hash는 `outputs/experiments/20260814_minimal_paper_extension_v2/`에 저장
+
 ## 해결해야 할 source-level 쟁점
 
 1. EDI NetCDF의 title/summary는 central/southern California라고 쓰지만 좌표와 Kelpwatch 웹문서는 더 넓은 West Coast 범위를 가리킨다. 데이터 담당자 문서 또는 EDI XML로 확인한다.

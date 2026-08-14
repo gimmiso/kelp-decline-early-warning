@@ -1,0 +1,1 @@
+scripts/42_run_minimal_paper_extension.py --environment outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv --output-dir outputs/experiments/20260814_minimal_paper_extension_v2

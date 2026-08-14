@@ -1,0 +1,8 @@
+check,value,passed
+locked_cells,165,True
+input_duplicate_keys,0,True
+train_end_before_test,True,True
+missing_prediction_scores,0,True
+duplicate_predictions,0,True
+matched_rows_within_domain,1,True
+forecast_years,2005-2024,True

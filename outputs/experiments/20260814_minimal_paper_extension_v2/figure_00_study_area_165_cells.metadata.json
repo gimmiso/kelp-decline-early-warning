@@ -1,0 +1,20 @@
+{
+  "figure": "outputs/experiments/20260814_minimal_paper_extension_v2/figure_00_study_area_165_cells.png",
+  "panel": "data/processed/kelpwatch_west_coast_panel_165.csv",
+  "panel_sha256": "c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48",
+  "environment": "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv",
+  "environment_sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87",
+  "total_cells": 165,
+  "upwelling_supported_cells": 107,
+  "region_counts": {
+    "Baja California Norte": 40,
+    "Baja California Sur": 3,
+    "Central California": 34,
+    "Northern California": 16,
+    "Oregon": 5,
+    "Southern California": 52,
+    "Washington outer coast": 15
+  },
+  "geometry_note": "Approximate 10-km display boxes reconstructed from centroids; not analysis geometry.",
+  "background": "Natural Earth low-resolution country polygons distributed with pyogrio test fixtures."
+}

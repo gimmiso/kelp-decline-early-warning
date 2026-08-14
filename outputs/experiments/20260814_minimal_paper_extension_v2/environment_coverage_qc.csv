@@ -1,0 +1,6 @@
+check,value,expected,passed
+panel_cells,165.0,165,True
+unique_oisst_requested_points,86.0,>0,True
+oisst_2024_complete_weeks_min,52.0,>=52,True
+upwelling_supported_cells,107.0,107 U.S. cells with centroid latitude 31-47N,True
+max_oisst_source_distance_km,27.798770058383226,reported_not_hidden,True

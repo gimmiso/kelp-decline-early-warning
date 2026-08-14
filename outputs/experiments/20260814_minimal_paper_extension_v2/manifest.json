@@ -1,0 +1,71 @@
+{
+  "status": "complete",
+  "classification": "pilot-informed locked extension; not independent confirmation",
+  "started_at_utc_epoch": 1786688402.044043,
+  "finished_at_utc_epoch": 1786688457.008387,
+  "runtime_seconds": 54.96,
+  "command": "scripts/42_run_minimal_paper_extension.py --environment outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv --output-dir outputs/experiments/20260814_minimal_paper_extension_v2",
+  "git_sha_before_run": "09271fda40d32e4e3875c53433a701f76589005c",
+  "python": "3.12.13",
+  "pandas": "3.0.3",
+  "numpy": "2.3.5",
+  "scikit_learn": "1.9.0",
+  "seed": 20260814,
+  "bootstrap_replicates": 2000,
+  "panel": "data/processed/kelpwatch_west_coast_panel_165.csv",
+  "panel_sha256": "c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48",
+  "environment": "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv",
+  "environment_sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87",
+  "config": "configs/paper_e2e_v2.yaml",
+  "config_sha256": "00d740eb3652af9784387b61dca57be8c9a53cb6b45c667d5204e7913df93fc4",
+  "forecast_years": [
+    2005,
+    2024
+  ],
+  "label": "next-year annual maximum canopy relative decline >= 30% among current relative canopy > 0.05",
+  "model": "fixed ridge logistic regression C=1.0",
+  "primary_metric": "macro within-year AP lift over within-year prevalence",
+  "decisions": {
+    "rq1_ranking_above_prevalence_supported": true,
+    "rq1_current_macro_year_ap_lift": 0.17653421471286107,
+    "rq1_current_ci": [
+      0.14085363613575372,
+      0.2140929483084078
+    ],
+    "rq2_trajectory_increment_supported": true,
+    "rq2_trajectory_increment": 0.02388986072107395,
+    "rq2_trajectory_ci": [
+      0.00558528825828007,
+      0.045105174467178225
+    ],
+    "rq2_oisst_increment_supported": false,
+    "rq2_oisst_increment": -0.02250451467877666,
+    "rq2_oisst_ci": [
+      -0.05481216504557223,
+      0.005669670361100662
+    ],
+    "rq2_cuti_beuti_increment_supported": false,
+    "rq2_cuti_beuti_increment": -0.0030854511363421406,
+    "rq2_cuti_beuti_ci": [
+      -0.026328054232879497,
+      0.0262392163987938
+    ],
+    "rq3_top20_recall": 0.32043650793650796,
+    "interpretation_guardrail": "pilot-informed locked extension; not independent confirmation"
+  },
+  "output_sha256": {
+    "predictions.csv": "621cf960fc87bd4fd9918c9118ffcf233f7373805096cdc805ab422ee9c7c48e",
+    "fold_audit.csv": "092d0c293c9ab479d23bc7e0ca7f2e5f7a84351ec1f18834dfbe71ed926ecb62",
+    "model_summary.csv": "903e069c78954bead11fd8ef24e512c047e3817b547f20b2868b4fb5adc11438",
+    "year_metrics.csv": "b791583cb89dca77d0d0a67ac66c024c5ad882ba774843f29afce4b65033a58a",
+    "region_year_metrics.csv": "47b9d97b61e6e63d5167d9b2954afbf6015f2fc61e0c2034d594f547d6e6ccc1",
+    "bootstrap_estimates.csv": "2c300e8bb8e09ed9a9c75bc0e97bed886885f259287e68001b0e348d7a331636",
+    "bootstrap_differences.csv": "6bd0195c47148751b3ebd3c9a342b50081bfba6c31b797b44c4776d060c35c2c",
+    "bootstrap_draws.csv": "42cd1b310fe55f488d345844f35e5d288ec516fc19d06dcf2dd54f8a2c1984df",
+    "stress_2022.csv": "d11f3e88efe1076e26914dda30617b65ed242664d60c42cdb7c87d4d689b6340",
+    "leave_one_year_out.csv": "9c36982f8b2438df4c74d43287240ad50575058e5418b44e350f7fc8f302bb93",
+    "leave_region_out_predictions.csv": "46eb49b89264eed72b47667c14805ca6099b3f5c0b25b2dd21bebe5dfe201bbd",
+    "leave_region_out_summary.csv": "a9b78930024d20c941500db3aa1b07ae8119c28e5a66e855894e712dc2d2cc7f",
+    "quality_checks.csv": "7226bdfc3ee7fb50b98c1ab6a87c66b683f0ae39adfdcc26d7ffe4692263b4d2"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "rq1_ranking_above_prevalence_supported": true,
+  "rq1_current_macro_year_ap_lift": 0.17653421471286107,
+  "rq1_current_ci": [
+    0.14085363613575372,
+    0.2140929483084078
+  ],
+  "rq2_trajectory_increment_supported": true,
+  "rq2_trajectory_increment": 0.02388986072107395,
+  "rq2_trajectory_ci": [
+    0.00558528825828007,
+    0.045105174467178225
+  ],
+  "rq2_oisst_increment_supported": false,
+  "rq2_oisst_increment": -0.02250451467877666,
+  "rq2_oisst_ci": [
+    -0.05481216504557223,
+    0.005669670361100662
+  ],
+  "rq2_cuti_beuti_increment_supported": false,
+  "rq2_cuti_beuti_increment": -0.0030854511363421406,
+  "rq2_cuti_beuti_ci": [
+    -0.026328054232879497,
+    0.0262392163987938
+  ],
+  "rq3_top20_recall": 0.32043650793650796,
+  "interpretation_guardrail": "pilot-informed locked extension; not independent confirmation"
+}
