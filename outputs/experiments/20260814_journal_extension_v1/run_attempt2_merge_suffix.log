@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/46_run_journal_extension_experiments.py", line 1181, in <module>
+    main()
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/46_run_journal_extension_experiments.py", line 1062, in main
+    expanding, fold_audit = expanding_predictions(domains, feature_sets)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/46_run_journal_extension_experiments.py", line 298, in expanding_predictions
+    score_model(
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/46_run_journal_extension_experiments.py", line 254, in score_model
+    output = test[
+             ^^^^^
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6355, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['region_group'] not in index"

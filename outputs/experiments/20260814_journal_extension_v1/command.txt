@@ -1,0 +1,1 @@
+scripts/46_run_journal_extension_experiments.py --panel data/processed/kelpwatch_west_coast_panel_165.csv --environment outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv --config configs/journal_extension_v1.json --output-dir outputs/experiments/20260814_journal_extension_v1
