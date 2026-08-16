@@ -1,0 +1,65 @@
+{
+  "classification": "pilot-informed exploratory diagnostic; not independent confirmation",
+  "decision": "no_stable_ecological_failure_condition_detected",
+  "matched_population": {
+    "cells": 52,
+    "cell_years": 424,
+    "events": 151,
+    "first_year": 2005,
+    "last_year": 2021,
+    "northern_cell_years": 35,
+    "central_cell_years": 157,
+    "southern_cell_years": 232
+  },
+  "strict_match_population": {
+    "cells": 43,
+    "cell_years": 341
+  },
+  "matched_subset_increments": {
+    "logistic": {
+      "trajectory_minus_current": {
+        "estimate": 0.03364294695649111,
+        "ci_low": -0.034066294482668735,
+        "ci_high": 0.10140070150411995,
+        "paired_years": 16
+      },
+      "oisst_minus_trajectory": {
+        "estimate": 0.011525853310104937,
+        "ci_low": -0.014027534854464195,
+        "ci_high": 0.04255613774991781,
+        "paired_years": 16
+      }
+    },
+    "random_forest": {
+      "trajectory_minus_current": {
+        "estimate": 0.069114961363332,
+        "ci_low": -0.019972991740210482,
+        "ci_high": 0.15509642883997082,
+        "paired_years": 16
+      },
+      "oisst_minus_trajectory": {
+        "estimate": -0.010377499742761517,
+        "ci_low": -0.04787741110160353,
+        "ci_high": 0.023615048149539148,
+        "paired_years": 16
+      }
+    },
+    "xgboost": {
+      "trajectory_minus_current": {
+        "estimate": 0.0509994137211001,
+        "ci_low": -0.023311876191636688,
+        "ci_high": 0.12565052366821092,
+        "paired_years": 16
+      },
+      "oisst_minus_trajectory": {
+        "estimate": 0.01716800503887976,
+        "ci_low": -0.02551910335113648,
+        "ci_high": 0.05950599059770434,
+        "paired_years": 16
+      }
+    }
+  },
+  "stable_condition_count": 0,
+  "tested_primary_condition_count": 20,
+  "interpretation": "No prespecified ecological axis robustly identified where the public OISST block helped or where trajectory-model errors recurred. This is an identification limit of the partial, cross-scale California case study, not evidence that ecology is unimportant."
+}

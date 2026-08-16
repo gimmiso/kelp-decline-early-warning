@@ -1,0 +1,8 @@
+region_group,full_cell_years,full_cells,full_events,matched_cell_years,matched_cells,matched_events,matched_cell_year_share
+Baja California Norte,541,40,233,0,0,0,0.0
+Baja California Sur,40,3,14,0,0,0,0.0
+Central California,564,34,168,157,20,38,0.2783687943262411
+Northern California,135,16,74,35,7,18,0.25925925925925924
+Oregon,64,5,30,0,0,0,0.0
+Southern California,735,52,314,232,25,95,0.31564625850340133
+Washington outer coast,236,15,70,0,0,0,0.0

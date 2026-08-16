@@ -1,0 +1,175 @@
+protocol:
+  id: KELP-EWS-E2E-v2.0
+  date: '2026-08-13'
+  status: draft_pending_user_approval
+  classification: pilot_informed_locked_extension
+  preregistration: false
+  primary_research_question: >-
+    Across the intentionally expanded Northeast Pacific West Coast domain, do
+    pre-forecast thermal and upwelling exposures add out-of-time, within-year
+    prioritization value beyond current kelp canopy and recent trajectory, and
+    does that value transfer across ecological regions?
+  target_population_change: intentional_regional_expansion
+
+prediction:
+  forecast_cutoff: calendar_year_end
+  train_start_year: 1989
+  first_test_year: 2005
+  last_test_year: 2024
+  last_outcome_year: 2025
+  outer_validation: expanding_window
+  random_seed: 20260813
+  preseason_sensitivity:
+    forecast_cutoff: march_31_of_outcome_year
+    canopy_features_available_through: prior_calendar_year
+    environmental_features_available_through_month: 3
+    outcome_window_quarters: [2, 3]
+    prohibit_predictor_dates_after_month: 3
+
+kelpwatch:
+  dataset_id: knb-lter-sbc.74.34
+  revision: 34
+  source_file: LandsatKelpBiomass_2026_Q2_withmetadata.nc
+  source_sha256: b27caf8e4d08c0d2816d044e254a6339c854f2933e14a3fa2a139b37832f884f
+  response_variable: area
+  exclude_partial_years: [2026]
+  grid:
+    crs: EPSG:6933
+    primary_size_m: 10000
+    sensitivity_size_m: [5000, 20000]
+    sensitivity_half_cell_offsets: true
+  cohort:
+    reference_start_year: 1984
+    reference_end_year: 2004
+    minimum_pre2005_footprint_pixels: 500
+    minimum_positive_reference_years: 10
+    sensitivity_positive_reference_years: [5, 15]
+    report_regional_inclusion_and_exclusion_flow: true
+    rolling_available_cohort_sensitivity: true
+    prohibit_future_all_history_footprint: true
+  annual_observation_rule:
+    minimum_valid_habitat_fraction: 0.50
+    minimum_valid_quarters: 3
+    require_q3: true
+    aggregator: maximum_valid_quarter
+  reference_canopy: pre2005_p95_annual_area
+
+outcome:
+  primary:
+    name: next_year_relative_decline
+    decline_fraction: 0.30
+    eligibility_relative_canopy_gt: 0.05
+  sensitivity:
+    decline_fractions: [0.20, 0.40, 0.50]
+    eligibility_thresholds: [0.02, 0.10]
+    continuous_log_ratio: true
+    new_low_state_transition: true
+
+environment:
+  primary_thermal:
+    product: NOAA_CRW_CoralTemp_v3.1
+    spatial_resolution_degree: 0.05
+    climatology_start_year: 1985
+    climatology_end_year: 2004
+    minimum_cell_year_daily_coverage: 0.95
+    maximum_nearest_ocean_fallback_km: 15
+    features:
+      - january_march_mean_daily_anomaly
+      - april_june_mean_daily_anomaly
+      - annual_max_7day_anomaly
+      - cumulative_positive_anomaly_degree_days
+      - days_above_pre2005_doy_p90
+  thermal_sensitivity:
+    product: NOAA_OISST_v2.1
+    spatial_resolution_degree: 0.25
+    matching: [nearest_valid_ocean, ocean_only_3x3]
+    features_match_primary: true
+  upwelling:
+    products: [erdCUTIdaily, erdBEUTIdaily]
+    valid_latitude_min: 31.0
+    valid_latitude_max: 47.0
+    restrict_to_us_west_coast: true
+    extrapolate_or_clamp: false
+    climatology_start_year: 1988
+    climatology_end_year: 2004
+    season_months: [4, 5, 6, 7, 8, 9]
+    include_lag1: true
+  wave_secondary:
+    status: run_only_if_source_qc_passes_before_outcome_modeling
+    global_candidate: ECMWF_ERA5_ocean_waves
+    california_support_audit: CDIP_MOP_hindcast
+    prohibit_product_selection_using_model_performance: true
+    features:
+      - ond_maximum_7day_mean_significant_wave_height
+      - trailing_12month_maximum_7day_mean_significant_wave_height
+      - trailing_12month_days_above_pre2005_p95
+    minimum_analysis_year_coverage: 0.95
+    minimum_full_domain_cell_coverage: 0.90
+    maximum_region_missing_fraction: 0.15
+
+feature_sets:
+  - train_prevalence
+  - region_prevalence
+  - recent_decline_rule
+  - current_only
+  - current_plus_trajectory
+  - crw_only
+  - current_plus_trajectory_plus_crw
+  - oisst_only
+  - current_plus_trajectory_plus_oisst
+  - upwelling_only
+  - current_plus_trajectory_plus_crw_plus_upwelling
+  - wave_only_if_qc_passes
+  - current_plus_trajectory_plus_crw_plus_wave_if_qc_passes
+
+model:
+  primary: ridge_logistic_regression
+  c_grid: [0.01, 0.1, 1.0, 10.0]
+  inner_validation: expanding_window
+  inner_objective: macro_within_year_ap_lift
+  tie_break: stronger_regularization
+  imputation: training_fold_median
+  scaling: training_fold_standardization
+  class_weight: null
+  resampling: null
+  exclude_geographic_identifiers_from_primary_features: true
+
+evaluation:
+  primary_metric: macro_within_year_ap_lift
+  primary_comparison: current_plus_trajectory_plus_crw_minus_current_plus_trajectory
+  primary_budget: top_20_percent_per_year
+  secondary_budgets: [top_10_percent_per_year, fixed_5_cells, fixed_10_cells]
+  supplementary_metrics:
+    - pooled_ap
+    - macro_region_year_ap_lift
+    - brier_score
+    - log_loss
+    - calibration_intercept
+    - calibration_slope
+    - auroc
+  uncertainty:
+    primary: two_year_moving_block_bootstrap
+    secondary: year_cell_two_way_cluster_bootstrap
+    replicates: 2000
+    confidence_level: 0.95
+
+claim_gates:
+  primary_increment:
+    estimate_gt: 0.0
+    confidence_interval_lower_gt: 0.0
+    minimum_positive_year_share: 0.60
+    top20_recall_difference_gte: 0.0
+  thermal_full_domain_minimum_coverage: 0.90
+  upwelling_minimum_cells: 60
+  upwelling_minimum_estimable_years: 10
+  minimum_valid_bootstrap_share: 0.95
+
+logging:
+  registry: experiments/registry.csv
+  output_root: outputs/experiments
+  overwrite_runs: false
+  require_git_sha: true
+  require_config_sha256: true
+  require_input_sha256: true
+  save_raw_predictions: true
+  save_bootstrap_draws: true

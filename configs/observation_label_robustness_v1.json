@@ -1,0 +1,97 @@
+{
+  "experiment_id": "E2E-v2-E16-observation-label-v1",
+  "classification": "pilot_informed_locked_robustness",
+  "primary_variant": "fixedpre_protocol_max",
+  "forecast": {
+    "train_start": 1989,
+    "test_start": 2005,
+    "test_end": 2024,
+    "panel_end": 2025,
+    "seed": 20260816,
+    "bootstrap_replicates": 2000,
+    "bootstrap_block_years": 2
+  },
+  "outcome": {
+    "decline_fraction": 0.30,
+    "eligibility_relative_canopy_gt": 0.05,
+    "reference_years": [1984, 2004],
+    "reference_statistic": "cell_specific_p95_annual_area"
+  },
+  "variants": [
+    {
+      "name": "fixedpre_protocol_max",
+      "footprint": "pre2005_positive_pixels",
+      "minimum_valid_fraction": 0.50,
+      "minimum_valid_quarters": 3,
+      "require_q3": true,
+      "aggregator": "maximum_valid_quarter"
+    },
+    {
+      "name": "legacy_allhist_vf75_max",
+      "footprint": "all_history_habitat_pixels",
+      "minimum_valid_fraction": 0.75,
+      "minimum_valid_quarters": 3,
+      "require_q3": false,
+      "aggregator": "maximum_valid_quarter"
+    },
+    {
+      "name": "allhist_protocol_max",
+      "footprint": "all_history_habitat_pixels",
+      "minimum_valid_fraction": 0.50,
+      "minimum_valid_quarters": 3,
+      "require_q3": true,
+      "aggregator": "maximum_valid_quarter"
+    },
+    {
+      "name": "fixedpre_vf75_noq3_max",
+      "footprint": "pre2005_positive_pixels",
+      "minimum_valid_fraction": 0.75,
+      "minimum_valid_quarters": 3,
+      "require_q3": false,
+      "aggregator": "maximum_valid_quarter"
+    },
+    {
+      "name": "fixedpre_vf75_q3_max",
+      "footprint": "pre2005_positive_pixels",
+      "minimum_valid_fraction": 0.75,
+      "minimum_valid_quarters": 3,
+      "require_q3": true,
+      "aggregator": "maximum_valid_quarter"
+    },
+    {
+      "name": "fixedpre_vf75_all4_max",
+      "footprint": "pre2005_positive_pixels",
+      "minimum_valid_fraction": 0.75,
+      "minimum_valid_quarters": 4,
+      "require_q3": true,
+      "aggregator": "maximum_valid_quarter"
+    },
+    {
+      "name": "fixedpre_protocol_mean",
+      "footprint": "pre2005_positive_pixels",
+      "minimum_valid_fraction": 0.50,
+      "minimum_valid_quarters": 3,
+      "require_q3": true,
+      "aggregator": "mean_valid_quarters"
+    },
+    {
+      "name": "fixedpre_protocol_q23max",
+      "footprint": "pre2005_positive_pixels",
+      "minimum_valid_fraction": 0.50,
+      "minimum_valid_quarters": 3,
+      "require_q3": true,
+      "require_q2_for_aggregation": true,
+      "aggregator": "q2_q3_maximum"
+    }
+  ],
+  "high_observation_subset": {
+    "base_variant": "fixedpre_protocol_max",
+    "minimum_mean_passes_in_every_valid_quarter": 2.0,
+    "require_current_and_next_year": true
+  },
+  "uncertainty_guardrail": {
+    "area_se_use": "diagnostic_only",
+    "inverse_variance_weighting": "not_used",
+    "reason": "pixel covariance and annual-maximum selection uncertainty are not supplied, so a defensible cell-year sampling variance cannot be recovered"
+  }
+}

@@ -1,0 +1,4 @@
+endpoint,rows,max_absolute_difference_celsius_vs_noaa,passed
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.csvp,3,0.0,True
+https://erddap.riddc.brown.edu/erddap/griddap/jplMURSST41.csvp,3,0.0,True
+https://erddap.marine.usf.edu/erddap/griddap/jplMURSST41.csvp,3,0.0,True

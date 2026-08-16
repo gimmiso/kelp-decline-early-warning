@@ -1,0 +1,9 @@
+check,value,passed
+analysis_keys_unique,0,True
+prediction_keys_unique,0,True
+prediction_scores_bounded,0,True
+forward_only_folds,0,True
+both_supports_present,2,True
+all_model_families_present,4,True
+all_feature_sets_present,5,True
+primary_decision_present,8,True

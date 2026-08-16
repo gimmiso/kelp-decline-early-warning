@@ -1,0 +1,20 @@
+check,passed,severity_if_failed,evidence
+panel_has_165_cells,True,blocker,cells=165
+panel_keys_unique,True,blocker,duplicates=0
+event_definition_matches_30pct,True,blocker,event == relative_drop_next >= 0.30
+eligibility_matches_canopy_cutoff,True,blocker,minimum eligible relative_canopy=0.050115
+prediction_keys_unique,True,blocker,duplicates=0
+temporal_folds_are_forward_only,True,blocker,max(train_end-test_year)=-1
+exact_matched_rows_within_domain,True,blocker,all model row-key lists are identical
+exact_matched_outcomes_within_domain,True,blocker,all model outcome lists are identical
+year_ap_lifts_recomputed,True,blocker,maximum absolute discrepancy=9.71e-17
+macro_year_lifts_recomputed,True,blocker,maximum discrepancy=8.33e-17
+top20_recall_recomputed,True,blocker,maximum discrepancy=5.55e-17
+exclude_2022_recomputed,True,blocker,manual=0.176752882913; stored=0.176752882913
+upwelling_support_is_107_cells,True,blocker,supported_cells=107
+no_upwelling_values_outside_support,True,blocker,non_null_outside_support=0
+oisst_2024_has_full_weeks,True,blocker,minimum_weeks=52
+all_loro_current_lifts_positive,True,claim,minimum=0.125
+panel_hash_matches_manifest,True,blocker,c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48
+environment_hash_matches_manifest,True,blocker,2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87
+saved_output_hashes_match_manifest,True,blocker,mismatches=[]

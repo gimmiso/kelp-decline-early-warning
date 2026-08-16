@@ -1,0 +1,5 @@
+figure,question,chart_family,supported_takeaway
+figure_01_field_coverage.png,Where does the field subset overlap the 165-cell domain?,spatial point map,Field coverage is California-only and partial.
+figure_02_primary_ecological_associations.png,Do four prespecified field axes explain out-of-fold errors or OISST rank gain?,faceted dot and interval,Uncertainty intervals include zero for the primary effects.
+figure_03_recurrent_miss_vs_grazing.png,Are recurrent misses concentrated at high surveyed urchin pressure?,scatter,No stable monotonic relationship is visible or supported.
+figure_04_matched_vs_full_performance.png,How does the selected field-observed cohort differ in apparent model performance?,grouped dot and interval,The matched cohort is not a representative replacement for the full domain.

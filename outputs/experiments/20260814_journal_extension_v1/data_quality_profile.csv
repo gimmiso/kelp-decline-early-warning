@@ -1,0 +1,13 @@
+check,value
+panel_rows,6930
+panel_cells,165
+panel_year_min,1984
+panel_year_max,2025
+panel_duplicate_keys,0
+environment_rows,6930
+environment_duplicate_keys,0
+merged_rows,6930
+primary_eligible_rows,4618
+primary_eligible_cells,165
+primary_missing_relative_drop,0
+supported_upwelling_cells,107

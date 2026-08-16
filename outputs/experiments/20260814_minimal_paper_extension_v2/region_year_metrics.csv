@@ -1,0 +1,689 @@
+scope,domain,model,n,events,prevalence,ap,ap_lift,estimable,region_group,year,top10_k,top10_tp,top10_recall,top20_k,top20_tp,top20_recall
+region_year,full_oisst_domain,current_only,37,33,0.8918918918918919,0.9817485538576907,0.08985666196579878,True,Baja California Norte,2005,4,4,0.12121212121212122,8,8,0.24242424242424243
+region_year,full_oisst_domain,current_only,30,0,0.0,,,False,Baja California Norte,2006,3,0,,6,0,
+region_year,full_oisst_domain,current_only,40,16,0.4,0.6707420077912623,0.27074200779126223,True,Baja California Norte,2007,4,2,0.125,8,6,0.375
+region_year,full_oisst_domain,current_only,40,5,0.125,0.1955564387917329,0.0705564387917329,True,Baja California Norte,2008,4,1,0.2,8,1,0.2
+region_year,full_oisst_domain,current_only,39,22,0.5641025641025641,0.6593742887067413,0.09527172460417721,True,Baja California Norte,2009,4,2,0.09090909090909091,8,5,0.22727272727272727
+region_year,full_oisst_domain,current_only,38,15,0.39473684210526316,0.6401530118355653,0.24541616973030211,True,Baja California Norte,2010,4,2,0.13333333333333333,8,5,0.3333333333333333
+region_year,full_oisst_domain,current_only,33,17,0.5151515151515151,0.839137884266423,0.32398636911490786,True,Baja California Norte,2011,4,4,0.23529411764705882,7,7,0.4117647058823529
+region_year,full_oisst_domain,current_only,35,7,0.2,0.3367709466231633,0.1367709466231633,True,Baja California Norte,2012,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,full_oisst_domain,current_only,38,7,0.18421052631578946,0.4957792207792207,0.3115686944634313,True,Baja California Norte,2013,4,2,0.2857142857142857,8,5,0.7142857142857143
+region_year,full_oisst_domain,current_only,39,17,0.4358974358974359,0.5821899121639607,0.14629247626652475,True,Baja California Norte,2014,4,2,0.11764705882352941,8,4,0.23529411764705882
+region_year,full_oisst_domain,current_only,32,30,0.9375,0.9912450562353232,0.05374505623532322,True,Baja California Norte,2015,4,4,0.13333333333333333,7,7,0.23333333333333334
+region_year,full_oisst_domain,current_only,20,3,0.15,0.18977591036414565,0.039775910364145656,True,Baja California Norte,2016,2,0,0.0,4,0,0.0
+region_year,full_oisst_domain,current_only,26,3,0.11538461538461539,0.30036630036630035,0.18498168498168496,True,Baja California Norte,2017,3,1,0.3333333333333333,6,1,0.3333333333333333
+region_year,full_oisst_domain,current_only,35,31,0.8857142857142857,0.9542401981597383,0.06852591244545259,True,Baja California Norte,2018,4,4,0.12903225806451613,7,7,0.22580645161290322
+region_year,full_oisst_domain,current_only,19,9,0.47368421052631576,0.6294321476597018,0.15574793713338603,True,Baja California Norte,2019,2,2,0.2222222222222222,4,3,0.3333333333333333
+region_year,full_oisst_domain,current_only,23,16,0.6956521739130435,0.7957065914713941,0.10005441755835065,True,Baja California Norte,2020,3,2,0.125,5,4,0.25
+region_year,full_oisst_domain,current_only,17,2,0.11764705882352941,0.3269230769230769,0.20927601809954752,True,Baja California Norte,2021,2,1,0.5,4,1,0.5
+region_year,full_oisst_domain,current_only,16,12,0.75,0.9866452991452991,0.23664529914529908,True,Baja California Norte,2022,2,2,0.16666666666666666,4,4,0.3333333333333333
+region_year,full_oisst_domain,current_only,17,5,0.29411764705882354,0.6408119658119659,0.3466943187531423,True,Baja California Norte,2023,2,2,0.4,4,2,0.4
+region_year,full_oisst_domain,current_only,15,5,0.3333333333333333,0.4514285714285714,0.11809523809523809,True,Baja California Norte,2024,2,1,0.2,3,2,0.4
+region_year,full_oisst_domain,current_only,3,1,0.3333333333333333,1.0,0.6666666666666667,True,Baja California Sur,2005,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,3,0,0.0,,,False,Baja California Sur,2006,1,0,,1,0,
+region_year,full_oisst_domain,current_only,3,0,0.0,,,False,Baja California Sur,2007,1,0,,1,0,
+region_year,full_oisst_domain,current_only,3,3,1.0,,,False,Baja California Sur,2008,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_only,3,1,0.3333333333333333,1.0,0.6666666666666667,True,Baja California Sur,2009,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,3,0,0.0,,,False,Baja California Sur,2010,1,0,,1,0,
+region_year,full_oisst_domain,current_only,3,0,0.0,,,False,Baja California Sur,2011,1,0,,1,0,
+region_year,full_oisst_domain,current_only,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Baja California Sur,2012,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,3,0,0.0,,,False,Baja California Sur,2013,1,0,,1,0,
+region_year,full_oisst_domain,current_only,3,3,1.0,,,False,Baja California Sur,2014,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_only,1,1,1.0,,,False,Baja California Sur,2015,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,1,0,0.0,,,False,Baja California Sur,2017,1,0,,1,0,
+region_year,full_oisst_domain,current_only,2,1,0.5,1.0,0.5,True,Baja California Sur,2018,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,2,0,0.0,,,False,Baja California Sur,2019,1,0,,1,0,
+region_year,full_oisst_domain,current_only,2,0,0.0,,,False,Baja California Sur,2020,1,0,,1,0,
+region_year,full_oisst_domain,current_only,2,2,1.0,,,False,Baja California Sur,2021,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,2,1,0.5,1.0,0.5,True,Baja California Sur,2022,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,2,1,0.5,0.5,0.0,True,Baja California Sur,2023,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_only,2,0,0.0,,,False,Baja California Sur,2024,1,0,,1,0,
+region_year,full_oisst_domain,current_only,33,17,0.5151515151515151,0.6860968549405755,0.17094533978906035,True,Central California,2005,4,2,0.11764705882352941,7,5,0.29411764705882354
+region_year,full_oisst_domain,current_only,33,2,0.06060606060606061,0.29166666666666663,0.23106060606060602,True,Central California,2006,4,1,0.5,7,1,0.5
+region_year,full_oisst_domain,current_only,34,7,0.20588235294117646,0.4483294930875576,0.24244714014638113,True,Central California,2007,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,full_oisst_domain,current_only,33,3,0.09090909090909091,0.08073206986250464,-0.010177021046586271,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,current_only,34,18,0.5294117647058824,0.7430891706254026,0.21367740591952022,True,Central California,2009,4,3,0.16666666666666666,7,5,0.2777777777777778
+region_year,full_oisst_domain,current_only,34,23,0.6764705882352942,0.7602543576152669,0.08378376937997278,True,Central California,2010,4,3,0.13043478260869565,7,5,0.21739130434782608
+region_year,full_oisst_domain,current_only,30,1,0.03333333333333333,0.08333333333333333,0.049999999999999996,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,full_oisst_domain,current_only,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,full_oisst_domain,current_only,34,25,0.7352941176470589,0.8489198760699115,0.11362575842285261,True,Central California,2013,4,4,0.16,7,6,0.24
+region_year,full_oisst_domain,current_only,33,1,0.030303030303030304,0.2,0.1696969696969697,True,Central California,2014,4,0,0.0,7,1,1.0
+region_year,full_oisst_domain,current_only,34,7,0.20588235294117646,0.4647377230462077,0.25885537010503124,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,full_oisst_domain,current_only,34,22,0.6470588235294118,0.9057819280693102,0.25872310453989844,True,Central California,2016,4,4,0.18181818181818182,7,7,0.3181818181818182
+region_year,full_oisst_domain,current_only,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,full_oisst_domain,current_only,34,32,0.9411764705882353,0.9232181616721965,-0.01795830891603878,True,Central California,2018,4,4,0.125,7,6,0.1875
+region_year,full_oisst_domain,current_only,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,full_oisst_domain,current_only,34,9,0.2647058823529412,0.33272019051825225,0.06801430816531107,True,Central California,2020,4,1,0.1111111111111111,7,3,0.3333333333333333
+region_year,full_oisst_domain,current_only,33,1,0.030303030303030304,0.16666666666666666,0.13636363636363635,True,Central California,2021,4,0,0.0,7,1,1.0
+region_year,full_oisst_domain,current_only,34,33,0.9705882352941176,0.9908408541608507,0.02025261886673302,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,full_oisst_domain,current_only,22,1,0.045454545454545456,0.07692307692307693,0.03146853146853147,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,full_oisst_domain,current_only,31,1,0.03225806451612903,0.14285714285714285,0.11059907834101382,True,Central California,2024,4,0,0.0,7,1,1.0
+region_year,full_oisst_domain,current_only,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_only,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,full_oisst_domain,current_only,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,full_oisst_domain,current_only,16,11,0.6875,0.975068870523416,0.28756887052341595,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,full_oisst_domain,current_only,16,15,0.9375,0.913506956006956,-0.023993043993044028,True,Northern California,2009,2,2,0.13333333333333333,4,3,0.2
+region_year,full_oisst_domain,current_only,15,5,0.3333333333333333,0.72,0.38666666666666666,True,Northern California,2010,2,2,0.4,3,2,0.4
+region_year,full_oisst_domain,current_only,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,full_oisst_domain,current_only,16,9,0.5625,0.7540885040885041,0.19158850408850414,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,full_oisst_domain,current_only,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,full_oisst_domain,current_only,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,full_oisst_domain,current_only,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,full_oisst_domain,current_only,3,2,0.6666666666666666,0.8333333333333333,0.16666666666666663,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,5,4,0.8,1.0,0.19999999999999996,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,full_oisst_domain,current_only,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,full_oisst_domain,current_only,4,2,0.5,1.0,0.5,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,full_oisst_domain,current_only,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,5,3,0.6,0.7555555555555555,0.15555555555555556,True,Oregon,2011,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_only,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,full_oisst_domain,current_only,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,full_oisst_domain,current_only,5,2,0.4,0.8333333333333333,0.43333333333333324,True,Oregon,2014,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_only,4,1,0.25,0.3333333333333333,0.08333333333333331,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_only,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,full_oisst_domain,current_only,5,3,0.6,0.5333333333333333,-0.06666666666666665,True,Oregon,2017,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_only,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_only,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,full_oisst_domain,current_only,4,3,0.75,0.9166666666666665,0.16666666666666652,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_only,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_only,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,2,1,0.5,0.5,0.0,True,Oregon,2023,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_only,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_only,50,33,0.66,0.7326574219141273,0.07265742191412727,True,Southern California,2005,5,4,0.12121212121212122,10,7,0.21212121212121213
+region_year,full_oisst_domain,current_only,41,7,0.17073170731707318,0.7687074829931972,0.597975775676124,True,Southern California,2006,5,3,0.42857142857142855,9,6,0.8571428571428571
+region_year,full_oisst_domain,current_only,50,24,0.48,0.599888039769146,0.11988803976914597,True,Southern California,2007,5,4,0.16666666666666666,10,7,0.2916666666666667
+region_year,full_oisst_domain,current_only,50,12,0.24,0.4690257904963787,0.22902579049637872,True,Southern California,2008,5,3,0.25,10,5,0.4166666666666667
+region_year,full_oisst_domain,current_only,49,11,0.22448979591836735,0.3998699042895545,0.17538010837118714,True,Southern California,2009,5,2,0.18181818181818182,10,4,0.36363636363636365
+region_year,full_oisst_domain,current_only,49,31,0.6326530612244898,0.6909318658019343,0.0582788045774445,True,Southern California,2010,5,4,0.12903225806451613,10,7,0.22580645161290322
+region_year,full_oisst_domain,current_only,47,26,0.5531914893617021,0.680181553618331,0.12699006425662884,True,Southern California,2011,5,3,0.11538461538461539,10,7,0.2692307692307692
+region_year,full_oisst_domain,current_only,45,3,0.06666666666666667,0.13992673992673993,0.07326007326007326,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,full_oisst_domain,current_only,52,43,0.8269230769230769,0.8847931391566748,0.05787006223359792,True,Southern California,2013,6,6,0.13953488372093023,11,10,0.23255813953488372
+region_year,full_oisst_domain,current_only,43,23,0.5348837209302325,0.7679535616456143,0.23306984071538184,True,Southern California,2014,5,5,0.21739130434782608,9,7,0.30434782608695654
+region_year,full_oisst_domain,current_only,34,14,0.4117647058823529,0.8172584185189227,0.40549371263656975,True,Southern California,2015,4,3,0.21428571428571427,7,5,0.35714285714285715
+region_year,full_oisst_domain,current_only,35,8,0.22857142857142856,0.6098616600790514,0.38129023150762287,True,Southern California,2016,4,3,0.375,7,3,0.375
+region_year,full_oisst_domain,current_only,40,9,0.225,0.3971935190330443,0.17219351903304428,True,Southern California,2017,4,2,0.2222222222222222,8,3,0.3333333333333333
+region_year,full_oisst_domain,current_only,45,37,0.8222222222222222,0.9313537705170201,0.10913154829479788,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,full_oisst_domain,current_only,26,8,0.3076923076923077,0.3887839968003011,0.08109168910799341,True,Southern California,2019,3,1,0.125,6,2,0.25
+region_year,full_oisst_domain,current_only,39,13,0.3333333333333333,0.33107132391039606,-0.00226200942293725,True,Southern California,2020,4,1,0.07692307692307693,8,2,0.15384615384615385
+region_year,full_oisst_domain,current_only,40,12,0.3,0.6636843845725424,0.36368438457254243,True,Southern California,2021,4,2,0.16666666666666666,8,6,0.5
+region_year,full_oisst_domain,current_only,41,27,0.6585365853658537,0.7337296462988303,0.07519306093297662,True,Southern California,2022,5,4,0.14814814814814814,9,6,0.2222222222222222
+region_year,full_oisst_domain,current_only,29,1,0.034482758620689655,0.5,0.46551724137931033,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,full_oisst_domain,current_only,37,9,0.24324324324324326,0.24342886524369312,0.00018562200044985877,True,Southern California,2024,4,0,0.0,8,1,0.1111111111111111
+region_year,full_oisst_domain,current_only,15,2,0.13333333333333333,1.0,0.8666666666666667,True,Washington outer coast,2005,2,2,1.0,3,2,1.0
+region_year,full_oisst_domain,current_only,15,5,0.3333333333333333,0.3548717948717949,0.021538461538461562,True,Washington outer coast,2006,2,1,0.2,3,1,0.2
+region_year,full_oisst_domain,current_only,14,0,0.0,,,False,Washington outer coast,2007,2,0,,3,0,
+region_year,full_oisst_domain,current_only,14,4,0.2857142857142857,0.8166666666666667,0.530952380952381,True,Washington outer coast,2008,2,2,0.5,3,2,0.5
+region_year,full_oisst_domain,current_only,15,12,0.8,0.9752747252747255,0.17527472527472543,True,Washington outer coast,2009,2,2,0.16666666666666666,3,3,0.25
+region_year,full_oisst_domain,current_only,15,1,0.06666666666666667,1.0,0.9333333333333333,True,Washington outer coast,2010,2,1,1.0,3,1,1.0
+region_year,full_oisst_domain,current_only,9,4,0.4444444444444444,0.8928571428571428,0.4484126984126984,True,Washington outer coast,2011,1,1,0.25,2,2,0.5
+region_year,full_oisst_domain,current_only,8,5,0.625,0.7892857142857144,0.16428571428571437,True,Washington outer coast,2012,1,1,0.2,2,2,0.4
+region_year,full_oisst_domain,current_only,11,2,0.18181818181818182,0.2777777777777778,0.09595959595959597,True,Washington outer coast,2013,2,0,0.0,3,1,0.5
+region_year,full_oisst_domain,current_only,15,1,0.06666666666666667,0.2,0.13333333333333336,True,Washington outer coast,2014,2,0,0.0,3,0,0.0
+region_year,full_oisst_domain,current_only,15,6,0.4,0.7972222222222222,0.39722222222222214,True,Washington outer coast,2015,2,2,0.3333333333333333,3,2,0.3333333333333333
+region_year,full_oisst_domain,current_only,15,2,0.13333333333333333,0.625,0.4916666666666667,True,Washington outer coast,2016,2,1,0.5,3,1,0.5
+region_year,full_oisst_domain,current_only,15,1,0.06666666666666667,0.5,0.43333333333333335,True,Washington outer coast,2017,2,1,1.0,3,1,1.0
+region_year,full_oisst_domain,current_only,15,0,0.0,,,False,Washington outer coast,2018,2,0,,3,0,
+region_year,full_oisst_domain,current_only,15,12,0.8,0.9707362082362084,0.1707362082362084,True,Washington outer coast,2019,2,2,0.16666666666666666,3,3,0.25
+region_year,full_oisst_domain,current_only,15,0,0.0,,,False,Washington outer coast,2020,2,0,,3,0,
+region_year,full_oisst_domain,current_only,15,13,0.8666666666666667,0.9821780783319243,0.11551141166525758,True,Washington outer coast,2021,2,2,0.15384615384615385,3,3,0.23076923076923078
+region_year,full_oisst_domain,current_only,15,0,0.0,,,False,Washington outer coast,2022,2,0,,3,0,
+region_year,full_oisst_domain,current_only,15,5,0.3333333333333333,0.3398934398934399,0.006560106560106582,True,Washington outer coast,2023,2,1,0.2,3,1,0.2
+region_year,full_oisst_domain,current_only,15,1,0.06666666666666667,0.14285714285714285,0.07619047619047618,True,Washington outer coast,2024,2,0,0.0,3,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,37,33,0.8918918918918919,0.985887409936016,0.0939955180441241,True,Baja California Norte,2005,4,4,0.12121212121212122,8,8,0.24242424242424243
+region_year,full_oisst_domain,current_plus_trajectory,30,0,0.0,,,False,Baja California Norte,2006,3,0,,6,0,
+region_year,full_oisst_domain,current_plus_trajectory,40,16,0.4,0.7057639794423516,0.30576397944235156,True,Baja California Norte,2007,4,3,0.1875,8,6,0.375
+region_year,full_oisst_domain,current_plus_trajectory,40,5,0.125,0.19737461300309597,0.07237461300309597,True,Baja California Norte,2008,4,1,0.2,8,1,0.2
+region_year,full_oisst_domain,current_plus_trajectory,39,22,0.5641025641025641,0.6164447715394238,0.05234220743685969,True,Baja California Norte,2009,4,2,0.09090909090909091,8,5,0.22727272727272727
+region_year,full_oisst_domain,current_plus_trajectory,38,15,0.39473684210526316,0.7121792929292928,0.31744245082402966,True,Baja California Norte,2010,4,3,0.2,8,5,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,33,17,0.5151515151515151,0.8081527935559734,0.2930012784044582,True,Baja California Norte,2011,4,4,0.23529411764705882,7,7,0.4117647058823529
+region_year,full_oisst_domain,current_plus_trajectory,35,7,0.2,0.3164828738512949,0.11648287385129491,True,Baja California Norte,2012,4,1,0.14285714285714285,7,3,0.42857142857142855
+region_year,full_oisst_domain,current_plus_trajectory,38,7,0.18421052631578946,0.4748866213151927,0.2906760949994033,True,Baja California Norte,2013,4,2,0.2857142857142857,8,5,0.7142857142857143
+region_year,full_oisst_domain,current_plus_trajectory,39,17,0.4358974358974359,0.5516024282794908,0.1157049923820549,True,Baja California Norte,2014,4,2,0.11764705882352941,8,4,0.23529411764705882
+region_year,full_oisst_domain,current_plus_trajectory,32,30,0.9375,0.9935439068100358,0.05604390681003579,True,Baja California Norte,2015,4,4,0.13333333333333333,7,7,0.23333333333333334
+region_year,full_oisst_domain,current_plus_trajectory,20,3,0.15,0.15925925925925927,0.009259259259259273,True,Baja California Norte,2016,2,0,0.0,4,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,26,3,0.11538461538461539,0.4458689458689459,0.33048433048433046,True,Baja California Norte,2017,3,1,0.3333333333333333,6,1,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,35,31,0.8857142857142857,0.9551857129205323,0.06947142720624666,True,Baja California Norte,2018,4,4,0.12903225806451613,7,7,0.22580645161290322
+region_year,full_oisst_domain,current_plus_trajectory,19,9,0.47368421052631576,0.6210378640203202,0.14735365349400448,True,Baja California Norte,2019,2,2,0.2222222222222222,4,3,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,23,16,0.6956521739130435,0.7407012498688699,0.04504907595582641,True,Baja California Norte,2020,3,2,0.125,5,3,0.1875
+region_year,full_oisst_domain,current_plus_trajectory,17,2,0.11764705882352941,0.375,0.25735294117647056,True,Baja California Norte,2021,2,1,0.5,4,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,16,12,0.75,0.9515873015873015,0.20158730158730154,True,Baja California Norte,2022,2,2,0.16666666666666666,4,4,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,17,5,0.29411764705882354,0.5305555555555557,0.23643790849673213,True,Baja California Norte,2023,2,1,0.2,4,2,0.4
+region_year,full_oisst_domain,current_plus_trajectory,15,5,0.3333333333333333,0.6388888888888888,0.3055555555555555,True,Baja California Norte,2024,2,1,0.2,3,2,0.4
+region_year,full_oisst_domain,current_plus_trajectory,3,1,0.3333333333333333,1.0,0.6666666666666667,True,Baja California Sur,2005,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,3,0,0.0,,,False,Baja California Sur,2006,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,3,0,0.0,,,False,Baja California Sur,2007,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,3,3,1.0,,,False,Baja California Sur,2008,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,3,1,0.3333333333333333,0.5,0.16666666666666669,True,Baja California Sur,2009,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,3,0,0.0,,,False,Baja California Sur,2010,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,3,0,0.0,,,False,Baja California Sur,2011,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Baja California Sur,2012,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,3,0,0.0,,,False,Baja California Sur,2013,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,3,3,1.0,,,False,Baja California Sur,2014,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,1,1,1.0,,,False,Baja California Sur,2015,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,1,0,0.0,,,False,Baja California Sur,2017,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Baja California Sur,2018,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,2,0,0.0,,,False,Baja California Sur,2019,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,2,0,0.0,,,False,Baja California Sur,2020,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,2,2,1.0,,,False,Baja California Sur,2021,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Baja California Sur,2022,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,2,1,0.5,0.5,0.0,True,Baja California Sur,2023,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,2,0,0.0,,,False,Baja California Sur,2024,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,33,17,0.5151515151515151,0.6167834708173444,0.10163195566582928,True,Central California,2005,4,1,0.058823529411764705,7,3,0.17647058823529413
+region_year,full_oisst_domain,current_plus_trajectory,33,2,0.06060606060606061,0.1534090909090909,0.0928030303030303,True,Central California,2006,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,34,7,0.20588235294117646,0.49183206463363377,0.2859497116924573,True,Central California,2007,4,2,0.2857142857142857,7,3,0.42857142857142855
+region_year,full_oisst_domain,current_plus_trajectory,33,3,0.09090909090909091,0.0899108734402852,-0.0009982174688057122,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,34,18,0.5294117647058824,0.6811360910321815,0.15172432632629917,True,Central California,2009,4,3,0.16666666666666666,7,5,0.2777777777777778
+region_year,full_oisst_domain,current_plus_trajectory,34,23,0.6764705882352942,0.795216739526216,0.11874615129092181,True,Central California,2010,4,4,0.17391304347826086,7,6,0.2608695652173913
+region_year,full_oisst_domain,current_plus_trajectory,30,1,0.03333333333333333,0.047619047619047616,0.014285714285714284,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,full_oisst_domain,current_plus_trajectory,34,25,0.7352941176470589,0.7820716252941534,0.04677750764709454,True,Central California,2013,4,2,0.08,7,5,0.2
+region_year,full_oisst_domain,current_plus_trajectory,33,1,0.030303030303030304,0.2,0.1696969696969697,True,Central California,2014,4,0,0.0,7,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,34,7,0.20588235294117646,0.35057773109243695,0.1446953781512605,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,full_oisst_domain,current_plus_trajectory,34,22,0.6470588235294118,0.8608982728246213,0.21383944929520948,True,Central California,2016,4,4,0.18181818181818182,7,5,0.22727272727272727
+region_year,full_oisst_domain,current_plus_trajectory,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,full_oisst_domain,current_plus_trajectory,34,32,0.9411764705882353,0.9124779470257318,-0.028698523562503464,True,Central California,2018,4,4,0.125,7,6,0.1875
+region_year,full_oisst_domain,current_plus_trajectory,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,full_oisst_domain,current_plus_trajectory,34,9,0.2647058823529412,0.3480059122164385,0.08330002986349733,True,Central California,2020,4,1,0.1111111111111111,7,3,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,33,1,0.030303030303030304,0.06666666666666667,0.03636363636363636,True,Central California,2021,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,34,33,0.9705882352941176,0.999108734402852,0.028520499108734332,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,full_oisst_domain,current_plus_trajectory,22,1,0.045454545454545456,0.05555555555555555,0.010101010101010097,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,31,1,0.03225806451612903,0.14285714285714285,0.11059907834101382,True,Central California,2024,4,0,0.0,7,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,full_oisst_domain,current_plus_trajectory,16,11,0.6875,0.9536042240587695,0.26610422405876955,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,full_oisst_domain,current_plus_trajectory,16,15,0.9375,0.9698826173826173,0.032382617382617274,True,Northern California,2009,2,2,0.13333333333333333,4,4,0.26666666666666666
+region_year,full_oisst_domain,current_plus_trajectory,15,5,0.3333333333333333,0.6385281385281385,0.3051948051948052,True,Northern California,2010,2,1,0.2,3,2,0.4
+region_year,full_oisst_domain,current_plus_trajectory,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,full_oisst_domain,current_plus_trajectory,16,9,0.5625,0.7919753086419754,0.2294753086419754,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,full_oisst_domain,current_plus_trajectory,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,full_oisst_domain,current_plus_trajectory,3,2,0.6666666666666666,0.8333333333333333,0.16666666666666663,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,full_oisst_domain,current_plus_trajectory,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,4,2,0.5,1.0,0.5,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,5,3,0.6,0.8055555555555556,0.2055555555555556,True,Oregon,2011,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,5,4,0.8,0.8041666666666667,0.004166666666666652,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,full_oisst_domain,current_plus_trajectory,5,2,0.4,0.5,0.09999999999999998,True,Oregon,2014,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,4,1,0.25,0.25,0.0,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,5,3,0.6,0.6388888888888888,0.03888888888888886,True,Oregon,2017,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,full_oisst_domain,current_plus_trajectory,4,3,0.75,0.9166666666666665,0.16666666666666652,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Oregon,2023,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,50,33,0.66,0.7076945397923271,0.04769453979232707,True,Southern California,2005,5,2,0.06060606060606061,10,7,0.21212121212121213
+region_year,full_oisst_domain,current_plus_trajectory,41,7,0.17073170731707318,0.8233516483516483,0.6526199410345751,True,Southern California,2006,5,4,0.5714285714285714,9,5,0.7142857142857143
+region_year,full_oisst_domain,current_plus_trajectory,50,24,0.48,0.6412300046397569,0.1612300046397569,True,Southern California,2007,5,4,0.16666666666666666,10,8,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,50,12,0.24,0.5104988885100281,0.2704988885100281,True,Southern California,2008,5,3,0.25,10,6,0.5
+region_year,full_oisst_domain,current_plus_trajectory,49,11,0.22448979591836735,0.4223462339780804,0.19785643805971306,True,Southern California,2009,5,2,0.18181818181818182,10,5,0.45454545454545453
+region_year,full_oisst_domain,current_plus_trajectory,49,31,0.6326530612244898,0.6910273120187134,0.05837425079422354,True,Southern California,2010,5,4,0.12903225806451613,10,7,0.22580645161290322
+region_year,full_oisst_domain,current_plus_trajectory,47,26,0.5531914893617021,0.6655035206352213,0.11231203127351919,True,Southern California,2011,5,2,0.07692307692307693,10,7,0.2692307692307692
+region_year,full_oisst_domain,current_plus_trajectory,45,3,0.06666666666666667,0.08463758463758464,0.017970917970917974,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,full_oisst_domain,current_plus_trajectory,52,43,0.8269230769230769,0.8603264852693739,0.03340340834629707,True,Southern California,2013,6,5,0.11627906976744186,11,9,0.20930232558139536
+region_year,full_oisst_domain,current_plus_trajectory,43,23,0.5348837209302325,0.6664787359778443,0.13159501504761184,True,Southern California,2014,5,5,0.21739130434782608,9,6,0.2608695652173913
+region_year,full_oisst_domain,current_plus_trajectory,34,14,0.4117647058823529,0.7624743326357656,0.35070962675341266,True,Southern California,2015,4,3,0.21428571428571427,7,5,0.35714285714285715
+region_year,full_oisst_domain,current_plus_trajectory,35,8,0.22857142857142856,0.6836760461760462,0.4551046176046176,True,Southern California,2016,4,3,0.375,7,4,0.5
+region_year,full_oisst_domain,current_plus_trajectory,40,9,0.225,0.4114434921187795,0.1864434921187795,True,Southern California,2017,4,2,0.2222222222222222,8,3,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,45,37,0.8222222222222222,0.9457393832530114,0.12351716103078925,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,full_oisst_domain,current_plus_trajectory,26,8,0.3076923076923077,0.5709325396825397,0.26324023199023194,True,Southern California,2019,3,2,0.25,6,4,0.5
+region_year,full_oisst_domain,current_plus_trajectory,39,13,0.3333333333333333,0.342107923087419,0.008774589754085682,True,Southern California,2020,4,1,0.07692307692307693,8,2,0.15384615384615385
+region_year,full_oisst_domain,current_plus_trajectory,40,12,0.3,0.8084725907306552,0.5084725907306553,True,Southern California,2021,4,4,0.3333333333333333,8,6,0.5
+region_year,full_oisst_domain,current_plus_trajectory,41,27,0.6585365853658537,0.7281331105194311,0.0695965251535774,True,Southern California,2022,5,3,0.1111111111111111,9,6,0.2222222222222222
+region_year,full_oisst_domain,current_plus_trajectory,29,1,0.034482758620689655,1.0,0.9655172413793104,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,37,9,0.24324324324324326,0.27141910568866445,0.028175862445421196,True,Southern California,2024,4,0,0.0,8,2,0.2222222222222222
+region_year,full_oisst_domain,current_plus_trajectory,15,2,0.13333333333333333,1.0,0.8666666666666667,True,Washington outer coast,2005,2,2,1.0,3,2,1.0
+region_year,full_oisst_domain,current_plus_trajectory,15,5,0.3333333333333333,0.6602564102564104,0.32692307692307704,True,Washington outer coast,2006,2,1,0.2,3,2,0.4
+region_year,full_oisst_domain,current_plus_trajectory,14,0,0.0,,,False,Washington outer coast,2007,2,0,,3,0,
+region_year,full_oisst_domain,current_plus_trajectory,14,4,0.2857142857142857,0.7321428571428572,0.4464285714285715,True,Washington outer coast,2008,2,2,0.5,3,2,0.5
+region_year,full_oisst_domain,current_plus_trajectory,15,12,0.8,0.9075829263329264,0.10758292633292632,True,Washington outer coast,2009,2,2,0.16666666666666666,3,3,0.25
+region_year,full_oisst_domain,current_plus_trajectory,15,1,0.06666666666666667,1.0,0.9333333333333333,True,Washington outer coast,2010,2,1,1.0,3,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,9,4,0.4444444444444444,0.8928571428571428,0.4484126984126984,True,Washington outer coast,2011,1,1,0.25,2,2,0.5
+region_year,full_oisst_domain,current_plus_trajectory,8,5,0.625,0.8350000000000001,0.21000000000000008,True,Washington outer coast,2012,1,1,0.2,2,2,0.4
+region_year,full_oisst_domain,current_plus_trajectory,11,2,0.18181818181818182,0.375,0.19318181818181818,True,Washington outer coast,2013,2,1,0.5,3,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,15,1,0.06666666666666667,0.3333333333333333,0.26666666666666666,True,Washington outer coast,2014,2,0,0.0,3,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,15,6,0.4,0.7972222222222222,0.39722222222222214,True,Washington outer coast,2015,2,2,0.3333333333333333,3,2,0.3333333333333333
+region_year,full_oisst_domain,current_plus_trajectory,15,2,0.13333333333333333,0.5,0.3666666666666667,True,Washington outer coast,2016,2,1,0.5,3,1,0.5
+region_year,full_oisst_domain,current_plus_trajectory,15,1,0.06666666666666667,0.3333333333333333,0.26666666666666666,True,Washington outer coast,2017,2,0,0.0,3,1,1.0
+region_year,full_oisst_domain,current_plus_trajectory,15,0,0.0,,,False,Washington outer coast,2018,2,0,,3,0,
+region_year,full_oisst_domain,current_plus_trajectory,15,12,0.8,0.9935897435897437,0.19358974358974368,True,Washington outer coast,2019,2,2,0.16666666666666666,3,3,0.25
+region_year,full_oisst_domain,current_plus_trajectory,15,0,0.0,,,False,Washington outer coast,2020,2,0,,3,0,
+region_year,full_oisst_domain,current_plus_trajectory,15,13,0.8666666666666667,0.9945054945054943,0.1278388278388276,True,Washington outer coast,2021,2,2,0.15384615384615385,3,3,0.23076923076923078
+region_year,full_oisst_domain,current_plus_trajectory,15,0,0.0,,,False,Washington outer coast,2022,2,0,,3,0,
+region_year,full_oisst_domain,current_plus_trajectory,15,5,0.3333333333333333,0.48833333333333334,0.15500000000000003,True,Washington outer coast,2023,2,1,0.2,3,1,0.2
+region_year,full_oisst_domain,current_plus_trajectory,15,1,0.06666666666666667,0.3333333333333333,0.26666666666666666,True,Washington outer coast,2024,2,0,0.0,3,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,37,33,0.8918918918918919,0.9871304884718752,0.09523859657998335,True,Baja California Norte,2005,4,4,0.12121212121212122,8,8,0.24242424242424243
+region_year,full_oisst_domain,trajectory_plus_oisst,30,0,0.0,,,False,Baja California Norte,2006,3,0,,6,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,40,16,0.4,0.6518906459112102,0.25189064591121013,True,Baja California Norte,2007,4,3,0.1875,8,6,0.375
+region_year,full_oisst_domain,trajectory_plus_oisst,40,5,0.125,0.26758241758241763,0.14258241758241763,True,Baja California Norte,2008,4,1,0.2,8,2,0.4
+region_year,full_oisst_domain,trajectory_plus_oisst,39,22,0.5641025641025641,0.6339309133998704,0.0698283492973063,True,Baja California Norte,2009,4,2,0.09090909090909091,8,5,0.22727272727272727
+region_year,full_oisst_domain,trajectory_plus_oisst,38,15,0.39473684210526316,0.7124856975719044,0.3177488554666412,True,Baja California Norte,2010,4,4,0.26666666666666666,8,5,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,33,17,0.5151515151515151,0.903816942927723,0.38866542777620783,True,Baja California Norte,2011,4,4,0.23529411764705882,7,7,0.4117647058823529
+region_year,full_oisst_domain,trajectory_plus_oisst,35,7,0.2,0.40126777983920836,0.20126777983920835,True,Baja California Norte,2012,4,2,0.2857142857142857,7,3,0.42857142857142855
+region_year,full_oisst_domain,trajectory_plus_oisst,38,7,0.18421052631578946,0.4774118738404452,0.29320134752465576,True,Baja California Norte,2013,4,2,0.2857142857142857,8,5,0.7142857142857143
+region_year,full_oisst_domain,trajectory_plus_oisst,39,17,0.4358974358974359,0.5105834896485507,0.07468605375111481,True,Baja California Norte,2014,4,2,0.11764705882352941,8,4,0.23529411764705882
+region_year,full_oisst_domain,trajectory_plus_oisst,32,30,0.9375,0.992191659653191,0.054691659653191005,True,Baja California Norte,2015,4,4,0.13333333333333333,7,7,0.23333333333333334
+region_year,full_oisst_domain,trajectory_plus_oisst,20,3,0.15,0.15974765974765975,0.00974765974765976,True,Baja California Norte,2016,2,0,0.0,4,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,26,3,0.11538461538461539,0.43240093240093236,0.31701631701631694,True,Baja California Norte,2017,3,1,0.3333333333333333,6,1,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,35,31,0.8857142857142857,0.9575449483158209,0.07183066260153526,True,Baja California Norte,2018,4,4,0.12903225806451613,7,7,0.22580645161290322
+region_year,full_oisst_domain,trajectory_plus_oisst,19,9,0.47368421052631576,0.6740047534165181,0.20032054289020235,True,Baja California Norte,2019,2,2,0.2222222222222222,4,3,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,23,16,0.6956521739130435,0.7616887676830132,0.06603659376996973,True,Baja California Norte,2020,3,2,0.125,5,4,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,17,2,0.11764705882352941,0.3611111111111111,0.2434640522875817,True,Baja California Norte,2021,2,1,0.5,4,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,16,12,0.75,0.8983287545787546,0.1483287545787546,True,Baja California Norte,2022,2,2,0.16666666666666666,4,4,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,17,5,0.29411764705882354,0.4841666666666667,0.19004901960784315,True,Baja California Norte,2023,2,1,0.2,4,1,0.2
+region_year,full_oisst_domain,trajectory_plus_oisst,15,5,0.3333333333333333,0.6666666666666666,0.3333333333333333,True,Baja California Norte,2024,2,2,0.4,3,2,0.4
+region_year,full_oisst_domain,trajectory_plus_oisst,3,1,0.3333333333333333,1.0,0.6666666666666667,True,Baja California Sur,2005,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,3,0,0.0,,,False,Baja California Sur,2006,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,3,0,0.0,,,False,Baja California Sur,2007,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,3,3,1.0,,,False,Baja California Sur,2008,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,3,1,0.3333333333333333,0.5,0.16666666666666669,True,Baja California Sur,2009,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,3,0,0.0,,,False,Baja California Sur,2010,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,3,0,0.0,,,False,Baja California Sur,2011,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Baja California Sur,2012,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,3,0,0.0,,,False,Baja California Sur,2013,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,3,3,1.0,,,False,Baja California Sur,2014,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,1,1,1.0,,,False,Baja California Sur,2015,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,1,0,0.0,,,False,Baja California Sur,2017,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Baja California Sur,2018,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,2,0,0.0,,,False,Baja California Sur,2019,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,2,0,0.0,,,False,Baja California Sur,2020,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,2,2,1.0,,,False,Baja California Sur,2021,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Baja California Sur,2022,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,2,1,0.5,0.5,0.0,True,Baja California Sur,2023,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,2,0,0.0,,,False,Baja California Sur,2024,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,33,17,0.5151515151515151,0.6669590845772561,0.15180756942574092,True,Central California,2005,4,2,0.11764705882352941,7,5,0.29411764705882354
+region_year,full_oisst_domain,trajectory_plus_oisst,33,2,0.06060606060606061,0.24358974358974358,0.18298368298368298,True,Central California,2006,4,1,0.5,7,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,34,7,0.20588235294117646,0.4721041734771712,0.26622182053599475,True,Central California,2007,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,full_oisst_domain,trajectory_plus_oisst,33,3,0.09090909090909091,0.07996632996632996,-0.010942760942760948,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,34,18,0.5294117647058824,0.6532972565625226,0.12388549185664022,True,Central California,2009,4,2,0.1111111111111111,7,5,0.2777777777777778
+region_year,full_oisst_domain,trajectory_plus_oisst,34,23,0.6764705882352942,0.8318968408418527,0.1554262526065585,True,Central California,2010,4,4,0.17391304347826086,7,7,0.30434782608695654
+region_year,full_oisst_domain,trajectory_plus_oisst,30,1,0.03333333333333333,0.0625,0.029166666666666667,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,34,25,0.7352941176470589,0.7859443164263726,0.05065019877931376,True,Central California,2013,4,3,0.12,7,5,0.2
+region_year,full_oisst_domain,trajectory_plus_oisst,33,1,0.030303030303030304,0.3333333333333333,0.303030303030303,True,Central California,2014,4,1,1.0,7,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,34,7,0.20588235294117646,0.41699670784338977,0.2111143549022133,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,full_oisst_domain,trajectory_plus_oisst,34,22,0.6470588235294118,0.8760003137607706,0.2289414902313588,True,Central California,2016,4,4,0.18181818181818182,7,6,0.2727272727272727
+region_year,full_oisst_domain,trajectory_plus_oisst,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,34,32,0.9411764705882353,0.9626094930575295,0.02143302246929424,True,Central California,2018,4,4,0.125,7,7,0.21875
+region_year,full_oisst_domain,trajectory_plus_oisst,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,34,9,0.2647058823529412,0.39041101142550416,0.12570512907256298,True,Central California,2020,4,1,0.1111111111111111,7,3,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,33,1,0.030303030303030304,0.09090909090909091,0.06060606060606061,True,Central California,2021,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,34,33,0.9705882352941176,0.9972434910603359,0.0266552557662183,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,full_oisst_domain,trajectory_plus_oisst,22,1,0.045454545454545456,0.05,0.004545454545454547,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,31,1,0.03225806451612903,0.125,0.09274193548387097,True,Central California,2024,4,0,0.0,7,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,16,11,0.6875,0.9536042240587695,0.26610422405876955,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,full_oisst_domain,trajectory_plus_oisst,16,15,0.9375,0.9698826173826173,0.032382617382617274,True,Northern California,2009,2,2,0.13333333333333333,4,4,0.26666666666666666
+region_year,full_oisst_domain,trajectory_plus_oisst,15,5,0.3333333333333333,0.5353646353646353,0.20203130203130198,True,Northern California,2010,2,1,0.2,3,1,0.2
+region_year,full_oisst_domain,trajectory_plus_oisst,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,16,9,0.5625,0.7587622254288922,0.19626222542889216,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,full_oisst_domain,trajectory_plus_oisst,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,5,4,0.8,1.0,0.19999999999999996,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,4,2,0.5,1.0,0.5,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,5,3,0.6,0.5888888888888889,-0.011111111111111072,True,Oregon,2011,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,5,2,0.4,0.5833333333333333,0.18333333333333324,True,Oregon,2014,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,4,1,0.25,0.25,0.0,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,5,3,0.6,0.8055555555555556,0.2055555555555556,True,Oregon,2017,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,4,3,0.75,1.0,0.25,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Oregon,2023,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,50,33,0.66,0.6748034431596379,0.014803443159637886,True,Southern California,2005,5,3,0.09090909090909091,10,7,0.21212121212121213
+region_year,full_oisst_domain,trajectory_plus_oisst,41,7,0.17073170731707318,0.7299843014128728,0.5592525940957996,True,Southern California,2006,5,3,0.42857142857142855,9,4,0.5714285714285714
+region_year,full_oisst_domain,trajectory_plus_oisst,50,24,0.48,0.5603135257541514,0.0803135257541514,True,Southern California,2007,5,4,0.16666666666666666,10,6,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,50,12,0.24,0.38262810328426883,0.14262810328426884,True,Southern California,2008,5,2,0.16666666666666666,10,4,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,49,11,0.22448979591836735,0.4372581986828055,0.21276840276443817,True,Southern California,2009,5,2,0.18181818181818182,10,6,0.5454545454545454
+region_year,full_oisst_domain,trajectory_plus_oisst,49,31,0.6326530612244898,0.6870193381534749,0.0543662769289851,True,Southern California,2010,5,4,0.12903225806451613,10,6,0.1935483870967742
+region_year,full_oisst_domain,trajectory_plus_oisst,47,26,0.5531914893617021,0.6938162903603553,0.14062480099865315,True,Southern California,2011,5,3,0.11538461538461539,10,7,0.2692307692307692
+region_year,full_oisst_domain,trajectory_plus_oisst,45,3,0.06666666666666667,0.12103174603174602,0.05436507936507935,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,full_oisst_domain,trajectory_plus_oisst,52,43,0.8269230769230769,0.8303449983316273,0.0034219214085504657,True,Southern California,2013,6,5,0.11627906976744186,11,9,0.20930232558139536
+region_year,full_oisst_domain,trajectory_plus_oisst,43,23,0.5348837209302325,0.7169001414404413,0.18201642051020883,True,Southern California,2014,5,4,0.17391304347826086,9,7,0.30434782608695654
+region_year,full_oisst_domain,trajectory_plus_oisst,34,14,0.4117647058823529,0.7975135975135974,0.3857488916312445,True,Southern California,2015,4,4,0.2857142857142857,7,5,0.35714285714285715
+region_year,full_oisst_domain,trajectory_plus_oisst,35,8,0.22857142857142856,0.6375,0.4089285714285714,True,Southern California,2016,4,3,0.375,7,4,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,40,9,0.225,0.37471024560292426,0.14971024560292426,True,Southern California,2017,4,2,0.2222222222222222,8,3,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,45,37,0.8222222222222222,0.9552078565259843,0.1329856343037621,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,full_oisst_domain,trajectory_plus_oisst,26,8,0.3076923076923077,0.5503637310187233,0.24267142332641556,True,Southern California,2019,3,2,0.25,6,3,0.375
+region_year,full_oisst_domain,trajectory_plus_oisst,39,13,0.3333333333333333,0.38483381516848336,0.05150048183515005,True,Southern California,2020,4,1,0.07692307692307693,8,2,0.15384615384615385
+region_year,full_oisst_domain,trajectory_plus_oisst,40,12,0.3,0.830191798941799,0.530191798941799,True,Southern California,2021,4,4,0.3333333333333333,8,7,0.5833333333333334
+region_year,full_oisst_domain,trajectory_plus_oisst,41,27,0.6585365853658537,0.7119439812906276,0.05340739592477395,True,Southern California,2022,5,3,0.1111111111111111,9,5,0.18518518518518517
+region_year,full_oisst_domain,trajectory_plus_oisst,29,1,0.034482758620689655,0.5,0.46551724137931033,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,37,9,0.24324324324324326,0.2691003441003441,0.025857100857100856,True,Southern California,2024,4,0,0.0,8,1,0.1111111111111111
+region_year,full_oisst_domain,trajectory_plus_oisst,15,2,0.13333333333333333,0.75,0.6166666666666667,True,Washington outer coast,2005,2,1,0.5,3,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,15,5,0.3333333333333333,0.7051948051948052,0.37186147186147184,True,Washington outer coast,2006,2,2,0.4,3,2,0.4
+region_year,full_oisst_domain,trajectory_plus_oisst,14,0,0.0,,,False,Washington outer coast,2007,2,0,,3,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,14,4,0.2857142857142857,0.8166666666666667,0.530952380952381,True,Washington outer coast,2008,2,2,0.5,3,2,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,15,12,0.8,0.9191509879009879,0.11915098790098788,True,Washington outer coast,2009,2,2,0.16666666666666666,3,3,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,15,1,0.06666666666666667,1.0,0.9333333333333333,True,Washington outer coast,2010,2,1,1.0,3,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,9,4,0.4444444444444444,0.8928571428571428,0.4484126984126984,True,Washington outer coast,2011,1,1,0.25,2,2,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,8,5,0.625,0.7892857142857144,0.16428571428571437,True,Washington outer coast,2012,1,1,0.2,2,2,0.4
+region_year,full_oisst_domain,trajectory_plus_oisst,11,2,0.18181818181818182,0.625,0.4431818181818182,True,Washington outer coast,2013,2,1,0.5,3,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,15,1,0.06666666666666667,0.5,0.43333333333333335,True,Washington outer coast,2014,2,1,1.0,3,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,15,6,0.4,0.6746031746031745,0.2746031746031745,True,Washington outer coast,2015,2,1,0.16666666666666666,3,2,0.3333333333333333
+region_year,full_oisst_domain,trajectory_plus_oisst,15,2,0.13333333333333333,0.41666666666666663,0.2833333333333333,True,Washington outer coast,2016,2,1,0.5,3,1,0.5
+region_year,full_oisst_domain,trajectory_plus_oisst,15,1,0.06666666666666667,0.3333333333333333,0.26666666666666666,True,Washington outer coast,2017,2,0,0.0,3,1,1.0
+region_year,full_oisst_domain,trajectory_plus_oisst,15,0,0.0,,,False,Washington outer coast,2018,2,0,,3,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,15,12,0.8,0.9510602823102824,0.15106028231028235,True,Washington outer coast,2019,2,2,0.16666666666666666,3,3,0.25
+region_year,full_oisst_domain,trajectory_plus_oisst,15,0,0.0,,,False,Washington outer coast,2020,2,0,,3,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,15,13,0.8666666666666667,0.9751850713389172,0.10851840467225049,True,Washington outer coast,2021,2,2,0.15384615384615385,3,3,0.23076923076923078
+region_year,full_oisst_domain,trajectory_plus_oisst,15,0,0.0,,,False,Washington outer coast,2022,2,0,,3,0,
+region_year,full_oisst_domain,trajectory_plus_oisst,15,5,0.3333333333333333,0.35248917748917746,0.01915584415584415,True,Washington outer coast,2023,2,0,0.0,3,1,0.2
+region_year,full_oisst_domain,trajectory_plus_oisst,15,1,0.06666666666666667,0.3333333333333333,0.26666666666666666,True,Washington outer coast,2024,2,0,0.0,3,1,1.0
+region_year,upwelling_supported_domain,current_only,33,17,0.5151515151515151,0.6860968549405755,0.17094533978906035,True,Central California,2005,4,2,0.11764705882352941,7,5,0.29411764705882354
+region_year,upwelling_supported_domain,current_only,33,2,0.06060606060606061,0.29166666666666663,0.23106060606060602,True,Central California,2006,4,1,0.5,7,1,0.5
+region_year,upwelling_supported_domain,current_only,34,7,0.20588235294117646,0.4483294930875576,0.24244714014638113,True,Central California,2007,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,upwelling_supported_domain,current_only,33,3,0.09090909090909091,0.08073206986250464,-0.010177021046586271,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,current_only,34,18,0.5294117647058824,0.7430891706254026,0.21367740591952022,True,Central California,2009,4,3,0.16666666666666666,7,5,0.2777777777777778
+region_year,upwelling_supported_domain,current_only,34,23,0.6764705882352942,0.7602543576152669,0.08378376937997278,True,Central California,2010,4,3,0.13043478260869565,7,5,0.21739130434782608
+region_year,upwelling_supported_domain,current_only,30,1,0.03333333333333333,0.08333333333333333,0.049999999999999996,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,upwelling_supported_domain,current_only,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,upwelling_supported_domain,current_only,34,25,0.7352941176470589,0.8489198760699115,0.11362575842285261,True,Central California,2013,4,4,0.16,7,6,0.24
+region_year,upwelling_supported_domain,current_only,33,1,0.030303030303030304,0.2,0.1696969696969697,True,Central California,2014,4,0,0.0,7,1,1.0
+region_year,upwelling_supported_domain,current_only,34,7,0.20588235294117646,0.4647377230462077,0.25885537010503124,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,upwelling_supported_domain,current_only,34,22,0.6470588235294118,0.9057819280693102,0.25872310453989844,True,Central California,2016,4,4,0.18181818181818182,7,7,0.3181818181818182
+region_year,upwelling_supported_domain,current_only,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,upwelling_supported_domain,current_only,34,32,0.9411764705882353,0.9232181616721965,-0.01795830891603878,True,Central California,2018,4,4,0.125,7,6,0.1875
+region_year,upwelling_supported_domain,current_only,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,upwelling_supported_domain,current_only,34,9,0.2647058823529412,0.33272019051825225,0.06801430816531107,True,Central California,2020,4,1,0.1111111111111111,7,3,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,33,1,0.030303030303030304,0.16666666666666666,0.13636363636363635,True,Central California,2021,4,0,0.0,7,1,1.0
+region_year,upwelling_supported_domain,current_only,34,33,0.9705882352941176,0.9908408541608507,0.02025261886673302,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,upwelling_supported_domain,current_only,22,1,0.045454545454545456,0.07692307692307693,0.03146853146853147,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,upwelling_supported_domain,current_only,31,1,0.03225806451612903,0.14285714285714285,0.11059907834101382,True,Central California,2024,4,0,0.0,7,1,1.0
+region_year,upwelling_supported_domain,current_only,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_only,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,upwelling_supported_domain,current_only,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,upwelling_supported_domain,current_only,16,11,0.6875,0.975068870523416,0.28756887052341595,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,upwelling_supported_domain,current_only,16,15,0.9375,0.913506956006956,-0.023993043993044028,True,Northern California,2009,2,2,0.13333333333333333,4,3,0.2
+region_year,upwelling_supported_domain,current_only,15,5,0.3333333333333333,0.72,0.38666666666666666,True,Northern California,2010,2,2,0.4,3,2,0.4
+region_year,upwelling_supported_domain,current_only,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,upwelling_supported_domain,current_only,16,9,0.5625,0.7540885040885041,0.19158850408850414,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,upwelling_supported_domain,current_only,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_only,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_only,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,upwelling_supported_domain,current_only,3,2,0.6666666666666666,0.8333333333333333,0.16666666666666663,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_only,5,4,0.8,1.0,0.19999999999999996,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,current_only,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,upwelling_supported_domain,current_only,4,2,0.5,1.0,0.5,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_only,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,upwelling_supported_domain,current_only,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_only,5,3,0.6,0.7555555555555555,0.15555555555555556,True,Oregon,2011,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,upwelling_supported_domain,current_only,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,current_only,5,2,0.4,0.8333333333333333,0.43333333333333324,True,Oregon,2014,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_only,4,1,0.25,0.3333333333333333,0.08333333333333331,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_only,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,upwelling_supported_domain,current_only,5,3,0.6,0.5333333333333333,-0.06666666666666665,True,Oregon,2017,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_only,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,upwelling_supported_domain,current_only,4,3,0.75,0.9166666666666665,0.16666666666666652,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_only,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_only,2,1,0.5,0.5,0.0,True,Oregon,2023,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_only,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_only,50,33,0.66,0.7326574219141273,0.07265742191412727,True,Southern California,2005,5,4,0.12121212121212122,10,7,0.21212121212121213
+region_year,upwelling_supported_domain,current_only,41,7,0.17073170731707318,0.7687074829931972,0.597975775676124,True,Southern California,2006,5,3,0.42857142857142855,9,6,0.8571428571428571
+region_year,upwelling_supported_domain,current_only,50,24,0.48,0.599888039769146,0.11988803976914597,True,Southern California,2007,5,4,0.16666666666666666,10,7,0.2916666666666667
+region_year,upwelling_supported_domain,current_only,50,12,0.24,0.4690257904963787,0.22902579049637872,True,Southern California,2008,5,3,0.25,10,5,0.4166666666666667
+region_year,upwelling_supported_domain,current_only,49,11,0.22448979591836735,0.3998699042895545,0.17538010837118714,True,Southern California,2009,5,2,0.18181818181818182,10,4,0.36363636363636365
+region_year,upwelling_supported_domain,current_only,49,31,0.6326530612244898,0.6909318658019343,0.0582788045774445,True,Southern California,2010,5,4,0.12903225806451613,10,7,0.22580645161290322
+region_year,upwelling_supported_domain,current_only,47,26,0.5531914893617021,0.680181553618331,0.12699006425662884,True,Southern California,2011,5,3,0.11538461538461539,10,7,0.2692307692307692
+region_year,upwelling_supported_domain,current_only,45,3,0.06666666666666667,0.13992673992673993,0.07326007326007326,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,upwelling_supported_domain,current_only,52,43,0.8269230769230769,0.8847931391566748,0.05787006223359792,True,Southern California,2013,6,6,0.13953488372093023,11,10,0.23255813953488372
+region_year,upwelling_supported_domain,current_only,43,23,0.5348837209302325,0.7679535616456143,0.23306984071538184,True,Southern California,2014,5,5,0.21739130434782608,9,7,0.30434782608695654
+region_year,upwelling_supported_domain,current_only,34,14,0.4117647058823529,0.8172584185189227,0.40549371263656975,True,Southern California,2015,4,3,0.21428571428571427,7,5,0.35714285714285715
+region_year,upwelling_supported_domain,current_only,35,8,0.22857142857142856,0.6098616600790514,0.38129023150762287,True,Southern California,2016,4,3,0.375,7,3,0.375
+region_year,upwelling_supported_domain,current_only,40,9,0.225,0.3971935190330443,0.17219351903304428,True,Southern California,2017,4,2,0.2222222222222222,8,3,0.3333333333333333
+region_year,upwelling_supported_domain,current_only,45,37,0.8222222222222222,0.9313537705170201,0.10913154829479788,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,upwelling_supported_domain,current_only,26,8,0.3076923076923077,0.3887839968003011,0.08109168910799341,True,Southern California,2019,3,1,0.125,6,2,0.25
+region_year,upwelling_supported_domain,current_only,39,13,0.3333333333333333,0.33107132391039606,-0.00226200942293725,True,Southern California,2020,4,1,0.07692307692307693,8,2,0.15384615384615385
+region_year,upwelling_supported_domain,current_only,40,12,0.3,0.6636843845725424,0.36368438457254243,True,Southern California,2021,4,2,0.16666666666666666,8,6,0.5
+region_year,upwelling_supported_domain,current_only,41,27,0.6585365853658537,0.7337296462988303,0.07519306093297662,True,Southern California,2022,5,4,0.14814814814814814,9,6,0.2222222222222222
+region_year,upwelling_supported_domain,current_only,29,1,0.034482758620689655,0.5,0.46551724137931033,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,upwelling_supported_domain,current_only,37,9,0.24324324324324326,0.24342886524369312,0.00018562200044985877,True,Southern California,2024,4,0,0.0,8,1,0.1111111111111111
+region_year,upwelling_supported_domain,current_plus_trajectory,33,17,0.5151515151515151,0.5907724820354578,0.07562096688394271,True,Central California,2005,4,1,0.058823529411764705,7,3,0.17647058823529413
+region_year,upwelling_supported_domain,current_plus_trajectory,33,2,0.06060606060606061,0.1111111111111111,0.0505050505050505,True,Central California,2006,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,34,7,0.20588235294117646,0.4309591030087924,0.22507675006761596,True,Central California,2007,4,2,0.2857142857142857,7,3,0.42857142857142855
+region_year,upwelling_supported_domain,current_plus_trajectory,33,3,0.09090909090909091,0.09294117647058824,0.0020320855614973238,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,34,18,0.5294117647058824,0.6583353350661454,0.12892357036026303,True,Central California,2009,4,3,0.16666666666666666,7,4,0.2222222222222222
+region_year,upwelling_supported_domain,current_plus_trajectory,34,23,0.6764705882352942,0.7637177071770571,0.08724711894176296,True,Central California,2010,4,3,0.13043478260869565,7,6,0.2608695652173913
+region_year,upwelling_supported_domain,current_plus_trajectory,30,1,0.03333333333333333,0.041666666666666664,0.008333333333333331,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,34,25,0.7352941176470589,0.7688591215481811,0.03356500390112227,True,Central California,2013,4,3,0.12,7,4,0.16
+region_year,upwelling_supported_domain,current_plus_trajectory,33,1,0.030303030303030304,0.25,0.2196969696969697,True,Central California,2014,4,1,1.0,7,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,34,7,0.20588235294117646,0.3881101986249045,0.18222784568372802,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,upwelling_supported_domain,current_plus_trajectory,34,22,0.6470588235294118,0.8788818161158896,0.23182299258647776,True,Central California,2016,4,4,0.18181818181818182,7,6,0.2727272727272727
+region_year,upwelling_supported_domain,current_plus_trajectory,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,34,32,0.9411764705882353,0.8995935224225573,-0.04158294816567798,True,Central California,2018,4,3,0.09375,7,6,0.1875
+region_year,upwelling_supported_domain,current_plus_trajectory,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,34,9,0.2647058823529412,0.3330354080505321,0.06832952569759093,True,Central California,2020,4,1,0.1111111111111111,7,2,0.2222222222222222
+region_year,upwelling_supported_domain,current_plus_trajectory,33,1,0.030303030303030304,0.058823529411764705,0.0285204991087344,True,Central California,2021,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,34,33,0.9705882352941176,0.999108734402852,0.028520499108734332,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,upwelling_supported_domain,current_plus_trajectory,22,1,0.045454545454545456,0.0625,0.017045454545454544,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,31,1,0.03225806451612903,0.14285714285714285,0.11059907834101382,True,Central California,2024,4,0,0.0,7,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,16,11,0.6875,0.9536042240587695,0.26610422405876955,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,upwelling_supported_domain,current_plus_trajectory,16,15,0.9375,0.9698826173826173,0.032382617382617274,True,Northern California,2009,2,2,0.13333333333333333,4,4,0.26666666666666666
+region_year,upwelling_supported_domain,current_plus_trajectory,15,5,0.3333333333333333,0.6676190476190476,0.33428571428571424,True,Northern California,2010,2,1,0.2,3,2,0.4
+region_year,upwelling_supported_domain,current_plus_trajectory,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,16,9,0.5625,0.7919753086419754,0.2294753086419754,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,upwelling_supported_domain,current_plus_trajectory,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,upwelling_supported_domain,current_plus_trajectory,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,upwelling_supported_domain,current_plus_trajectory,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,upwelling_supported_domain,current_plus_trajectory,3,2,0.6666666666666666,0.8333333333333333,0.16666666666666663,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,current_plus_trajectory,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,4,2,0.5,0.8333333333333333,0.33333333333333326,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,5,3,0.6,0.8055555555555556,0.2055555555555556,True,Oregon,2011,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,current_plus_trajectory,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,current_plus_trajectory,5,2,0.4,0.5,0.09999999999999998,True,Oregon,2014,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,4,1,0.25,0.25,0.0,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,5,3,0.6,0.6388888888888888,0.03888888888888886,True,Oregon,2017,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,current_plus_trajectory,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,upwelling_supported_domain,current_plus_trajectory,4,3,0.75,1.0,0.25,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,current_plus_trajectory,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Oregon,2023,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,50,33,0.66,0.6966792250938869,0.03667922509388688,True,Southern California,2005,5,2,0.06060606060606061,10,7,0.21212121212121213
+region_year,upwelling_supported_domain,current_plus_trajectory,41,7,0.17073170731707318,0.7742019884877027,0.6034702811706295,True,Southern California,2006,5,3,0.42857142857142855,9,5,0.7142857142857143
+region_year,upwelling_supported_domain,current_plus_trajectory,50,24,0.48,0.6253426311233994,0.1453426311233994,True,Southern California,2007,5,4,0.16666666666666666,10,7,0.2916666666666667
+region_year,upwelling_supported_domain,current_plus_trajectory,50,12,0.24,0.5463760927076144,0.30637609270761446,True,Southern California,2008,5,4,0.3333333333333333,10,6,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,49,11,0.22448979591836735,0.3962270665842095,0.17173727066584213,True,Southern California,2009,5,2,0.18181818181818182,10,5,0.45454545454545453
+region_year,upwelling_supported_domain,current_plus_trajectory,49,31,0.6326530612244898,0.6751518964053818,0.042498835180891925,True,Southern California,2010,5,4,0.12903225806451613,10,6,0.1935483870967742
+region_year,upwelling_supported_domain,current_plus_trajectory,47,26,0.5531914893617021,0.6468996409744647,0.09370815161276258,True,Southern California,2011,5,2,0.07692307692307693,10,6,0.23076923076923078
+region_year,upwelling_supported_domain,current_plus_trajectory,45,3,0.06666666666666667,0.07957671957671958,0.012910052910052913,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,upwelling_supported_domain,current_plus_trajectory,52,43,0.8269230769230769,0.8666060944541599,0.039683017531083054,True,Southern California,2013,6,5,0.11627906976744186,11,10,0.23255813953488372
+region_year,upwelling_supported_domain,current_plus_trajectory,43,23,0.5348837209302325,0.6834298985931071,0.1485461776628746,True,Southern California,2014,5,5,0.21739130434782608,9,5,0.21739130434782608
+region_year,upwelling_supported_domain,current_plus_trajectory,34,14,0.4117647058823529,0.7718180883806904,0.3600533824983375,True,Southern California,2015,4,4,0.2857142857142857,7,5,0.35714285714285715
+region_year,upwelling_supported_domain,current_plus_trajectory,35,8,0.22857142857142856,0.6572939763167467,0.42872254774531815,True,Southern California,2016,4,3,0.375,7,4,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,40,9,0.225,0.347010044388561,0.12201004438856097,True,Southern California,2017,4,1,0.1111111111111111,8,3,0.3333333333333333
+region_year,upwelling_supported_domain,current_plus_trajectory,45,37,0.8222222222222222,0.920647334778125,0.0984251125559028,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,upwelling_supported_domain,current_plus_trajectory,26,8,0.3076923076923077,0.5883295625942684,0.2806372549019607,True,Southern California,2019,3,2,0.25,6,4,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,39,13,0.3333333333333333,0.37575018617088674,0.04241685283755342,True,Southern California,2020,4,2,0.15384615384615385,8,2,0.15384615384615385
+region_year,upwelling_supported_domain,current_plus_trajectory,40,12,0.3,0.7406944332156556,0.44069443321565566,True,Southern California,2021,4,3,0.25,8,6,0.5
+region_year,upwelling_supported_domain,current_plus_trajectory,41,27,0.6585365853658537,0.7218238215917945,0.06328723622594079,True,Southern California,2022,5,3,0.1111111111111111,9,6,0.2222222222222222
+region_year,upwelling_supported_domain,current_plus_trajectory,29,1,0.034482758620689655,0.5,0.46551724137931033,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,upwelling_supported_domain,current_plus_trajectory,37,9,0.24324324324324326,0.2804584134189397,0.03721517017569642,True,Southern California,2024,4,0,0.0,8,1,0.1111111111111111
+region_year,upwelling_supported_domain,trajectory_plus_oisst,33,17,0.5151515151515151,0.6526947587719446,0.13754324362042947,True,Central California,2005,4,2,0.11764705882352941,7,4,0.23529411764705882
+region_year,upwelling_supported_domain,trajectory_plus_oisst,33,2,0.06060606060606061,0.17045454545454547,0.10984848484848486,True,Central California,2006,4,1,0.5,7,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,7,0.20588235294117646,0.473420202743511,0.2675378498023345,True,Central California,2007,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,upwelling_supported_domain,trajectory_plus_oisst,33,3,0.09090909090909091,0.08211233211233213,-0.008796758796758786,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,18,0.5294117647058824,0.657366632663984,0.12795486795810163,True,Central California,2009,4,3,0.16666666666666666,7,4,0.2222222222222222
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,23,0.6764705882352942,0.799920777207834,0.1234501889725399,True,Central California,2010,4,4,0.17391304347826086,7,6,0.2608695652173913
+region_year,upwelling_supported_domain,trajectory_plus_oisst,30,1,0.03333333333333333,0.043478260869565216,0.010144927536231883,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,25,0.7352941176470589,0.7746638751495613,0.03936975750250238,True,Central California,2013,4,3,0.12,7,5,0.2
+region_year,upwelling_supported_domain,trajectory_plus_oisst,33,1,0.030303030303030304,0.3333333333333333,0.303030303030303,True,Central California,2014,4,1,1.0,7,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,7,0.20588235294117646,0.39336917562724016,0.1874868226860637,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,22,0.6470588235294118,0.9046455272531827,0.2575867037237709,True,Central California,2016,4,4,0.18181818181818182,7,6,0.2727272727272727
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,32,0.9411764705882353,0.9232181616721965,-0.01795830891603878,True,Central California,2018,4,4,0.125,7,6,0.1875
+region_year,upwelling_supported_domain,trajectory_plus_oisst,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,9,0.2647058823529412,0.37670524026359264,0.11199935791065146,True,Central California,2020,4,1,0.1111111111111111,7,2,0.2222222222222222
+region_year,upwelling_supported_domain,trajectory_plus_oisst,33,1,0.030303030303030304,0.07692307692307693,0.046620046620046623,True,Central California,2021,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,33,0.9705882352941176,0.999108734402852,0.028520499108734332,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,upwelling_supported_domain,trajectory_plus_oisst,22,1,0.045454545454545456,0.05,0.004545454545454547,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,31,1,0.03225806451612903,0.1111111111111111,0.07885304659498207,True,Central California,2024,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,16,11,0.6875,0.9536042240587695,0.26610422405876955,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,upwelling_supported_domain,trajectory_plus_oisst,16,15,0.9375,0.94747520997521,0.009975209975209953,True,Northern California,2009,2,2,0.13333333333333333,4,4,0.26666666666666666
+region_year,upwelling_supported_domain,trajectory_plus_oisst,15,5,0.3333333333333333,0.5866666666666667,0.25333333333333335,True,Northern California,2010,2,1,0.2,3,1,0.2
+region_year,upwelling_supported_domain,trajectory_plus_oisst,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,16,9,0.5625,0.726046176046176,0.16354617604617605,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,upwelling_supported_domain,trajectory_plus_oisst,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,4,2,0.5,1.0,0.5,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,5,3,0.6,0.8055555555555556,0.2055555555555556,True,Oregon,2011,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,5,4,0.8,0.95,0.1499999999999999,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst,5,2,0.4,0.5833333333333333,0.18333333333333324,True,Oregon,2014,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,4,1,0.25,0.25,0.0,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,5,3,0.6,0.8055555555555556,0.2055555555555556,True,Oregon,2017,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst,4,3,0.75,1.0,0.25,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Oregon,2023,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,50,33,0.66,0.6704289829474407,0.010428982947440657,True,Southern California,2005,5,3,0.09090909090909091,10,6,0.18181818181818182
+region_year,upwelling_supported_domain,trajectory_plus_oisst,41,7,0.17073170731707318,0.7063492063492063,0.5356174990321331,True,Southern California,2006,5,3,0.42857142857142855,9,4,0.5714285714285714
+region_year,upwelling_supported_domain,trajectory_plus_oisst,50,24,0.48,0.5596524430687104,0.07965244306871044,True,Southern California,2007,5,4,0.16666666666666666,10,6,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst,50,12,0.24,0.4367443104399626,0.1967443104399626,True,Southern California,2008,5,2,0.16666666666666666,10,5,0.4166666666666667
+region_year,upwelling_supported_domain,trajectory_plus_oisst,49,11,0.22448979591836735,0.40936946113808725,0.1848796652197199,True,Southern California,2009,5,2,0.18181818181818182,10,4,0.36363636363636365
+region_year,upwelling_supported_domain,trajectory_plus_oisst,49,31,0.6326530612244898,0.6693237223902864,0.036670661165796536,True,Southern California,2010,5,4,0.12903225806451613,10,7,0.22580645161290322
+region_year,upwelling_supported_domain,trajectory_plus_oisst,47,26,0.5531914893617021,0.6622234162668788,0.1090319269051766,True,Southern California,2011,5,2,0.07692307692307693,10,7,0.2692307692307692
+region_year,upwelling_supported_domain,trajectory_plus_oisst,45,3,0.06666666666666667,0.14206349206349206,0.07539682539682539,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,52,43,0.8269230769230769,0.8404410217640972,0.013517944841020313,True,Southern California,2013,6,5,0.11627906976744186,11,9,0.20930232558139536
+region_year,upwelling_supported_domain,trajectory_plus_oisst,43,23,0.5348837209302325,0.7156958040576484,0.18081208312741592,True,Southern California,2014,5,4,0.17391304347826086,9,6,0.2608695652173913
+region_year,upwelling_supported_domain,trajectory_plus_oisst,34,14,0.4117647058823529,0.808029582563744,0.3962648766813911,True,Southern California,2015,4,4,0.2857142857142857,7,5,0.35714285714285715
+region_year,upwelling_supported_domain,trajectory_plus_oisst,35,8,0.22857142857142856,0.6117853901996371,0.38321396162820853,True,Southern California,2016,4,3,0.375,7,4,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,40,9,0.225,0.3323132203376292,0.10731322033762922,True,Southern California,2017,4,1,0.1111111111111111,8,2,0.2222222222222222
+region_year,upwelling_supported_domain,trajectory_plus_oisst,45,37,0.8222222222222222,0.9360072305922718,0.11378500837004957,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,upwelling_supported_domain,trajectory_plus_oisst,26,8,0.3076923076923077,0.5139057500470544,0.2062134423547467,True,Southern California,2019,3,1,0.125,6,3,0.375
+region_year,upwelling_supported_domain,trajectory_plus_oisst,39,13,0.3333333333333333,0.3927241339140653,0.059390800580731984,True,Southern California,2020,4,2,0.15384615384615385,8,2,0.15384615384615385
+region_year,upwelling_supported_domain,trajectory_plus_oisst,40,12,0.3,0.7644654769866994,0.46446547698669943,True,Southern California,2021,4,4,0.3333333333333333,8,6,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst,41,27,0.6585365853658537,0.7095265821023802,0.05098999673652649,True,Southern California,2022,5,3,0.1111111111111111,9,5,0.18518518518518517
+region_year,upwelling_supported_domain,trajectory_plus_oisst,29,1,0.034482758620689655,0.5,0.46551724137931033,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst,37,9,0.24324324324324326,0.2695580865515506,0.026314843308307356,True,Southern California,2024,4,0,0.0,8,1,0.1111111111111111
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,33,17,0.5151515151515151,0.6593510468107772,0.14419953165926203,True,Central California,2005,4,3,0.17647058823529413,7,4,0.23529411764705882
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,33,2,0.06060606060606061,0.35,0.28939393939393937,True,Central California,2006,4,1,0.5,7,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,7,0.20588235294117646,0.31070428171268505,0.10482192877150859,True,Central California,2007,4,1,0.14285714285714285,7,1,0.14285714285714285
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,33,3,0.09090909090909091,0.10062111801242235,0.009712027103331439,True,Central California,2008,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,18,0.5294117647058824,0.6716395757798064,0.14222781107392402,True,Central California,2009,4,3,0.16666666666666666,7,5,0.2777777777777778
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,23,0.6764705882352942,0.7977733889291636,0.12130280069386945,True,Central California,2010,4,4,0.17391304347826086,7,6,0.2608695652173913
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,30,1,0.03333333333333333,0.043478260869565216,0.010144927536231883,True,Central California,2011,3,0,0.0,6,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,0,0.0,,,False,Central California,2012,4,0,,7,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,25,0.7352941176470589,0.8173841650767477,0.08209004742968884,True,Central California,2013,4,3,0.12,7,6,0.24
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,33,1,0.030303030303030304,0.3333333333333333,0.303030303030303,True,Central California,2014,4,1,1.0,7,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,7,0.20588235294117646,0.38471116696923147,0.178828814028055,True,Central California,2015,4,2,0.2857142857142857,7,2,0.2857142857142857
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,22,0.6470588235294118,0.9031039083582708,0.256045084828859,True,Central California,2016,4,4,0.18181818181818182,7,6,0.2727272727272727
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,0,0.0,,,False,Central California,2017,4,0,,7,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,32,0.9411764705882353,0.9685923716555396,0.027415901067304294,True,Central California,2018,4,4,0.125,7,7,0.21875
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,29,0,0.0,,,False,Central California,2019,3,0,,6,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,9,0.2647058823529412,0.38968001727345747,0.12497413492051629,True,Central California,2020,4,1,0.1111111111111111,7,2,0.2222222222222222
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,33,1,0.030303030303030304,0.045454545454545456,0.015151515151515152,True,Central California,2021,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,33,0.9705882352941176,0.9981904607573057,0.027602225463188024,True,Central California,2022,4,4,0.12121212121212122,7,7,0.21212121212121213
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,22,1,0.045454545454545456,0.05,0.004545454545454547,True,Central California,2023,3,0,0.0,5,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,31,1,0.03225806451612903,0.125,0.09274193548387097,True,Central California,2024,4,0,0.0,7,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,3,1,0.3333333333333333,0.3333333333333333,0.0,True,Northern California,2005,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,6,1,0.16666666666666666,1.0,0.8333333333333334,True,Northern California,2006,1,1,1.0,2,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,16,0,0.0,,,False,Northern California,2007,2,0,,4,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,16,11,0.6875,0.9536042240587695,0.26610422405876955,True,Northern California,2008,2,2,0.18181818181818182,4,4,0.36363636363636365
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,16,15,0.9375,0.9379514004514005,0.00045140045140046325,True,Northern California,2009,2,2,0.13333333333333333,4,4,0.26666666666666666
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,15,5,0.3333333333333333,0.6866666666666666,0.35333333333333333,True,Northern California,2010,2,2,0.4,3,2,0.4
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,14,0,0.0,,,False,Northern California,2011,2,0,,3,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,16,9,0.5625,0.7408609908609909,0.1783609908609909,True,Northern California,2012,2,1,0.1111111111111111,4,3,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,16,16,1.0,,,False,Northern California,2013,2,2,0.125,4,4,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,6,6,1.0,,,False,Northern California,2014,1,1,0.16666666666666666,2,2,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Northern California,2016,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,1,1,1.0,,,False,Northern California,2017,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,7,7,1.0,,,False,Northern California,2021,1,1,0.14285714285714285,2,2,0.2857142857142857
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,3,2,0.6666666666666666,1.0,0.33333333333333337,True,Oregon,2005,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,5,4,0.8,0.95,0.1499999999999999,True,Oregon,2006,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,1,0,0.0,,,False,Oregon,2007,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,4,2,0.5,1.0,0.5,True,Oregon,2008,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,4,0,0.0,,,False,Oregon,2009,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,4,2,0.5,1.0,0.5,True,Oregon,2010,1,1,0.5,1,1,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,5,3,0.6,0.6388888888888888,0.03888888888888886,True,Oregon,2011,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,3,0,0.0,,,False,Oregon,2012,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,5,4,0.8,0.8875,0.08749999999999991,True,Oregon,2013,1,1,0.25,1,1,0.25
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,5,2,0.4,0.5833333333333333,0.18333333333333324,True,Oregon,2014,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,4,1,0.25,0.25,0.0,True,Oregon,2015,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,4,0,0.0,,,False,Oregon,2016,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,5,3,0.6,0.8055555555555556,0.2055555555555556,True,Oregon,2017,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,3,3,1.0,,,False,Oregon,2018,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,2,0,0.0,,,False,Oregon,2019,1,0,,1,0,
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,4,3,0.75,1.0,0.25,True,Oregon,2020,1,1,0.3333333333333333,1,1,0.3333333333333333
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,3,1,0.3333333333333333,0.5,0.16666666666666669,True,Oregon,2021,1,0,0.0,1,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,2,1,0.5,1.0,0.5,True,Oregon,2022,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,2,1,0.5,1.0,0.5,True,Oregon,2023,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,2,1,0.5,1.0,0.5,True,Oregon,2024,1,1,1.0,1,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,50,33,0.66,0.6725837127033663,0.012583712703366223,True,Southern California,2005,5,3,0.09090909090909091,10,7,0.21212121212121213
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,41,7,0.17073170731707318,0.8218210361067504,0.6510893287896772,True,Southern California,2006,5,4,0.5714285714285714,9,5,0.7142857142857143
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,50,24,0.48,0.6061612509895093,0.12616125098950937,True,Southern California,2007,5,4,0.16666666666666666,10,7,0.2916666666666667
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,50,12,0.24,0.35084059143799246,0.11084059143799246,True,Southern California,2008,5,2,0.16666666666666666,10,2,0.16666666666666666
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,49,11,0.22448979591836735,0.42787046746674073,0.2033806715483734,True,Southern California,2009,5,2,0.18181818181818182,10,6,0.5454545454545454
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,49,31,0.6326530612244898,0.6603660085159169,0.027712947291427037,True,Southern California,2010,5,4,0.12903225806451613,10,6,0.1935483870967742
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,47,26,0.5531914893617021,0.6482088568757552,0.0950173675140531,True,Southern California,2011,5,3,0.11538461538461539,10,7,0.2692307692307692
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,45,3,0.06666666666666667,0.13992673992673993,0.07326007326007326,True,Southern California,2012,5,0,0.0,9,0,0.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,52,43,0.8269230769230769,0.8378696619438424,0.010946585020765509,True,Southern California,2013,6,5,0.11627906976744186,11,9,0.20930232558139536
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,43,23,0.5348837209302325,0.6998143138824926,0.1649305929522601,True,Southern California,2014,5,4,0.17391304347826086,9,5,0.21739130434782608
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,34,14,0.4117647058823529,0.8005116440515601,0.38874693816920713,True,Southern California,2015,4,4,0.2857142857142857,7,5,0.35714285714285715
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,35,8,0.22857142857142856,0.5506143162393162,0.3220428876678877,True,Southern California,2016,4,3,0.375,7,3,0.375
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,40,9,0.225,0.4005643324483904,0.1755643324483904,True,Southern California,2017,4,2,0.2222222222222222,8,2,0.2222222222222222
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,45,37,0.8222222222222222,0.9305768985172027,0.10835467629498052,True,Southern California,2018,5,5,0.13513513513513514,9,9,0.24324324324324326
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,26,8,0.3076923076923077,0.4643759018759019,0.15668359418359418,True,Southern California,2019,3,1,0.125,6,3,0.375
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,39,13,0.3333333333333333,0.36883319295084005,0.035499859617506735,True,Southern California,2020,4,1,0.07692307692307693,8,2,0.15384615384615385
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,40,12,0.3,0.7668059240639886,0.46680592406398863,True,Southern California,2021,4,4,0.3333333333333333,8,6,0.5
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,41,27,0.6585365853658537,0.7099272350364474,0.0513906496705937,True,Southern California,2022,5,4,0.14814814814814814,9,5,0.18518518518518517
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,29,1,0.034482758620689655,1.0,0.9655172413793104,True,Southern California,2023,3,1,1.0,6,1,1.0
+region_year,upwelling_supported_domain,trajectory_plus_oisst_cuti_beuti,37,9,0.24324324324324326,0.29480343869589837,0.05156019545265511,True,Southern California,2024,4,0,0.0,8,1,0.1111111111111111

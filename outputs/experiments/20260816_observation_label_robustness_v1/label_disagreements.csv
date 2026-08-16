@@ -1,0 +1,315 @@
+cell_id,year,region_group,eligible_primary,event_primary,annual_area_m2_primary,eligible_variant,event_variant,annual_area_m2_variant,variant
+westcoast_0010,2019,Washington outer coast,True,0,331849.0,True,1,337652.0,legacy_allhist_vf75_max
+westcoast_0126,2020,Central California,True,1,1065125.0,True,0,1113358.0,legacy_allhist_vf75_max
+westcoast_0127,2020,Central California,True,1,496511.0,True,0,514829.0,legacy_allhist_vf75_max
+westcoast_0154,2011,Southern California,True,1,146713.0,True,0,147232.0,legacy_allhist_vf75_max
+westcoast_0166,2008,Southern California,True,0,54197.0,True,1,55995.0,legacy_allhist_vf75_max
+westcoast_0182,2015,Southern California,True,1,42864.0,True,0,43554.0,legacy_allhist_vf75_max
+westcoast_0184,2006,Southern California,True,0,100634.0,True,1,106441.0,legacy_allhist_vf75_max
+westcoast_0184,2016,Southern California,True,0,76553.0,True,1,83366.0,legacy_allhist_vf75_max
+westcoast_0188,2007,Southern California,True,0,185118.0,True,1,190093.0,legacy_allhist_vf75_max
+westcoast_0188,2022,Southern California,True,0,92418.0,True,1,97546.0,legacy_allhist_vf75_max
+westcoast_0195,2006,Southern California,True,1,84333.0,True,0,40940.0,legacy_allhist_vf75_max
+westcoast_0203,2009,Southern California,True,1,261312.0,True,0,289314.0,legacy_allhist_vf75_max
+westcoast_0203,2010,Southern California,True,1,178714.0,True,0,545084.0,legacy_allhist_vf75_max
+westcoast_0203,2013,Southern California,True,0,153089.0,True,1,477561.0,legacy_allhist_vf75_max
+westcoast_0230,2005,Southern California,True,1,11217.0,True,0,11820.0,legacy_allhist_vf75_max
+westcoast_0233,2014,Baja California Norte,True,1,7016.0,True,0,7166.0,legacy_allhist_vf75_max
+westcoast_0236,2011,Baja California Norte,True,1,59001.0,True,0,60603.0,legacy_allhist_vf75_max
+westcoast_0243,2018,Baja California Norte,True,1,77849.0,True,0,95550.0,legacy_allhist_vf75_max
+westcoast_0244,2013,Baja California Norte,True,1,112359.0,True,0,145598.0,legacy_allhist_vf75_max
+westcoast_0247,2017,Baja California Norte,True,0,102375.0,True,1,142144.0,legacy_allhist_vf75_max
+westcoast_0248,2014,Baja California Norte,True,0,72391.0,True,1,148683.0,legacy_allhist_vf75_max
+westcoast_0252,2009,Baja California Norte,True,0,2603562.0,True,1,2735009.0,legacy_allhist_vf75_max
+westcoast_0255,2018,Baja California Norte,True,1,35873.0,True,0,42419.0,legacy_allhist_vf75_max
+westcoast_0257,2016,Baja California Norte,True,0,184502.0,True,1,286042.0,legacy_allhist_vf75_max
+westcoast_0258,2021,Baja California Norte,True,1,8264.0,True,0,10166.0,legacy_allhist_vf75_max
+westcoast_0262,2010,Baja California Norte,True,0,11608.0,True,1,42075.0,legacy_allhist_vf75_max
+westcoast_0274,2005,Baja California Norte,True,0,111367.0,True,1,128248.0,legacy_allhist_vf75_max
+westcoast_0274,2021,Baja California Norte,True,0,141262.0,True,1,188212.0,legacy_allhist_vf75_max
+westcoast_0279,2007,Baja California Norte,True,0,1012442.0,True,1,1216813.0,legacy_allhist_vf75_max
+westcoast_0321,2021,Baja California Sur,True,0,169221.0,True,1,174440.0,legacy_allhist_vf75_max
+westcoast_0010,2019,Washington outer coast,True,0,331849.0,True,1,337652.0,allhist_protocol_max
+westcoast_0126,2020,Central California,True,1,1065125.0,True,0,1113358.0,allhist_protocol_max
+westcoast_0127,2020,Central California,True,1,496511.0,True,0,514829.0,allhist_protocol_max
+westcoast_0154,2011,Southern California,True,1,146713.0,True,0,147232.0,allhist_protocol_max
+westcoast_0166,2008,Southern California,True,0,54197.0,True,1,55995.0,allhist_protocol_max
+westcoast_0182,2015,Southern California,True,1,42864.0,True,0,43554.0,allhist_protocol_max
+westcoast_0184,2006,Southern California,True,0,100634.0,True,1,106441.0,allhist_protocol_max
+westcoast_0184,2016,Southern California,True,0,76553.0,True,1,83366.0,allhist_protocol_max
+westcoast_0188,2007,Southern California,True,0,185118.0,True,1,190093.0,allhist_protocol_max
+westcoast_0188,2022,Southern California,True,0,92418.0,True,1,97546.0,allhist_protocol_max
+westcoast_0203,2009,Southern California,True,1,261312.0,True,0,289314.0,allhist_protocol_max
+westcoast_0203,2010,Southern California,True,1,178714.0,True,0,545084.0,allhist_protocol_max
+westcoast_0203,2013,Southern California,True,0,153089.0,True,1,477561.0,allhist_protocol_max
+westcoast_0230,2005,Southern California,True,1,11217.0,True,0,11820.0,allhist_protocol_max
+westcoast_0233,2014,Baja California Norte,True,1,7016.0,True,0,7166.0,allhist_protocol_max
+westcoast_0236,2011,Baja California Norte,True,1,59001.0,True,0,60603.0,allhist_protocol_max
+westcoast_0243,2018,Baja California Norte,True,1,77849.0,True,0,95550.0,allhist_protocol_max
+westcoast_0244,2013,Baja California Norte,True,1,112359.0,True,0,145598.0,allhist_protocol_max
+westcoast_0247,2017,Baja California Norte,True,0,102375.0,True,1,142144.0,allhist_protocol_max
+westcoast_0248,2014,Baja California Norte,True,0,72391.0,True,1,148683.0,allhist_protocol_max
+westcoast_0252,2009,Baja California Norte,True,0,2603562.0,True,1,2735009.0,allhist_protocol_max
+westcoast_0255,2018,Baja California Norte,True,1,35873.0,True,0,42419.0,allhist_protocol_max
+westcoast_0257,2016,Baja California Norte,True,0,184502.0,True,1,286042.0,allhist_protocol_max
+westcoast_0258,2021,Baja California Norte,True,1,8264.0,True,0,10166.0,allhist_protocol_max
+westcoast_0262,2010,Baja California Norte,True,0,11608.0,True,1,42075.0,allhist_protocol_max
+westcoast_0274,2005,Baja California Norte,True,0,111367.0,True,1,128248.0,allhist_protocol_max
+westcoast_0274,2018,Baja California Norte,True,1,251197.0,True,0,252799.0,allhist_protocol_max
+westcoast_0274,2021,Baja California Norte,True,0,141262.0,True,1,188212.0,allhist_protocol_max
+westcoast_0279,2007,Baja California Norte,True,0,1012442.0,True,1,1216813.0,allhist_protocol_max
+westcoast_0321,2021,Baja California Sur,True,0,169221.0,True,1,174440.0,allhist_protocol_max
+westcoast_0195,2006,Southern California,True,1,84333.0,True,0,40097.0,fixedpre_vf75_noq3_max
+westcoast_0195,2006,Southern California,True,1,84333.0,True,0,40097.0,fixedpre_vf75_q3_max
+westcoast_0001,2014,Washington outer coast,True,1,105880.0,True,0,31462.75,fixedpre_protocol_mean
+westcoast_0001,2023,Washington outer coast,True,1,67372.0,True,0,31616.0,fixedpre_protocol_mean
+westcoast_0002,2015,Washington outer coast,True,0,241991.0,True,1,125016.25,fixedpre_protocol_mean
+westcoast_0002,2019,Washington outer coast,True,0,314940.0,True,1,146396.5,fixedpre_protocol_mean
+westcoast_0003,2006,Washington outer coast,True,0,168484.0,True,1,114940.5,fixedpre_protocol_mean
+westcoast_0003,2015,Washington outer coast,True,0,236236.0,True,1,102113.25,fixedpre_protocol_mean
+westcoast_0003,2023,Washington outer coast,True,0,112134.0,True,1,54745.75,fixedpre_protocol_mean
+westcoast_0004,2006,Washington outer coast,True,0,218351.0,True,1,140241.5,fixedpre_protocol_mean
+westcoast_0004,2007,Washington outer coast,True,0,158673.0,True,1,61684.5,fixedpre_protocol_mean
+westcoast_0008,2006,Washington outer coast,True,1,44584.0,True,0,25204.5,fixedpre_protocol_mean
+westcoast_0008,2016,Washington outer coast,True,1,66736.0,True,0,24449.75,fixedpre_protocol_mean
+westcoast_0010,2012,Washington outer coast,True,0,173217.0,True,1,86558.75,fixedpre_protocol_mean
+westcoast_0010,2019,Washington outer coast,True,0,331849.0,True,1,131312.75,fixedpre_protocol_mean
+westcoast_0011,2008,Washington outer coast,True,1,255688.0,True,0,103598.25,fixedpre_protocol_mean
+westcoast_0011,2009,Washington outer coast,True,1,172104.0,True,0,72698.75,fixedpre_protocol_mean
+westcoast_0011,2012,Washington outer coast,True,0,231652.0,True,1,97747.25,fixedpre_protocol_mean
+westcoast_0013,2006,Washington outer coast,True,0,478236.0,True,1,291453.0,fixedpre_protocol_mean
+westcoast_0013,2007,Washington outer coast,True,0,354235.0,True,1,177752.5,fixedpre_protocol_mean
+westcoast_0013,2019,Washington outer coast,True,1,875816.0,True,0,334615.25,fixedpre_protocol_mean
+westcoast_0014,2005,Washington outer coast,True,1,163311.0,True,0,58454.0,fixedpre_protocol_mean
+westcoast_0014,2011,Washington outer coast,True,1,128172.0,True,0,51385.0,fixedpre_protocol_mean
+westcoast_0014,2021,Washington outer coast,True,1,46391.0,True,0,18333.25,fixedpre_protocol_mean
+westcoast_0015,2012,Washington outer coast,True,0,228040.0,True,1,103861.75,fixedpre_protocol_mean
+westcoast_0015,2021,Washington outer coast,True,1,248863.0,True,0,90521.5,fixedpre_protocol_mean
+westcoast_0016,2012,Washington outer coast,True,0,157752.0,True,1,63698.5,fixedpre_protocol_mean
+westcoast_0017,2008,Washington outer coast,True,0,49884.0,True,1,29288.0,fixedpre_protocol_mean
+westcoast_0017,2013,Washington outer coast,True,1,15499.0,True,0,6102.75,fixedpre_protocol_mean
+westcoast_0018,2016,Washington outer coast,True,1,86371.0,True,0,27957.5,fixedpre_protocol_mean
+westcoast_0018,2019,Washington outer coast,True,1,129385.0,True,0,36114.0,fixedpre_protocol_mean
+westcoast_0022,2012,Washington outer coast,True,0,69749.0,True,1,39923.0,fixedpre_protocol_mean
+westcoast_0022,2021,Washington outer coast,True,0,19250.0,True,1,10215.5,fixedpre_protocol_mean
+westcoast_0038,2013,Oregon,True,1,342212.0,True,0,94398.75,fixedpre_protocol_mean
+westcoast_0039,2011,Oregon,True,0,11100.0,True,1,6872.25,fixedpre_protocol_mean
+westcoast_0044,2011,Oregon,True,1,6068.0,True,0,2426.25,fixedpre_protocol_mean
+westcoast_0044,2013,Oregon,True,0,16525.0,True,1,9136.75,fixedpre_protocol_mean
+westcoast_0046,2019,Oregon,True,0,5456.0,True,1,3423.0,fixedpre_protocol_mean
+westcoast_0074,2008,Northern California,True,0,41816.0,True,1,20115.25,fixedpre_protocol_mean
+westcoast_0078,2012,Northern California,True,0,179838.0,True,1,76872.5,fixedpre_protocol_mean
+westcoast_0081,2005,Northern California,True,0,18255.0,True,1,7792.25,fixedpre_protocol_mean
+westcoast_0082,2012,Northern California,True,0,953877.0,True,1,450232.25,fixedpre_protocol_mean
+westcoast_0084,2010,Northern California,True,1,43986.0,True,0,15774.25,fixedpre_protocol_mean
+westcoast_0084,2016,Northern California,True,0,9513.0,True,1,3713.25,fixedpre_protocol_mean
+westcoast_0090,2009,Northern California,True,0,74948.0,True,1,38633.5,fixedpre_protocol_mean
+westcoast_0107,2015,Central California,True,0,345828.0,True,1,137820.5,fixedpre_protocol_mean
+westcoast_0107,2018,Central California,True,1,249221.0,True,0,94771.75,fixedpre_protocol_mean
+westcoast_0107,2024,Central California,True,0,167080.0,True,1,71719.25,fixedpre_protocol_mean
+westcoast_0108,2005,Central California,True,0,1512648.0,True,1,710352.75,fixedpre_protocol_mean
+westcoast_0112,2005,Central California,True,0,1823473.0,True,1,914863.25,fixedpre_protocol_mean
+westcoast_0112,2006,Central California,True,1,1432589.0,True,0,565385.5,fixedpre_protocol_mean
+westcoast_0113,2005,Central California,True,0,1620615.0,True,1,715700.75,fixedpre_protocol_mean
+westcoast_0113,2013,Central California,True,0,1756557.0,True,1,713944.5,fixedpre_protocol_mean
+westcoast_0113,2015,Central California,True,1,1059371.0,True,0,411023.25,fixedpre_protocol_mean
+westcoast_0115,2005,Central California,True,0,650033.0,True,1,328649.0,fixedpre_protocol_mean
+westcoast_0115,2020,Central California,True,0,515852.0,True,1,233002.5,fixedpre_protocol_mean
+westcoast_0119,2005,Central California,True,0,335321.0,True,1,136521.75,fixedpre_protocol_mean
+westcoast_0120,2016,Central California,True,1,489712.0,True,0,193104.25,fixedpre_protocol_mean
+westcoast_0124,2005,Central California,True,0,123497.0,True,1,41172.25,fixedpre_protocol_mean
+westcoast_0125,2020,Central California,True,0,214989.0,True,1,87735.0,fixedpre_protocol_mean
+westcoast_0126,2009,Central California,True,0,1972601.0,True,1,853042.75,fixedpre_protocol_mean
+westcoast_0126,2013,Central California,True,0,1172336.0,True,1,577482.25,fixedpre_protocol_mean
+westcoast_0127,2013,Central California,True,0,706955.0,True,1,306881.5,fixedpre_protocol_mean
+westcoast_0128,2005,Central California,True,0,684286.0,True,1,324714.5,fixedpre_protocol_mean
+westcoast_0128,2008,Central California,True,1,1131541.0,True,0,355530.75,fixedpre_protocol_mean
+westcoast_0128,2009,Central California,True,0,786800.0,True,1,370020.75,fixedpre_protocol_mean
+westcoast_0129,2005,Central California,True,0,174507.0,True,1,84383.75,fixedpre_protocol_mean
+westcoast_0129,2006,Central California,True,1,122728.0,True,0,31947.0,fixedpre_protocol_mean
+westcoast_0129,2008,Central California,True,1,134813.0,True,0,39496.25,fixedpre_protocol_mean
+westcoast_0132,2016,Central California,True,0,231457.0,True,1,114395.75,fixedpre_protocol_mean
+westcoast_0133,2005,Central California,True,0,326942.0,True,1,112932.75,fixedpre_protocol_mean
+westcoast_0133,2013,Central California,True,0,316706.0,True,1,132050.5,fixedpre_protocol_mean
+westcoast_0135,2016,Central California,True,0,94160.0,True,1,30557.0,fixedpre_protocol_mean
+westcoast_0142,2021,Central California,True,1,1036556.0,True,0,440166.75,fixedpre_protocol_mean
+westcoast_0142,2024,Central California,True,1,637766.0,True,0,252097.0,fixedpre_protocol_mean
+westcoast_0143,2015,Central California,True,1,865170.0,True,0,282226.5,fixedpre_protocol_mean
+westcoast_0143,2020,Central California,True,1,805304.0,True,0,419769.0,fixedpre_protocol_mean
+westcoast_0145,2013,Central California,True,0,141563.0,True,1,80202.5,fixedpre_protocol_mean
+westcoast_0151,2010,Southern California,True,1,347565.0,True,0,142965.5,fixedpre_protocol_mean
+westcoast_0162,2008,Southern California,True,1,1202897.0,True,0,523923.75,fixedpre_protocol_mean
+westcoast_0163,2024,Southern California,True,0,241455.0,True,1,107221.25,fixedpre_protocol_mean
+westcoast_0165,2005,Southern California,True,0,1724867.0,True,1,856827.0,fixedpre_protocol_mean
+westcoast_0165,2009,Southern California,True,0,1050185.0,True,1,465164.75,fixedpre_protocol_mean
+westcoast_0165,2015,Southern California,True,0,305529.0,True,1,163200.5,fixedpre_protocol_mean
+westcoast_0165,2020,Southern California,True,0,407474.0,True,1,199453.25,fixedpre_protocol_mean
+westcoast_0165,2022,Southern California,True,1,294591.0,True,0,125796.5,fixedpre_protocol_mean
+westcoast_0167,2019,Southern California,True,1,23639.0,True,0,10738.0,fixedpre_protocol_mean
+westcoast_0167,2022,Southern California,True,1,25128.0,True,0,14449.0,fixedpre_protocol_mean
+westcoast_0167,2024,Southern California,True,0,38138.0,True,1,26153.25,fixedpre_protocol_mean
+westcoast_0170,2005,Southern California,True,0,107736.0,True,1,54554.25,fixedpre_protocol_mean
+westcoast_0170,2006,Southern California,True,0,78103.0,True,1,37305.5,fixedpre_protocol_mean
+westcoast_0170,2011,Southern California,True,0,27807.0,True,1,14966.5,fixedpre_protocol_mean
+westcoast_0170,2021,Southern California,True,0,46185.0,True,1,22519.0,fixedpre_protocol_mean
+westcoast_0171,2006,Southern California,True,1,436698.0,True,0,193036.5,fixedpre_protocol_mean
+westcoast_0171,2007,Southern California,True,0,271629.0,True,1,173239.25,fixedpre_protocol_mean
+westcoast_0172,2008,Southern California,True,1,36755.0,True,0,14174.75,fixedpre_protocol_mean
+westcoast_0173,2008,Southern California,True,1,44725.0,True,0,16343.75,fixedpre_protocol_mean
+westcoast_0173,2010,Southern California,True,1,39869.0,True,0,21028.5,fixedpre_protocol_mean
+westcoast_0173,2024,Southern California,True,0,75662.0,True,1,42936.0,fixedpre_protocol_mean
+westcoast_0175,2021,Southern California,True,0,191505.0,True,1,68030.75,fixedpre_protocol_mean
+westcoast_0176,2014,Southern California,True,0,64256.0,True,1,25323.5,fixedpre_protocol_mean
+westcoast_0180,2010,Southern California,True,1,1522924.0,True,0,504680.5,fixedpre_protocol_mean
+westcoast_0180,2021,Southern California,True,1,489007.0,True,0,198663.75,fixedpre_protocol_mean
+westcoast_0181,2005,Southern California,True,0,665993.0,True,1,399466.25,fixedpre_protocol_mean
+westcoast_0182,2009,Southern California,True,1,35961.0,True,0,16514.25,fixedpre_protocol_mean
+westcoast_0182,2015,Southern California,True,1,42864.0,True,0,15745.75,fixedpre_protocol_mean
+westcoast_0182,2018,Southern California,True,1,15632.0,True,0,7634.25,fixedpre_protocol_mean
+westcoast_0182,2020,Southern California,True,1,22263.0,True,0,9918.25,fixedpre_protocol_mean
+westcoast_0182,2022,Southern California,True,1,44177.0,True,0,18397.25,fixedpre_protocol_mean
+westcoast_0183,2008,Southern California,True,1,234147.0,True,0,106739.75,fixedpre_protocol_mean
+westcoast_0183,2019,Southern California,True,1,247997.0,True,0,103937.25,fixedpre_protocol_mean
+westcoast_0184,2014,Southern California,True,1,19859.0,True,0,8816.5,fixedpre_protocol_mean
+westcoast_0186,2023,Southern California,True,0,114533.0,True,1,50131.25,fixedpre_protocol_mean
+westcoast_0188,2020,Southern California,True,0,296628.0,True,1,140525.5,fixedpre_protocol_mean
+westcoast_0188,2022,Southern California,True,0,92418.0,True,1,36253.0,fixedpre_protocol_mean
+westcoast_0192,2011,Southern California,True,0,69333.0,True,1,35801.75,fixedpre_protocol_mean
+westcoast_0192,2020,Southern California,True,0,4520.0,True,1,2476.5,fixedpre_protocol_mean
+westcoast_0193,2007,Southern California,True,1,54025.0,True,0,18397.0,fixedpre_protocol_mean
+westcoast_0193,2008,Southern California,True,1,27663.0,True,0,13740.75,fixedpre_protocol_mean
+westcoast_0193,2023,Southern California,True,1,422086.0,True,0,125321.25,fixedpre_protocol_mean
+westcoast_0195,2006,Southern California,True,1,84333.0,True,0,32041.75,fixedpre_protocol_mean
+westcoast_0195,2010,Southern California,True,1,113827.0,True,0,54284.25,fixedpre_protocol_mean
+westcoast_0195,2017,Southern California,True,0,32989.0,True,1,21109.75,fixedpre_protocol_mean
+westcoast_0195,2018,Southern California,True,1,36143.0,True,0,12554.5,fixedpre_protocol_mean
+westcoast_0203,2009,Southern California,True,1,261312.0,True,0,127011.0,fixedpre_protocol_mean
+westcoast_0203,2013,Southern California,True,0,153089.0,True,1,108986.0,fixedpre_protocol_mean
+westcoast_0206,2024,Southern California,True,0,1802836.0,True,1,633933.25,fixedpre_protocol_mean
+westcoast_0207,2017,Southern California,True,0,158924.0,True,1,65384.25,fixedpre_protocol_mean
+westcoast_0210,2009,Southern California,True,0,267772.0,True,1,132692.25,fixedpre_protocol_mean
+westcoast_0210,2013,Southern California,True,0,152559.0,True,1,103294.25,fixedpre_protocol_mean
+westcoast_0212,2007,Southern California,True,0,216559.0,True,1,94934.0,fixedpre_protocol_mean
+westcoast_0212,2015,Southern California,True,1,152530.0,True,0,58291.75,fixedpre_protocol_mean
+westcoast_0214,2022,Southern California,True,0,76607.0,True,1,49592.5,fixedpre_protocol_mean
+westcoast_0214,2024,Southern California,True,1,195201.0,True,0,74143.0,fixedpre_protocol_mean
+westcoast_0216,2009,Southern California,True,1,151382.0,True,0,78046.25,fixedpre_protocol_mean
+westcoast_0216,2013,Southern California,True,0,99302.0,True,1,70900.75,fixedpre_protocol_mean
+westcoast_0217,2012,Southern California,True,1,697093.0,True,0,192589.25,fixedpre_protocol_mean
+westcoast_0218,2012,Southern California,True,1,115311.0,True,0,33846.0,fixedpre_protocol_mean
+westcoast_0219,2013,Southern California,True,0,347908.0,True,1,260949.75,fixedpre_protocol_mean
+westcoast_0220,2024,Southern California,True,1,847628.0,True,0,352257.25,fixedpre_protocol_mean
+westcoast_0222,2009,Southern California,True,1,76827.0,True,0,33995.75,fixedpre_protocol_mean
+westcoast_0223,2022,Southern California,True,0,189890.0,True,1,124033.0,fixedpre_protocol_mean
+westcoast_0224,2022,Southern California,True,0,164486.0,True,1,110863.75,fixedpre_protocol_mean
+westcoast_0226,2014,Southern California,True,0,603179.0,True,1,288663.25,fixedpre_protocol_mean
+westcoast_0226,2021,Southern California,True,0,164948.0,True,1,80415.0,fixedpre_protocol_mean
+westcoast_0227,2005,Southern California,True,0,273152.0,True,1,215579.75,fixedpre_protocol_mean
+westcoast_0227,2009,Southern California,True,0,1138462.0,True,1,805779.25,fixedpre_protocol_mean
+westcoast_0227,2010,Southern California,True,0,918140.0,True,1,394149.0,fixedpre_protocol_mean
+westcoast_0227,2014,Southern California,True,0,750474.0,True,1,421728.75,fixedpre_protocol_mean
+westcoast_0228,2019,Southern California,True,1,117034.0,True,0,50110.25,fixedpre_protocol_mean
+westcoast_0233,2007,Baja California Norte,True,0,44560.0,True,1,22484.0,fixedpre_protocol_mean
+westcoast_0235,2018,Baja California Norte,True,1,25483.0,True,0,8265.5,fixedpre_protocol_mean
+westcoast_0235,2019,Baja California Norte,True,1,16895.0,True,0,6213.5,fixedpre_protocol_mean
+westcoast_0237,2007,Baja California Norte,True,1,633045.0,True,0,300107.75,fixedpre_protocol_mean
+westcoast_0237,2011,Baja California Norte,True,1,105443.0,True,0,38808.0,fixedpre_protocol_mean
+westcoast_0238,2007,Baja California Norte,True,1,155689.0,True,0,59111.5,fixedpre_protocol_mean
+westcoast_0239,2010,Baja California Norte,True,1,329857.0,True,0,124798.25,fixedpre_protocol_mean
+westcoast_0244,2011,Baja California Norte,True,1,44973.0,True,0,26748.75,fixedpre_protocol_mean
+westcoast_0248,2009,Baja California Norte,True,0,136439.0,True,1,75564.5,fixedpre_protocol_mean
+westcoast_0248,2016,Baja California Norte,True,1,22587.0,True,0,9146.75,fixedpre_protocol_mean
+westcoast_0250,2020,Baja California Norte,True,0,711867.0,True,1,419230.75,fixedpre_protocol_mean
+westcoast_0252,2009,Baja California Norte,True,0,2603562.0,True,1,1121363.0,fixedpre_protocol_mean
+westcoast_0252,2011,Baja California Norte,True,0,1304978.0,True,1,723572.25,fixedpre_protocol_mean
+westcoast_0252,2013,Baja California Norte,True,0,1199230.0,True,1,667949.75,fixedpre_protocol_mean
+westcoast_0252,2019,Baja California Norte,True,0,1004366.0,True,1,502476.25,fixedpre_protocol_mean
+westcoast_0252,2020,Baja California Norte,True,1,789460.0,True,0,348258.5,fixedpre_protocol_mean
+westcoast_0255,2008,Baja California Norte,True,0,82327.0,True,1,57405.0,fixedpre_protocol_mean
+westcoast_0255,2018,Baja California Norte,True,1,35873.0,True,0,10422.25,fixedpre_protocol_mean
+westcoast_0256,2017,Baja California Norte,True,0,107094.0,True,1,54249.75,fixedpre_protocol_mean
+westcoast_0257,2017,Baja California Norte,True,0,154644.0,True,1,88568.75,fixedpre_protocol_mean
+westcoast_0263,2013,Baja California Norte,True,0,905092.0,True,1,437089.0,fixedpre_protocol_mean
+westcoast_0273,2010,Baja California Norte,True,1,186066.0,True,0,70593.25,fixedpre_protocol_mean
+westcoast_0274,2005,Baja California Norte,True,0,111367.0,True,1,40974.333333333336,fixedpre_protocol_mean
+westcoast_0274,2013,Baja California Norte,True,0,51147.0,True,1,34028.25,fixedpre_protocol_mean
+westcoast_0274,2018,Baja California Norte,True,1,251197.0,True,0,137027.25,fixedpre_protocol_mean
+westcoast_0275,2012,Baja California Norte,True,1,42674.0,True,0,12497.0,fixedpre_protocol_mean
+westcoast_0276,2005,Baja California Norte,True,1,14976.0,True,0,4873.25,fixedpre_protocol_mean
+westcoast_0276,2022,Baja California Norte,True,0,14617.0,True,1,6779.5,fixedpre_protocol_mean
+westcoast_0279,2007,Baja California Norte,True,0,1012442.0,True,1,550011.25,fixedpre_protocol_mean
+westcoast_0279,2010,Baja California Norte,True,1,590247.0,True,0,279086.0,fixedpre_protocol_mean
+westcoast_0280,2007,Baja California Norte,True,1,713870.0,True,0,255742.25,fixedpre_protocol_mean
+westcoast_0280,2008,Baja California Norte,True,0,415887.0,True,1,190565.25,fixedpre_protocol_mean
+westcoast_0281,2014,Baja California Norte,True,0,415546.0,True,1,213081.5,fixedpre_protocol_mean
+westcoast_0285,2022,Baja California Norte,True,1,138002.0,True,0,50489.25,fixedpre_protocol_mean
+westcoast_0299,2012,Baja California Norte,True,0,1114201.0,True,1,680936.0,fixedpre_protocol_mean
+westcoast_0299,2022,Baja California Norte,True,0,180234.0,True,1,116499.5,fixedpre_protocol_mean
+westcoast_0305,2007,Baja California Norte,True,0,138656.0,True,1,101373.25,fixedpre_protocol_mean
+westcoast_0306,2012,Baja California Norte,True,0,1873112.0,True,1,955335.0,fixedpre_protocol_mean
+westcoast_0307,2005,Baja California Norte,True,0,226614.0,True,1,163480.5,fixedpre_protocol_mean
+westcoast_0307,2011,Baja California Norte,True,0,391099.0,True,1,243594.0,fixedpre_protocol_mean
+westcoast_0320,2018,Baja California Sur,True,1,3502573.0,True,0,1522288.75,fixedpre_protocol_mean
+westcoast_0321,2021,Baja California Sur,True,0,169221.0,True,1,98596.75,fixedpre_protocol_mean
+westcoast_0017,2023,Washington outer coast,True,1,48111.0,True,0,40504.0,fixedpre_protocol_q23max
+westcoast_0038,2011,Oregon,True,0,196943.0,True,1,196943.0,fixedpre_protocol_q23max
+westcoast_0038,2015,Oregon,True,1,60304.0,True,0,47160.0,fixedpre_protocol_q23max
+westcoast_0041,2005,Oregon,True,0,39774.0,True,1,18692.0,fixedpre_protocol_q23max
+westcoast_0041,2008,Oregon,True,0,9970.0,True,1,9970.0,fixedpre_protocol_q23max
+westcoast_0041,2010,Oregon,True,1,129107.0,True,0,7168.0,fixedpre_protocol_q23max
+westcoast_0041,2013,Oregon,True,1,26477.0,True,0,9297.0,fixedpre_protocol_q23max
+westcoast_0074,2006,Northern California,True,1,31829.0,True,0,2817.0,fixedpre_protocol_q23max
+westcoast_0074,2011,Northern California,True,0,10595.0,True,1,10595.0,fixedpre_protocol_q23max
+westcoast_0081,2005,Northern California,True,0,18255.0,True,1,18255.0,fixedpre_protocol_q23max
+westcoast_0082,2005,Northern California,True,0,131460.0,True,1,131460.0,fixedpre_protocol_q23max
+westcoast_0089,2009,Northern California,True,1,96040.0,True,0,76672.0,fixedpre_protocol_q23max
+westcoast_0143,2008,Central California,True,0,467694.0,True,1,265364.0,fixedpre_protocol_q23max
+westcoast_0144,2011,Central California,True,1,105323.0,True,0,63184.0,fixedpre_protocol_q23max
+westcoast_0144,2015,Central California,True,0,66778.0,True,1,66778.0,fixedpre_protocol_q23max
+westcoast_0165,2008,Southern California,True,0,1197420.0,True,1,1197420.0,fixedpre_protocol_q23max
+westcoast_0170,2006,Southern California,True,0,78103.0,True,1,78103.0,fixedpre_protocol_q23max
+westcoast_0170,2011,Southern California,True,0,27807.0,True,1,27807.0,fixedpre_protocol_q23max
+westcoast_0171,2008,Southern California,True,0,250902.0,True,1,250902.0,fixedpre_protocol_q23max
+westcoast_0171,2013,Southern California,True,1,223090.0,True,0,92235.0,fixedpre_protocol_q23max
+westcoast_0172,2012,Southern California,True,0,29849.0,True,1,19000.0,fixedpre_protocol_q23max
+westcoast_0172,2013,Southern California,True,1,29180.0,True,0,12782.0,fixedpre_protocol_q23max
+westcoast_0177,2013,Southern California,True,1,207903.0,True,0,157665.0,fixedpre_protocol_q23max
+westcoast_0177,2016,Southern California,True,0,12441.0,True,1,12441.0,fixedpre_protocol_q23max
+westcoast_0181,2008,Southern California,True,0,178126.0,True,1,178126.0,fixedpre_protocol_q23max
+westcoast_0182,2020,Southern California,True,1,22263.0,True,0,9415.0,fixedpre_protocol_q23max
+westcoast_0184,2006,Southern California,True,0,100634.0,True,1,100634.0,fixedpre_protocol_q23max
+westcoast_0184,2014,Southern California,True,1,19859.0,True,0,11701.0,fixedpre_protocol_q23max
+westcoast_0186,2005,Southern California,True,0,30510.0,True,1,13633.0,fixedpre_protocol_q23max
+westcoast_0186,2007,Southern California,True,0,83177.0,True,1,83177.0,fixedpre_protocol_q23max
+westcoast_0186,2017,Southern California,True,1,76071.0,True,0,42173.0,fixedpre_protocol_q23max
+westcoast_0186,2020,Southern California,True,1,37553.0,True,0,11683.0,fixedpre_protocol_q23max
+westcoast_0188,2007,Southern California,True,0,185118.0,True,1,185118.0,fixedpre_protocol_q23max
+westcoast_0192,2020,Southern California,True,0,4520.0,True,1,4520.0,fixedpre_protocol_q23max
+westcoast_0195,2010,Southern California,True,1,113827.0,True,0,63287.0,fixedpre_protocol_q23max
+westcoast_0198,2009,Southern California,True,0,284504.0,True,1,231596.0,fixedpre_protocol_q23max
+westcoast_0198,2011,Southern California,True,1,139351.0,True,0,71401.0,fixedpre_protocol_q23max
+westcoast_0210,2009,Southern California,True,0,267772.0,True,1,250081.0,fixedpre_protocol_q23max
+westcoast_0210,2013,Southern California,True,0,152559.0,True,1,144319.0,fixedpre_protocol_q23max
+westcoast_0216,2009,Southern California,True,1,151382.0,True,0,128209.0,fixedpre_protocol_q23max
+westcoast_0216,2014,Southern California,True,1,102005.0,True,0,50271.0,fixedpre_protocol_q23max
+westcoast_0219,2010,Southern California,True,0,140787.0,True,1,140787.0,fixedpre_protocol_q23max
+westcoast_0222,2009,Southern California,True,1,76827.0,True,0,43723.0,fixedpre_protocol_q23max
+westcoast_0227,2010,Southern California,True,0,918140.0,True,1,918140.0,fixedpre_protocol_q23max
+westcoast_0228,2011,Southern California,True,1,107250.0,True,0,52566.0,fixedpre_protocol_q23max
+westcoast_0233,2007,Baja California Norte,True,0,44560.0,True,1,28599.0,fixedpre_protocol_q23max
+westcoast_0244,2010,Baja California Norte,True,0,55670.0,True,1,55670.0,fixedpre_protocol_q23max
+westcoast_0244,2011,Baja California Norte,True,1,44973.0,True,0,31372.0,fixedpre_protocol_q23max
+westcoast_0244,2014,Baja California Norte,True,1,65651.0,True,0,5384.0,fixedpre_protocol_q23max
+westcoast_0254,2020,Baja California Norte,True,0,62715.0,True,1,62715.0,fixedpre_protocol_q23max
+westcoast_0255,2005,Baja California Norte,True,0,36649.0,True,1,36649.0,fixedpre_protocol_q23max
+westcoast_0285,2015,Baja California Norte,True,0,58873.0,True,1,58873.0,fixedpre_protocol_q23max
+westcoast_0299,2012,Baja California Norte,True,0,1114201.0,True,1,891462.0,fixedpre_protocol_q23max
+westcoast_0302,2023,Baja California Norte,True,0,169638.0,True,1,169638.0,fixedpre_protocol_q23max
+westcoast_0305,2007,Baja California Norte,True,0,138656.0,True,1,138656.0,fixedpre_protocol_q23max
+westcoast_0305,2011,Baja California Norte,True,0,65312.0,True,1,53496.0,fixedpre_protocol_q23max
+westcoast_0306,2012,Baja California Norte,True,0,1873112.0,True,1,1855193.0,fixedpre_protocol_q23max
+westcoast_0306,2023,Baja California Norte,True,0,664629.0,True,1,664629.0,fixedpre_protocol_q23max
+westcoast_0307,2010,Baja California Norte,True,0,411803.0,True,1,353605.0,fixedpre_protocol_q23max
+westcoast_0307,2023,Baja California Norte,True,0,37580.0,True,1,37580.0,fixedpre_protocol_q23max
+westcoast_0326,2006,Baja California Sur,True,0,486292.0,True,1,486292.0,fixedpre_protocol_q23max
+westcoast_0326,2009,Baja California Sur,True,0,237674.0,True,1,237674.0,fixedpre_protocol_q23max

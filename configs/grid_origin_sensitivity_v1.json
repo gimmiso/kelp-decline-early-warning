@@ -1,0 +1,61 @@
+{
+  "experiment_id": "E2E-v2-E16-grid-origin-v1",
+  "classification": "pilot_informed_locked_robustness",
+  "source_crs": "EPSG:4326",
+  "grid_crs": "EPSG:6933",
+  "grid_sizes_m": [5000, 10000, 20000],
+  "origins": [
+    {"name": "o00", "x_fraction": 0.0, "y_fraction": 0.0},
+    {"name": "ox50", "x_fraction": 0.5, "y_fraction": 0.0},
+    {"name": "oy50", "x_fraction": 0.0, "y_fraction": 0.5},
+    {"name": "oxy50", "x_fraction": 0.5, "y_fraction": 0.5}
+  ],
+  "cohort_threshold_policies": [
+    {
+      "name": "area_scaled",
+      "description": "Scale the 500-pixel threshold by cell area: 125, 500, and 2000 pixels for 5, 10, and 20 km cells"
+    },
+    {
+      "name": "fixed_500",
+      "description": "Apply the literal 500-pixel threshold at 5 and 20 km as a cohort-selection sensitivity",
+      "exclude_grid_sizes_m": [10000]
+    }
+  ],
+  "primary_reference_spec": "g10_area_scaled_o00",
+  "cohort": {
+    "reference_start_year": 1984,
+    "reference_end_year": 2004,
+    "minimum_positive_reference_years": 10,
+    "base_10km_footprint_pixels": 500
+  },
+  "annual_observation_rule": {
+    "minimum_valid_habitat_fraction": 0.50,
+    "minimum_valid_quarters": 3,
+    "require_q3": true,
+    "aggregator": "maximum_valid_quarter"
+  },
+  "forecast": {
+    "train_start": 1989,
+    "test_start": 2005,
+    "test_end": 2024,
+    "panel_end": 2025,
+    "seed": 20260816,
+    "bootstrap_replicates": 2000,
+    "bootstrap_block_years": 2
+  },
+  "outcome": {
+    "decline_fraction": 0.30,
+    "eligibility_relative_canopy_gt": 0.05,
+    "reference_statistic": "cell_specific_p95_annual_area_1984_2004"
+  },
+  "oisst": {
+    "source": "existing weekly OISST v2.1 source-grid features",
+    "maximum_nearest_source_distance_km": 40.0,
+    "role": "secondary matched-domain sensitivity"
+  },
+  "spatial_agreement": {
+    "mapping_unit": "pre2005_positive_30m_station_pixel",
+    "comparison_references": ["global_10km_o00", "same_size_policy_o00"],
+    "top_budget_fraction": 0.20
+  }
+}

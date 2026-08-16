@@ -1,0 +1,32 @@
+ERDDAP subsets complete: 25/312
+ERDDAP subsets complete: 50/312
+ERDDAP subsets complete: 75/312
+ERDDAP subsets complete: 100/312
+ERDDAP subsets complete: 125/312
+ERDDAP subsets complete: 150/312
+ERDDAP subsets complete: 175/312
+ERDDAP subsets complete: 200/312
+ERDDAP subsets complete: 225/312
+ERDDAP subsets complete: 250/312
+ERDDAP subsets complete: 275/312
+ERDDAP subsets complete: 300/312
+ERDDAP subsets complete: 312/312
+Traceback (most recent call last):
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/57_build_crw_daily_heatstress.py", line 475, in <module>
+    main()
+    ~~~~^^
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/57_build_crw_daily_heatstress.py", line 388, in main
+    logs.append(future.result())
+                ~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 395, in __get_result
+    raise self._exception
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/57_build_crw_daily_heatstress.py", line 223, in extract_official_date
+    raise ValueError("Official latitude indices no longer match locked mapping")
+ValueError: Official latitude indices no longer match locked mapping

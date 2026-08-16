@@ -1,0 +1,55 @@
+{
+  "protocol": {
+    "id": "KELP-EWS-CA-LOCAL-v2.0",
+    "date": "2026-08-16",
+    "classification": "pilot_informed_multiscale_ecological_diagnostic",
+    "preregistration": false,
+    "purpose": "Rebuild KelpWatch outcomes around Giraldo field sites at matched local supports and diagnose prediction errors without generalizing the field subset coastwide."
+  },
+  "spatial_supports_m": [300, 1000],
+  "source_crs": "EPSG:4326",
+  "analysis_crs": "EPSG:6933",
+  "cohort": {
+    "reference_start_year": 1984,
+    "reference_end_year": 2004,
+    "minimum_positive_reference_years": 10,
+    "minimum_prepositive_pixels": {"300": 5, "1000": 20}
+  },
+  "annual_observation_rule": {
+    "minimum_valid_habitat_fraction": 0.5,
+    "minimum_valid_quarters": 3,
+    "require_q3": true,
+    "aggregator": "maximum_valid_quarter"
+  },
+  "outcome": {
+    "decline_fraction": 0.30,
+    "eligibility_relative_canopy_gt": 0.05,
+    "reference_statistic": "site_support_specific_p95_annual_area_1984_2004"
+  },
+  "forecast": {
+    "train_start_year": 2004,
+    "minimum_complete_training_years": 4,
+    "first_forecast_year": 2008,
+    "last_forecast_year": 2021,
+    "monitoring_budget_fraction": 0.20,
+    "seed": 20260816,
+    "bootstrap_replicates": 5000
+  },
+  "overlap_control": {
+    "cluster_rule": "DBSCAN connected components at twice the support radius",
+    "use": "cluster-robust inference and leave-cluster-out audit; do not interpret overlapping site buffers as independent ecological replicates"
+  },
+  "ecological_axes": {
+    "grazing_log1p": "log1p(red urchin density + purple urchin density)",
+    "rock_probability": "mean probability of rock in the surveyed site polygon",
+    "depth_m": "positive depth magnitude from mean_depth",
+    "kelp_species_contrast": "log1p(bull kelp density) minus log1p(giant kelp density)"
+  },
+  "interpretation_rules": {
+    "causal_language_prohibited": true,
+    "california_only": true,
+    "field_data_not_coastwide_information_block": true,
+    "stable_condition_requires_support_consistency": true,
+    "false_discovery_rate": 0.10
+  }
+}

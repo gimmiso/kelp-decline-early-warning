@@ -1,0 +1,7 @@
+support_m,context,rows,sites,years,events,overlap_clusters
+300,bull_north,56,9,14,33,9
+300,giant_central_southwest,643,81,18,261,55
+300,giant_southeast,166,21,17,78,21
+1000,bull_north,60,10,12,40,8
+1000,giant_central_southwest,810,88,18,296,33
+1000,giant_southeast,239,25,17,90,14

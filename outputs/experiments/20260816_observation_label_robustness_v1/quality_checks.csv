@@ -1,0 +1,11 @@
+check,value,passed
+stable_cells_165,165,True
+quarterly_keys_unique,0,True
+panel_keys_unique_all_variants,0,True
+train_precedes_test,0,True
+prediction_scores_complete,0,True
+prediction_keys_unique,0,True
+model_rows_matched_within_mode_variant,1,True
+netcdf_quarterly_rebuild,0,True
+legacy_locked_reproduction,0,True
+fixed_footprint_count_reproduction,0,True

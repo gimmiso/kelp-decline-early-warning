@@ -1,0 +1,10 @@
+check,passed,severity_if_failed,evidence
+panel_keys_unique,True,blocker,0
+metadata_keys_unique,True,blocker,0
+field_keys_unique,True,blocker,0
+complete_site_year_rectangle,True,blocker,expected=14700; rows=14700
+panel_contains_exact_stable_support_sites,True,blocker,metadata=350; panel=350
+event_rule_recomputed,True,blocker,0
+eligibility_rule_recomputed,True,blocker,0
+reference_p95_recomputed,True,blocker,max_error=1.16e-10
+raw_netcdf_spot_checks_match,True,blocker,passed=18/18

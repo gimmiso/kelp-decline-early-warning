@@ -1,0 +1,15 @@
+python3 scripts/57_build_crw_daily_heatstress.py \
+  --config configs/crw_daily_heatstress_v1.json \
+  --mapping outputs/metadata/crw5km_march_cell_mapping_165.csv \
+  --cache-dir data/external/noaa/cache/crw5km_daily_q1_v1 \
+  --output-dir outputs/experiments/20260816_crw_daily_heatstress_v1 \
+  --workers 6
+
+python3 scripts/58_run_crw_daily_heatstress_confirmation.py \
+  --config configs/crw_daily_heatstress_v1.json \
+  --base-analysis-rows outputs/experiments/20260816_forecast_clock_crw5km_v1/analysis_rows_q23.csv \
+  --daily-features outputs/experiments/20260816_crw_daily_heatstress_v1/crw_daily_q1_heatstress_features_165.csv \
+  --output-dir outputs/experiments/20260816_crw_daily_heatstress_v1
+
+python3 scripts/59_validate_crw_daily_heatstress_confirmation.py \
+  --output-dir outputs/experiments/20260816_crw_daily_heatstress_v1

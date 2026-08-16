@@ -1,0 +1,197 @@
+{
+  "status": "complete",
+  "classification": "pilot-informed reviewer robustness; not independent confirmation",
+  "started_at_utc_epoch": 1786855823.119801,
+  "finished_at_utc_epoch": 1786856436.514248,
+  "runtime_seconds": 613.39,
+  "command": "scripts/46_run_journal_extension_experiments.py --panel data/processed/kelpwatch_west_coast_panel_5km_v1.csv --environment data/processed/noaa_environmental_features_5km_v1.csv --config configs/coastwide_5km_primary_v1.json --output-dir outputs/experiments/20260816_coastwide_5km_primary_v1",
+  "git_sha_before_run": "3a49853302a2015a3bb14bb0a3f359e233757a2d",
+  "python": "3.12.13",
+  "pandas": "3.0.3",
+  "numpy": "2.3.5",
+  "scikit_learn": "1.9.0",
+  "xgboost": "3.2.0",
+  "seed": 20260814,
+  "bootstrap_replicates": 2000,
+  "random_cv_repeats": 20,
+  "random_cv_folds": 5,
+  "panel": "data/processed/kelpwatch_west_coast_panel_5km_v1.csv",
+  "panel_sha256": "496eb158422dd97ba8c98358fa659c420411cbf8413a7bfba13c436a1bd36726",
+  "environment": "data/processed/noaa_environmental_features_5km_v1.csv",
+  "environment_sha256": "4497115e4eb0e7e62b728c3abc6a003b5ae474c81fa6d86d4565d962fef13933",
+  "config": "configs/coastwide_5km_primary_v1.json",
+  "config_sha256": "b5156b8870c8d11584b09bbb0ba7a555abc9878c1d8213cd68e6083c27075e98",
+  "forecast_years": [
+    2005,
+    2024
+  ],
+  "model_families": [
+    "logistic",
+    "random_forest",
+    "xgboost"
+  ],
+  "budgets": [
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "decline_thresholds": [
+    0.2,
+    0.3,
+    0.4
+  ],
+  "canopy_cutoffs": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "decision": {
+    "classification": "pilot-informed reviewer robustness; not independent confirmation",
+    "protocol_current_only": {
+      "random_pooled_lift_mean": 0.16417852676393346,
+      "random_macro_within_year_lift_mean": 0.15297376881207883,
+      "expanding_pooled_lift": 0.15966284138971515,
+      "expanding_macro_within_year_lift": 0.15297377049503907
+    },
+    "primary_logistic_current_macro_lift": 0.15297377049503907,
+    "model_family_increment_conclusions": {
+      "logistic": {
+        "trajectory_minus_current": {
+          "estimate": 0.037949738594475715,
+          "ci": [
+            0.01957305593077623,
+            0.05675602815040091
+          ],
+          "supported_positive": true
+        },
+        "oisst_minus_trajectory": {
+          "estimate": -0.017027959747699727,
+          "ci": [
+            -0.037938820987834715,
+            0.003529219272664034
+          ],
+          "supported_positive": false
+        },
+        "cuti_beuti_minus_oisst": {
+          "estimate": -0.008991192125318112,
+          "ci": [
+            -0.024268936865881337,
+            0.005748174650592731
+          ],
+          "supported_positive": false
+        }
+      },
+      "random_forest": {
+        "trajectory_minus_current": {
+          "estimate": 0.04186355015771222,
+          "ci": [
+            0.027249882757007723,
+            0.05717086039749854
+          ],
+          "supported_positive": true
+        },
+        "oisst_minus_trajectory": {
+          "estimate": 0.0022425407250897754,
+          "ci": [
+            -0.010294649098083641,
+            0.014684595478681377
+          ],
+          "supported_positive": false
+        },
+        "cuti_beuti_minus_oisst": {
+          "estimate": -0.002179182192187948,
+          "ci": [
+            -0.02398212148457687,
+            0.016354717319190682
+          ],
+          "supported_positive": false
+        }
+      },
+      "xgboost": {
+        "trajectory_minus_current": {
+          "estimate": 0.03307125078092493,
+          "ci": [
+            0.020281179521696974,
+            0.048450936390239153
+          ],
+          "supported_positive": true
+        },
+        "oisst_minus_trajectory": {
+          "estimate": 0.015364945565884488,
+          "ci": [
+            -0.007150045109510608,
+            0.0374468016062868
+          ],
+          "supported_positive": false
+        },
+        "cuti_beuti_minus_oisst": {
+          "estimate": -0.009705893648136347,
+          "ci": [
+            -0.0431090052600558,
+            0.0217295649539319
+          ],
+          "supported_positive": false
+        }
+      }
+    },
+    "budget_current_only": {
+      "top_5pct": {
+        "recall": 0.08836996336996338,
+        "ci": [
+          0.07567547517844254,
+          0.10510606874328676
+        ]
+      },
+      "top_10pct": {
+        "recall": 0.17032967032967034,
+        "ci": [
+          0.14938244316908814,
+          0.1977086788572178
+        ]
+      },
+      "top_20pct": {
+        "recall": 0.2967032967032967,
+        "ci": [
+          0.2726126736963519,
+          0.3282078472958643
+        ]
+      },
+      "top_30pct": {
+        "recall": 0.4088827838827839,
+        "ci": [
+          0.38569398597978816,
+          0.43912051840203176
+        ]
+      }
+    },
+    "sensitivity_current_macro_lift_range": [
+      0.13774979882660746,
+      0.16278813737028758
+    ],
+    "sensitivity_oisst_increment_positive_combinations": 0,
+    "sensitivity_oisst_increment_combinations": 9
+  },
+  "output_sha256": {
+    "data_quality_profile.csv": "234f2f00cf8538adf792a22c217ae929451229412598a5ea578ae57a01290350",
+    "fold_audit.csv": "a475022aa1d86574ca2b231d6b0f7d81f200b13dd26002d22ac939cabcb65802",
+    "expanding_predictions.csv": "ad447e11f5bbf0c7ec80b926192b860db999ee80b62347d729a366a8945b2f6f",
+    "expanding_year_metrics.csv": "2b4a26a866b389b2aff8bb70f7dbc1c7a6458c99c90e65958750cb2f8de9e272",
+    "model_family_summary.csv": "b7e80a76aa7bb345cc0175af04240db54e4d36f3a697b400fe0335cbf7bbac07",
+    "model_family_increment_summary.csv": "ee978a5de844326a8ef4829b20d4f2d57d298caea4bebc654edd407389fa8291",
+    "random_protocol_replicate_metrics.csv": "8ac77f72aa1fd5ad0522444ac4a4eec173c742922ea9c5bc7bda891265faebb9",
+    "random_protocol_predictions_repeat0.csv": "04ea5c6eed11980fc298d0d2bc29351e188160d707ff514fda65b90d5037964c",
+    "protocol_comparison.csv": "8c601a49fc3dc36391eaaab443f1c32a6a3c8eb820807389176b350e73b84bdc",
+    "budget_year_detail.csv": "f89dca6fb6822de016d7a927e79aa1ea67836d962b427e72a4b67236fe969fda",
+    "budget_summary.csv": "f100547d0a5dc377f9e4ae98c507162881b483dfdca56d3ade84780d46b8c964",
+    "sensitivity_model_metrics.csv": "c2f88ab87aeac1a0c6f167ce31f515cff57434c90027f16c56fe10e90a3f7237",
+    "sensitivity_year_metrics.csv": "1a284583f3d174dfa64483d95d054778f2bd492d8a222b3d3a93faeae2da43f0",
+    "sensitivity_increment_summary.csv": "2c6db0efea8e259f4e2fa45407bedd5abefc2f2fd5e4bf7fd11a351fbb80b550",
+    "decision.json": "c2fa70a65939c3f357b391630ca889f7688933e1a0e239ac2c998fdaa2550923",
+    "results_summary_ko.md": "c785287f093a9c30269716523e1428c610e92a23e02d18e5d6be0d98dadff9de",
+    "figure_01_protocol_comparison.png": "a498f59c6282d5ce8902b2d1dc6bfbd74ee70293303be9cfdca53a28fc8fe7d9",
+    "figure_02_model_family_increments.png": "e7bb11aba979226ce095d53db9f572d69025ba608333bded0dd21da80aa11b2d",
+    "figure_03_budget_recall_curve.png": "0ffe7802a20fa5c7cfa8efc9009c7e129b75a0ed8ce36d8061ebc3b571275f68",
+    "figure_04_threshold_canopy_sensitivity.png": "3c7a428250bd4874c65e11f62ebcb498559d24bcbeff106577e46f50ac58923d"
+  }
+}

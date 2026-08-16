@@ -1,0 +1,1 @@
+scripts/77_run_california_pooled_hierarchical_extension.py --config configs/model_architecture_extension_v1.json --analysis-rows outputs/experiments/20260816_california_local_ecology_v3/analysis_rows.csv --old-predictions outputs/experiments/20260816_california_local_ecology_v3/predictions.csv --output-dir outputs/experiments/20260816_model_architecture_california_v1

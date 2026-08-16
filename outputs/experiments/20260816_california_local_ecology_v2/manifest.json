@@ -1,0 +1,85 @@
+{
+  "status": "complete",
+  "protocol": {
+    "id": "KELP-EWS-CA-LOCAL-v2.0",
+    "date": "2026-08-16",
+    "classification": "pilot_informed_multiscale_ecological_diagnostic",
+    "preregistration": false,
+    "purpose": "Rebuild KelpWatch outcomes around Giraldo field sites at matched local supports and diagnose prediction errors without generalizing the field subset coastwide."
+  },
+  "forecast": {
+    "train_start_year": 2004,
+    "minimum_complete_training_years": 4,
+    "first_forecast_year": 2008,
+    "last_forecast_year": 2021,
+    "monitoring_budget_fraction": 0.2,
+    "seed": 20260816,
+    "bootstrap_replicates": 5000
+  },
+  "runtime_seconds": 196.08,
+  "git_sha_before_run": "3a49853302a2015a3bb14bb0a3f359e233757a2d",
+  "python": "3.12.13",
+  "pandas": "3.0.3",
+  "numpy": "2.3.5",
+  "scikit_learn": "1.9.0",
+  "xgboost": "3.2.0",
+  "stable_condition_count": 0,
+  "analysis_rows": 4847,
+  "analysis_sites": 183,
+  "effective_analysis_year_range": [
+    2004,
+    2021
+  ],
+  "coverage": [
+    {
+      "support_m": 300,
+      "matched_rows": 752,
+      "matched_sites": 152,
+      "overlap_clusters": 120,
+      "years": 14,
+      "events": 337
+    },
+    {
+      "support_m": 1000,
+      "matched_rows": 965,
+      "matched_sites": 169,
+      "overlap_clusters": 73,
+      "years": 14,
+      "events": 401
+    }
+  ],
+  "inputs": {
+    "config": {
+      "path": "configs/california_local_ecology_v2.json",
+      "sha256": "b92d22721cf86194e6b6a8637b8f0ac6e3434aa818ed0c2e7097557bc79ac54b"
+    },
+    "panel": {
+      "path": "outputs/experiments/20260816_california_local_ecology_v2/local_support_panel.csv",
+      "sha256": "106bc06eac131b45273fccff63581fa49f1adc4e74e711d01d686dd5808901aa"
+    },
+    "field": {
+      "path": "outputs/experiments/20260816_california_local_ecology_v2/field_site_year_ecology.csv",
+      "sha256": "a9bee03d5acae023465ef1f2f2e5e86122962e97758a3200877bf2a8f4d193de"
+    },
+    "mur": {
+      "path": "outputs/experiments/20260816_california_local_ecology_v2/mur1km_site_year_features.csv",
+      "sha256": "06547c2b369af079dda6cf8a83593b2ac87cb16d9d367990e1dcfbdbc22b9f8d"
+    }
+  },
+  "output_sha256": {
+    "command.txt": "525513bd880291d82cbb4329a4013e8999a94277ee7f4adab345aa27d44a584a",
+    "analysis_rows.csv": "cba1ba5e3bf097121e83bb4701f8861d31d4b4267629595daa15322050e01959",
+    "fold_audit.csv": "ced77727b238fe8562993affa1c8f96b4b7ba66af17e974471a62dd86ca67d0e",
+    "predictions.csv": "67528e47f80911efb2de95f3a389ff77fa225403c51dcedbde0806daeab38d48",
+    "ranked_predictions.csv": "62457ee86af44538d86a0ef93c3cf26e30c38fb2fab6533291c51fcfd57148d7",
+    "annual_metrics.csv": "af011939a3afbb5bbe97af84d5dea5c1e0e35a07e90e34c6328774f215c42020",
+    "performance_summary.csv": "e606486bed22fb303d8360d9139549c021a1c64f0828957394bad2d531705bdf",
+    "increment_summary.csv": "06640bcd7883f149430ea55e1224f03b70b963c9352887a25a2b64d4938e3161",
+    "prediction_diagnostics.csv": "2146cd3f26997e00f70b1812ec4ad1f5c0b93bbd5d8c70cb91c7c51ab0e2c2ce",
+    "ecology_matched_diagnostics.csv": "c4c89a4c2969830e7155e2d2920209d1eebe84f38f2e740fe5f3cddeaceafbbb",
+    "ecological_axis_associations.csv": "30afa2108dd11fd60035640a44558f73573fad9c6c5531dd00a973139eb9a6a4",
+    "condition_stability_summary.csv": "7f215a2ad061f1f76b39e5370b23f5a2c440d22f4d5c0f23ebd28a3f5762ee53",
+    "leave_overlap_cluster_out_associations.csv": "353e36a2bc8364ee4388e2c38f809174e1e4b5340cede665890ce6ce43bcd79b",
+    "leave_overlap_cluster_out_summary.csv": "5c99f09a50f6633c4803537b8d82a7282c26d01e5f7fc895efb5d53701038a87"
+  }
+}

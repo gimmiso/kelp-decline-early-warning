@@ -1,0 +1,21 @@
+{
+  "panel": "data/processed/kelpwatch_west_coast_panel_165.csv",
+  "panel_sha256": "c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48",
+  "output_sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87",
+  "oisst_endpoint": "https://comet.nefsc.noaa.gov/erddap/griddap/noaa_psl_62b6_f192_98f7.nc",
+  "oisst_dataset": "noaa_psl_62b6_f192_98f7",
+  "oisst_temporal_resolution": "weekly",
+  "thermal_baseline": [
+    1984,
+    2004
+  ],
+  "upwelling_baseline": [
+    1988,
+    2004
+  ],
+  "upwelling_geographic_support": [
+    31.0,
+    47.0
+  ],
+  "runtime_seconds": 6.86
+}

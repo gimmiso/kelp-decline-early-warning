@@ -1,0 +1,15 @@
+{
+  "primary_claim_gate": "not_supported",
+  "daily_minus_trajectory_mean_ap_lift_difference": -0.0018285580238652857,
+  "daily_minus_trajectory_ci": [
+    -0.016271355508227045,
+    0.009303689522613375
+  ],
+  "daily_beyond_monthly_claim_gate": "not_supported",
+  "daily_beyond_monthly_mean_ap_lift_difference": -5.202439917387919e-05,
+  "daily_beyond_monthly_ci": [
+    -0.024788723411128186,
+    0.018512452606086752
+  ],
+  "interpretation_rule": "No mechanism claim; incremental predictive value only."
+}

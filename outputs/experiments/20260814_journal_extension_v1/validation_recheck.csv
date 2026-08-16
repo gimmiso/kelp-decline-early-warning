@@ -1,0 +1,29 @@
+check,passed,severity_if_failed,evidence
+panel_has_165_cells,True,blocker,cells=165
+panel_keys_unique,True,blocker,duplicates=0
+environment_keys_unique,True,blocker,duplicates=0
+merge_preserves_panel_grain,True,blocker,panel=6930; merged=6930
+forward_only_expanding_folds,True,blocker,max_train_end_minus_test=-1
+expanding_prediction_keys_unique,True,blocker,duplicates=0
+prediction_scores_finite_and_bounded,True,blocker,missing=0; min=0.011822; max=1.000000
+exact_rows_across_models_within_domain,True,blocker,"{'full_oisst_domain': 2614, 'upwelling_supported_domain': 1698}"
+exact_outcomes_across_models_within_domain,True,blocker,ordered event vectors match
+annual_ap_lifts_recomputed,True,blocker,max_error=9.71e-17
+model_macro_lifts_recomputed,True,blocker,max_error=8.33e-17
+model_pooled_lifts_recomputed,True,blocker,max_error=9.71e-17
+paired_model_increments_recomputed,True,blocker,max_error=9.54e-17
+random_protocol_has_20_repeats,True,blocker,min=20; max=20
+random_oof_repeat0_covers_exact_operational_rows,True,blocker,cell-year-event rows match
+random_repeat0_metrics_recomputed,True,blocker,max_error=8.33e-17
+protocol_table_has_all_information_sets,True,blocker,rows=7
+budget_rank_counts_recomputed,True,blocker,max_count_error=0
+budget_micro_recall_recomputed,True,blocker,max_error=8.33e-17
+budget_recall_is_monotonic,True,claim,violations=0
+sensitivity_population_counts_recomputed,True,blocker,max_n_error=0
+sensitivity_event_counts_recomputed,True,blocker,max_event_error=0
+primary_sensitivity_matches_main_logistic_run,True,blocker,max_error=0
+oisst_increment_nonpositive_in_all_nine_sensitivities,True,claim,all 9 point estimates <= 0
+current_baseline_positive_for_all_model_families,True,claim,all lower confidence limits > 0
+panel_hash_matches_manifest,True,blocker,c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48
+environment_hash_matches_manifest,True,blocker,2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87
+saved_output_hashes_match_manifest,True,blocker,mismatches=[]

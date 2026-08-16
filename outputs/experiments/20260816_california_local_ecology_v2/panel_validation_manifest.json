@@ -1,0 +1,9 @@
+{
+  "assessment": "Share with caveats",
+  "checks": 9,
+  "passed": 9,
+  "blockers": 0,
+  "panel_sha256": "106bc06eac131b45273fccff63581fa49f1adc4e74e711d01d686dd5808901aa",
+  "netcdf_sha256": "b27caf8e4d08c0d2816d044e254a6339c854f2933e14a3fa2a139b37832f884f",
+  "spot_check_sha256": "316324b6db9ff407ccefb798b0177be68da0d5e1dfeb0a967d78b0a516335fe4"
+}

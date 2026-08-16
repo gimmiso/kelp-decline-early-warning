@@ -1,0 +1,8 @@
+check,value,expected,passed
+locked_cells,165.0,165,True
+forecast_years,20.0,20,True
+q23_evaluation_rows,2478.0,>=2000,True
+q23_events,1009.0,>=200,True
+all_years_two_classes,20.0,20,True
+crw_mapping_max_km,7.304035117994904,<=15,True
+same_rows_all_models_within_outcome,1.0,1,True

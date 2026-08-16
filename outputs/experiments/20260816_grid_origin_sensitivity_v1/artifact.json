@@ -1,0 +1,966 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "켈프 급감 위험순위화의 격자 크기·원점 민감도",
+    "description": "켈프 급감 위험순위화의 공간 support 강건성과 우선조사 위치 안정성을 평가한 기술 보고서.",
+    "generatedAt": "2026-08-16T02:27:26.425893Z",
+    "cards": [
+      {
+        "id": "current_support_card",
+        "description": "현재상태 AP lift의 95% CI 하한이 0보다 큰 면적비례 격자 수.",
+        "dataset": "headline",
+        "sourceId": "headline_metrics",
+        "metrics": [
+          {
+            "label": "현재상태 지지",
+            "field": "current_supported",
+            "format": "number",
+            "unit": "/ 12 격자"
+          }
+        ]
+      },
+      {
+        "id": "origin_range_card",
+        "description": "동일 크기에서 네 원점 간 현재상태 AP lift 최대 범위.",
+        "dataset": "headline",
+        "sourceId": "headline_metrics",
+        "metrics": [
+          {
+            "label": "원점 이동 최대 범위",
+            "field": "max_origin_range",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "top20_card",
+        "description": "10km 기본 격자 대비 상위 20% 조사영역의 최소 픽셀 가중 Jaccard.",
+        "dataset": "headline",
+        "sourceId": "headline_metrics",
+        "metrics": [
+          {
+            "label": "최소 조사영역 Jaccard",
+            "field": "min_top20",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "trajectory_card",
+        "description": "궤적 증분의 95% CI 하한이 0보다 큰 면적비례 격자 수.",
+        "dataset": "headline",
+        "sourceId": "headline_metrics",
+        "metrics": [
+          {
+            "label": "궤적 증분 지지",
+            "field": "trajectory_supported",
+            "format": "number",
+            "unit": "/ 12 격자"
+          }
+        ]
+      },
+      {
+        "id": "oisst_card",
+        "description": "OISST 증분의 95% CI 하한이 0보다 큰 면적비례 격자 수.",
+        "dataset": "headline",
+        "sourceId": "headline_metrics",
+        "metrics": [
+          {
+            "label": "OISST 증분 지지",
+            "field": "oisst_supported",
+            "format": "number",
+            "unit": "/ 12 격자"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "current_lift_chart",
+        "title": "현재상태 AP lift: 격자 크기·원점별",
+        "subtitle": "면적비례 footprint 기준의 12개 격자; 정확한 95% 구간은 아래 표에 제시.",
+        "type": "bar",
+        "dataset": "scaled_results",
+        "sourceId": "grid_results",
+        "encodings": {
+          "x": {
+            "field": "origin",
+            "type": "nominal",
+            "label": "원점"
+          },
+          "y": {
+            "field": "current_lift",
+            "type": "quantitative",
+            "label": "Macro within-year AP lift"
+          },
+          "color": {
+            "field": "grid_size",
+            "type": "nominal",
+            "label": "격자 크기"
+          },
+          "tooltip": [
+            {
+              "field": "stable_cells",
+              "type": "quantitative",
+              "label": "안정 코호트 셀"
+            },
+            {
+              "field": "current_ci_low",
+              "type": "quantitative",
+              "label": "95% CI 하한"
+            },
+            {
+              "field": "current_ci_high",
+              "type": "quantitative",
+              "label": "95% CI 상한"
+            }
+          ]
+        }
+      },
+      {
+        "id": "spatial_chart",
+        "title": "10km 기본 격자 대비 공간 일치도",
+        "subtitle": "점 하나는 격자 크기×원점 사양 하나; 셀 성능과 실제 조사대상 안정성은 별개다.",
+        "type": "scatter",
+        "dataset": "scaled_results",
+        "sourceId": "spatial_agreement",
+        "encodings": {
+          "x": {
+            "field": "label_jaccard",
+            "type": "quantitative",
+            "label": "급감 라벨 Jaccard"
+          },
+          "y": {
+            "field": "top20_jaccard",
+            "type": "quantitative",
+            "label": "상위 20% 조사영역 Jaccard"
+          },
+          "color": {
+            "field": "grid_size",
+            "type": "nominal",
+            "label": "격자 크기"
+          },
+          "tooltip": [
+            {
+              "field": "origin",
+              "type": "nominal",
+              "label": "원점"
+            },
+            {
+              "field": "stable_cells",
+              "type": "quantitative",
+              "label": "안정 코호트 셀"
+            },
+            {
+              "field": "test_events",
+              "type": "quantitative",
+              "label": "평가 사건 수"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cohort_policy_chart",
+        "title": "footprint 기준에 따른 코호트 셀 수",
+        "subtitle": "5km에서 500픽셀 고정은 더 엄격하고, 20km에서는 더 느슨해진다.",
+        "type": "bar",
+        "dataset": "policy_results",
+        "sourceId": "policy_results",
+        "encodings": {
+          "x": {
+            "field": "spec_label",
+            "type": "nominal",
+            "label": "격자 사양"
+          },
+          "y": {
+            "field": "stable_cells",
+            "type": "quantitative",
+            "label": "안정 코호트 셀"
+          },
+          "color": {
+            "field": "threshold",
+            "type": "nominal",
+            "label": "footprint 기준"
+          },
+          "tooltip": [
+            {
+              "field": "minimum_pixels",
+              "type": "quantitative",
+              "label": "최소 footprint 픽셀"
+            },
+            {
+              "field": "current_lift",
+              "type": "quantitative",
+              "label": "현재상태 AP lift"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "scaled_table",
+        "title": "면적비례 격자별 결과",
+        "subtitle": "AP lift·증분가치·공간 일치도의 정확한 점추정과 95% 구간.",
+        "dataset": "scaled_results",
+        "sourceId": "grid_results",
+        "defaultSort": {
+          "field": "current_lift",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "spec_label",
+            "label": "격자 사양",
+            "type": "text"
+          },
+          {
+            "field": "stable_cells",
+            "label": "셀",
+            "format": "number"
+          },
+          {
+            "field": "current_lift",
+            "label": "현재 lift",
+            "format": "number"
+          },
+          {
+            "field": "current_ci_low",
+            "label": "현재 CI 하한",
+            "format": "number"
+          },
+          {
+            "field": "current_ci_high",
+            "label": "현재 CI 상한",
+            "format": "number"
+          },
+          {
+            "field": "trajectory_increment",
+            "label": "궤적 증분",
+            "format": "number"
+          },
+          {
+            "field": "oisst_increment",
+            "label": "OISST 증분",
+            "format": "number"
+          },
+          {
+            "field": "label_jaccard",
+            "label": "라벨 Jaccard",
+            "format": "number"
+          },
+          {
+            "field": "top20_jaccard",
+            "label": "Top-20 Jaccard",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "grid_results",
+        "label": "격자 민감도 결과표",
+        "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+        "query": {
+          "language": "sql",
+          "description": "20개 격자 사양의 미래예측 성능, 부트스트랩 구간, 코호트 및 공간 일치도를 결합한 검증 결과표.",
+          "tables_used": [
+            "grid_sensitivity_results"
+          ],
+          "filters": [
+            "공식 Kelpwatch 2026 Q2 NetCDF",
+            "1984–2004 양성 픽셀 고정 footprint",
+            "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+            "2005–2024 expanding-window 평가",
+            "다음 해 연간 최대 캐노피 30% 이상 감소"
+          ],
+          "metric_definitions": {
+            "current_lift": "연도별 AP에서 해당 연도 사건률을 뺀 값의 20개 연도 macro 평균.",
+            "trajectory_increment": "동일 표본에서 current+trajectory AP lift와 current-only AP lift의 연도별 차이 평균.",
+            "oisst_increment": "OISST 지원 동일 표본에서 trajectory+OISST와 current+trajectory AP lift의 연도별 차이 평균."
+          },
+          "engine": "sqlite",
+          "sql": "SELECT * FROM grid_sensitivity_results\nWHERE threshold_policy = 'area_scaled'\nORDER BY grid_size_km,\nCASE origin_name WHEN 'o00' THEN 1 WHEN 'ox50' THEN 2 WHEN 'oy50' THEN 3 ELSE 4 END"
+        }
+      },
+      {
+        "id": "spatial_agreement",
+        "label": "픽셀 가중 공간 일치도",
+        "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+        "query": {
+          "language": "sql",
+          "description": "공통 pre-2005 양성 30m 픽셀-연도에서 급감 라벨과 상위 20% 조사영역의 Jaccard를 계산.",
+          "tables_used": [
+            "grid_sensitivity_results"
+          ],
+          "filters": [
+            "공식 Kelpwatch 2026 Q2 NetCDF",
+            "1984–2004 양성 픽셀 고정 footprint",
+            "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+            "2005–2024 expanding-window 평가",
+            "다음 해 연간 최대 캐노피 30% 이상 감소"
+          ],
+          "metric_definitions": {
+            "label_jaccard": "두 격자 모두 급감으로 분류한 픽셀-연도 / 적어도 한 격자가 급감으로 분류한 픽셀-연도.",
+            "top20_jaccard": "두 격자의 상위 20% 조사 셀에 동시에 포함된 공통 픽셀-연도 / 어느 한쪽에 포함된 공통 픽셀-연도."
+          },
+          "engine": "sqlite",
+          "sql": "SELECT * FROM grid_sensitivity_results\nWHERE threshold_policy = 'area_scaled'\nORDER BY grid_size_km,\nCASE origin_name WHEN 'o00' THEN 1 WHEN 'ox50' THEN 2 WHEN 'oy50' THEN 3 ELSE 4 END"
+        }
+      },
+      {
+        "id": "validation",
+        "label": "독립 재검산 결과",
+        "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/validation_recheck.csv",
+        "query": {
+          "language": "sql",
+          "description": "예측확률·bootstrap draw·픽셀 혼동행렬·manifest hash에서 결과를 독립 재검산한 25개 검사.",
+          "tables_used": [
+            "validation_recheck"
+          ],
+          "filters": [
+            "25개 사전 정의 정합성 검사"
+          ],
+          "engine": "sqlite",
+          "sql": "SELECT \"check\", value, passed FROM validation_recheck ORDER BY \"check\""
+        }
+      },
+      {
+        "id": "headline_metrics",
+        "label": "격자 강건성 핵심 지표",
+        "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+        "query": {
+          "language": "sql",
+          "engine": "sqlite",
+          "sql": "WITH scaled AS (\n  SELECT * FROM grid_sensitivity_results WHERE threshold_policy = 'area_scaled'\n), origin_ranges AS (\n  SELECT grid_size_km, MAX(current_lift) - MIN(current_lift) AS origin_range\n  FROM scaled GROUP BY grid_size_km\n)\nSELECT\n  SUM(CASE WHEN current_ci_low > 0 THEN 1 ELSE 0 END) AS current_supported,\n  (SELECT MAX(origin_range) FROM origin_ranges) AS max_origin_range,\n  MIN(CASE WHEN spec_id <> 'g10_area_scaled_o00' THEN global_label_jaccard END) AS min_label,\n  MIN(CASE WHEN spec_id <> 'g10_area_scaled_o00' THEN global_top20_spatial_jaccard END) AS min_top20,\n  SUM(CASE WHEN trajectory_ci_low > 0 THEN 1 ELSE 0 END) AS trajectory_supported,\n  SUM(CASE WHEN oisst_ci_low > 0 THEN 1 ELSE 0 END) AS oisst_supported\nFROM scaled",
+          "description": "면적비례 12개 격자의 지지 횟수, 원점 범위 및 최소 공간 Jaccard를 집계.",
+          "tables_used": [
+            "grid_sensitivity_results"
+          ],
+          "filters": [
+            "공식 Kelpwatch 2026 Q2 NetCDF",
+            "1984–2004 양성 픽셀 고정 footprint",
+            "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+            "2005–2024 expanding-window 평가",
+            "다음 해 연간 최대 캐노피 30% 이상 감소"
+          ]
+        }
+      },
+      {
+        "id": "policy_results",
+        "label": "footprint 기준 비교",
+        "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+        "query": {
+          "language": "sql",
+          "engine": "sqlite",
+          "sql": "SELECT * FROM grid_sensitivity_results\nWHERE grid_size_km IN (5, 20)\nORDER BY grid_size_km, threshold_policy,\nCASE origin_name WHEN 'o00' THEN 1 WHEN 'ox50' THEN 2 WHEN 'oy50' THEN 3 ELSE 4 END",
+          "description": "5km와 20km의 면적비례 및 500픽셀 고정 코호트를 선택.",
+          "tables_used": [
+            "grid_sensitivity_results"
+          ],
+          "filters": [
+            "공식 Kelpwatch 2026 Q2 NetCDF",
+            "1984–2004 양성 픽셀 고정 footprint",
+            "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+            "2005–2024 expanding-window 평가",
+            "다음 해 연간 최대 캐노피 30% 이상 감소",
+            "grid_size_km IN (5, 20)"
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 켈프 급감 위험순위화의 격자 크기·원점 민감도\n\n공식 Kelpwatch 원자료로 재구축한 5·10·20km 격자와 반 셀 원점 이동 강건성 분석."
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "grid_results",
+        "body": "## 기술 요약\n\n면적비례 footprint 기준의 **12/12개 격자**에서 현재상태 AP lift의 95% CI가 0보다 컸다. 기본 10km 격자는 167셀, lift 0.176 (95% CI 0.142–0.220)였다. 같은 크기 안에서 원점 이동에 따른 lift 최대 범위는 0.032이었다."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "current_support_card",
+          "origin_range_card",
+          "top20_card",
+          "trajectory_card",
+          "oisst_card"
+        ]
+      },
+      {
+        "id": "key_findings",
+        "type": "markdown",
+        "sourceId": "grid_results",
+        "body": "## 핵심 발견\n\n- **RQ1은 강해졌다.** 현재 캐노피만으로 만든 순위 신호는 5·10·20km와 네 원점에서 반복됐다.\n- **궤적은 조건부다.** 증분가치의 95% CI가 0보다 큰 사양은 8/12개였다.\n- **OISST 추가가치는 지지되지 않았다.** 양의 증분 CI를 보인 사양은 0/12개였다.\n- **성능 안정성과 지도 안정성은 다르다.** 아래 공간 일치도에서 실제 상위 20% 조사영역은 격자에 따라 더 크게 바뀐다."
+      },
+      {
+        "id": "current_chart_block",
+        "type": "chart",
+        "chartId": "current_lift_chart"
+      },
+      {
+        "id": "spatial_chart_block",
+        "type": "chart",
+        "chartId": "spatial_chart"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## 범위와 정의\n\n- 공간단위: EPSG:6933 equal-area 5·10·20km 격자, 크기별 기본·동쪽 반 셀·북쪽 반 셀·동북 반 셀 원점.\n- 고정 footprint: 1984–2004년 중 양의 켈프 면적을 가진 30m station pixels.\n- 주 코호트 기준: 셀 면적에 비례한 최소 footprint 125·500·2,000픽셀.\n- 라벨: 현재 상대 캐노피가 0.05보다 큰 셀 중 다음 해 연간 최대 캐노피가 30% 이상 감소.\n- 평가지표: 연도 내 AP lift, top-20% recall, 2년 블록 bootstrap 95% CI, 픽셀 가중 공간 Jaccard."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "grid_results",
+        "body": "## 방법론과 모델\n\n모든 격자는 공식 NetCDF에서 독립 재집계했다. 1989년부터 예측연도 직전까지를 학습하는 expanding-window로 2005–2024년을 평가했다. 주분석은 전체 켈프 도메인의 로지스틱 회귀 current-only와 current+trajectory이며, OISST는 유효 source-grid 81개에서 40km 이내 최근접 매칭이 가능한 동일 표본 보조분석이다."
+      },
+      {
+        "id": "policy_chart_block",
+        "type": "chart",
+        "chartId": "cohort_policy_chart"
+      },
+      {
+        "id": "robustness",
+        "type": "markdown",
+        "sourceId": "validation",
+        "body": "## 강건성·한계\n\n독립 재검산은 **25/25개 검사**를 통과했다. 이전 165셀 패널도 4/4 항목에서 완전히 재현됐고, 고정 프로토콜 적용 시 Southern California 2셀이 추가되어 기본 코호트는 167셀이 됐다. 다만 이 실험은 공간 support 강건성이지 새로운 지역·센서·현장자료에 대한 생태적 외부검증은 아니다. 또한 OISST 비교는 40km 지원범위 내 동일 표본으로 한정되므로 미지원 연안을 대표하지 않는다."
+      },
+      {
+        "id": "detail_table_block",
+        "type": "table",
+        "tableId": "scaled_table"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 논문 반영과 다음 단계\n\n1. 본문 주결과에는 10km 기본 사양을 두고, 이 분석은 ‘공간단위 강건성’ 절에 배치한다.\n2. ‘현재상태 신호가 유지된다’와 ‘우선조사 위치가 완전히 고정되지는 않는다’를 함께 보고한다.\n3. 주분석은 면적비례 코호트만 사용하고, 500픽셀 고정 결과는 코호트 선택 민감도로 부록에 둔다.\n4. 운영 배포 시에는 한 격자 지도를 절대적 정답으로 쓰지 말고, 여러 원점에서 반복 선택되는 픽셀을 합의 우선지역으로 제시하는 후속 분석이 필요하다."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 더 확인할 질문\n\n- 여러 원점에서 반복 선택된 공간만 조사하면 단일 격자 top-20%보다 사건 포착률이 안정적인가?\n- 5km의 세밀한 공간단위가 실제 관리비용 증가를 정당화할 만큼 위치 정확도를 높이는가?\n- 지역 holdout에서 격자 ensemble 우선순위가 단일 격자보다 calibration과 포착률을 개선하는가?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-16T02:27:26.425893Z",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "current_supported": 12,
+          "max_origin_range": 0.0318,
+          "min_label": 0.7378,
+          "min_top20": 0.5073,
+          "trajectory_supported": 8,
+          "oisst_supported": 0
+        }
+      ],
+      "scaled_results": [
+        {
+          "spec_label": "5 km · 기본 원점",
+          "grid_size": "5 km",
+          "origin": "기본 원점",
+          "stable_cells": 368,
+          "current_lift": 0.1549,
+          "current_ci_low": 0.1194,
+          "current_ci_high": 0.1956,
+          "trajectory_increment": 0.0391,
+          "trajectory_ci_low": 0.0178,
+          "trajectory_ci_high": 0.0615,
+          "oisst_increment": -0.017,
+          "oisst_ci_low": -0.0397,
+          "oisst_ci_high": 0.0018,
+          "label_jaccard": 0.7983,
+          "top20_jaccard": 0.6324,
+          "test_events": 2231,
+          "test_rows": 5522
+        },
+        {
+          "spec_label": "5 km · 동쪽 반 셀",
+          "grid_size": "5 km",
+          "origin": "동쪽 반 셀",
+          "stable_cells": 361,
+          "current_lift": 0.1545,
+          "current_ci_low": 0.125,
+          "current_ci_high": 0.1842,
+          "trajectory_increment": 0.0328,
+          "trajectory_ci_low": 0.0146,
+          "trajectory_ci_high": 0.0564,
+          "oisst_increment": -0.0158,
+          "oisst_ci_low": -0.0405,
+          "oisst_ci_high": 0.0039,
+          "label_jaccard": 0.754,
+          "top20_jaccard": 0.5537,
+          "test_events": 2219,
+          "test_rows": 5445
+        },
+        {
+          "spec_label": "5 km · 북쪽 반 셀",
+          "grid_size": "5 km",
+          "origin": "북쪽 반 셀",
+          "stable_cells": 357,
+          "current_lift": 0.1577,
+          "current_ci_low": 0.1212,
+          "current_ci_high": 0.199,
+          "trajectory_increment": 0.0363,
+          "trajectory_ci_low": 0.0141,
+          "trajectory_ci_high": 0.0589,
+          "oisst_increment": -0.0159,
+          "oisst_ci_low": -0.0322,
+          "oisst_ci_high": -0.0019,
+          "label_jaccard": 0.7673,
+          "top20_jaccard": 0.5579,
+          "test_events": 2162,
+          "test_rows": 5378
+        },
+        {
+          "spec_label": "5 km · 동·북 반 셀",
+          "grid_size": "5 km",
+          "origin": "동·북 반 셀",
+          "stable_cells": 367,
+          "current_lift": 0.1636,
+          "current_ci_low": 0.1293,
+          "current_ci_high": 0.1993,
+          "trajectory_increment": 0.0332,
+          "trajectory_ci_low": 0.0122,
+          "trajectory_ci_high": 0.0556,
+          "oisst_increment": -0.0151,
+          "oisst_ci_low": -0.031,
+          "oisst_ci_high": -0.0016,
+          "label_jaccard": 0.7378,
+          "top20_jaccard": 0.5258,
+          "test_events": 2240,
+          "test_rows": 5513
+        },
+        {
+          "spec_label": "10 km · 기본 원점",
+          "grid_size": "10 km",
+          "origin": "기본 원점",
+          "stable_cells": 167,
+          "current_lift": 0.1764,
+          "current_ci_low": 0.1422,
+          "current_ci_high": 0.2199,
+          "trajectory_increment": 0.0235,
+          "trajectory_ci_low": 0.005,
+          "trajectory_ci_high": 0.0414,
+          "oisst_increment": -0.0186,
+          "oisst_ci_low": -0.0487,
+          "oisst_ci_high": 0.0059,
+          "label_jaccard": 1.0,
+          "top20_jaccard": 1.0,
+          "test_events": 1008,
+          "test_rows": 2598
+        },
+        {
+          "spec_label": "10 km · 동쪽 반 셀",
+          "grid_size": "10 km",
+          "origin": "동쪽 반 셀",
+          "stable_cells": 166,
+          "current_lift": 0.2053,
+          "current_ci_low": 0.1672,
+          "current_ci_high": 0.2588,
+          "trajectory_increment": 0.0179,
+          "trajectory_ci_low": 0.0013,
+          "trajectory_ci_high": 0.0354,
+          "oisst_increment": -0.0194,
+          "oisst_ci_low": -0.0549,
+          "oisst_ci_high": 0.0062,
+          "label_jaccard": 0.8067,
+          "top20_jaccard": 0.6305,
+          "test_events": 996,
+          "test_rows": 2657
+        },
+        {
+          "spec_label": "10 km · 북쪽 반 셀",
+          "grid_size": "10 km",
+          "origin": "북쪽 반 셀",
+          "stable_cells": 169,
+          "current_lift": 0.1735,
+          "current_ci_low": 0.1371,
+          "current_ci_high": 0.2223,
+          "trajectory_increment": 0.0205,
+          "trajectory_ci_low": -0.0002,
+          "trajectory_ci_high": 0.0399,
+          "oisst_increment": -0.015,
+          "oisst_ci_low": -0.0417,
+          "oisst_ci_high": 0.0101,
+          "label_jaccard": 0.8064,
+          "top20_jaccard": 0.6338,
+          "test_events": 1019,
+          "test_rows": 2624
+        },
+        {
+          "spec_label": "10 km · 동·북 반 셀",
+          "grid_size": "10 km",
+          "origin": "동·북 반 셀",
+          "stable_cells": 169,
+          "current_lift": 0.1993,
+          "current_ci_low": 0.1624,
+          "current_ci_high": 0.2446,
+          "trajectory_increment": 0.0178,
+          "trajectory_ci_low": -0.002,
+          "trajectory_ci_high": 0.0371,
+          "oisst_increment": -0.0163,
+          "oisst_ci_low": -0.0495,
+          "oisst_ci_high": 0.0082,
+          "label_jaccard": 0.7482,
+          "top20_jaccard": 0.5073,
+          "test_events": 1046,
+          "test_rows": 2679
+        },
+        {
+          "spec_label": "20 km · 기본 원점",
+          "grid_size": "20 km",
+          "origin": "기본 원점",
+          "stable_cells": 66,
+          "current_lift": 0.2026,
+          "current_ci_low": 0.1551,
+          "current_ci_high": 0.264,
+          "trajectory_increment": 0.0021,
+          "trajectory_ci_low": -0.036,
+          "trajectory_ci_high": 0.0355,
+          "oisst_increment": -0.0171,
+          "oisst_ci_low": -0.0482,
+          "oisst_ci_high": 0.0089,
+          "label_jaccard": 0.8101,
+          "top20_jaccard": 0.5759,
+          "test_events": 395,
+          "test_rows": 1084
+        },
+        {
+          "spec_label": "20 km · 동쪽 반 셀",
+          "grid_size": "20 km",
+          "origin": "동쪽 반 셀",
+          "stable_cells": 71,
+          "current_lift": 0.2224,
+          "current_ci_low": 0.1804,
+          "current_ci_high": 0.2768,
+          "trajectory_increment": 0.0173,
+          "trajectory_ci_low": -0.0226,
+          "trajectory_ci_high": 0.0574,
+          "oisst_increment": -0.0095,
+          "oisst_ci_low": -0.0422,
+          "oisst_ci_high": 0.0167,
+          "label_jaccard": 0.8024,
+          "top20_jaccard": 0.591,
+          "test_events": 423,
+          "test_rows": 1176
+        },
+        {
+          "spec_label": "20 km · 북쪽 반 셀",
+          "grid_size": "20 km",
+          "origin": "북쪽 반 셀",
+          "stable_cells": 62,
+          "current_lift": 0.2051,
+          "current_ci_low": 0.1566,
+          "current_ci_high": 0.2706,
+          "trajectory_increment": 0.0267,
+          "trajectory_ci_low": 0.0,
+          "trajectory_ci_high": 0.055,
+          "oisst_increment": -0.0238,
+          "oisst_ci_low": -0.0611,
+          "oisst_ci_high": 0.0067,
+          "label_jaccard": 0.8314,
+          "top20_jaccard": 0.6233,
+          "test_events": 394,
+          "test_rows": 1054
+        },
+        {
+          "spec_label": "20 km · 동·북 반 셀",
+          "grid_size": "20 km",
+          "origin": "동·북 반 셀",
+          "stable_cells": 70,
+          "current_lift": 0.2014,
+          "current_ci_low": 0.158,
+          "current_ci_high": 0.2606,
+          "trajectory_increment": 0.0375,
+          "trajectory_ci_low": 0.0083,
+          "trajectory_ci_high": 0.0735,
+          "oisst_increment": -0.0294,
+          "oisst_ci_low": -0.0665,
+          "oisst_ci_high": -0.0025,
+          "label_jaccard": 0.8069,
+          "top20_jaccard": 0.6091,
+          "test_events": 436,
+          "test_rows": 1158
+        }
+      ],
+      "policy_results": [
+        {
+          "spec_label": "5 km · 기본 원점",
+          "grid_size": "5 km",
+          "origin": "기본 원점",
+          "threshold": "면적비례",
+          "minimum_pixels": 125,
+          "stable_cells": 368,
+          "current_lift": 0.1549
+        },
+        {
+          "spec_label": "5 km · 동쪽 반 셀",
+          "grid_size": "5 km",
+          "origin": "동쪽 반 셀",
+          "threshold": "면적비례",
+          "minimum_pixels": 125,
+          "stable_cells": 361,
+          "current_lift": 0.1545
+        },
+        {
+          "spec_label": "5 km · 북쪽 반 셀",
+          "grid_size": "5 km",
+          "origin": "북쪽 반 셀",
+          "threshold": "면적비례",
+          "minimum_pixels": 125,
+          "stable_cells": 357,
+          "current_lift": 0.1577
+        },
+        {
+          "spec_label": "5 km · 동·북 반 셀",
+          "grid_size": "5 km",
+          "origin": "동·북 반 셀",
+          "threshold": "면적비례",
+          "minimum_pixels": 125,
+          "stable_cells": 367,
+          "current_lift": 0.1636
+        },
+        {
+          "spec_label": "5 km · 기본 원점",
+          "grid_size": "5 km",
+          "origin": "기본 원점",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 252,
+          "current_lift": 0.1744
+        },
+        {
+          "spec_label": "5 km · 동쪽 반 셀",
+          "grid_size": "5 km",
+          "origin": "동쪽 반 셀",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 240,
+          "current_lift": 0.1794
+        },
+        {
+          "spec_label": "5 km · 북쪽 반 셀",
+          "grid_size": "5 km",
+          "origin": "북쪽 반 셀",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 239,
+          "current_lift": 0.1681
+        },
+        {
+          "spec_label": "5 km · 동·북 반 셀",
+          "grid_size": "5 km",
+          "origin": "동·북 반 셀",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 238,
+          "current_lift": 0.1713
+        },
+        {
+          "spec_label": "20 km · 기본 원점",
+          "grid_size": "20 km",
+          "origin": "기본 원점",
+          "threshold": "면적비례",
+          "minimum_pixels": 2000,
+          "stable_cells": 66,
+          "current_lift": 0.2026
+        },
+        {
+          "spec_label": "20 km · 동쪽 반 셀",
+          "grid_size": "20 km",
+          "origin": "동쪽 반 셀",
+          "threshold": "면적비례",
+          "minimum_pixels": 2000,
+          "stable_cells": 71,
+          "current_lift": 0.2224
+        },
+        {
+          "spec_label": "20 km · 북쪽 반 셀",
+          "grid_size": "20 km",
+          "origin": "북쪽 반 셀",
+          "threshold": "면적비례",
+          "minimum_pixels": 2000,
+          "stable_cells": 62,
+          "current_lift": 0.2051
+        },
+        {
+          "spec_label": "20 km · 동·북 반 셀",
+          "grid_size": "20 km",
+          "origin": "동·북 반 셀",
+          "threshold": "면적비례",
+          "minimum_pixels": 2000,
+          "stable_cells": 70,
+          "current_lift": 0.2014
+        },
+        {
+          "spec_label": "20 km · 기본 원점",
+          "grid_size": "20 km",
+          "origin": "기본 원점",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 98,
+          "current_lift": 0.2046
+        },
+        {
+          "spec_label": "20 km · 동쪽 반 셀",
+          "grid_size": "20 km",
+          "origin": "동쪽 반 셀",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 104,
+          "current_lift": 0.2107
+        },
+        {
+          "spec_label": "20 km · 북쪽 반 셀",
+          "grid_size": "20 km",
+          "origin": "북쪽 반 셀",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 108,
+          "current_lift": 0.1981
+        },
+        {
+          "spec_label": "20 km · 동·북 반 셀",
+          "grid_size": "20 km",
+          "origin": "동·북 반 셀",
+          "threshold": "500픽셀 고정",
+          "minimum_pixels": 500,
+          "stable_cells": 106,
+          "current_lift": 0.1952
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "grid_results",
+      "label": "격자 민감도 결과표",
+      "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+      "query": {
+        "language": "sql",
+        "description": "20개 격자 사양의 미래예측 성능, 부트스트랩 구간, 코호트 및 공간 일치도를 결합한 검증 결과표.",
+        "tables_used": [
+          "grid_sensitivity_results"
+        ],
+        "filters": [
+          "공식 Kelpwatch 2026 Q2 NetCDF",
+          "1984–2004 양성 픽셀 고정 footprint",
+          "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+          "2005–2024 expanding-window 평가",
+          "다음 해 연간 최대 캐노피 30% 이상 감소"
+        ],
+        "metric_definitions": {
+          "current_lift": "연도별 AP에서 해당 연도 사건률을 뺀 값의 20개 연도 macro 평균.",
+          "trajectory_increment": "동일 표본에서 current+trajectory AP lift와 current-only AP lift의 연도별 차이 평균.",
+          "oisst_increment": "OISST 지원 동일 표본에서 trajectory+OISST와 current+trajectory AP lift의 연도별 차이 평균."
+        },
+        "engine": "sqlite",
+        "sql": "SELECT * FROM grid_sensitivity_results\nWHERE threshold_policy = 'area_scaled'\nORDER BY grid_size_km,\nCASE origin_name WHEN 'o00' THEN 1 WHEN 'ox50' THEN 2 WHEN 'oy50' THEN 3 ELSE 4 END"
+      }
+    },
+    {
+      "id": "spatial_agreement",
+      "label": "픽셀 가중 공간 일치도",
+      "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+      "query": {
+        "language": "sql",
+        "description": "공통 pre-2005 양성 30m 픽셀-연도에서 급감 라벨과 상위 20% 조사영역의 Jaccard를 계산.",
+        "tables_used": [
+          "grid_sensitivity_results"
+        ],
+        "filters": [
+          "공식 Kelpwatch 2026 Q2 NetCDF",
+          "1984–2004 양성 픽셀 고정 footprint",
+          "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+          "2005–2024 expanding-window 평가",
+          "다음 해 연간 최대 캐노피 30% 이상 감소"
+        ],
+        "metric_definitions": {
+          "label_jaccard": "두 격자 모두 급감으로 분류한 픽셀-연도 / 적어도 한 격자가 급감으로 분류한 픽셀-연도.",
+          "top20_jaccard": "두 격자의 상위 20% 조사 셀에 동시에 포함된 공통 픽셀-연도 / 어느 한쪽에 포함된 공통 픽셀-연도."
+        },
+        "engine": "sqlite",
+        "sql": "SELECT * FROM grid_sensitivity_results\nWHERE threshold_policy = 'area_scaled'\nORDER BY grid_size_km,\nCASE origin_name WHEN 'o00' THEN 1 WHEN 'ox50' THEN 2 WHEN 'oy50' THEN 3 ELSE 4 END"
+      }
+    },
+    {
+      "id": "validation",
+      "label": "독립 재검산 결과",
+      "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/validation_recheck.csv",
+      "query": {
+        "language": "sql",
+        "description": "예측확률·bootstrap draw·픽셀 혼동행렬·manifest hash에서 결과를 독립 재검산한 25개 검사.",
+        "tables_used": [
+          "validation_recheck"
+        ],
+        "filters": [
+          "25개 사전 정의 정합성 검사"
+        ],
+        "engine": "sqlite",
+        "sql": "SELECT \"check\", value, passed FROM validation_recheck ORDER BY \"check\""
+      }
+    },
+    {
+      "id": "headline_metrics",
+      "label": "격자 강건성 핵심 지표",
+      "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+      "query": {
+        "language": "sql",
+        "engine": "sqlite",
+        "sql": "WITH scaled AS (\n  SELECT * FROM grid_sensitivity_results WHERE threshold_policy = 'area_scaled'\n), origin_ranges AS (\n  SELECT grid_size_km, MAX(current_lift) - MIN(current_lift) AS origin_range\n  FROM scaled GROUP BY grid_size_km\n)\nSELECT\n  SUM(CASE WHEN current_ci_low > 0 THEN 1 ELSE 0 END) AS current_supported,\n  (SELECT MAX(origin_range) FROM origin_ranges) AS max_origin_range,\n  MIN(CASE WHEN spec_id <> 'g10_area_scaled_o00' THEN global_label_jaccard END) AS min_label,\n  MIN(CASE WHEN spec_id <> 'g10_area_scaled_o00' THEN global_top20_spatial_jaccard END) AS min_top20,\n  SUM(CASE WHEN trajectory_ci_low > 0 THEN 1 ELSE 0 END) AS trajectory_supported,\n  SUM(CASE WHEN oisst_ci_low > 0 THEN 1 ELSE 0 END) AS oisst_supported\nFROM scaled",
+        "description": "면적비례 12개 격자의 지지 횟수, 원점 범위 및 최소 공간 Jaccard를 집계.",
+        "tables_used": [
+          "grid_sensitivity_results"
+        ],
+        "filters": [
+          "공식 Kelpwatch 2026 Q2 NetCDF",
+          "1984–2004 양성 픽셀 고정 footprint",
+          "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+          "2005–2024 expanding-window 평가",
+          "다음 해 연간 최대 캐노피 30% 이상 감소"
+        ]
+      }
+    },
+    {
+      "id": "policy_results",
+      "label": "footprint 기준 비교",
+      "path": "outputs/experiments/20260816_grid_origin_sensitivity_v1/grid_sensitivity_results.csv",
+      "query": {
+        "language": "sql",
+        "engine": "sqlite",
+        "sql": "SELECT * FROM grid_sensitivity_results\nWHERE grid_size_km IN (5, 20)\nORDER BY grid_size_km, threshold_policy,\nCASE origin_name WHEN 'o00' THEN 1 WHEN 'ox50' THEN 2 WHEN 'oy50' THEN 3 ELSE 4 END",
+        "description": "5km와 20km의 면적비례 및 500픽셀 고정 코호트를 선택.",
+        "tables_used": [
+          "grid_sensitivity_results"
+        ],
+        "filters": [
+          "공식 Kelpwatch 2026 Q2 NetCDF",
+          "1984–2004 양성 픽셀 고정 footprint",
+          "관측 유효면적 ≥50%, 유효 분기 ≥3, Q3 필수",
+          "2005–2024 expanding-window 평가",
+          "다음 해 연간 최대 캐노피 30% 이상 감소",
+          "grid_size_km IN (5, 20)"
+        ]
+      }
+    }
+  ],
+  "package_info": {
+    "sourceKind": "local-reproducible-experiment",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

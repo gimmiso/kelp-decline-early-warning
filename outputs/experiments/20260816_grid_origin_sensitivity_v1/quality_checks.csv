@@ -1,0 +1,12 @@
+check,value,passed
+expected_grid_specifications,20,True
+coordinate_rows_unique,593426,True
+pre2005_positive_pixels,537408,True
+panel_keys_unique,0,True
+forward_only_folds,0,True
+prediction_scores_complete,0,True
+prediction_keys_unique,0,True
+model_rows_matched_within_domain,1,True
+base_locked_panel_reproduction,0,True
+all_specs_have_20_forecast_years,20,True
+oisst_source_grid_coordinates_valid,81,True

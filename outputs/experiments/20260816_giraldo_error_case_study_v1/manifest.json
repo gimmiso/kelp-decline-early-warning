@@ -1,0 +1,111 @@
+{
+  "status": "complete",
+  "classification": "pilot-informed exploratory diagnostic; not independent confirmation",
+  "started_at_utc_epoch": 1786854449.4958699,
+  "finished_at_utc_epoch": 1786854478.733186,
+  "runtime_seconds": 29.24,
+  "command": "scripts/60_run_giraldo_error_case_study.py --field data/external/restoration_site_selection/giraldo_2025/Kelp_Predictors_All_CA_2.csv --panel data/processed/kelpwatch_west_coast_panel_165.csv --predictions outputs/experiments/20260814_journal_extension_v1/expanding_predictions.csv --config configs/giraldo_error_case_study_v1.json --output-dir outputs/experiments/20260816_giraldo_error_case_study_v1",
+  "git_sha_before_run": "baba8cb9966427944fc1eac68257b2ce4ae73b10",
+  "python": "3.14.3",
+  "pandas": "3.0.3",
+  "numpy": "2.4.3",
+  "scikit_learn": "1.9.0",
+  "seed": 20260816,
+  "year_bootstrap_replicates": 5000,
+  "inputs": {
+    "field": "data/external/restoration_site_selection/giraldo_2025/Kelp_Predictors_All_CA_2.csv",
+    "field_sha256": "31e48854b88aca135df6896c353c7aa09ce6860e9df9c636aef66ea0fd38be9e",
+    "panel": "data/processed/kelpwatch_west_coast_panel_165.csv",
+    "panel_sha256": "c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48",
+    "predictions": "outputs/experiments/20260814_journal_extension_v1/expanding_predictions.csv",
+    "predictions_sha256": "5986c6f60a5a101d9edbc8ba4b0beafbfcb5ebf29a1b48d043973929b5fed915",
+    "config": "configs/giraldo_error_case_study_v1.json",
+    "config_sha256": "ae4fec9ae6acc3e86d561b5cd25f6ce8ff59eca235d64f38d1e2dce3ca0e2c36"
+  },
+  "decision": {
+    "classification": "pilot-informed exploratory diagnostic; not independent confirmation",
+    "decision": "no_stable_ecological_failure_condition_detected",
+    "matched_population": {
+      "cells": 52,
+      "cell_years": 424,
+      "events": 151,
+      "first_year": 2005,
+      "last_year": 2021,
+      "northern_cell_years": 35,
+      "central_cell_years": 157,
+      "southern_cell_years": 232
+    },
+    "strict_match_population": {
+      "cells": 43,
+      "cell_years": 341
+    },
+    "matched_subset_increments": {
+      "logistic": {
+        "trajectory_minus_current": {
+          "estimate": 0.03364294695649111,
+          "ci_low": -0.034066294482668735,
+          "ci_high": 0.10140070150411995,
+          "paired_years": 16
+        },
+        "oisst_minus_trajectory": {
+          "estimate": 0.011525853310104937,
+          "ci_low": -0.014027534854464195,
+          "ci_high": 0.04255613774991781,
+          "paired_years": 16
+        }
+      },
+      "random_forest": {
+        "trajectory_minus_current": {
+          "estimate": 0.069114961363332,
+          "ci_low": -0.019972991740210482,
+          "ci_high": 0.15509642883997082,
+          "paired_years": 16
+        },
+        "oisst_minus_trajectory": {
+          "estimate": -0.010377499742761517,
+          "ci_low": -0.04787741110160353,
+          "ci_high": 0.023615048149539148,
+          "paired_years": 16
+        }
+      },
+      "xgboost": {
+        "trajectory_minus_current": {
+          "estimate": 0.0509994137211001,
+          "ci_low": -0.023311876191636688,
+          "ci_high": 0.12565052366821092,
+          "paired_years": 16
+        },
+        "oisst_minus_trajectory": {
+          "estimate": 0.01716800503887976,
+          "ci_low": -0.02551910335113648,
+          "ci_high": 0.05950599059770434,
+          "paired_years": 16
+        }
+      }
+    },
+    "stable_condition_count": 0,
+    "tested_primary_condition_count": 20,
+    "interpretation": "No prespecified ecological axis robustly identified where the public OISST block helped or where trajectory-model errors recurred. This is an identification limit of the partial, cross-scale California case study, not evidence that ecology is unimportant."
+  },
+  "output_sha256": {
+    "analysis_dataset.csv": "4adb5279e1404d7b3a6df754d2d4886a627a24e9eecfb14bfd28f84d28cb96bd",
+    "axis_spearman_correlations.csv": "b187341eef2e26c84a19381f4566f7551ce7e710431808226ac7f5d87b078ed6",
+    "chart_map.csv": "514be8d4c6fb7d236f8606078b2328c6589a7a3adcd54a45a896405d8c37350f",
+    "cohort_coverage_by_region.csv": "05042c45733d4cb6b8e0b2a1b3a40468980844fb7fb59073872e85b90fb5f783",
+    "condition_support_summary.csv": "c6ef86ded5c5676dd63007abe14bcef8760c8bac1f42773433d41165020486df",
+    "data_quality_profile.csv": "5b93f996716068f34c2af74f0e834c42749a1f0f7914516612986da7e43020f9",
+    "decision.json": "3c653e0ebbdcc57608dec4f96d720eaa96fc843e8dd4d28fba4bf5a456551e64",
+    "ecological_axis_associations.csv": "40c44b8af467256ee7d520ab83b8adf7db5e4133120a36d0480b267325f879e9",
+    "field_cell_years.csv": "eb54ab1f0086aaea0bf60a68c127268d365202cbc71ac2f2990c3f6c7f4f924f",
+    "field_site_year_matches.csv": "e7838b6f993c119e2ff5a6161d30a8ad2319ceb2ea12b1af051e1d3156d09911",
+    "figure_01_field_coverage.png": "782ea39601bfbd8cf5feccfb2f9551d1fdc8e727695112e83549c6bf0cd9d482",
+    "figure_02_primary_ecological_associations.png": "7385ebdc75c35100cfb7bd79c3403f6a0ac6801eef2932619ce0a1b2c3d83b45",
+    "figure_03_recurrent_miss_vs_grazing.png": "464c853115cd9670ad5f89ca15493ab8fad38fb0098ef2904f801ccc222b086c",
+    "figure_04_matched_vs_full_performance.png": "15e198e12f4784d8369e63ff592a71f78e6f68255bd1964451ecc49572c56be4",
+    "performance_increment_summary.csv": "17c8e6be5885f5b610b1e3420d5e3b0a5bda2bbdb3683ab17267e8eee21f0acd",
+    "performance_summary.csv": "b4eb7138399f9370f497e6ed95a0a2ab2e67e93e9cf01269b0ec9aa1a7e61174",
+    "performance_year_metrics.csv": "e4efb90815ed95985ac3eaa28212f588fbcc0cb224fdc8cb777665a5e93b006e",
+    "repeated_error_cells.csv": "50492df56656f23275362b944a1fa7d9769b2262d8cf9d7c7739068585701f8e",
+    "results_summary_ko.md": "d6c669618d2bc1fcb47978e2e77cad938ad03b574198b9c9611671cd56f55bbf"
+  }
+}

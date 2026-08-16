@@ -1,0 +1,7 @@
+source_table,query_executed,rows,columns,null_cells
+report_headline,True,1,9,0
+model_family_summary,True,12,10,0
+yearly_increment,True,20,6,0
+budget_recall,True,16,7,0
+feature_correlations,True,15,5,0
+ap_increments,True,12,8,0

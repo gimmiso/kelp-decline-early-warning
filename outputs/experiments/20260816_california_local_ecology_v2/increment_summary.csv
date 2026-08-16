@@ -1,0 +1,13 @@
+support_m,model_family,comparison,left_feature_set,right_feature_set,paired_years,estimate,ci_low,ci_high
+300,logistic,trajectory_minus_current,current_plus_trajectory,current_only,14,0.07127893729961042,0.035091082263826213,0.11379929355322134
+300,logistic,mur_minus_trajectory,trajectory_plus_mur,current_plus_trajectory,14,-0.010677588437922908,-0.05262880152003388,0.03480251344128599
+300,random_forest,trajectory_minus_current,current_plus_trajectory,current_only,14,0.04111685719239637,-0.005551209809592311,0.08324193133943943
+300,random_forest,mur_minus_trajectory,trajectory_plus_mur,current_plus_trajectory,14,0.02745964898356374,-0.009211224483212536,0.06935501113520834
+300,xgboost,trajectory_minus_current,current_plus_trajectory,current_only,14,0.018981652326197796,-0.02724735549340944,0.0591402604440599
+300,xgboost,mur_minus_trajectory,trajectory_plus_mur,current_plus_trajectory,14,0.046571897017918716,0.015124216698507893,0.0796392180319464
+1000,logistic,trajectory_minus_current,current_plus_trajectory,current_only,14,0.026159075488842196,0.0002526122738021998,0.051829107422483055
+1000,logistic,mur_minus_trajectory,trajectory_plus_mur,current_plus_trajectory,14,0.010662385449005902,-0.03051404347177058,0.05485626509508981
+1000,random_forest,trajectory_minus_current,current_plus_trajectory,current_only,14,0.026285430205475992,-0.0032721615658467223,0.0594701615756625
+1000,random_forest,mur_minus_trajectory,trajectory_plus_mur,current_plus_trajectory,14,0.018987694094512342,-0.0015310149163439914,0.040574031644080466
+1000,xgboost,trajectory_minus_current,current_plus_trajectory,current_only,14,0.0038829035738182755,-0.03341405838017009,0.03880323945863521
+1000,xgboost,mur_minus_trajectory,trajectory_plus_mur,current_plus_trajectory,14,0.03439090849416872,-0.010209263352696271,0.07681666822003258

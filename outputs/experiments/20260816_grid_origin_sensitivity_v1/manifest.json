@@ -1,0 +1,74 @@
+{
+  "status": "complete",
+  "classification": "pilot_informed_locked_robustness",
+  "experiment_id": "E2E-v2-E16-grid-origin-v1",
+  "started_at_utc_epoch": 1786846922.455352,
+  "finished_at_utc_epoch": 1786847246.425893,
+  "runtime_seconds": 323.97,
+  "command": "scripts/54_run_grid_origin_sensitivity.py --config configs/grid_origin_sensitivity_v1.json --netcdf /Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/raw_official/LandsatKelpBiomass_2026_Q2_withmetadata.nc --environment outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv --base-inventory /Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_inventory.csv --base-primary-panel outputs/experiments/20260816_observation_label_robustness_v1/variant_panels.csv --output-dir outputs/experiments/20260816_grid_origin_sensitivity_v1",
+  "git_sha_before_run": "46e22990b36fc0f4e314cd1efb4d96c47a9ce836",
+  "python": "3.14.3",
+  "pandas": "3.0.3",
+  "numpy": "2.4.3",
+  "scikit_learn": "1.9.0",
+  "seed": 20260816,
+  "bootstrap_replicates": 2000,
+  "grid_specifications": 20,
+  "pre2005_positive_station_pixels": 537408,
+  "inputs": {
+    "config": {
+      "path": "configs/grid_origin_sensitivity_v1.json",
+      "sha256": "da57ba05b0ed983f310ee47c26e555cc93682b018cecf0f5ac576c1b659bb435"
+    },
+    "netcdf": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/raw_official/LandsatKelpBiomass_2026_Q2_withmetadata.nc",
+      "sha256": "b27caf8e4d08c0d2816d044e254a6339c854f2933e14a3fa2a139b37832f884f"
+    },
+    "environment": {
+      "path": "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv",
+      "sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87"
+    },
+    "base_inventory": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_inventory.csv",
+      "sha256": "93901ad4b91730404ee49ebe9a999bdbbc3f3041b6ee58ad7fd42f18d6ad92b0"
+    },
+    "base_primary_panel": {
+      "path": "outputs/experiments/20260816_observation_label_robustness_v1/variant_panels.csv",
+      "sha256": "987adf762dc72f5d1232b6fa344b1629a60a744c02dff13a287107f962781f99"
+    }
+  },
+  "decisions": {
+    "primary_protocol_cells": 167,
+    "primary_current_lift": 0.17643625413190192,
+    "primary_current_ci": [
+      0.14216127446881988,
+      0.21985311379899972
+    ],
+    "current_lift_supported_all_12_scaled_specs": true,
+    "trajectory_supported_scaled_specs": 8,
+    "oisst_supported_scaled_specs": 0,
+    "scaled_spec_count": 12,
+    "maximum_within_size_origin_current_lift_range": 0.0318036876625081,
+    "minimum_global_label_jaccard": 0.7378316307657109,
+    "minimum_global_top20_spatial_jaccard": 0.5073011178602551
+  },
+  "output_sha256": {
+    "grid_specifications.csv": "fddcdb72e1567c05ef46c036ebf030306218482c85fbe85d3552d5021b096b87",
+    "grid_inventory.csv": "9ff55a807c480bcff34d4e41c278bc050dcbb6603162341aca24d597ac036334",
+    "grid_panels.csv": "5bbbf4e358d899f32133c48e4213ab9e8f1d2b13a979248f9a7a4607c7cca1cd",
+    "oisst_cell_matches.csv": "070e83ecef687d9aad3e0910d65f2eadd6aedff6808c19da9af055986c1c240f",
+    "base_reproduction_checks.csv": "012a1b21b37e0db13bc3f52c97fb4e85ae7c66e3a3fb8a6b127d75edddf3172e",
+    "base_protocol_cell_mapping.csv": "b32555c4463e203f8fb6cabd3b166f150db18842d86eadc466bef556135c0542",
+    "predictions.csv": "1892b626888c7a422368be9f2e664c7d1827045d996b8dfa0e07283e7a102144",
+    "fold_audit.csv": "956ec79a8bb0d3166d015641180c31b86ac86ec8115bed23f2811ae6f26413f6",
+    "year_metrics.csv": "3664169d31b0db4ffbaaf4e5a8f5697168952483ee1024a81c8b3fcffd7c5360",
+    "model_summary.csv": "bb8bfaa8f560178a4b4a4c8c7b0b4028251b64a8583195520c6f8d711b37700a",
+    "bootstrap_estimates.csv": "79b454ac75baa3309f4d07a3f238a24e7ee6468f6ccd4754be092ef6b30cf291",
+    "bootstrap_differences.csv": "91df2c0794e0a12174d2f43c95de173c34d0763e00b6d3a8c2ac1b956934ce86",
+    "bootstrap_draws.csv": "2afa3fe5c3222a32cad31540f65f0c444505f7dd5f7d5d4e39f43acb5f93f95d",
+    "pixel_spatial_agreement.csv": "d8973c11003363962aa22ea76d015a537b544fca94193eb2259be2e208521542",
+    "grid_sensitivity_results.csv": "4ed9a682288894a9a7afabd46e1e1aff5e5b3719e64a6bdbe4e3dcce8702c4a5",
+    "origin_spread_summary.csv": "62675946db334cb0683c30acfe5ab6cf37417529ca5b4a73a3e22b7259daa918",
+    "quality_checks.csv": "4ee7d0c57e7e4b664a8ececbe9745a556d26572409f3094d86d66e0e50e9980f"
+  }
+}
