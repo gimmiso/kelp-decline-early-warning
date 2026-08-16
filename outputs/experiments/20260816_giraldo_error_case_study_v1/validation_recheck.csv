@@ -1,0 +1,26 @@
+check,passed,severity_if_failed,evidence
+manifest_complete,True,blocker,status=complete
+classification_is_exploratory,True,blocker,pilot-informed exploratory diagnostic; not independent confirmation
+field_input_hash,True,blocker,31e48854b88aca135df6896c353c7aa09ce6860e9df9c636aef66ea0fd38be9e
+panel_input_hash,True,blocker,c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48
+prediction_input_hash,True,blocker,5986c6f60a5a101d9edbc8ba4b0beafbfcb5ebf29a1b48d043973929b5fed915
+config_input_hash,True,blocker,ae4fec9ae6acc3e86d561b5cd25f6ce8ff59eca235d64f38d1e2dce3ca0e2c36
+saved_output_hashes,True,blocker,mismatches=[]
+raw_field_shape,True,blocker,"shape=(9728, 144)"
+raw_field_sites_and_years,True,blocker,sites=191; years=1999-2021
+panel_grain_and_cells,True,blocker,cells=165; duplicate_keys=0
+field_cell_year_keys_unique,True,blocker,rows=590; duplicate_keys=0
+analysis_keys_unique,True,blocker,rows=1272; duplicate_keys=0
+locked_primary_population,True,blocker,cell_years=424; cells=52; events=151
+three_model_families_share_rows,True,blocker,"{'logistic': 424, 'random_forest': 424, 'xgboost': 424}"
+events_agree_across_families,True,blocker,one event label per cell-year
+no_missing_primary_axes,True,blocker,"{'grazing_log1p': 0, 'rock_probability': 0, 'depth_m': 0, 'kelp_species_contrast': 0}"
+logistic_matched_oisst_increment_recomputed,True,blocker,recomputed=0.011525853310105; stored=0.011525853310105; years=16
+row_level_rank_gain_recomputed,True,blocker,max_abs_error=7.11e-15
+row_level_brier_gain_recomputed,True,blocker,max_abs_error=9.97e-17
+association_table_complete,True,blocker,rows=180; scopes=3; families=3; outcomes=5; axes=4
+association_intervals_and_q_values_valid,True,blocker,invalid_intervals=0; invalid_q=0
+condition_support_table_complete,True,blocker,rows=20
+no_stable_condition_matches_saved_decision,True,claim,stable_rows=0; decision=no_stable_ecological_failure_condition_detected
+repeated_error_table_one_row_per_cell,True,blocker,rows=52; unique_cells=52
+four_figures_rendered_at_usable_size,True,blocker,figures=4; failures=[]

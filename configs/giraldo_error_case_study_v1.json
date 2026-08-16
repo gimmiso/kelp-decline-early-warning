@@ -1,0 +1,86 @@
+{
+  "protocol": {
+    "id": "KELP-EWS-GIRALDO-CASE-v1.0",
+    "date": "2026-08-16",
+    "classification": "pilot_informed_exploratory_diagnostic",
+    "preregistration": false,
+    "purpose": "Use the California Giraldo-Ospina field subset to diagnose recurrent errors and conditional OISST value without treating sparse field observations as a coastwide prediction block."
+  },
+  "inputs": {
+    "field": "data/external/restoration_site_selection/giraldo_2025/Kelp_Predictors_All_CA_2.csv",
+    "panel": "data/processed/kelpwatch_west_coast_panel_165.csv",
+    "predictions": "outputs/experiments/20260814_journal_extension_v1/expanding_predictions.csv"
+  },
+  "population": {
+    "prediction_domain": "full_oisst_domain",
+    "first_forecast_year": 2005,
+    "last_field_year": 2021,
+    "primary_model_family": "logistic",
+    "robustness_model_families": [
+      "random_forest",
+      "xgboost"
+    ],
+    "interpretation": "California field-observed subset only; no Oregon, Washington, or Baja generalization"
+  },
+  "spatial_matching": {
+    "primary_rule": "nearest locked 10-km cell center by haversine distance",
+    "primary_max_distance_km": 7.2,
+    "rationale": "approximately the half-diagonal of a 10-by-10 km cell",
+    "strict_sensitivity_max_distance_km": 5.0,
+    "prohibit_nearest_year_carry_forward": true,
+    "prohibit_unobserved_cell_imputation": true
+  },
+  "field_aggregation": {
+    "step_1": "median across 60-m2 transects within site-year",
+    "step_2": "median across sites within cell-year",
+    "uncertainty_descriptors": [
+      "interquartile_range",
+      "number_of_sites",
+      "number_of_transects",
+      "maximum_match_distance_km"
+    ]
+  },
+  "ecological_axes": {
+    "grazing_log1p": "log1p(red urchin density + purple urchin density)",
+    "rock_probability": "mean probability of rock in the surveyed site polygon",
+    "depth_m": "positive depth magnitude from mean_depth",
+    "kelp_species_contrast": "log1p(bull kelp density) minus log1p(giant kelp density)"
+  },
+  "prediction_diagnostics": {
+    "annual_monitoring_budget_fraction": 0.2,
+    "risk_rank": "within-year percentile, 1 is highest predicted risk",
+    "outcomes": [
+      "trajectory_rank_quality_pp",
+      "trajectory_false_negative",
+      "trajectory_false_positive",
+      "oisst_signed_rank_gain_pp",
+      "oisst_brier_gain"
+    ]
+  },
+  "association_model": {
+    "form": "one ecological axis at a time with region and year fixed effects",
+    "axis_scaling": "one standard deviation within the analyzed rows",
+    "uncertainty": "two-way cell and year cluster-robust standard errors",
+    "multiple_testing": "Benjamini-Hochberg within each outcome and model family",
+    "false_discovery_rate": 0.1
+  },
+  "interpretation_rules": {
+    "supported_condition_requires": [
+      "95-percent cluster-robust confidence interval excludes zero",
+      "Benjamini-Hochberg q-value below 0.10",
+      "same directional pattern in at least two of three model families",
+      "same directional pattern under the strict 5-km match sensitivity"
+    ],
+    "causal_language_prohibited": true,
+    "coastwide_field_value_claim_prohibited": true,
+    "field_data_are_not_a_fifth_primary_information_block": true
+  },
+  "reproducibility": {
+    "random_seed": 20260816,
+    "year_bootstrap_replicates": 5000,
+    "confidence_level": 0.95,
+    "overwrite_runs": false,
+    "save_input_and_output_hashes": true,
+    "log_git_sha": true
+  }
+}
