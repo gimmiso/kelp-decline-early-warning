@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "html": "outputs/experiments/20260816_grid_origin_sensitivity_v1/report.html",
+  "stages": {
+    "validation": "passed",
+    "package": "passed",
+    "verification": "structural_only"
+  },
+  "browser_warning": {
+    "code": "browser_unavailable",
+    "message": "No installed Chromium headless-shell executable was available to the portable builder. An installed Google Chrome binary was also attempted but exceeded the static-chart extraction timeout."
+  },
+  "counts": {
+    "blocks": 17,
+    "charts": 3,
+    "html": 0,
+    "metrics": 5,
+    "tables": 1
+  },
+  "source_dialog": "not_verified",
+  "source_interaction": "not_verified",
+  "report_sha256": "e45020155982b444e6cfb79e70529822150063dee168245ef222a7c90c07fc79",
+  "artifact_sha256": "ff42332539e1a237e57163576820804bba8481eae4b9594c53671eba7f819443"
+}

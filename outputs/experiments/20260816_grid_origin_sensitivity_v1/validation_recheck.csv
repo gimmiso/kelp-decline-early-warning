@@ -1,0 +1,26 @@
+check,value,passed
+twenty_locked_specifications,20,True
+twelve_area_scaled_specifications,12,True
+area_scaled_pixel_thresholds,"{5: 125, 10: 500, 20: 2000}",True
+fixed_500_is_secondary_5_and_20km_only,rows=8,True
+prediction_keys_unique,0,True
+prediction_probabilities_bounded_complete,0,True
+strict_forward_folds,0,True
+twenty_test_years_per_model,20,True
+year_metrics_recomputed_from_predictions,2000,True
+macro_year_lifts_recomputed,100,True
+top20_recall_recomputed,100,True
+model_bootstrap_quantiles_recomputed,100,True
+difference_bootstrap_quantiles_recomputed,60,True
+two_thousand_draws_each,2000,True
+label_jaccard_recomputed_from_pixel_counts,40,True
+same_grid_spatial_identity,5,True
+global_agreement_rows_complete,20,True
+current_lift_supported_all_scaled_grids,12,True
+trajectory_support_count_is_eight,8,True
+oisst_support_count_is_zero,0,True
+primary_reference_values,"cells=167, lift=0.176436254132",True
+base_panel_reproduction_passed,0,True
+run_quality_checks_passed,11,True
+manifest_output_hashes,0,True
+manifest_complete_and_classified,complete,True

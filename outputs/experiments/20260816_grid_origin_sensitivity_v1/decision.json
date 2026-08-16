@@ -1,0 +1,15 @@
+{
+  "primary_protocol_cells": 167,
+  "primary_current_lift": 0.17643625413190192,
+  "primary_current_ci": [
+    0.14216127446881988,
+    0.21985311379899972
+  ],
+  "current_lift_supported_all_12_scaled_specs": true,
+  "trajectory_supported_scaled_specs": 8,
+  "oisst_supported_scaled_specs": 0,
+  "scaled_spec_count": 12,
+  "maximum_within_size_origin_current_lift_range": 0.0318036876625081,
+  "minimum_global_label_jaccard": 0.7378316307657109,
+  "minimum_global_top20_spatial_jaccard": 0.5073011178602551
+}
