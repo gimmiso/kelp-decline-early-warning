@@ -1,0 +1,106 @@
+{
+  "status": "complete",
+  "classification": "pilot_informed_locked_robustness",
+  "experiment_id": "E2E-v2-E16-observation-label-v1",
+  "started_at_utc_epoch": 1786844734.506237,
+  "finished_at_utc_epoch": 1786844814.590742,
+  "runtime_seconds": 80.08,
+  "command": "scripts/52_run_observation_label_robustness.py --config configs/observation_label_robustness_v1.json --quarterly /Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_quarterly_ge500.csv --inventory /Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_inventory.csv --netcdf /Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/raw_official/LandsatKelpBiomass_2026_Q2_withmetadata.nc --environment outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv --locked-panel data/processed/kelpwatch_west_coast_panel_165.csv --output-dir outputs/experiments/20260816_observation_label_robustness_v1",
+  "git_sha_before_run": "742641c6e9eab4181a2dec3db44739d34b9c20bf",
+  "python": "3.14.3",
+  "pandas": "3.0.3",
+  "numpy": "2.4.3",
+  "scikit_learn": "1.9.0",
+  "source_metadata": {
+    "source_stations_in_165_cells": 523791,
+    "netcdf_time_slices_used": 168,
+    "netcdf_area_units": "m^2 canopy/900m^2 pixel",
+    "netcdf_area_se_units": "m^2 canopy/900m^2 pixel",
+    "netcdf_passes_definition": "number of Landsat images used to make mean for each pixel, each quarter"
+  },
+  "seed": 20260816,
+  "bootstrap_replicates": 2000,
+  "bootstrap_block_years": 2,
+  "inputs": {
+    "config": {
+      "path": "configs/observation_label_robustness_v1.json",
+      "sha256": "7218d4591bb8a61ebecc7d27d65b7547e58cc30098b1f27d8b8311d958ad5f45"
+    },
+    "quarterly": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_quarterly_ge500.csv",
+      "sha256": "e2564fe50831f849a45973e2577afd84d3004ddea95573b11fbb094c219764cd"
+    },
+    "inventory": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_inventory.csv",
+      "sha256": "93901ad4b91730404ee49ebe9a999bdbbc3f3041b6ee58ad7fd42f18d6ad92b0"
+    },
+    "netcdf": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/raw_official/LandsatKelpBiomass_2026_Q2_withmetadata.nc",
+      "sha256": "b27caf8e4d08c0d2816d044e254a6339c854f2933e14a3fa2a139b37832f884f"
+    },
+    "environment": {
+      "path": "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv",
+      "sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87"
+    },
+    "locked_panel": {
+      "path": "data/processed/kelpwatch_west_coast_panel_165.csv",
+      "sha256": "c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48"
+    }
+  },
+  "decisions": {
+    "primary_current_lift": 0.17626384022431218,
+    "primary_current_ci": [
+      0.14219153669183676,
+      0.21969917440190526
+    ],
+    "primary_trajectory_increment": 0.02448418004859832,
+    "primary_trajectory_ci": [
+      0.0059917622883995155,
+      0.04297218576072487
+    ],
+    "primary_oisst_increment": -0.01885729372203502,
+    "primary_oisst_ci": [
+      -0.04899170740742224,
+      0.005410909270234403
+    ],
+    "common_row_trajectory_increment": 0.0249885016472981,
+    "common_row_trajectory_ci": [
+      -0.0001797724254961,
+      0.0509463311026771
+    ],
+    "high_observation_trajectory_increment": 0.0110949989568863,
+    "high_observation_trajectory_ci": [
+      -0.0055742668809801,
+      0.025907700051383
+    ],
+    "current_lift_positive_ci_all_native_variants": true,
+    "current_lift_positive_ci_all_common_row_variants": true,
+    "oisst_positive_supported_any_native_variant": false,
+    "minimum_positive_event_jaccard_vs_primary": 0.8268003646308113,
+    "primary_test_eligible_rows": 2566,
+    "primary_test_events": 996,
+    "high_observation_subset_rows": 1943,
+    "high_observation_subset_current_lift": 0.18555139424887496
+  },
+  "output_sha256": {
+    "quarterly_observation_quality_165.csv": "e0389f8f0d07ebe363ba7cb4dba70632f4db43af38d3faae02dcf8d983a142ac",
+    "fixed_footprint_reproduction.csv": "63688422155c0a5651b79bb21c8a50965f92912dad5a8db828ab136ed87c77bf",
+    "netcdf_rebuild_checks.csv": "1b8a5fdf86d306c8217ce6002e1b878ada2d6d7448eb70cde37012cf53ad0ea3",
+    "legacy_reproduction_checks.csv": "ab2e505613c48997e789ba464484cfc290d41ba0414f6ae048fa94febf01cea7",
+    "annual_variants.csv": "7f96dc578dee2ccb43af4215dc9ce8ab670992dc249d244214d7642168c57a85",
+    "variant_panels.csv": "987adf762dc72f5d1232b6fa344b1629a60a744c02dff13a287107f962781f99",
+    "predictions.csv": "d5ac7d5d587140e710b1f9cdb69f308c01180b23e6a5bb7c1ec0ff08b58fbe88",
+    "fold_audit.csv": "c729c65bf1a86bf051aaa02f5657ebd48931c8669b717b3e7943cb94b1742e09",
+    "year_metrics.csv": "b4140d2d2a2b9a3516b4765d970c72b0eb8060dba0c7790ed951f323fc011cee",
+    "model_summary.csv": "091925e80cb7576f20e8fdfb7ed96781abfedc583811128f679ef631ffa2c2a4",
+    "bootstrap_estimates.csv": "ab0a16ae47c9b0ffa724e68b9d86b48f23b6105aa37d85eeeb395df00a118288",
+    "bootstrap_differences.csv": "edacca741123271f208b26ac7fcd7d705f8e30fcc78bbfc9b3f1af67ddab8362",
+    "bootstrap_draws.csv": "200cf03d5a5767ad1d341a1263add298cd323726bc7129c689295dbbc1704982",
+    "label_agreement.csv": "0017bafed40aafb5f3eeea5b3e05ed190bbb253292573e510b4d2160618757bb",
+    "label_disagreements.csv": "a0468a473e5351f5d593b47ef89f5911edff0a1b45a01d59f567db5c0826d05b",
+    "observation_quality_by_region_era.csv": "864a9187e82ca8d4b126e4fd864311bac77bbc4685ac5f58a1a67d9daa11ce35",
+    "observation_quality_by_year.csv": "c65890db03a3ef7df563a86e96f1353a4eb37d57565eeaac07711ad83acb9d8e",
+    "performance_by_sensor_era.csv": "4b50c36aa54ef9fd6c2eaa7fe151eef2989db9c4b38d8dfa3eb8f0815df44b6d",
+    "quality_checks.csv": "884737d8c97c31d1f45be868290c73aaa5b135dac87f5d39d0e2bfc6e4e9b4c1"
+  }
+}

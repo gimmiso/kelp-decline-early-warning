@@ -1,0 +1,21 @@
+check,passed,severity_if_failed,evidence
+saved_quality_checks_pass,True,blocker,passed=10/10
+prediction_keys_unique,True,blocker,duplicates=0
+temporal_folds_forward_only,True,blocker,max_train_minus_test=-1
+fixed_footprint_counts_match,True,blocker,failed_rows=0
+models_use_matched_rows,True,blocker,row keys identical within every mode-variant
+models_use_matched_outcomes,True,blocker,event vectors identical within every mode-variant
+common_mode_exact_rows_across_variants,True,blocker,variants=8; rows=2265
+high_observation_subset_is_native_subset,True,blocker,high_quality=1943; native=2566
+event_definition_recomputed,True,blocker,event == relative_drop_next >= 0.30
+eligibility_definition_recomputed,True,blocker,eligible rows have canopy >0.05 and both years observed
+primary_annual_completeness_rule,True,blocker,50% threshold encoded upstream; annual_complete == >=3 valid quarters and Q3 valid
+year_ap_lifts_recomputed,True,blocker,max_error=1.11e-16
+year_top20_counts_recomputed,True,blocker,max_error=0.0
+macro_lifts_recomputed,True,blocker,max_error=8.33e-17
+top20_recall_recomputed,True,blocker,max_error=5.55e-17
+bootstrap_intervals_recomputed_from_draws,True,blocker,max_error=9.02e-17
+input_hashes_match_manifest,True,blocker,mismatches=[]
+output_hashes_match_manifest,True,blocker,mismatches=[]
+decision_current_lift_matches,True,blocker,estimate=0.176263840224
+decision_oisst_increment_matches,True,blocker,estimate=-0.018857293722

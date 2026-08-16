@@ -255,8 +255,11 @@
 
 - `passes`, `passes5`, `passes7`, `passes8`, `area_se`를 연도·지역·센서시대별로 요약
 - 관측노력 변수를 주 예측변수에 넣지 않는다. 모델이 센서변화나 구름을 생태신호로 학습할 수 있기 때문이다.
-- 대신 높은 관측품질 subset, inverse-variance weighting, 센서시대별 결과를 민감도로 평가한다.
+- 대신 높은 관측품질 subset과 센서시대별 결과를 민감도로 평가한다.
+- `area_se`는 픽셀 간 공분산과 annual-maximum 선택오차가 제공될 때만 inverse-variance weighting에 사용한다. 이 정보가 없으면 RSS(독립 가정)와 단순합(완전상관 상계)을 관측오차 진단으로만 보고하고 임의의 단일 가중치는 만들지 않는다.
 - 각 지역에서 최대 5개, 최소 3개 셀을 층화추출하여 공식 Kelpwatch API 집계와 NetCDF 집계를 quarter별로 재검증한다.
+
+실행 메모(2026-08-16): 기존 165셀 패널은 all-history habitat footprint, 75% 기준, 연 3분기, Q3 비필수 규칙으로 만들어져 위 주 규칙과 달랐다. 공식 NetCDF에서 pre-2005 양성 픽셀을 고정 footprint로 다시 집계한 `20260816_observation_label_robustness_v1`을 이후 주 분석의 canopy·label 입력으로 사용한다. 기존 구현은 전 행 정확 재현 후 민감도로만 유지한다. 웹/API 층화표본 대조는 아직 Gate 2 잔여 작업이다.
 
 ## 6. NOAA 환경자료와 특징
 

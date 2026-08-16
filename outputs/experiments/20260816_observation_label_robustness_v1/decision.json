@@ -1,0 +1,35 @@
+{
+  "primary_current_lift": 0.17626384022431218,
+  "primary_current_ci": [
+    0.14219153669183676,
+    0.21969917440190526
+  ],
+  "primary_trajectory_increment": 0.02448418004859832,
+  "primary_trajectory_ci": [
+    0.0059917622883995155,
+    0.04297218576072487
+  ],
+  "primary_oisst_increment": -0.01885729372203502,
+  "primary_oisst_ci": [
+    -0.04899170740742224,
+    0.005410909270234403
+  ],
+  "common_row_trajectory_increment": 0.0249885016472981,
+  "common_row_trajectory_ci": [
+    -0.0001797724254961,
+    0.0509463311026771
+  ],
+  "high_observation_trajectory_increment": 0.0110949989568863,
+  "high_observation_trajectory_ci": [
+    -0.0055742668809801,
+    0.025907700051383
+  ],
+  "current_lift_positive_ci_all_native_variants": true,
+  "current_lift_positive_ci_all_common_row_variants": true,
+  "oisst_positive_supported_any_native_variant": false,
+  "minimum_positive_event_jaccard_vs_primary": 0.8268003646308113,
+  "primary_test_eligible_rows": 2566,
+  "primary_test_events": 996,
+  "high_observation_subset_rows": 1943,
+  "high_observation_subset_current_lift": 0.18555139424887496
+}

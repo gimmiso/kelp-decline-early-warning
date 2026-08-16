@@ -1,0 +1,7 @@
+sensor_era,model,n,events,macro_year_ap_lift,estimable_years
+2005-2012 Landsat 5/7,current_only,1179,423,0.22755117757682383,8
+2005-2012 Landsat 5/7,current_plus_trajectory,1179,423,0.24513536885017934,8
+2005-2012 Landsat 5/7,trajectory_plus_oisst,1179,423,0.20390533723260157,8
+2013-2024 Landsat 7/8/9,current_only,1387,573,0.1420722819893044,12
+2013-2024 Landsat 7/8/9,current_plus_trajectory,1387,573,0.17115645455473127,12
+2013-2024 Landsat 7/8/9,trajectory_plus_oisst,1387,573,0.16721431942972476,12
