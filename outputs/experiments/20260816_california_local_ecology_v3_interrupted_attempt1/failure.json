@@ -1,0 +1,7 @@
+{
+  "status": "interrupted",
+  "reason": "The initial hierarchical bootstrap used repeated pandas filtering and was manually interrupted after model fitting to replace it with an equivalent cached-array implementation.",
+  "exit_code": 130,
+  "superseded_by": "../20260816_california_local_ecology_v3",
+  "data_deleted": false
+}

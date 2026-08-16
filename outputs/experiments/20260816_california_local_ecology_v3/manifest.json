@@ -1,0 +1,129 @@
+{
+  "status": "complete",
+  "protocol": {
+    "id": "KELP-EWS-CA-METHOD-AUDIT-v3.0",
+    "date": "2026-08-16",
+    "classification": "paper_informed_exploratory_method_audit",
+    "preregistration": false,
+    "purpose": "Test whether the v2 null ecological diagnostic was induced by cohort dilution, linearity, species-region pooling, or omission of paper-aligned mechanisms."
+  },
+  "forecast": {
+    "train_start_year": 2004,
+    "first_forecast_year": 2008,
+    "last_forecast_year": 2021,
+    "monitoring_budget_fraction": 0.2,
+    "bootstrap_replicates": 2000,
+    "seed": 20260816
+  },
+  "runtime_seconds": 336.97,
+  "git_sha_before_run": "57ae6d3d5a093cebe7780f89d657f6afa4f6e140",
+  "python": "3.12.13",
+  "pandas": "3.0.3",
+  "numpy": "2.3.5",
+  "scikit_learn": "1.9.0",
+  "xgboost": "3.2.0",
+  "primary_decision": {
+    "comparison": "paper_full_minus_trajectory",
+    "primary_estimate": 0.037803922637442075,
+    "primary_ci_low": -0.05716330009989242,
+    "primary_ci_high": 0.1458999404513327,
+    "primary_ci_excludes_zero": false,
+    "same_direction_families_300m": 4,
+    "logistic_spline_estimate_1000m": 0.019479351459912444,
+    "stable_positive_increment": false
+  },
+  "coverage": [
+    {
+      "support_m": 300,
+      "context": "bull_north",
+      "rows": 56,
+      "sites": 9,
+      "years": 14,
+      "events": 33,
+      "overlap_clusters": 9
+    },
+    {
+      "support_m": 300,
+      "context": "giant_central_southwest",
+      "rows": 643,
+      "sites": 81,
+      "years": 18,
+      "events": 261,
+      "overlap_clusters": 55
+    },
+    {
+      "support_m": 300,
+      "context": "giant_southeast",
+      "rows": 166,
+      "sites": 21,
+      "years": 17,
+      "events": 78,
+      "overlap_clusters": 21
+    },
+    {
+      "support_m": 1000,
+      "context": "bull_north",
+      "rows": 60,
+      "sites": 10,
+      "years": 12,
+      "events": 40,
+      "overlap_clusters": 8
+    },
+    {
+      "support_m": 1000,
+      "context": "giant_central_southwest",
+      "rows": 810,
+      "sites": 88,
+      "years": 18,
+      "events": 296,
+      "overlap_clusters": 33
+    },
+    {
+      "support_m": 1000,
+      "context": "giant_southeast",
+      "rows": 239,
+      "sites": 25,
+      "years": 17,
+      "events": 90,
+      "overlap_clusters": 14
+    }
+  ],
+  "inputs": {
+    "config": {
+      "path": "configs/california_local_ecology_v3.json",
+      "sha256": "263692b9657588fa7ee31dfbd3d3c6e0eebda8c7cbd807cd34bed13d7aaf19f9"
+    },
+    "panel": {
+      "path": "outputs/experiments/20260816_california_local_ecology_v2/local_support_panel.csv",
+      "sha256": "106bc06eac131b45273fccff63581fa49f1adc4e74e711d01d686dd5808901aa"
+    },
+    "field": {
+      "path": "data/external/restoration_site_selection/giraldo_2025/Kelp_Predictors_All_CA_2.csv",
+      "sha256": "31e48854b88aca135df6896c353c7aa09ce6860e9df9c636aef66ea0fd38be9e"
+    },
+    "code_release_manifest": {
+      "path": "data/external/restoration_site_selection/giraldo_2025/code_release_v1/source_manifest.json",
+      "sha256": "75425349840478c0c29fa5a91e36be414397a5abd05d38bf80a1f35cdb695eaa"
+    }
+  },
+  "outputs": {
+    "context_site_assignment.csv": "4416df94e6b682f8a15affe59be2ebce432750018acdfaf780f32021847f512e",
+    "cohort_audit.csv": "f69f1c46b2d72ba46f57e318525c15a0382908e0498aae28155e978619c3d703",
+    "duplicate_transect_key_audit.csv": "9f650433e634723188ae4b27a9198195a3f1f82faa110a7b4e9a7e9e50ee70ff",
+    "field_site_year_features.csv": "99b313b8b5788c2edc09bd5714688a604ef4f31c4defb99f1c96462a8dd802c6",
+    "analysis_rows.csv": "2377971ae58476b305b4eb68d17661de532e72beb237dc0e7217e10c46259d96",
+    "fold_audit.csv": "a1e34e766db5856d4eab1a5a37747ebb198189fe6c3b25ad23be9f6152b35619",
+    "predictions.csv": "2ebee131df694c23ca92da54bb6ad10f1d0a48b443e843fc77440f980151684d",
+    "ranked_predictions.csv": "8b6cbc0933c76ac4341e08266c42f2c2e4c9672494a308a1128bac22083cca6c",
+    "annual_metrics.csv": "3e640039cbb93a61ff2da1a2b1911866ee1ec8499a6167c6bd24b44c7d1aedac",
+    "performance_summary.csv": "10342c2022e536978e253750eb23800b2b19bd41c4d1dadab07247a109622685",
+    "increment_summary.csv": "fd770d199932a590d87d2b192f8ee3480ae6610a71893d3f87023093ec7ab795",
+    "condition_summary.csv": "bf36a7c668f9b5acabedbf7a194124862d5bc135da2b6c0ce6feb228a81b9d9c",
+    "decision_table.csv": "941918b0262e475cafcf05c004c8c8c47b494b3c4f40d8e151be4f958b3ee7ca",
+    "coverage.csv": "0cb0b27b48e28268bd19be047095151dffedc0971eed14c7e21c97b0e367d4b1",
+    "feature_missingness.csv": "c1a9c85b7555471f7b8fc5bef1fcbd1369b984bb0b444a34456ddbc2573ae390",
+    "quality_checks.csv": "09ca4c84e4acf85e34f8780f4e43d69d1cc2b8484bc83f730f9d3aa27c83caf1",
+    "results_summary_ko.md": "5cc01371fb385827f20358f55af5b7e1519c160af63f663e9917c7365d974c59",
+    "figure_01_paper_aligned_increments.png": "515f9226675b59d36896c8bbb11efd914ff1ab528166cbdd23441a82b8a1ea2c"
+  }
+}

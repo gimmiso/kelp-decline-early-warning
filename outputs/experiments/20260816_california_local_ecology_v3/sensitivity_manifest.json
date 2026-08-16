@@ -1,0 +1,14 @@
+{
+  "primary_all_years_gain": 0.037803922637442075,
+  "primary_excluding_2021_gain": 4.4495871996448505e-05,
+  "primary_excluding_2021_hierarchical_ci": [
+    -0.07572128722222964,
+    0.08240155532706007
+  ],
+  "primary_excluding_2021_successful_bootstraps": 2000,
+  "leave_one_year_out_min": 4.4495871996448505e-05,
+  "leave_one_year_out_max": 0.0534298923584513,
+  "leave_one_year_out_all_positive": true,
+  "primary_top20_recall_gain": -0.006993006993007034,
+  "primary_brier_improvement": -0.042105098767635574
+}

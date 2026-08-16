@@ -1,0 +1,21 @@
+check,value,passed,severity
+manifest_complete,complete,True,error
+manifest_output_hashes,0,True,error
+locked_context_site_counts,"{""bull_north"": 10, ""giant_central_southwest"": 88, ""giant_southeast"": 26}",True,error
+context_sites_nonoverlapping,0,True,error
+field_site_year_unique,0,True,error
+analysis_support_site_year_unique,0,True,error
+event_labels_match_locked_panel,0,True,error
+expanding_folds_have_no_future_rows,0,True,error
+fitted_training_folds_have_two_classes,0,True,error
+prediction_keys_unique,0,True,error
+prediction_scores_finite,0,True,error
+prediction_scores_bounded,0,True,error
+identical_prediction_samples_across_blocks,0,True,error
+no_context_used_feature_is_all_missing,0,True,error
+north_depth_fallback_is_explicit,1.0,True,warning
+annual_ap_lift_recomputed,9.71445146547012e-17,True,error
+annual_brier_recomputed,2.220446049250313e-16,True,error
+increment_estimates_recomputed,1.1449174941446927e-16,True,error
+primary_decision_matches_increment,0.037803922637442,True,error
+primary_stability_rule_recomputed,False,True,error

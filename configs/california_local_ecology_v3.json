@@ -1,0 +1,58 @@
+{
+  "protocol": {
+    "id": "KELP-EWS-CA-METHOD-AUDIT-v3.0",
+    "date": "2026-08-16",
+    "classification": "paper_informed_exploratory_method_audit",
+    "preregistration": false,
+    "purpose": "Test whether the v2 null ecological diagnostic was induced by cohort dilution, linearity, species-region pooling, or omission of paper-aligned mechanisms."
+  },
+  "forecast": {
+    "train_start_year": 2004,
+    "first_forecast_year": 2008,
+    "last_forecast_year": 2021,
+    "monitoring_budget_fraction": 0.20,
+    "bootstrap_replicates": 2000,
+    "seed": 20260816
+  },
+  "giraldo_cohort": {
+    "minimum_pre_mhw_survey_years": 3,
+    "north_context": "bull_north",
+    "central_southwest_context": "giant_central_southwest",
+    "southeast_context": "giant_southeast"
+  },
+  "mechanism_features": {
+    "purple_urchin_only": true,
+    "bull_negative_threshold_log_count_per_60m2": 2.5,
+    "giant_negative_threshold_log_count_per_60m2": 5.0,
+    "smith_active_grazing_equation": "-0.6487 * (1 - exp(-5.1438 * giant_stipes_per_m2)) + 0.7169",
+    "depth_source": "observed_transect_depth_mean_with_mapped_fallback_for_reefcheck",
+    "paper_selected_abiotic_features_by_context": true
+  },
+  "disturbance_regimes": {
+    "pre_mhw_last_year": 2013,
+    "transition_last_year": 2018,
+    "grazer_dominated_first_year": 2019
+  },
+  "model_families": [
+    "logistic_linear",
+    "logistic_spline",
+    "random_forest",
+    "xgboost"
+  ],
+  "feature_sets": [
+    "trajectory",
+    "trajectory_plus_field_state",
+    "trajectory_plus_paper_environment",
+    "trajectory_plus_paper_full",
+    "trajectory_plus_full_regime"
+  ],
+  "interpretation": {
+    "primary_comparison": "paper_full_minus_trajectory",
+    "primary_family": "logistic_spline",
+    "primary_support_m": 300,
+    "requires_same_direction_model_families": 3,
+    "requires_same_direction_at_1000m": true,
+    "causal_language_prohibited": true,
+    "california_field_subset_only": true
+  }
+}
