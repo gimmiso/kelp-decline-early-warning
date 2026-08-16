@@ -1,0 +1,1 @@
+scripts/75_run_coastwide_model_architecture_extension.py --config configs/model_architecture_extension_v1.json --panel data/processed/kelpwatch_west_coast_panel_5km_v1.csv --environment data/processed/noaa_environmental_features_5km_v1.csv --output-dir outputs/experiments/20260816_model_architecture_coastwide_v1

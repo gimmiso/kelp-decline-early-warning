@@ -1,0 +1,12 @@
+check,value,passed
+manifest_complete,complete,True
+manifest_hashes,0,True
+prediction_keys_unique,0,True
+scores_bounded,0,True
+forward_only,0,True
+five_blocks_same_samples,0,True
+inner_tuning_argmax,0,True
+annual_ap_recomputed,9.8879238130678e-17,True
+brier_recomputed,1.1102230246251565e-16,True
+increments_recomputed,9.71445146547012e-17,True
+old_new_matched_nonempty,140,True

@@ -1,0 +1,55 @@
+{
+  "status": "complete",
+  "protocol": {
+    "id": "KELP-EWS-MODEL-ARCH-v1.0",
+    "date": "2026-08-16",
+    "classification": "posthoc_methodological_robustness",
+    "preregistration": false,
+    "purpose": "Evaluate structure-aware and ranking-aligned models without replacing the locked primary analysis or selecting a winner from outer-test results."
+  },
+  "runtime_seconds": 68.01,
+  "git_sha_before_run": "39faddbb8c06f8de1af470c53859d7c8d0a815af",
+  "python": "3.12.13",
+  "pandas": "3.0.3",
+  "numpy": "2.3.5",
+  "scikit_learn": "1.9.0",
+  "inputs": {
+    "config": {
+      "path": "configs/model_architecture_extension_v1.json",
+      "sha256": "fb6b87db1fe6b9a7f180822756e97ce92deb3fd5e96b918e091433c5652a613b"
+    },
+    "analysis_rows": {
+      "path": "outputs/experiments/20260816_california_local_ecology_v3/analysis_rows.csv",
+      "sha256": "2377971ae58476b305b4eb68d17661de532e72beb237dc0e7217e10c46259d96"
+    },
+    "old_predictions": {
+      "path": "outputs/experiments/20260816_california_local_ecology_v3/predictions.csv",
+      "sha256": "2ebee131df694c23ca92da54bb6ad10f1d0a48b443e843fc77440f980151684d"
+    }
+  },
+  "primary": {
+    "support_m": 300,
+    "comparison": "paper_full_minus_trajectory",
+    "left_feature_set": "trajectory_plus_paper_full",
+    "right_feature_set": "trajectory",
+    "estimate": -0.011607703471679344,
+    "ci_low": -0.07039618965966256,
+    "ci_high": 0.06135056003385272,
+    "years": 14
+  },
+  "outputs": {
+    "predictions.csv": "5c601597e6601fe1ff4806f2c21c782676942b6c74fbe3269c859c788cb043f1",
+    "fold_audit.csv": "cb5522a7ff9a46362d10f422f34ad21e9e201fe984ce1d11bdf98bf23131595e",
+    "inner_tuning_audit.csv": "97898619f9f9b8b8f2628878d440707e0c085213c0b046ad4e70b1c840b3ba44",
+    "context_scaling_audit.csv": "c947c07dcac4db906d1a4684482d4d55cb0d5f1e7983d3b83370487e4b0749e9",
+    "annual_metrics.csv": "7336934c0eb7c425b41bc6d76c91f9f4eb30610761244f75938c8f8673f66f0c",
+    "model_summary.csv": "865eb60c8cb99cdbfe610f550ffb5b20e2f77f5e647a7f29af6f64b33f20eb04",
+    "increment_summary.csv": "6f7e81ab57c406b1c6013e6f10c05aac2095eb02889070a2f1030a2ac4988c10",
+    "year_sensitivity.csv": "43c4132b58df6d7b6e9ddc02b8cfdf582ab0f8b2b67d52449fb3195137a0e7b2",
+    "budget_summary.csv": "79299f1ef7018f3c7a840afb970660ff5849932e4898a2c7b6e7e6cedfd671eb",
+    "matched_old_new_annual.csv": "18662f2898349a6875ba9bbd0a4452792a6e14c4f815c6efd31a81c0a58e693e",
+    "quality_checks.csv": "8f64cf77751f1a9c37619e1e2824d34a9bed7321f9ba39c1fd630e78a3aa8595",
+    "results_summary_ko.md": "dbe74999367e9e3554741162fc9050b627cd78d0bcd70678e4c90f0ece932205",
+    "figure_01_california_pooled_hierarchical.png": "fb7f5c8f9899edd2f11bc4082a7b42c72fa5c7b9bb34963c574f1e9ca689e871"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "protocol": {
+    "id": "KELP-EWS-MODEL-ARCH-v1.0",
+    "date": "2026-08-16",
+    "classification": "posthoc_methodological_robustness",
+    "preregistration": false,
+    "purpose": "Evaluate structure-aware and ranking-aligned models without replacing the locked primary analysis or selecting a winner from outer-test results."
+  },
+  "coastwide": {
+    "panel": "data/processed/kelpwatch_west_coast_panel_5km_v1.csv",
+    "environment": "data/processed/noaa_environmental_features_5km_v1.csv",
+    "train_start_year": 1989,
+    "first_forecast_year": 2005,
+    "last_forecast_year": 2024,
+    "decline_threshold": 0.30,
+    "canopy_cutoff": 0.05,
+    "models": ["elastic_net", "hierarchical_additive", "lambdamart_ranker"],
+    "inner_validation_years": 3,
+    "c_grid": [0.05, 0.20, 1.00],
+    "elastic_l1_ratio_grid": [0.0, 0.5, 1.0],
+    "spatiotemporal_holdout_train_end": 2014,
+    "spatiotemporal_holdout_test_start": 2015,
+    "spatiotemporal_holdout_test_end": 2024
+  },
+  "california": {
+    "analysis_rows": "outputs/experiments/20260816_california_local_ecology_v3/analysis_rows.csv",
+    "train_start_year": 2004,
+    "first_forecast_year": 2008,
+    "last_forecast_year": 2021,
+    "model": "pooled_hierarchical_additive",
+    "inner_validation_years": 2,
+    "c_grid": [0.05, 0.20, 1.00]
+  },
+  "evaluation": {
+    "budget_fractions": [0.05, 0.10, 0.20, 0.30],
+    "bootstrap_replicates": 2000,
+    "seed": 20260816,
+    "required_metrics": [
+      "macro_within_year_ap_lift",
+      "brier",
+      "log_loss",
+      "calibration_intercept",
+      "calibration_slope",
+      "budget_recall"
+    ],
+    "year_exclusions": [2021, 2022],
+    "ranking_models_require_calibration": true
+  },
+  "interpretation": {
+    "locked_primary_results_are_not_replaced": true,
+    "winner_selection_from_outer_test_prohibited": true,
+    "stable_increment_requires_positive_ci": true,
+    "stable_increment_requires_budget_recall_nonnegative": true,
+    "stable_increment_requires_calibration_not_materially_worse": true,
+    "causal_language_prohibited": true
+  }
+}

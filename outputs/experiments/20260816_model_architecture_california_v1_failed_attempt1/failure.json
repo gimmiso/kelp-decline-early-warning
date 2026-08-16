@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "reason": "Context standardization attempted to assign floating-point z-scores into integer regime columns under strict pandas dtype checking.",
+  "fix": "Explicitly cast every modeled feature to float before fold-specific contextual standardization.",
+  "data_deleted": false,
+  "superseded_by": "../20260816_model_architecture_california_v1"
+}

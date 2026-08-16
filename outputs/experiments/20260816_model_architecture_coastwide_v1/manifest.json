@@ -1,0 +1,73 @@
+{
+  "status": "complete",
+  "protocol": {
+    "id": "KELP-EWS-MODEL-ARCH-v1.0",
+    "date": "2026-08-16",
+    "classification": "posthoc_methodological_robustness",
+    "preregistration": false,
+    "purpose": "Evaluate structure-aware and ranking-aligned models without replacing the locked primary analysis or selecting a winner from outer-test results."
+  },
+  "runtime_seconds": 488.01,
+  "git_sha_before_run": "39faddbb8c06f8de1af470c53859d7c8d0a815af",
+  "python": "3.12.13",
+  "pandas": "3.0.3",
+  "numpy": "2.3.5",
+  "scikit_learn": "1.9.0",
+  "lightgbm": "4.6.0",
+  "inputs": {
+    "config": {
+      "path": "configs/model_architecture_extension_v1.json",
+      "sha256": "fb6b87db1fe6b9a7f180822756e97ce92deb3fd5e96b918e091433c5652a613b"
+    },
+    "panel": {
+      "path": "data/processed/kelpwatch_west_coast_panel_5km_v1.csv",
+      "sha256": "496eb158422dd97ba8c98358fa659c420411cbf8413a7bfba13c436a1bd36726"
+    },
+    "environment": {
+      "path": "data/processed/noaa_environmental_features_5km_v1.csv",
+      "sha256": "4497115e4eb0e7e62b728c3abc6a003b5ae474c81fa6d86d4565d962fef13933"
+    }
+  },
+  "domains": {
+    "full_oisst_domain": {
+      "rows": 9457,
+      "cells": 361,
+      "events": 3868
+    },
+    "upwelling_supported_domain": {
+      "rows": 6413,
+      "cells": 242,
+      "events": 2682
+    }
+  },
+  "outputs": {
+    "predictions.csv": "d6cb2d40e1f8d42a9b5d014a9f9b94c4bc24bff5f5e7e72f3649103a03c04e21",
+    "fold_audit.csv": "be20cb52f390f0ccc04f136663d077b41043b77654f187915e27a6c885c152e4",
+    "inner_tuning_audit.csv": "9f0f9ab6421b0e79c699c8d6ecc6458d2a4f544b01c6676218de0178f6b18b92",
+    "annual_metrics.csv": "110e491d18af654e3e53f8d8bf785faf4ac9b03c3e565893e49363222510e16c",
+    "model_summary.csv": "bc50022fb16a3281a9219df6ef2fb3d0efc67b544f9f154d42fb2e1d75668c4d",
+    "increment_summary.csv": "a0a4ae9687ab353952c2b3985a52c615522068ca8884dab9103f6f8a92ca4cd5",
+    "year_exclusion_sensitivity.csv": "2e86e5e798f7de7a3a80f221fe0e80797bcb14709262910e0988f0c24e4996dc",
+    "budget_summary.csv": "04f5098ab9e8fb604d6ed537b7cf4b01d646ac9a03d520921b43b696c22e4674",
+    "spatiotemporal_region_holdout_predictions.csv": "dc5ab526d7d4f17c5611399b98deda9451339ea0eb22dc20d7d2660bdc06b9a0",
+    "spatiotemporal_region_holdout_audit.csv": "b3f6a469430d0151a5dfc7474aebde1ebe42063c76d2c4a5c5bbff2ba6db72d3",
+    "spatiotemporal_region_holdout_annual.csv": "0ced29ad841d57a62d8511b47ffdf296facfdf1ac16f5adcc757ca45f224e3c5",
+    "spatiotemporal_region_holdout_increments.csv": "0eb6fa67c65556f0aeaf9bec00e0279ca54a15626f135e77f414c06cf97c5017",
+    "quality_checks.csv": "4c7a7c5529a5f9e058fd49f3298c35936c2755ff0d325895d2a69e32742811d6",
+    "results_summary_ko.md": "c8d8cca3051b5aae2b3071caee9a19bc442073d9e51e5d4390dcc657598b19bd",
+    "figure_01_model_architecture_increments.png": "2c087ea32beb1f2673a9b9d2107a581cc9fedffdabcacb298424cede96a2df0a",
+    "figure_02_budget_recall.png": "ae6510b9299eb54ca3ec593baee091731a86b89c8f256566c99f05f1b19fbdea"
+  },
+  "repairs": [
+    {
+      "reason": "Ranker scores in the multi-year region holdout must be normalized within deployment year.",
+      "scope": [
+        "spatiotemporal_region_holdout_annual.csv",
+        "spatiotemporal_region_holdout_audit.csv",
+        "spatiotemporal_region_holdout_increments.csv",
+        "spatiotemporal_region_holdout_predictions.csv"
+      ],
+      "method": "Recomputed every region-holdout family and feature set from source data; no outer-test model selection."
+    }
+  ]
+}

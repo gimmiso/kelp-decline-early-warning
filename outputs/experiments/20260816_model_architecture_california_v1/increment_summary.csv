@@ -1,0 +1,11 @@
+support_m,comparison,left_feature_set,right_feature_set,estimate,ci_low,ci_high,years
+300,field_state_minus_trajectory,trajectory_plus_field_state,trajectory,-0.00829989873279873,-0.09502336820900659,0.07214844507274967,14
+300,paper_environment_minus_trajectory,trajectory_plus_paper_environment,trajectory,-0.03330806119799852,-0.09644809149403848,0.03727293935109458,14
+300,paper_full_minus_trajectory,trajectory_plus_paper_full,trajectory,-0.011607703471679344,-0.07039618965966256,0.06135056003385272,14
+300,paper_full_minus_environment,trajectory_plus_paper_full,trajectory_plus_paper_environment,0.02170035772631918,-0.016954636847242306,0.06126606145217373,14
+300,regime_minus_paper_full,trajectory_plus_full_regime,trajectory_plus_paper_full,-0.035315199262723494,-0.08907548728743574,0.003983443190896109,14
+1000,field_state_minus_trajectory,trajectory_plus_field_state,trajectory,-0.008894352401662654,-0.05554978397447334,0.039866547600194736,14
+1000,paper_environment_minus_trajectory,trajectory_plus_paper_environment,trajectory,-0.04124986817651956,-0.1355803984177945,0.061256347505383855,14
+1000,paper_full_minus_trajectory,trajectory_plus_paper_full,trajectory,-0.029182252522133394,-0.12040597437697656,0.060663496287791586,14
+1000,paper_full_minus_environment,trajectory_plus_paper_full,trajectory_plus_paper_environment,0.012067615654386172,-0.015345380746737542,0.042325582851715664,14
+1000,regime_minus_paper_full,trajectory_plus_full_regime,trajectory_plus_paper_full,-0.047560082827171966,-0.11308145233099012,0.00037055063108057607,14
