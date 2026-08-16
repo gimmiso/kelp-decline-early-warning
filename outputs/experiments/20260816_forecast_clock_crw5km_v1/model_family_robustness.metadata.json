@@ -1,0 +1,10 @@
+{
+  "classification": "exploratory_fixed_model_family_robustness",
+  "analysis_rows": "outputs/experiments/20260816_forecast_clock_crw5km_v1/analysis_rows_q23.csv",
+  "analysis_rows_sha256": "6dd877c8cd7fee2960e8d498a2a6f8800723bb3b987024682bfd2003aff57497",
+  "seed": 20260816,
+  "bootstrap": {
+    "type": "two_year_moving_block",
+    "replicates": 2000
+  }
+}

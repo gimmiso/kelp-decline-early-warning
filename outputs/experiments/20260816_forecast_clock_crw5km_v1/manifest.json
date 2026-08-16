@@ -1,0 +1,42 @@
+{
+  "experiment": "forecast_clock_crw5km_v1",
+  "classification": "exploratory_monthly_composite_sensitivity",
+  "git_sha": "e8c1490efd7255a584375262cd4e446911d76088",
+  "python": "3.14.3 (v3.14.3:323c59a5e34, Feb  3 2026, 11:41:37) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "pandas": "3.0.3",
+  "numpy": "2.4.3",
+  "scikit_learn": "1.9.0",
+  "seed": 20260816,
+  "forecast_years": [
+    2005,
+    2024
+  ],
+  "train_outcome_start": 1990,
+  "bootstrap": {
+    "type": "two_year_moving_block",
+    "replicates": 2000
+  },
+  "inputs": {
+    "annual_panel": {
+      "path": "data/processed/kelpwatch_west_coast_panel_165.csv",
+      "sha256": "c45c2c038f9f9603e390d43f1199425d456f2fbae11222cc9b5978a4a146ba48"
+    },
+    "quarterly": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/full_west_coast_10km/west_coast_10km_quarterly_ge500.csv",
+      "sha256": "e2564fe50831f849a45973e2577afd84d3004ddea95573b11fbb094c219764cd"
+    },
+    "environment": {
+      "path": "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv",
+      "sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87"
+    },
+    "crw": {
+      "path": "data/processed/crw5km_march_features_165.csv",
+      "sha256": "15f9606cc9c14e47fdc811c6f1761e32a1741088ed3ab7b1b3196c84e4680d3a"
+    },
+    "config": {
+      "path": "configs/paper_e2e_v2.yaml",
+      "sha256": "00d740eb3652af9784387b61dca57be8c9a53cb6b45c667d5204e7913df93fc4"
+    }
+  },
+  "runtime_seconds": 11.59
+}
