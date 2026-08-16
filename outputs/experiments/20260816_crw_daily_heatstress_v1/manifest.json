@@ -1,0 +1,137 @@
+{
+  "experiment_id": "E2E-v2-E20B",
+  "run_id": "20260816_crw_daily_heatstress_v1",
+  "classification": "pilot_informed_locked_daily_heatstress_confirmation",
+  "config": "configs/crw_daily_heatstress_v1.json",
+  "config_sha256": "5b7e9a434442faacdd5ae6249365926f44870b7846f3d5ea80d398abd3d9c6e9",
+  "base_analysis_rows": "outputs/experiments/20260816_forecast_clock_crw5km_v1/analysis_rows_q23.csv",
+  "base_analysis_rows_sha256": "6dd877c8cd7fee2960e8d498a2a6f8800723bb3b987024682bfd2003aff57497",
+  "daily_features": "outputs/experiments/20260816_crw_daily_heatstress_v1/crw_daily_q1_heatstress_features_165.csv",
+  "daily_features_sha256": "c17255e4cdac4d5d28efab3da9efa911a10c983fbc166448aa1217afbf151e44",
+  "analysis_rows_sha256": "ddd43a9fd138ad5cc0925f876b8a9a9b9eb7f5dc9bb24949c8d58ad848b3ed59",
+  "predictions_sha256": "8823f31e83d82bc39d443b3cbfb4d9a20292965d788163fe0a0aa58c62317592",
+  "analysis_rows": 3874,
+  "forecast_rows": 2478,
+  "forecast_events": 1009,
+  "forecast_years": [
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "feature_sets": {
+    "prior_trajectory": [
+      "relative_canopy",
+      "canopy_lag1",
+      "canopy_lag2",
+      "canopy_2yr_change",
+      "canopy_3yr_change",
+      "canopy_3yr_mean",
+      "canopy_3yr_std",
+      "canopy_3yr_slope",
+      "canopy_drop_from_3yr_max"
+    ],
+    "monthly_crw": [
+      "relative_canopy",
+      "canopy_lag1",
+      "canopy_lag2",
+      "canopy_2yr_change",
+      "canopy_3yr_change",
+      "canopy_3yr_mean",
+      "canopy_3yr_std",
+      "canopy_3yr_slope",
+      "canopy_drop_from_3yr_max",
+      "q1_mean_sst_anomaly_crw5km",
+      "q1_max_monthly_sst_anomaly_crw5km"
+    ],
+    "daily_stress": [
+      "relative_canopy",
+      "canopy_lag1",
+      "canopy_lag2",
+      "canopy_2yr_change",
+      "canopy_3yr_change",
+      "canopy_3yr_mean",
+      "canopy_3yr_std",
+      "canopy_3yr_slope",
+      "canopy_drop_from_3yr_max",
+      "q1_max_7day_mean_anomaly_crw5km",
+      "q1_positive_anomaly_degree_days_crw5km",
+      "q1_days_above_local_p90_crw5km",
+      "q1_max_consecutive_hot_days_crw5km"
+    ],
+    "monthly_and_daily_crw": [
+      "relative_canopy",
+      "canopy_lag1",
+      "canopy_lag2",
+      "canopy_2yr_change",
+      "canopy_3yr_change",
+      "canopy_3yr_mean",
+      "canopy_3yr_std",
+      "canopy_3yr_slope",
+      "canopy_drop_from_3yr_max",
+      "q1_mean_sst_anomaly_crw5km",
+      "q1_max_monthly_sst_anomaly_crw5km",
+      "q1_max_7day_mean_anomaly_crw5km",
+      "q1_positive_anomaly_degree_days_crw5km",
+      "q1_days_above_local_p90_crw5km",
+      "q1_max_consecutive_hot_days_crw5km"
+    ]
+  },
+  "comparisons": {
+    "daily_stress_minus_prior_trajectory": [
+      "daily_stress",
+      "prior_trajectory"
+    ],
+    "daily_stress_minus_monthly_crw": [
+      "daily_stress",
+      "monthly_crw"
+    ],
+    "monthly_and_daily_crw_minus_monthly_crw": [
+      "monthly_and_daily_crw",
+      "monthly_crw"
+    ],
+    "monthly_crw_minus_prior_trajectory": [
+      "monthly_crw",
+      "prior_trajectory"
+    ]
+  },
+  "seed": 20260816,
+  "bootstrap_replicates": 2000,
+  "git_sha_at_run": "9723f9b67973ecec89743a48f9e0d634e38e3124",
+  "git_dirty_at_run": true,
+  "python": "3.14.3",
+  "pandas": "3.0.3",
+  "numpy": "2.4.3",
+  "scikit_learn": "1.9.0",
+  "decision": {
+    "primary_claim_gate": "not_supported",
+    "daily_minus_trajectory_mean_ap_lift_difference": -0.0018285580238652857,
+    "daily_minus_trajectory_ci": [
+      -0.016271355508227045,
+      0.009303689522613375
+    ],
+    "daily_beyond_monthly_claim_gate": "not_supported",
+    "daily_beyond_monthly_mean_ap_lift_difference": -5.202439917387919e-05,
+    "daily_beyond_monthly_ci": [
+      -0.024788723411128186,
+      0.018512452606086752
+    ],
+    "interpretation_rule": "No mechanism claim; incremental predictive value only."
+  }
+}

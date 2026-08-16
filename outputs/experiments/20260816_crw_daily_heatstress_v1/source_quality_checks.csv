@@ -1,0 +1,10 @@
+check,passed,value
+mapping_cell_count_165,True,
+mapping_unique_source_pixels_164,True,
+daily_key_unique,True,
+daily_years_1985_2024,True,
+overlap_has_at_least_150_valid_pixels,True,
+official_erddap_max_abs_difference_le_0_001c,True,0.0
+forecast_feature_rows_3300,True,
+forecast_daily_coverage_pass_at_least_95pct,True,1.0
+forecast_four_features_complete_at_least_95pct,True,1.0

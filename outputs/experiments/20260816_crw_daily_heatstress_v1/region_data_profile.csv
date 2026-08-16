@@ -1,0 +1,8 @@
+region_group,rows,cells,events,mean_daily_coverage
+Baja California Norte,534,40,245,0.9996707412437751
+Baja California Sur,47,3,18,0.9995323825111059
+Central California,647,34,217,0.9996263396572516
+Northern California,137,16,85,1.0
+Oregon,66,5,32,0.9996669996669998
+Southern California,792,52,342,0.9996253746253746
+Washington outer coast,255,15,70,0.9993535875888817

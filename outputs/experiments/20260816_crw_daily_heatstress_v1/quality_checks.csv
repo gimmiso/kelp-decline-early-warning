@@ -1,0 +1,35 @@
+stage,check,passed,detail
+source_and_feature,mapping_cell_count_165,True,
+source_and_feature,mapping_unique_source_pixels_164,True,
+source_and_feature,daily_key_unique,True,
+source_and_feature,daily_years_1985_2024,True,
+source_and_feature,overlap_has_at_least_150_valid_pixels,True,
+source_and_feature,official_erddap_max_abs_difference_le_0_001c,True,0.0
+source_and_feature,forecast_feature_rows_3300,True,
+source_and_feature,forecast_daily_coverage_pass_at_least_95pct,True,1.0
+source_and_feature,forecast_four_features_complete_at_least_95pct,True,1.0
+independent_recalculation,source_quality_checks_all_pass,True,
+independent_recalculation,prediction_scores_finite,True,
+independent_recalculation,prediction_scores_in_unit_interval,True,
+independent_recalculation,all_20_forecast_years,True,
+independent_recalculation,three_model_families,True,
+independent_recalculation,four_feature_sets,True,
+independent_recalculation,fold_training_precedes_test,True,
+independent_recalculation,fold_training_starts_1990,True,
+independent_recalculation,fold_test_two_classes,True,
+independent_recalculation,identical_prediction_row_count,True,"{('logistic', 'daily_stress'): 2478, ('logistic', 'monthly_and_daily_crw'): 2478, ('logistic', 'monthly_crw'): 2478, ('logistic', 'prior_trajectory'): 2478, ('random_forest', 'daily_stress'): 2478, ('random_forest', 'monthly_and_daily_crw'): 2478, ('random_forest', 'monthly_crw'): 2478, ('random_forest', 'prior_trajectory'): 2478, ('xgboost', 'daily_stress'): 2478, ('xgboost', 'monthly_and_daily_crw'): 2478, ('xgboost', 'monthly_crw'): 2478, ('xgboost', 'prior_trajectory'): 2478}"
+independent_recalculation,identical_prediction_keys,True,
+independent_recalculation,recompute_prevalence,True,max_abs_diff=8.326672684688674e-17
+independent_recalculation,recompute_average_precision,True,max_abs_diff=8.326672684688674e-17
+independent_recalculation,recompute_ap_lift,True,max_abs_diff=9.71445146547012e-17
+independent_recalculation,recompute_recall_top_5pct,True,max_abs_diff=9.71445146547012e-17
+independent_recalculation,recompute_recall_top_10pct,True,max_abs_diff=9.71445146547012e-17
+independent_recalculation,recompute_recall_top_20pct,True,max_abs_diff=8.326672684688674e-17
+independent_recalculation,recompute_recall_top_30pct,True,max_abs_diff=5.551115123125783e-17
+independent_recalculation,recompute_all_increment_estimates_and_intervals,True,max_abs_diff=9.974659986866641e-17
+report_source_query,execute_report_headline,True,rows=1; columns=9; null_cells=0
+report_source_query,execute_model_family_summary,True,rows=12; columns=10; null_cells=0
+report_source_query,execute_yearly_increment,True,rows=20; columns=6; null_cells=0
+report_source_query,execute_budget_recall,True,rows=16; columns=7; null_cells=0
+report_source_query,execute_feature_correlations,True,rows=15; columns=5; null_cells=0
+report_source_query,execute_ap_increments,True,rows=12; columns=8; null_cells=0

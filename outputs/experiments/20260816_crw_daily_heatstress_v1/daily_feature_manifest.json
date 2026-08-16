@@ -1,0 +1,19 @@
+{
+  "experiment_id": "E2E-v2-E20B",
+  "classification": "pilot_informed_locked_daily_heatstress_confirmation",
+  "config": "configs/crw_daily_heatstress_v1.json",
+  "config_sha256": "5b7e9a434442faacdd5ae6249365926f44870b7846f3d5ea80d398abd3d9c6e9",
+  "mapping": "outputs/metadata/crw5km_march_cell_mapping_165.csv",
+  "mapping_sha256": "4fa20323013948ae5a78dd6df2a84109b27d627a3510dc74a2f24bbae3a5f868",
+  "feature_file": "outputs/experiments/20260816_crw_daily_heatstress_v1/crw_daily_q1_heatstress_features_165.csv",
+  "feature_sha256": "c17255e4cdac4d5d28efab3da9efa911a10c983fbc166448aa1217afbf151e44",
+  "daily_rows": 592040,
+  "source_pixels": 164,
+  "cell_year_feature_rows": 6600,
+  "official_erddap_overlap_valid_pixels": 164,
+  "official_erddap_max_absolute_difference_c": 0.0,
+  "quality_passed": true,
+  "raw_daily_cache_retained": true,
+  "raw_daily_cache_path": "data/external/noaa/cache/crw5km_daily_q1_v1",
+  "daily_enriched_not_persisted": true
+}

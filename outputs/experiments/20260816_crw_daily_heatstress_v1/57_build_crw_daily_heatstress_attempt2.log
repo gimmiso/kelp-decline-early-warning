@@ -1,0 +1,53 @@
+ERDDAP subsets complete: 25/312
+ERDDAP subsets complete: 50/312
+ERDDAP subsets complete: 75/312
+ERDDAP subsets complete: 100/312
+ERDDAP subsets complete: 125/312
+ERDDAP subsets complete: 150/312
+ERDDAP subsets complete: 175/312
+ERDDAP subsets complete: 200/312
+ERDDAP subsets complete: 225/312
+ERDDAP subsets complete: 250/312
+ERDDAP subsets complete: 275/312
+ERDDAP subsets complete: 300/312
+ERDDAP subsets complete: 312/312
+Official 1985 files complete: 15/90
+Official 1985 files complete: 30/90
+Official 1985 files complete: 45/90
+Official 1985 files complete: 60/90
+Official 1985 files complete: 75/90
+Official 1985 files complete: 90/90
+Traceback (most recent call last):
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/57_build_crw_daily_heatstress.py", line 484, in <module>
+    main()
+    ~~~~^^
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/57_build_crw_daily_heatstress.py", line 426, in main
+    features, daily_enriched, profile = build_features(daily, points, mapping)
+                                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/miso/Documents/Codex/2026-06-11/create-an-initial-github-repository-structure/kelp-decline-early-warning/scripts/57_build_crw_daily_heatstress.py", line 325, in build_features
+    features = map_points[["cell_id", "source_point_id", "crw_lat", "crw_lon", "distance_to_crw_grid_km"]].merge(
+        point_features, on="source_point_id", how="left", validate="one_to_many"
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/frame.py", line 12900, in merge
+    return merge(
+        self,
+    ...<10 lines>...
+        validate=validate,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/reshape/merge.py", line 385, in merge
+    op = _MergeOperation(
+        left_df,
+    ...<10 lines>...
+        validate=validate,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/reshape/merge.py", line 1037, in __init__
+    self._validate_validate_kwd(validate)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/reshape/merge.py", line 2012, in _validate_validate_kwd
+    raise MergeError(
+    ...<2 lines>...
+    )
+pandas.errors.MergeError: Merge keys are not unique in left dataset; not a one-to-many merge
+Duplicates in left:
+ source_point_id
+        crw_009 ...

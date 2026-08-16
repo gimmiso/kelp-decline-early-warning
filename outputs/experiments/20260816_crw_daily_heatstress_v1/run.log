@@ -1,0 +1,59 @@
+Run ID: 20260816_crw_daily_heatstress_v1
+Experiment ID: E2E-v2-E20B
+Classification: pilot_informed_locked_daily_heatstress_confirmation
+Started: 2026-08-16T03:01:33Z / 2026-08-16T12:01:33+09:00
+Finished: 2026-08-16T03:25:21Z / 2026-08-16T12:25:21+09:00
+Git SHA at run: 9723f9b67973ecec89743a48f9e0d634e38e3124
+
+Protocol classification note:
+- The config and registry row were written before source extraction and feature/model results were inspected.
+- They were not committed or tagged before execution within this single-turn run.
+- Therefore the experiment is retained as pilot-informed locked confirmation, not represented as an independently preregistered confirmatory test.
+
+Design lock:
+- Reused the exact 165-cell / 164-source-pixel mapping from E20.
+- Reused the exact March 31 forecast clock and Q2-Q3 outcome rows from E20.
+- Locked four daily features before outcome modeling.
+- Required at least 95% valid Q1 days and identical rows across information blocks.
+
+Data extraction:
+- PaciOOS ERDDAP spatial-band subsets: 1986-2024 Q1, 312 year-band jobs.
+- NOAA STAR official daily files: 1985 Q1, 90 days.
+- Official overlap check: 2021-01-15, all 164 source pixels.
+
+QC correction 1:
+- First source build stopped because monthly CRW latitude indices are north-to-south while official daily files are south-to-north.
+- Correction: retained locked latitude/longitude coordinates and resolved array indices inside each daily product.
+- No feature definition, sample, or outcome was changed.
+- Failure log: 57_build_crw_daily_heatstress.log
+
+QC correction 2:
+- Second source build stopped because two kelp cells legitimately share one of the 164 CRW pixels and a one-to-many merge assertion was too strict.
+- Correction: asserted uniqueness by cell and source-pixel-year separately, then allowed the documented mapping expansion.
+- No feature definition, sample, or outcome was changed.
+- Failure log: 57_build_crw_daily_heatstress_attempt2.log
+
+Successful source build:
+- 592040 source-pixel-day rows and 6600 cell-year feature rows.
+- Forecast feature coverage: 100%.
+- Official versus ERDDAP maximum absolute SST difference: 0.000 C.
+- Success log: 57_build_crw_daily_heatstress_attempt3.log
+
+Model result:
+- Matched forecast rows: 2478; events: 1009; years: 2005-2024.
+- Logistic daily stress minus trajectory AP lift: -0.0018286, 95% CI [-0.0162714, 0.0093037].
+- Logistic daily beyond monthly AP lift: -0.0000520, 95% CI [-0.0247887, 0.0185125].
+- No positive AP increment with CI lower bound above zero in Logistic, Random Forest, or XGBoost.
+
+Independent validation:
+- 19 of 19 checks passed by recomputing metrics and bootstrap intervals from raw predictions.
+
+Report source audit:
+- The first report-source audit detected a missing SQL alias between raw `mean_recall_*` fields and reader-facing `recall_*` fields.
+- The report query was corrected without changing any analysis value or snapshot row.
+- All six report source queries then executed successfully with expected row counts and zero null cells.
+- The corrected complete report artifact passed validation and rendering.
+
+Claim gate:
+- no_supported_daily_heatstress_increment
+- This is a predictive incremental-value result, not a test of ecological causal importance.

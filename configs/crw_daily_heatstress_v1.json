@@ -1,0 +1,72 @@
+{
+  "experiment_id": "E2E-v2-E20B",
+  "run_id": "20260816_crw_daily_heatstress_v1",
+  "classification": "pilot_informed_locked_daily_heatstress_confirmation",
+  "estimand": "Incremental within-year ranking value of daily Q1 CRW 5 km heat-stress summaries at a March 31 forecast clock for same-year Q2-Q3 kelp decline",
+  "cohort": {
+    "cell_count": 165,
+    "mapping": "outputs/metadata/crw5km_march_cell_mapping_165.csv",
+    "mapping_rule": "reuse_exact_monthly_experiment_nearest_valid_ocean_pixel",
+    "maximum_mapping_distance_km": 15.0
+  },
+  "source": {
+    "product": "NOAA Coral Reef Watch CoralTemp v3.1 daily global 5 km nighttime SST",
+    "official_product_page": "https://www.coralreefwatch.noaa.gov/product/5km/index.php",
+    "official_sst_page": "https://coralreefwatch.noaa.gov/product/5km/index_5km_sst.php",
+    "official_daily_root": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1_op/nc/v1.0/daily/sst",
+    "erddap_dataset": "https://pae-paha.pacioos.hawaii.edu/erddap/griddap/dhw_5km",
+    "erddap_variable": "CRW_SST",
+    "official_variable": "analysed_sst"
+  },
+  "time": {
+    "feature_months": [1, 2, 3],
+    "source_start_year": 1985,
+    "source_end_year": 2024,
+    "climatology_start_year": 1985,
+    "climatology_end_year": 2004,
+    "training_outcome_start_year": 1990,
+    "forecast_start_year": 2005,
+    "forecast_end_year": 2024,
+    "forecast_cutoff": "March 31 of outcome year",
+    "outcome_window": "Q2-Q3 of outcome year"
+  },
+  "daily_feature_lock": {
+    "anomaly_climatology": "source-pixel calendar-day mean over 1985-2004 Q1",
+    "february_29_rule": "mean of February 28 and March 1 climatology",
+    "local_hot_threshold": "source-pixel pooled Q1 SST 90th percentile over 1985-2004",
+    "features": [
+      "q1_max_7day_mean_anomaly_crw5km",
+      "q1_positive_anomaly_degree_days_crw5km",
+      "q1_days_above_local_p90_crw5km",
+      "q1_max_consecutive_hot_days_crw5km"
+    ],
+    "seven_day_window": "seven consecutive calendar days with seven valid observations",
+    "positive_degree_days": "sum(max(daily_anomaly_C, 0))",
+    "hot_day_comparison": "strictly_greater_than_local_p90",
+    "missing_day_run_rule": "missing observation breaks a consecutive-hot-day run",
+    "minimum_q1_daily_coverage": 0.95
+  },
+  "comparisons": [
+    "daily_stress_minus_prior_trajectory",
+    "daily_stress_minus_monthly_crw",
+    "monthly_and_daily_crw_minus_monthly_crw",
+    "monthly_crw_minus_prior_trajectory"
+  ],
+  "evaluation": {
+    "validation": "expanding_window",
+    "primary_metric": "macro_mean_within_year_average_precision_lift",
+    "decision_metrics": ["recall_top_5pct", "recall_top_10pct", "recall_top_20pct", "recall_top_30pct"],
+    "bootstrap": "two_year_moving_block",
+    "bootstrap_replicates": 2000,
+    "seed": 20260816,
+    "model_families": ["logistic", "random_forest", "xgboost"]
+  },
+  "quality_gates": {
+    "required_cell_count": 165,
+    "required_unique_source_pixels": 164,
+    "minimum_feature_coverage_fraction": 0.95,
+    "maximum_erddap_official_overlap_absolute_difference_c": 0.001,
+    "all_forecast_years_require_two_target_classes": true,
+    "all_information_blocks_use_identical_rows": true
+  }
+}
