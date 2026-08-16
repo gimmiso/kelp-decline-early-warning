@@ -1,0 +1,1 @@
+scripts/46_run_journal_extension_experiments.py --panel data/processed/kelpwatch_west_coast_panel_5km_v1.csv --environment data/processed/noaa_environmental_features_5km_v1.csv --config configs/coastwide_5km_primary_v1.json --output-dir outputs/experiments/20260816_coastwide_5km_primary_v1

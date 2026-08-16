@@ -1,0 +1,1 @@
+scripts/65_build_mur1km_site_features.py --sites outputs/experiments/20260816_california_local_ecology_v2/local_support_site_metadata.csv --cache-dir data/external/noaa/cache/mur1km_giraldo_v1 --output-dir outputs/experiments/20260816_california_local_ecology_v2 --workers 18

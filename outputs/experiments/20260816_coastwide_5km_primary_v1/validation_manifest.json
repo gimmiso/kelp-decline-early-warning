@@ -1,0 +1,8 @@
+{
+  "assessment": "Share with caveats",
+  "checks": 28,
+  "passed": 28,
+  "blockers": 0,
+  "validation_csv_sha256": "3bfd39ea9f81494804b9f97b65efd13a7f0c51d75efcbf481f544f533ea85933",
+  "validated_manifest_sha256": "9ef240c93bd8607553cc184df803c3089110201ad68219a7b2ef17928165459f"
+}

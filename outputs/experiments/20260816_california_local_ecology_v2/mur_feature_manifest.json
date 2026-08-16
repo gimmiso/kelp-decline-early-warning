@@ -1,0 +1,35 @@
+{
+  "status": "complete",
+  "source": "NASA JPL MUR v4.1 through three public ERDDAP replicas of jplMURSST41",
+  "source_urls": [
+    "https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.csvp",
+    "https://erddap.riddc.brown.edu/erddap/griddap/jplMURSST41.csvp",
+    "https://erddap.marine.usf.edu/erddap/griddap/jplMURSST41.csvp"
+  ],
+  "source_period": [
+    "2002-06-01T09:00:00Z",
+    "2021-12-31T09:00:00Z"
+  ],
+  "forecast_quality_period": [
+    2008,
+    2021
+  ],
+  "transfer_tile_degrees_by_period": {
+    "2002-2007": 0.1,
+    "2008-2021": 0.2
+  },
+  "sites": 183,
+  "source_pixels": 146,
+  "maximum_match_distance_km": 0.9244962084118052,
+  "forecast_feature_completeness": 1.0,
+  "runtime_seconds": 277.02,
+  "input_sha256": "7bfdf278260497ae5d8d2a87d77da3c143e9acdf39bf5404abf530e0ff6bf1e8",
+  "output_sha256": {
+    "mur_command.txt": "c5cb0bb2ab97fd5cb8384ec7b19ff5050856f174d83a9d8163c484eb39cd85ce",
+    "mur_site_mapping.csv": "a13c0e03459d209cfd7d066b68ed23d1fb07937efe1f18f5f78efd60b7fa90ee",
+    "mur1km_site_year_features.csv": "06547c2b369af079dda6cf8a83593b2ac87cb16d9d367990e1dcfbdbc22b9f8d",
+    "mur_quality_checks.csv": "ceae5b0854c386e6480aaec72139a3ba7baf5c4c7a098bafe1d5d76228218534",
+    "mur_endpoint_parity_checks.csv": "aa292db5e0471f729eaa59fa2c885669449171b9e4127e3fe98057698f956692"
+  },
+  "quality_passed": true
+}

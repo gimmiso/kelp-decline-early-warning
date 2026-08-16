@@ -1,0 +1,126 @@
+{
+  "classification": "pilot-informed reviewer robustness; not independent confirmation",
+  "protocol_current_only": {
+    "random_pooled_lift_mean": 0.16417852676393346,
+    "random_macro_within_year_lift_mean": 0.15297376881207883,
+    "expanding_pooled_lift": 0.15966284138971515,
+    "expanding_macro_within_year_lift": 0.15297377049503907
+  },
+  "primary_logistic_current_macro_lift": 0.15297377049503907,
+  "model_family_increment_conclusions": {
+    "logistic": {
+      "trajectory_minus_current": {
+        "estimate": 0.037949738594475715,
+        "ci": [
+          0.01957305593077623,
+          0.05675602815040091
+        ],
+        "supported_positive": true
+      },
+      "oisst_minus_trajectory": {
+        "estimate": -0.017027959747699727,
+        "ci": [
+          -0.037938820987834715,
+          0.003529219272664034
+        ],
+        "supported_positive": false
+      },
+      "cuti_beuti_minus_oisst": {
+        "estimate": -0.008991192125318112,
+        "ci": [
+          -0.024268936865881337,
+          0.005748174650592731
+        ],
+        "supported_positive": false
+      }
+    },
+    "random_forest": {
+      "trajectory_minus_current": {
+        "estimate": 0.04186355015771222,
+        "ci": [
+          0.027249882757007723,
+          0.05717086039749854
+        ],
+        "supported_positive": true
+      },
+      "oisst_minus_trajectory": {
+        "estimate": 0.0022425407250897754,
+        "ci": [
+          -0.010294649098083641,
+          0.014684595478681377
+        ],
+        "supported_positive": false
+      },
+      "cuti_beuti_minus_oisst": {
+        "estimate": -0.002179182192187948,
+        "ci": [
+          -0.02398212148457687,
+          0.016354717319190682
+        ],
+        "supported_positive": false
+      }
+    },
+    "xgboost": {
+      "trajectory_minus_current": {
+        "estimate": 0.03307125078092493,
+        "ci": [
+          0.020281179521696974,
+          0.048450936390239153
+        ],
+        "supported_positive": true
+      },
+      "oisst_minus_trajectory": {
+        "estimate": 0.015364945565884488,
+        "ci": [
+          -0.007150045109510608,
+          0.0374468016062868
+        ],
+        "supported_positive": false
+      },
+      "cuti_beuti_minus_oisst": {
+        "estimate": -0.009705893648136347,
+        "ci": [
+          -0.0431090052600558,
+          0.0217295649539319
+        ],
+        "supported_positive": false
+      }
+    }
+  },
+  "budget_current_only": {
+    "top_5pct": {
+      "recall": 0.08836996336996338,
+      "ci": [
+        0.07567547517844254,
+        0.10510606874328676
+      ]
+    },
+    "top_10pct": {
+      "recall": 0.17032967032967034,
+      "ci": [
+        0.14938244316908814,
+        0.1977086788572178
+      ]
+    },
+    "top_20pct": {
+      "recall": 0.2967032967032967,
+      "ci": [
+        0.2726126736963519,
+        0.3282078472958643
+      ]
+    },
+    "top_30pct": {
+      "recall": 0.4088827838827839,
+      "ci": [
+        0.38569398597978816,
+        0.43912051840203176
+      ]
+    }
+  },
+  "sensitivity_current_macro_lift_range": [
+    0.13774979882660746,
+    0.16278813737028758
+  ],
+  "sensitivity_oisst_increment_positive_combinations": 0,
+  "sensitivity_oisst_increment_combinations": 9
+}

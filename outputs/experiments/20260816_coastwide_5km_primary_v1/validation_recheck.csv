@@ -1,0 +1,29 @@
+check,passed,severity_if_failed,evidence
+panel_has_expected_cells,True,blocker,expected=368; cells=368
+panel_keys_unique,True,blocker,duplicates=0
+environment_keys_unique,True,blocker,duplicates=0
+merge_preserves_panel_grain,True,blocker,panel=15456; merged=15456
+forward_only_expanding_folds,True,blocker,max_train_end_minus_test=-1
+expanding_prediction_keys_unique,True,blocker,duplicates=0
+prediction_scores_finite_and_bounded,True,blocker,missing=0; min=0.031184; max=0.999996
+exact_rows_across_models_within_domain,True,blocker,"{'full_oisst_domain': 5411, 'upwelling_supported_domain': 3620}"
+exact_outcomes_across_models_within_domain,True,blocker,ordered event vectors match
+annual_ap_lifts_recomputed,True,blocker,max_error=9.71e-17
+model_macro_lifts_recomputed,True,blocker,max_error=8.33e-17
+model_pooled_lifts_recomputed,True,blocker,max_error=8.33e-17
+paired_model_increments_recomputed,True,blocker,max_error=9.28e-17
+random_protocol_has_20_repeats,True,blocker,min=20; max=20
+random_oof_repeat0_covers_exact_operational_rows,True,blocker,cell-year-event rows match
+random_repeat0_metrics_recomputed,True,blocker,max_error=8.33e-17
+protocol_table_has_all_information_sets,True,blocker,rows=7
+budget_rank_counts_recomputed,True,blocker,max_count_error=0
+budget_micro_recall_recomputed,True,blocker,max_error=8.33e-17
+budget_recall_is_monotonic,True,claim,violations=0
+sensitivity_population_counts_recomputed,True,blocker,max_n_error=0
+sensitivity_event_counts_recomputed,True,blocker,max_event_error=0
+primary_sensitivity_matches_main_logistic_run,True,blocker,max_error=0
+oisst_increment_nonpositive_in_all_nine_sensitivities,True,claim,all 9 point estimates <= 0
+current_baseline_positive_for_all_model_families,True,claim,all lower confidence limits > 0
+panel_hash_matches_manifest,True,blocker,496eb158422dd97ba8c98358fa659c420411cbf8413a7bfba13c436a1bd36726
+environment_hash_matches_manifest,True,blocker,4497115e4eb0e7e62b728c3abc6a003b5ae474c81fa6d86d4565d962fef13933
+saved_output_hashes_match_manifest,True,blocker,mismatches=[]

@@ -1,0 +1,7 @@
+check,value,passed
+mapping_site_keys_unique,0.0,True
+maximum_mapping_distance_le_10km,0.9244962084118052,True
+feature_keys_unique,0.0,True
+erddap_endpoint_parity,0.0,True
+forecast_feature_completeness_ge_95pct,1.0,True
+strictly_past_climatology,1.0,True

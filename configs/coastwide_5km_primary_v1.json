@@ -1,17 +1,19 @@
 {
   "protocol": {
-    "id": "KELP-EWS-JOURNAL-EXT-v1.0",
-    "date": "2026-08-14",
-    "classification": "pilot_informed_reviewer_robustness",
+    "id": "KELP-EWS-COASTWIDE-5KM-v1.0",
+    "date": "2026-08-16",
+    "classification": "pilot_informed_primary_resolution_update",
     "preregistration": false,
-    "purpose": "Test whether the locked 165-cell conclusions survive conventional-versus-operational evaluation, fixed model-family changes, monitoring-budget variation, and outcome/eligibility sensitivity."
+    "purpose": "Promote the official-data 5-km grid to the coastwide decision unit and rerun the complete reviewer-robustness suite without changing the forecast target."
   },
   "inputs": {
-    "panel": "data/processed/kelpwatch_west_coast_panel_165.csv",
-    "environment": "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv"
+    "panel": "data/processed/kelpwatch_west_coast_panel_5km_v1.csv",
+    "environment": "data/processed/noaa_environmental_features_5km_v1.csv"
   },
   "population": {
-    "expected_cell_count": 165
+    "expected_cell_count": 368,
+    "grid_specification": "g05_area_scaled_o00",
+    "interpretation": "Fixed 5-km coastwide monitoring-allocation units; 10-km and 20-km results remain resolution sensitivities."
   },
   "time": {
     "train_start_year": 1989,
@@ -50,7 +52,7 @@
     "conventional": "repeated_random_cell_year_cv",
     "conventional_folds": 5,
     "conventional_repeats": 20,
-    "conventional_limitation": "Random folds permit future years and repeated observations from the same cells to inform training. They are included only to quantify evaluation optimism, not as a valid deployment estimate.",
+    "conventional_limitation": "Random folds permit future years and repeated observations from the same cells to inform training. They quantify optimism only.",
     "aggregations": [
       "pooled_average_precision_lift",
       "macro_within_year_average_precision_lift"
@@ -60,21 +62,8 @@
     "selection": "fixed_prespecified_not_tuned_on_outer_results",
     "families": {
       "logistic": {"C": 1.0},
-      "random_forest": {
-        "n_estimators": 400,
-        "max_depth": 5,
-        "min_samples_leaf": 10,
-        "max_features": "sqrt"
-      },
-      "xgboost": {
-        "n_estimators": 300,
-        "max_depth": 3,
-        "learning_rate": 0.03,
-        "min_child_weight": 5,
-        "subsample": 0.9,
-        "colsample_bytree": 0.9,
-        "reg_lambda": 1.0
-      }
+      "random_forest": {"n_estimators": 400, "max_depth": 5, "min_samples_leaf": 10, "max_features": "sqrt"},
+      "xgboost": {"n_estimators": 300, "max_depth": 3, "learning_rate": 0.03, "min_child_weight": 5, "subsample": 0.9, "colsample_bytree": 0.9, "reg_lambda": 1.0}
     },
     "class_weight": null,
     "resampling": null

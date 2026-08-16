@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "protocol": {
+    "id": "KELP-EWS-CA-LOCAL-v2.0",
+    "date": "2026-08-16",
+    "classification": "pilot_informed_multiscale_ecological_diagnostic",
+    "preregistration": false,
+    "purpose": "Rebuild KelpWatch outcomes around Giraldo field sites at matched local supports and diagnose prediction errors without generalizing the field subset coastwide."
+  },
+  "runtime_seconds": 13.05,
+  "inputs": {
+    "config": {
+      "path": "configs/california_local_ecology_v2.json",
+      "sha256": "2109b7f8365c7159924c6863543376b10d34e34ff34cb1a08b72d57cf81e75f1"
+    },
+    "netcdf": {
+      "path": "/Users/miso/Documents/Codex/2026-08-12/new-chat/work/kelpwatch_expansion/raw_official/LandsatKelpBiomass_2026_Q2_withmetadata.nc",
+      "sha256": "b27caf8e4d08c0d2816d044e254a6339c854f2933e14a3fa2a139b37832f884f"
+    },
+    "field": {
+      "path": "data/external/restoration_site_selection/giraldo_2025/Kelp_Predictors_All_CA_2.csv",
+      "sha256": "31e48854b88aca135df6896c353c7aa09ce6860e9df9c636aef66ea0fd38be9e"
+    }
+  },
+  "raw_field_sites": 191,
+  "sites_with_coordinates": 189,
+  "sites_missing_coordinates": 2,
+  "nearby_source_pixels": 91317,
+  "pre2005_positive_nearby_pixels": 86361,
+  "coverage": [
+    {
+      "support_m": 300,
+      "stable_sites": 168,
+      "overlap_clusters": 130,
+      "eligible_forecast_rows": 2018,
+      "forecast_events": 865,
+      "field_matched_rows": 964,
+      "field_matched_sites": 153,
+      "field_matched_events": 413
+    },
+    {
+      "support_m": 1000,
+      "stable_sites": 182,
+      "overlap_clusters": 77,
+      "eligible_forecast_rows": 2527,
+      "forecast_events": 990,
+      "field_matched_rows": 1229,
+      "field_matched_sites": 171,
+      "field_matched_events": 477
+    }
+  ],
+  "output_sha256": {
+    "panel_command.txt": "e938d1bccd4879408b45807de78d1b7a7d268d22e61f29d02970ee925254d89c",
+    "local_support_panel.csv": "106bc06eac131b45273fccff63581fa49f1adc4e74e711d01d686dd5808901aa",
+    "local_support_site_metadata.csv": "7bfdf278260497ae5d8d2a87d77da3c143e9acdf39bf5404abf530e0ff6bf1e8",
+    "field_site_year_ecology.csv": "a9bee03d5acae023465ef1f2f2e5e86122962e97758a3200877bf2a8f4d193de"
+  }
+}

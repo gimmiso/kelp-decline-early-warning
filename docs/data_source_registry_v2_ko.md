@@ -6,6 +6,7 @@
 |---|---|---|---|---|---|
 | Kelpwatch/EDI `knb-lter-sbc.74.34` | Baja California–U.S./Canada border | 약 30 m pixels, quarterly, 1984–present | canopy outcome/history | 주 자료 | all-history footprint, cloud/sensor effort, species 미구분 |
 | NOAA CRW CoralTemp v3.1 | global | 0.05°, daily, 1985–present | full-domain thermal exposure | **주 NOAA 열 자료** | nearshore support, high-latitude anomaly 신뢰도, coral-derived ancillary thresholds |
+| NASA JPL MUR SST v4.1 via public ERDDAP replicas | global | 0.01°, daily, 2002–present | California 국지 열스트레스 사례연구 | **300 m·1 km 사례연구의 SST 보조자료** | 표층수온, site 최근접 해양 pixel, 2002 이전 기준기간 없음 |
 | NOAA OISST v2.1 | global | 0.25°, daily, 1981–present | legacy/coarse thermal sensitivity | 보조 | 10 km kelp cell보다 거친 공간 support |
 | NOAA CUTI | U.S. West Coast, 31–47°N | 1° latitude bins, daily, 1988–present | upwelling transport proxy | 지원범위 subset | cell-specific 현장값 아님, 범위 밖 외삽 금지 |
 | NOAA BEUTI | U.S. West Coast, 31–47°N | 1° latitude bins, daily, 1988–present | nitrate-flux proxy | 지원범위 subset | cell-specific nutrient 측정 아님, 범위 밖 외삽 금지 |
@@ -21,6 +22,9 @@
 - EDI metadata: https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-sbc.74.34
 - NOAA OISST v2.1: https://www.psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html
 - NOAA CRW 5 km methodology: https://coralreefwatch.noaa.gov/product/5km/methodology.php
+- NASA JPL MUR v4.1 via NOAA CoastWatch ERDDAP: https://coastwatch.pfeg.noaa.gov/erddap/info/jplMURSST41/index.html
+- Brown RI Data Discovery Center MUR replica: https://erddap.riddc.brown.edu/erddap/info/jplMURSST41/index.html
+- USF Marine Science MUR replica: https://erddap.marine.usf.edu/erddap/info/jplMURSST41/index.html
 - NOAA CUTI metadata: https://upwell.pfeg.noaa.gov/erddap/info/erdCUTIdaily/index.html
 - NOAA BEUTI metadata: https://upwell.pfeg.noaa.gov/erddap/info/erdBEUTIdaily/index.html
 - ECMWF ERA5 reanalysis catalogue: https://www.ecmwf.int/en/forecasts/datasets/browse-reanalysis-datasets
@@ -60,6 +64,7 @@
 4. CUTI/BEUTI는 31–47°N U.S. West Coast proxy다. 기존 코드의 31/47 clamp는 전 서해안 확장에 부적합하므로 사용하지 않는다.
 5. Planet은 더 정밀하지만 기간이 짧아 주 백테스트를 대체할 수 없다.
 6. 파랑은 kelp 선행연구에서 핵심 교란요인이지만, NOAA WAVEWATCH III 공개 hindcast snapshot은 2005–2019이고 근해 미세격자 적용에 제한이 명시돼 있어 1984–2024 전역 주 자료로는 부적합하다. ERA5를 장기 전역 후보로 감사하되, 결과를 보기 전에 coverage gate로 채택/제외한다.
+7. MUR 1 km SST는 California 사례연구에서 공간 support를 개선하지만 표층수온이며 Giraldo의 해저 현장수온과 동일하지 않다. 2002-06-01부터만 이용 가능하므로 최소 365일의 과거기준을 충족하는 2004년부터 특징을 사용한다. 각 예측연도의 anomaly와 고온 임계값은 해당 연도 이전 MUR 관측만으로 expanding 계산하고, 전 해안 장기분석의 기준자료로 대체하지 않는다.
 
 ## 실행 시 추가할 필드
 

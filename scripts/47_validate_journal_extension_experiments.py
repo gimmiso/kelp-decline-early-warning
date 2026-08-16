@@ -49,6 +49,7 @@ def parse_args() -> argparse.Namespace:
             "outputs/experiments/20260814_minimal_paper_extension_v2/environment_features.csv"
         ),
     )
+    parser.add_argument("--expected-cells", type=int, default=165)
     return parser.parse_args()
 
 
@@ -101,7 +102,11 @@ def main() -> None:
             }
         )
 
-    add("panel_has_165_cells", panel["cell_id"].nunique() == 165, f"cells={panel['cell_id'].nunique()}")
+    add(
+        "panel_has_expected_cells",
+        panel["cell_id"].nunique() == args.expected_cells,
+        f"expected={args.expected_cells}; cells={panel['cell_id'].nunique()}",
+    )
     add(
         "panel_keys_unique",
         not panel.duplicated(["cell_id", "year"]).any(),
@@ -377,6 +382,31 @@ def main() -> None:
         ~validation["passed"] & validation["severity_if_failed"].eq("blocker")
     ]
     assessment = "Share with caveats" if blockers.empty else "Needs revision"
+    trajectory_rows = increments.loc[
+        increments["domain"].eq("full_oisst_domain")
+        & increments["comparison"].eq("trajectory_minus_current")
+    ]
+    trajectory_supported = trajectory_rows.loc[
+        trajectory_rows["ci_low"].gt(0), "model_label"
+    ].tolist()
+    trajectory_unsupported = trajectory_rows.loc[
+        trajectory_rows["ci_low"].le(0), "model_label"
+    ].tolist()
+    if len(trajectory_supported) == len(trajectory_rows):
+        trajectory_text = (
+            "궤적 증분은 세 고정 모델 모두에서 양수로 지지됐으므로 "
+            "‘작지만 모델 계열에 강건한 추가가치’로 표현할 수 있다."
+        )
+    elif trajectory_supported:
+        trajectory_text = (
+            f"궤적 증분은 {', '.join(trajectory_supported)}에서 양수로 지지됐지만 "
+            f"{', '.join(trajectory_unsupported)}에서는 불확실하므로 "
+            "‘작고 모델에 따라 불확실한 추가가치’로 표현한다."
+        )
+    else:
+        trajectory_text = (
+            "궤적 증분은 어떤 고정 모델에서도 양수로 확정되지 않았다고 표현한다."
+        )
     report = f"""# 저널 보완 실험 검증 보고서
 
 ## Overall Assessment: {assessment}
@@ -411,7 +441,7 @@ def main() -> None:
 ## Required Caveats for Paper
 
 - 현재 상태 신호는 세 모델에서 반복됐다고 쓸 수 있다.
-- 궤적 증분은 Logistic과 Random Forest에서는 양수로 지지됐지만 XGBoost에서는 불확실하므로 “작고 모델에 따라 불확실한 추가가치”로 표현한다.
+- {trajectory_text}
 - OISST와 CUTI/BEUTI는 세 모델 모두에서 양의 증분가치가 확정되지 않았다고 쓸 수 있다.
 - random split이 항상 모든 지표를 부풀렸다고 쓰면 안 된다. 현재 상태의 macro within-year 지표는 random과 expanding이 거의 같았고, 복잡한 정보 블록과 pooled 지표에서 낙관 차이가 커졌다.
 """

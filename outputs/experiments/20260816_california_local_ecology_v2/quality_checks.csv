@@ -1,0 +1,9 @@
+check,value,passed
+analysis_keys_unique,0,True
+forward_only_folds,0,True
+minimum_complete_training_years,4,True
+prediction_keys_unique,0,True
+prediction_scores_bounded,0,True
+both_supports_present,2,True
+overlap_clusters_fewer_than_sites,2,True
+leave_overlap_cluster_out_audit_complete,20,True

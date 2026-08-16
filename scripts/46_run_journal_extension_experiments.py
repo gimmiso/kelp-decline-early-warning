@@ -1,4 +1,4 @@
-"""Run journal-oriented robustness experiments on the locked 165-cell panel.
+"""Run journal-oriented robustness experiments on a locked spatial panel.
 
 The run adds four reviewer-facing analyses without changing the original
 forecast target or selecting a preferred result after inspection:
@@ -186,9 +186,16 @@ def support_flag(series: pd.Series) -> pd.Series:
     return series.fillna(False).astype(str).str.lower().eq("true")
 
 
-def prepare_merged(panel: pd.DataFrame, environment: pd.DataFrame) -> pd.DataFrame:
-    if panel["cell_id"].nunique() != 165:
-        raise ValueError("Expected the locked 165-cell panel")
+def prepare_merged(
+    panel: pd.DataFrame,
+    environment: pd.DataFrame,
+    expected_cell_count: int,
+) -> pd.DataFrame:
+    observed_cell_count = int(panel["cell_id"].nunique())
+    if observed_cell_count != expected_cell_count:
+        raise ValueError(
+            f"Expected {expected_cell_count} locked cells, found {observed_cell_count}"
+        )
     if panel.duplicated(["cell_id", "year"]).any():
         raise ValueError("Panel contains duplicate cell-year keys")
     if environment.duplicated(["cell_id", "year"]).any():
@@ -1060,7 +1067,10 @@ def main() -> None:
     }
     panel = pd.read_csv(args.panel)
     environment = pd.read_csv(args.environment)
-    merged = prepare_merged(panel, environment)
+    expected_cell_count = int(
+        config.get("population", {}).get("expected_cell_count", 165)
+    )
+    merged = prepare_merged(panel, environment, expected_cell_count)
     domains = prepare_domains(merged, full_features, supported_features)
 
     expanding, fold_audit = expanding_predictions(domains, feature_sets)

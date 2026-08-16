@@ -1,0 +1,17 @@
+{
+  "spec_id": "g05_area_scaled_o00",
+  "cells": 368,
+  "cell_years": 15456,
+  "year_min": 1984,
+  "year_max": 2025,
+  "duplicate_panel_keys": 0,
+  "duplicate_environment_keys": 0,
+  "eligible_forecast_rows": 5522,
+  "forecast_events": 2231,
+  "oisst_supported_cells": 361,
+  "upwelling_supported_cells": 251,
+  "source_sha256": "5bbbf4e358d899f32133c48e4213ab9e8f1d2b13a979248f9a7a4607c7cca1cd",
+  "source_environment_sha256": "2d01f87c7fe3aa0e5bf3afe1d9691f12d7a1a3d741964531ce525e2aeb8ffa87",
+  "panel_sha256": "496eb158422dd97ba8c98358fa659c420411cbf8413a7bfba13c436a1bd36726",
+  "environment_sha256": "4497115e4eb0e7e62b728c3abc6a003b5ae474c81fa6d86d4565d962fef13933"
+}

@@ -1,0 +1,19 @@
+support_m,site_id,year,raw_footprint_pixels,saved_footprint_pixels,raw_annual_area_m2,saved_annual_area_m2,raw_annual_complete,saved_annual_complete,raw_valid_quarters,saved_valid_quarters,raw_selected_quarter,saved_selected_quarter,area_matches,all_rules_match
+300,3_PALMS_EAST VRG,2005,227,227,21063.0,21063.0,True,True,4,4,2,2,True,True
+300,3_PALMS_EAST VRG,2014,227,227,836.0,836.0,True,True,4,4,1,1,True,True
+300,3_PALMS_EAST VRG,2021,227,227,35186.0,35186.0,True,True,4,4,2,2,True,True
+300,Ocean Cove,2005,50,50,178.0,178.0,True,True,4,4,1,1,True,True
+300,Ocean Cove,2014,50,50,1140.0,1140.0,True,True,4,4,3,3,True,True
+300,Ocean Cove,2021,50,50,261.0,261.0,True,True,4,4,3,3,True,True
+300,WHITE_ROCK_UC UCSC,2005,172,172,27918.0,27918.0,True,True,4,4,3,3,True,True
+300,WHITE_ROCK_UC UCSC,2014,172,172,39842.0,39842.0,True,True,4,4,3,3,True,True
+300,WHITE_ROCK_UC UCSC,2021,172,172,500.0,500.0,True,True,4,4,3,3,True,True
+1000,3_PALMS_EAST VRG,2005,825,825,82750.0,82750.0,True,True,4,4,2,2,True,True
+1000,3_PALMS_EAST VRG,2014,825,825,4736.0,4736.0,True,True,4,4,2,2,True,True
+1000,3_PALMS_EAST VRG,2021,825,825,87533.0,87533.0,True,True,4,4,2,2,True,True
+1000,PESCADERO_UC UCSC,2005,1144,1144,466576.0,466576.0,True,True,4,4,3,3,True,True
+1000,PESCADERO_UC UCSC,2014,1144,1144,248344.0,248344.0,True,True,4,4,3,3,True,True
+1000,PESCADERO_UC UCSC,2021,1144,1144,74835.0,74835.0,True,True,4,4,3,3,True,True
+1000,WHITE_ROCK_UC UCSC,2005,863,863,79784.0,79784.0,True,True,4,4,4,4,True,True
+1000,WHITE_ROCK_UC UCSC,2014,863,863,118195.0,118195.0,True,True,4,4,3,3,True,True
+1000,WHITE_ROCK_UC UCSC,2021,863,863,57669.0,57669.0,True,True,4,4,3,3,True,True
